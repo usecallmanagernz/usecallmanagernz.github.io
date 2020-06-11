@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Firmware Load Information</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon selected">file_upload</span> <b>Firmware Load Information</b></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Firmware Load Information</h1>
+        The firmware downloaded by the phone from the provisioning server is specified by the &lt;<code class="tag">loadInformation</code>&gt; element in <a href="sepmac-cnf-xml.html#loadInformation">SEPMAC.cnf.xml</a> without the <code class="literal">.loads</code> suffix. To download firmware updates you will first need to register for a login (free, at the time of writing) at <a href="http://www.cisco.com">www.cisco.com</a>. Firmware updates are selected via the <b>Session Initiation Protocol (SIP) Software</b> link when downloading software.<br>
+        <br>
+        To convert firmware packages from <code class="literal">.cop.sgn</code> to <code class="literal">.tar.gz</code> use the <code class="literal">stripsgn</code> script.<br>
+        <br>
+        <span class="icon">file_download</span> <a href="includes/stripsgn">stripsgn</a> (1.9K) <span class="icon">event</span> 06/10/2017 <span class="icon">security</span> SHA256:674945eb5984b38433f532a8aadd42cd81af97bfad2c3b919c6af9ee2e6da19c.<br>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

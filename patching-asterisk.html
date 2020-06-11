@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patching Asterisk</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon selected">build</span> <b>Patching Asterisk</b></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Patching Asterisk</h1>
+        Steps for patching, compiling and installed the modified version of Asterisk are below. You should be familiar with building from source before attempting this.<br>
+        <br>
+        <b>1.</b> Download a copy of the patch below, the patch is also available from the Asterisk issue tracker.<br>
+        <br>
+        <span class="icon">file_download</span> <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-13.33.0.patch">cisco-usecallmanager-13.33.0.patch</a> (325K) <span class="icon">event</span> 25/05/2020 <span class="icon">security</span> SHA256:9f6137f2709f2ac33afe3705e72af8ad2436f409e4d175aa23c2f3015df29fea.<br>
+        <span class="icon">file_download</span> <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-16.10.0.patch">cisco-usecallmanager-16.10.0.patch</a> (321K) <span class="icon">event</span> 25/05/2020 <span class="icon">security</span> SHA256:9cb84ead5edb5f5e080e04dd7bcf162ad56b838f063611f27c1e8362950a50ac.<br>
+        <br>
+        Digium/Asterisk JIRA issue <span class="icon">open_in_browser</span> <a href="https://issues.asterisk.org/jira/browse/ASTERISK-13145">ASTERISK-13145</a>.<br>
+        <br>
+        <b>2.</b> Download the version of Asterisk that matches the version number in the name of the patch.<br>
+        <br>
+        <span class="icon">open_in_browser</span> <a href="http://asterisk.org/downloads">Asterisk Downloads</a> (http://asterisk.org/downloads).<br>
+        <br>
+        <b>3.</b> Extract the archive and apply the patch.<br>
+        <br>
+        <code class="command-line">~$ tar -zxvf asterisk-16.10.0.tar.gz
+~$ cd asterisk-16.10.0
+~/asterisk-16.10.0$ patch -p1 &lt; ../cisco-usecallmanager-16.10.0.patch</code>
+        <br>
+        <b>4.</b> Configure and build Asterisk.<br>
+        <br>
+        <code class="command-line">~/asterisk-16.10.0$ ./configure
+~/asterisk-16.10.0$ make</code>
+        <br>
+        <b>5.</b> Install the patched version of Asterisk.<br>
+        <br>
+        <code class="command-line">~/asterisk-16.10.0$ sudo make install</code>
+        <br>
+        <b>6.</b> Optionally install the sample configuration files. <b>Note</b>: sample sip.conf, sip_notify.conf and res_parking.conf contain patch-specific features so you will need to do this at least once.<br>
+        <br>
+        <code class="command-line">~/asterisk-16.10.0$ sudo make samples</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

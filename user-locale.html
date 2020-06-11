@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Locale</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon selected">face</span> <b>User Locale</b></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>User Locale</h1>
+        The user locale allows the phone to display text (menu items, soft keys etc.) native to the phone's language. To download locale packages you will first need to register for a login (free, at the time of writing) at <span class="icon">open_in_browser</span> <a href="http://www.cisco.com">www.cisco.com</a>. Locale packages are selected from the <b>Unified Communications Manager Endpoints Locale Installer</b> link when downloading software.<br>
+        <br>
+        The user locale package is named <code class="literal">po-locale-</code><code class="keyword"><i>LANGUAGE</i></code><code class="literal">-</code><code class="keyword"><i>VERSION</i></code><code class="literal">.cop.sgn</code>, the <code class="literal">LANGUAGE</code> is the ISO code for your region, eg: <code class="literal">en_GB</code> is English (United Kingdom). The name of the directory to download the user locale <code class="literal">.jar</code> file from is specified in the &lt;<code class="tag">name</code>&gt; element underneath the &lt;<code class="tag">userLocale</code>&gt; the element in <a href="sepmac-cnf-xml.html#userLocale/name">SEPMAC.cnf.xml</a>.<br>
+        <br>
+        <b>1.</b> Convert the <code class="literal">.cop.sgn</code> to <code class="literal">.tar.gz</code> using the <code class="literal">stripsgn</code> script.<br>
+        <br>
+        <span class="icon">file_download</span> <a href="includes/stripsgn">stripsgn</a> (1.9K) <span class="icon">event</span> 06/10/2017 <span class="icon">security</span> SHA256:674945eb5984b38433f532a8aadd42cd81af97bfad2c3b919c6af9ee2e6da19c.<br>
+        <br>
+        <code class="command-line">~$ ./stripsgn po-locale-en_GB-k3-12.0.1.1000-1.cop.sgn</code>
+        <br>
+        <b>2.</b> Extract the archive.<br>
+        <br>
+        <code class="command-line">~$ tar zxf po-locale-en_GB-k3-12.0.1.1000-1.tar.gz</code>
+        <br>
+        <b>3.</b> Extract the <code class="literal">.tar</code> file that the archive contained.<br>
+        <br>
+        <code class="command-line">~$ tar xf po-locale-en_GB-k3-12.0.1.1000-1.tar</code>
+        <br>
+        <b>4.</b> Change into the directory containing the user locale for your language.<br>
+        <br>
+        <code class="command-line">~$ cd usr/locale/cm/tftp/english_united_kingdom</code>
+        <br>
+        <b>5.</b> Copy the locale files into a language specific directory in <code class="literal">/var/lib/tftpboot</code>. You can use any combination of letters, numbers and underscores for the language name.<br>
+        <br>
+        <code class="command-line">~/usr/locale/cm/tftp/english_united_kingdom$ sudo cp *-sip.jar /var/lib/tftpboot/new_zealand</code>
+        <br>
+        Depending on the phone model, a different <code class="literal">.jar</code> file is used.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>rtl-sip.jar</b></td>
+              <td>6901, 6911, 6921, 6941, 6945 and 6961</td>
+              <td class="vertical-rule"><b>tc-sip.jar</b></td>
+              <td>7906 and 7911</td>
+              <td class="vertical-rule"><b>mk-sip.jar</b></td>
+              <td>7941, 7942, 7961 and 7962</td>
+              <td class="vertical-rule"><b>be-sip.jar</b></td>
+              <td>7945 and 7965</td>
+            </tr>
+            <tr>
+              <td><b>td-sip.jar</b></td>
+              <td>7970, 7971 and 7975 </td>
+              <td class="vertical-rule"><b>sl-be-sip.jar</b></td>
+              <td>8851</td>
+              <td class="vertical-rule"><b>sl-bev-sip.jar</b></td>
+              <td>8845, 8865</td>
+              <td class="vertical-rule"><b>gb-sccp-sip.jar</b></td>
+              <td>8941 and 8945</td>
+            </tr>
+            <tr>
+              <td><b>gh-sip.jar</b></td>
+              <td>8961</td>
+              <td class="vertical-rule"><b>lk-sip.jar</b></td>
+              <td>9951</td>
+              <td class="vertical-rule"><b>gd-sip.jar</b></td>
+              <td>9971</td>
+              <td colspan="4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

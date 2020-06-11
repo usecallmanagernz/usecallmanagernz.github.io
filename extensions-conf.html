@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dialplan Extensions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <link rel="stylesheet" type="text/css" href="includes/alternate.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript" src="includes/lang-astexten.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon selected">format_list_numbered</span> <b>Dialplan Extensions</b></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Dialplan Extensions</h1>
+        Example extension dialplan configuration sections in <code class="literal">extensions.conf</code>. Phone features such as call-forwarding, pickup and parking require <a href="extensions-conf.html#x-cisco-serviceuri">x-cisco-serviceuri</a> extensions to be configured.<br>
+        <br>
+        <h2 id="call-extension">call-extension</h2>
+        Context to call a SIP phone extension. Call-forwarding and Alert-Info as well as an optional voice mailbox is supported.<br>
+        <br>
+        <code class="prettify lang-astexten">[call-extension]
+exten =&gt; _X.,1,Set(PEERNAME=${EXTEN})
+; By manually checking for call-forwarding, the call can be forwarded even if the phone is unregistered
+same =&gt; next,Set(CALLFORWARD=${SIPPEER(${PEERNAME},callforward)})
+same =&gt; next,GotoIf($[${LEN(${CALLFORWARD})} != 0]?callforward,1)
+same =&gt; next,Set(MAILBOX=${SIPPEER(${PEERNAME},mailbox)})
+; Phones can be made to play a different ring using the Alert-Info header, see Ring Tones for examples
+same =&gt; next,ExecIf($[${LEN(${ALERT_INFO})} != 0]?SIPAddHeader(Alert-Info: &lt;${ALERT_INFO}&gt;))
+same =&gt; next,Dial(SIP/${PEERNAME},30)
+same =&gt; next,Goto(${TOLOWER(${DIALSTATUS})},1)
+
+; Cisco SIP phones support displaying diversion information
+exten =&gt; callforward,1,SIPAddHeader(Diversion: &quot;${SIPPEER(${PEERNAME},callerid_name)}&quot; &lt;sip:${SIPPEER(${PEERNAME},callerid_num)}@localhost&gt;\;screen=yes\;privacy=off)
+same =&gt; next,Goto(extensions,${CALLFORWARD},1)
+
+; If ${MAILBOX} is empty send congestion, otherwise go to voicemail extension below
+exten =&gt; congestion,1,ExecIf($[${LEN(${MAILBOX})} = 0]?Congestion(10))
+same =&gt; next,Set(GREETING=u)
+same =&gt; next,Goto(voicemail,1)
+
+; If ${MAILBOX} is empty send busy, otherwise go to voicemail extension below
+exten =&gt; busy,1,ExecIf($[${LEN(${MAILBOX})} = 0]?Busy(10))
+same =&gt; next,Set(GREETING=b)
+same =&gt; next,Goto(voicemail,1)
+
+exten =&gt; noanswer,1,Goto(congestion,1)
+exten =&gt; chanunavail,1,Goto(congestion,1)
+
+exten =&gt; voicemail,1,Answer()
+same =&gt; next,Wait(0.5)
+same =&gt; next,VoiceMail(${MAILBOX},${GREETING})
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2 id="extensions">extensions</h2>
+        Incoming context for local phone extensions. <b>Note</b>: when defining a <code class="keyword">hint</code> the peer name needs to be specified twice as there are two independant states, the device state and the presence state.<br>
+        <br>
+        <code class="prettify lang-astexten">[extensions]
+exten =&gt; 301,1,Goto(call-extension,${EXTEN},1)
+; Note the duplication of the hint peername
+same =&gt; hint,SIP/301,SIP/301
+exten =&gt; 302,1,Goto(call-extension,${EXTEN},1)
+same =&gt; hint,SIP/302,SIP/302
+exten =&gt; 303,1,Goto(call-extension,${EXTEN},1)
+same =&gt; hint,SIP/303,SIP/303
+...</code>
+        <br>
+        <h2 id="huntgroup">huntgroup</h2>
+        Hunt-group login. Ring only those peers that are logged into the hunt-group.<br>
+        <br>
+        <code class="prettify lang-astexten">; Clear dial group first
+exten =&gt; 370,1,Set(DIALGROUP(huntgroup)=)
+same =&gt; next,Set(PEERNAMES=301&amp;302&amp;303)
+same =&gt; next,While($[${LEN(${PEERNAMES})} != 0])
+same =&gt; next,Set(PEERNAME=${SHIFT(PEERNAMES,&amp;)})
+; Check if peer is logged-in to the hunt group and add them to the dial group if they are
+same =&gt; next,ExecIf($[${SIPPEER(${PEERNAME},huntgroup)} = yes]?Set(DIALGROUP(huntgroup,add)=SIP/${PEERNAME}))
+same =&gt; next,EndWhile()
+; Send congestion if the dial group is empty
+same =&gt; next,ExecIf($[${LEN(${DIALGROUP(huntgroup)})} = 0]?Congestion(10))
+same =&gt; next,Dial(${DIALGROUP(huntgroup)},30,i)
+same =&gt; next,Hangup(${HANGUPCAUSE})</code>
+        <br>
+        <h2 id="paging">paging</h2>
+        Page a group of phones using the <a href="rtp-streaming.html">RTP streaming</a> API.<br>
+        <br>
+        <code class="prettify lang-astexten">; Only allow one page at a time
+exten =&gt; 380,1,Set(GROUP()=paging)
+same =&gt; next,ExecIf($[${GROUP_COUNT(paging)} != 1]?Busy(10))
+; Multicast audio mode is enabled using the m() option
+same =&gt; next,SIPCiscoPage(301&amp;302&amp;303,om(224.0.1.1)d(From ${CALLERID(number)}))
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2 id="intercom">intercom</h2>
+        Call the intercom line on multiple phones. Intercom is specified as a <a href="line-keys-xml.html#Intercom">line key</a>. See <a href="extensions-conf.html#paging">paging</a> for how to page phones without requiring an intercom line.<br>
+        <br>
+        <code class="prettify lang-astexten">; Clear dial group first
+exten =&gt; 390,1,Set(DIALGROUP(intercom)=)
+; The list of SIP peers and their associated intercom line peer. List could be dynamically specified using EVAL() or DB() allowing for multiple intercom groups.
+same =&gt; next,Set(PEERNAMES=301/391&amp;302/392&amp;303/393)
+same =&gt; next,While($[${LEN(${PEERNAMES})} != 0])
+same =&gt; next,Set(PEERNAME=${SHIFT(PEERNAMES,/)})
+same =&gt; next,Set(INTERCOM_PEERNAME=${SHIFT(PEERNAMES,&amp;)})
+same =&gt; next,ExecIf($[${DEVICE_STATE(SIP/${PEERNAME})} = NOT_INUSE]?Set(DIALGROUP(intercom,add)=SIP/${INTERCOM_PEERNAME}))
+same =&gt; next,EndWhile()
+same =&gt; next,ExecIf($[${LEN(${DIALGROUP(intercom)})} = 0]?Busy(10))
+same =&gt; next,Page(${DIALGROUP(intercom)},is,3)
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2 id="voicemail">voicemail</h2>
+        Extension for the messages (voicemail) button, set by &lt;<code class="tag">messagesNumber</code>&gt; as part of the <a href="line-keys-xml.html#Line">line key</a> definition.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; 399,1,Set(CONNECTEDLINE(all)=&quot;Voice Mail&quot; &lt;${EXTEN}&gt;)
+same =&gt; next,Answer()
+same =&gt; next,Wait(0.5)
+same =&gt; next,Set(MAILBOX=${SIPPEER(${CHANNEL(peername)},mailbox)})
+same =&gt; next,VoiceMailMain(${MAILBOX},s)
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2 id="x-cisco-serviceuri">x-cisco-serviceuri</h2>
+        Dialplan features used by the Cisco phones are prefixed with <code class="literal">x-cisco-serviceuri-</code>, start by stripping it off. <b>Note</b>: <code class="literal">x</code> needs to be surrounded by <code class="literal">[]</code> otherwise it will be interpreted as to match any digit. Available feature extensions are listed below.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; _[x]-cisco-serviceuri-.,1,Goto(${EXTEN:19},1)</code>
+        <br>
+        <h2 id="pickup">pickup</h2>
+        Call Pickup. Hangup with <code class="literal">normal_circuit_congestion</code> which maps to SIP cause <code class="literal">503</code> so that <code class="literal">No call available for pickup</code> appears on the phone.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; pickup,1,Pickup()
+same =&gt; next,Hangup(normal_circuit_congestion)</code>
+        <br>
+        <h2 id="blfpickup">blfpickup</h2>
+        Busy Lamp Field Directed Call Pickup, ${<code class="variable">EXTEN</code>:<code class="literal">10</code>} is the number specified as the &lt;<code class="tag">speedDialNumber</code>&gt; in a BLF speed-dial <a href="line-keys-xml.html#BLF Speed Dial">line key</a> definition, also needs to have a matching <code class="literal">subscribe</code> entry in <a href="sip-conf.html">sip.conf.</a><br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; _blfpickup-.,1,PickupChan(SIP/${EXTEN:10})
+same =&gt; next,Hangup(normal_circuit_congestion)</code>
+        <br>
+        <h2 id="gpickup">gpickup</h2>
+        Group Call Pickup, manually sets the pickup extension or group.<br>
+        <br>
+        <code class="prettify lang-astexten">; Try pickup on channel first
+exten =&gt; _gpickup-.,1,PickupChan(SIP/${EXTEN:8})
+; Otherwise, treat exten as pickup group
+same =&gt; next,Set(CHANNEL(pickupgroup)=${EXTEN:8})
+same =&gt; next,Pickup()
+same =&gt; next,Hangup(normal_circut_congestion)</code>
+        <br>
+        <h2 id="opickup">opickup</h2>
+        Other Call Pickup, example uses ${<code class="variable">OTHERPICKUPGROUP</code>} which is set in the phone's <a href="sip-conf.html">sip.conf.</a> entry.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; opickup,1,Set(CHANNEL(pickupgroup)=${OTHERPICKUPGROUP})
+same =&gt; next,Pickup()
+same =&gt; next,Hangup(normal_circut_congestion)</code>
+        <br>
+        <h2 id="park">park</h2>
+        Park Call. You can omit the <code class="literal">park</code> exten if you have <code class="literal">parkexten</code> set to <code class="literal">park</code> in <a href="res-parking-conf.html">res_parking.conf</a>. <b>Note</b>: the extension priority of the <code class="literal">Park</code> application must be <code class="literal">1</code>.<br>
+        <br>
+        <code class="prettify lang-astexten">; If the parked call isn't retrieved in 60 seconds it will be sent to extension 370
+exten =&gt; park,1,Park(default,st(60)T(50)c(extensions,370,1))
+
+; Remember to include the parked calls context
+include =&gt; parked-calls</code>
+        <br>
+        <h2 id="dpark">dpark</h2>
+        Directed BLF Call Park, blind-transfers the current call to this extension. ${<code class="variable">EXTEN</code>:<code class="literal">6</code>} is the number specified as the &lt;<code class="tag">speedDialNumber</code>&gt; in a BLF Directed Call Park <a href="line-keys-xml.html#BLF Directed Call Park">line key</a> definition, also needs to have a matching <code class="literal">subscribe</code> entry in <a href="sip-conf.html">sip.conf</a>. The <code class="literal">dpark</code> prefix is only used when that parking extension is not in use, otherwise it uses the optional &lt;<code class="tag">retrievalPrefix</code>&gt;.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; _dpark-.,1,Set(PARKINGEXTEN=${EXTEN:6})
+same =&gt; next,Goto(park,1)</code>
+        <br>
+        <h2 id="cfwdall">cfwdall</h2>
+        Call Forwarding, you can reject invalid forwarding target extensions by hanging up with <code class="literal">normal_circuit_congestion</code> which maps to SIP cause <code class="literal">503</code>. <br>
+        <br>
+        <code class="prettify lang-astexten">; Enable call-forwarding
+exten =&gt; _cfwdall-.,1,Answer()
+same =&gt; next,Set(SIPPEER(${CHANNEL(peername)},callforward)=${EXTEN:8})
+same =&gt; next,Hangup(normal_clearing)
+
+; Disable call-forwarding
+exten =&gt; cfwdall,1,Answer()
+same =&gt; next,Set(SIPPEER(${CHANNEL(peername)},callforward)=)
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2 id="record">record</h2>
+        Record call, inbound and outbound legs are recorded separately so <code class="function">ConfBridge</code>() is used to merge them together.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; record,1,Answer()
+same =&gt; next,Wait(0.5)
+same =&gt; next,Set(CONFBRIDGE(bridge,record_conference)=yes)
+same =&gt; next,Set(CONFBRIDGE(bridge,record_file)=${RECORD_PEERNAME})
+same =&gt; next,Set(CONFBRIDGE(user,quiet)=yes)
+; Other channel variables available are ${RECORD_CHANNEL} and ${RECORD_DIRECTION}.
+same =&gt; next,ConfBridge(${RECORD_UNIQUEID})
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2 id="abbrdial">abbrdial</h2>
+        Abbrievated (or speed) dials, soft key is available from the dial number screen. Example uses ${<code class="variable">SPEEDDIAL&lt;X&gt;</code>} which is set in the phone's <a href="sip-conf.html">sip.conf</a> entry.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; _abbrdial-.,1,Set(SPEEDDIAL=${EVAL(SPEEDDIAL${EXTEN:9})})
+same =&gt; next,GotoIf($[${LEN(${SPEEDDIAL})} != 0]?extensions,${SPEEDDIAL},1)
+same =&gt; next,Hangup(unallocated)</code>
+        <br>
+        <h2 id="meetme">meetme</h2>
+        Meetme Conferencing, used to detect creation of a conference bridge as opposed to just joining one.<br>
+        <br>
+        <code class="prettify lang-astexten">; Only allow creation of conference bridge if no one else has first
+exten =&gt; _meetme-36X,1,ExecIf($[${CONFBRIDGE_INFO(${EXTEN:7},parties)} != 0]?Hangup(normal_circuit_congestion))
+same =&gt; next,Set(CONFBRIDGE(bridge,template)=default_bridge)
+same =&gt; next,Set(CONFBRIDGE(user,template)=default_user)
+same =&gt; next,Set(CONFBRIDGE(user,admin)=yes)
+same =&gt; next,ConfBridge(${EXTEN:7})
+same =&gt; next,Hangup(normal_clearing)
+
+; Reject calls to conference bridges that haven't been created
+exten =&gt; _36X,1,ExecIf($[${CONFBRIDGE_INFO(${EXTEN},parties)} = 0]?Hangup(unallocated))
+same =&gt; next,Set(CONFBRIDGE(bridge,template)=default_bridge)
+same =&gt; next,Set(CONFBRIDGE(user,template)=default_user)
+same =&gt; next,Set(CONFBRIDGE(user,admin)=no)
+same =&gt; next,ConfBridge(${EXTEN})
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2>idivert</h2>
+        Divert (Connected), allow call to be diverted to voicemail after being answered.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; idivert,1,Answer()
+same =&gt; next,Wait(0.5)
+same =&gt; next,Set(MAILBOX=${SIPPEER(${IDIVERT_PEERNAME},mailbox)})
+same =&gt; next,VoiceMail(${MAILBOX},b)
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2>cisco_callback_number</h2>
+        Specifies the number the phone stores in the call history without modifying the caller-ID number. Example use is to include a prefix required for an outside line so it can be dialed unedited from the call history entry.<br>
+        <br>
+        <code class="prettify lang-astexten">; If dialing outside numbers requires that they be prefixed with a '1'
+exten =&gt; _X.,1,Set(_CISCO_CALLBACK_NUMBER=1${CALLERID(number)})
+same =&gt; next,Dial(SIP/${EXTEN},30)
+...</code>    
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

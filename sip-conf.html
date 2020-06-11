@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIP Peers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript" src="includes/lang-astsip.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon selected">dialer_sip</span> <b>SIP Peers</b></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>SIP Peers</h1>
+        Example Cisco SIP peer configuration in <code class="literal">sip.conf</code>. New settings added by the patch are listed below.<br>
+        <br>
+        <h2 id="cisco_usecallmanager">cisco_usecallmanager</h2>
+        Enable support for Cisco SIP phone features, required for <code class="literal">USECALLAMANGER</code> phones. Do not enable on peers using phones from other vendors.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>no</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>yes</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="dndbusy">dndbusy</h2>
+        Have Asterisk automatically generate a busy response when calling a phone that has a presence state of DND, otherwise the call will be sent to the phone.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>no</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>yes</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="subscribe">subscribe</h2>
+        Add a subscription for a BLF Speed Dial or BLF Directed Call Park line key, required for Cisco SIP phones as they do not send SUBSCRIBE requests. This option only applies to the phone's primary line. Multiple extensions can be specified separated by a comma.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>exten</b></td>
+              <td>Watch <code class="literal">exten</code> in <code class="literal">subscribecontext</code> if defined, otherwise <code class="literal">context</code></td>
+            </tr>
+            <tr>
+              <td><b>exten@context</b></td>
+              <td>Watch <code class="literal">exten</code> in specified <code class="literal">context</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="register">register</h2>
+        Bulk-register specified peer automatically when this peer registers, required for Cisco SIP phones as they only send a REGISTER request for their primary line. The order in which the <code class="literal">register</code> entries are defined must match the <code class="literal">lineIndex</code> attribute defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. Peers registered in this way do not support subscriptions, separate <code class="literal">qualify</code> values and should have the same <code class="literal">dndbusy</code> setting as the primary line. Multiple peers can be specified separated by a comma.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>name</b></td>
+              <td>Name of the peer.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="huntgroup_default">huntgroup_default</h2>
+        Default hunt group login state of a peer. This option only applies to the phone's primary line.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>no</b></td>
+              <td>Logged Out</td>
+              <td class="vertical-rule"><b>yes</b></td>
+              <td>Logged In</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="cisco_pickup_alert">cisco_pickupnotify_alert</h2>
+        When another phone in your pickup group is ringing alert the user with one or more of the following methods. Multiple alert options can be combined using a comma, eg: <code class="literal">from,to,beep</code>. A notification will only be sent if the phone is idle and has not activated DND.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>from</b></td>
+              <td>Display the caller ID number of the calling phone in the status line.</td>
+            </tr>
+            <tr>
+              <td><b>to</b></td>
+              <td>Display the extension of the phone being called in the status line.</td>
+            </tr>
+            <tr>
+              <td><b>beep</b></td>
+              <td>Play a beep tone through the speaker.</td>
+            </tr>
+            <tr>
+              <td><b>none</b></td>
+              <td>Do not send any notification.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="cisco_pickup_timer">cisco_pickupnotify_timer</h2>
+        Display timeout in seconds for the pickup notify alert when either <code class="literal">from</code> or <code class="literal">to</code> are used.<br>
+        <br>
+        <h2 id="cisco_multiadmin_conference">cisco_multiadmin_conference</h2>
+        When joining another participant to an ad-hoc conference who also has <code class="literal">cisco_multiadmin_conference</code> set to <code class="literal">yes</code> then make that participant a conference administrator as well. That participant can now use the Conference List feature and mute or kick participants as well as adding other participants to the conference.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>no</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>yes</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="cisco_keep_conference">cisco_keep_conference</h2>
+        When there are no more administrators in an ad-hoc conference (see above for how to have more than one administrator), hang up the all remaining participants.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>no</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>yes</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="cisco_qrt_url">cisco_qrt_url</h2>
+        Tell the phone to access this URL when QRT is enabled to gather further information from the user regarding the call.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>url</b></td> 
+              <td>URL to access. The phone's device-name is automatically included in the <code class="literal">name</code> parameter.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div class="horizontal-rule"></div>
+        <h2 id="Extension Template">Extension Template</h2>
+        Settings common to all SIP peers that are local extensions.<br>
+        <br>
+        <code class="prettify lang-astsip">[extension](!)
+type=friend
+context=extensions
+host=dynamic
+nat=no
+trustrpid=no
+sendrpid=rpid
+rpid_update=yes
+rpid_immediate=yes
+parkinglot=default
+allowsubscribe=yes
+notifyhold=no
+callcounter=yes
+videosupport=no
+disallow=all
+allow=g722,ulaw,alaw,g729
+...</code>
+        <br>
+        <h2 id="Cisco SIP Phone Template">Cisco SIP Phone Template</h2>
+        Settings that apply to all Cisco SIP phones, inherits the settings from the <code class="literal">extension</code> template.<br>
+        <br>
+        <code class="prettify lang-astsip">[cisco-usecallmanager](!,extension)
+transport=tcp
+cisco_usecallmanager=yes
+cisco_pickupnotify_alert=from,to
+cisco_pickupnotify_timer=5
+cisco_keep_conference=no
+cisco_multiadmin_conference=yes
+dndbusy=yes
+huntgroup_default=no</code>
+        <br>
+        <h2 id="Transport Layer Security">Transport Layer Security</h2>
+        Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>Insecure</b></td>
+              <td>Connect using TCP</td>
+            </tr>
+            <tr>
+              <td><b>Authenticated</b></td>
+              <td>Connect using TLS with the NULL cipher, RTP is unencrypted</td>
+            </tr>
+            <tr>
+              <td><b>Enncrypted</b></td>
+              <td>Connect using TLS with AES cipher, RTP is encrypted</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-astsip">[general]
+...
+; Only the following ciphers are supported, phone may fail to connect if others are specified,
+; NULL cipher is required for Authenticated mode
+tlscipher=AES128-SHA:AES128-SHA256:AES256-SHA:AES256-SHA256:NULL
+
+[insecure-mode](!)
+transport=tcp
+
+[authenticated-mode](!)
+transport=tls
+
+[encrypted-mode](!)
+transport=tls
+; The res_srtp module needs to be loaded. encryption_taglen is set per-model below
+encryption=yes</code>
+        <br>
+        <h2 id="Device Model Template">Device Model Template</h2>
+        Example individual device templates for each Cisco SIP phone model to handle the different features, inherits the settings from the <code class="literal">cisco-usecallmanager</code> template.<br>
+        <br>
+        <code class="prettify lang-astsip">[cisco-7941](!,cisco-usecallmanager)
+; These should match &lt;busyTrigger&gt; and &lt;maxNumCalls&gt; in SEPMAC.cnf.xml
+busylevel=3
+call-limit=4
+; Force huntgroup login so that the prompt does not show the logged out message 
+huntgroup_default=yes
+; 7900 series only support 32-bit SRTP
+encryption_taglen=32
+
+[cisco-8841](!,cisco-usecallmanager)
+busylevel=4
+call-limit=5
+encryption_taglen=80
+
+[cisco-8865](!,cisco-usecallmanager)
+busylevel=4
+call-limit=5
+; &lt;videoCapability&gt; also needs to be enabled in SEPMAC.cnf.xml
+videosupport=yes
+; Allow the video codec
+allow=h264
+encryption_taglen=80
+
+[cisco-9951](!,cisco-usecallmanager)
+busylevel=5
+call-limit=6
+; &lt;videoCapability&gt; also needs to be enabled in SEPMAC.cnf.xml
+videosupport=yes
+; Allow the video codec
+allow=h264
+encryption_taglen=80</code>
+        <br>
+        <h2 id="SIP Phone Peers">SIP Phone Peers</h2>
+        Individual peer definitions for Cisco SIP phones, inherits the settings from the <code class="literal">cisco-</code><code class="keyword">MODEL</code> template.<br>
+        <br>
+        <code class="prettify lang-astsip">[301](cisco-7941,insecure-mode)
+secret=Gsgf90tYZ26FNQgA
+callerid="Alice" &lt;301&gt;
+description=Alice
+callgroup=1
+pickupgroup=1
+mailbox=301@default
+; See extensions.conf for example on OPickup
+setvar=OTHERPICKUPGROUP=2
+
+; Encryption is enabled on this peer
+[302](cisco-8841,encrypted-mode)
+secret=eV4i5qrCxf0ohMyE
+callerid="Bob" &lt;302&gt;
+description=Bob
+callgroup=1
+pickupgroup=1
+mailbox=302@default
+; Extensions that the phone is watching, they need to be configured in SEPMAC.cnf.xml as well
+subscribe=301
+subscribe=303
+subscribe=381
+
+[303](cisco-8865,insecure-mode)
+secret=NH3d6r1WW1Kcvo9I
+callerid="Cookie Monster" &lt;303&gt;
+description=Cookie Monster
+callgroup=1
+pickupgroup=1
+mailbox=303@default
+; Abbreviated/speed dials for extensions
+setvar=SPEEDDIAL1=301
+setvar=SPEEDDIAL2=302</code>
+        <br>
+        <h2 id="Multiple Lines">Multiple Lines</h2>
+        Cisco SIP phones that have more than one line must have each of those peers specified in their peer definition using <code class="literal">register</code>. Each additional bulk-registered peer will automatically have the same qualify, Do Not Disturb and Hunt Group state as the primary peer.<br>
+        <br>
+        <code class="prettify lang-astsip">; First line (lineIndex=1 in SEPMAC.cnf.xml)
+[301](cisco-9951,insecure-mode)
+secret=LJoO6dgRJYzrCE5Y
+callerid="Alice" &lt;301&gt;
+description=Alice, Line 1
+callgroup=1
+pickupgroup=1
+mailbox=301@default
+; Second line (lineIndex=2 in SEPMAC.cnf.xml)
+register=302
+; Third line (lineIndex=3 in SEPMAC.cnf.xml)
+register=303
+
+[302](cisco-9951,insecure-mode)
+secret=LJoO6dgRJYzrCE5Y
+callerid="Alice" &lt;302&gt;
+description=Alice, Line 2
+
+[303](cisco-9951,insecure-mode)
+secret=LJoO6dgRJYzrCE5Y
+callerid="Alice" &lt;303&gt;
+description=Alice, Line 3</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

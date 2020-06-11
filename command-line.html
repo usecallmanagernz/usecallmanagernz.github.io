@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Command Line</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon selected">keyboard_arrow_right</span> <b>Command Line</b></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Command Line</h1>
+        The call forward, do not disturb and hunt-group login state of a phone can be viewed and changed using the Asterisk command line. These values can also be changed using <a href="sippeer-options.html">SIPPEER options</a>.<br>
+        <br>
+        <h2 id="sip callforward on">sip callforward on</h2>
+        Sets the call forwarding target.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip callforward on 301 123456
+Call forwarding on '301' set to 123456</code>
+        <br>
+        <h2 id="sip callforward off">sip callforward off</h2>
+        Clears the call forwarding target.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip callforward off 301
+Call forwarding on '301' cleared</code>
+        <br>
+        <h2 id="sip donotdisturb on">sip donotdisturb on</h2>
+        Enables do not disturb.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip donotdisturb on 301
+Do Not Disturb on '301' enabled</code>
+        <br>
+        <h2 id="sip donotdisturb off">sip donotdisturb off</h2>
+        Disables do not disturb.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip donotdisturb 301 off
+Do Not Disturb on '301' disabled</code>
+        <br>
+        <h2 id="sip huntgroup on">sip huntgroup on</h2>
+        Logs a phone into the hunt-group.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip huntgroup on 301
+Hunt Group login for '301'</code>
+        <br>
+        <h2 id="sip huntgroup off">sip huntgroup off</h2>
+        Logs a phone out of the hunt-group.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip huntgroup off 301
+Hunt Group logout for '301'</code>
+        <br>
+        <div class="horizontal-rule"></div>
+        <h2 id="sip notify cisco-restart">sip notify cisco-restart</h2>
+        Does a quick restart of the phone. See <a href="sip-notify-conf.html">SIP Notify Commands</a> for more information.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip notify cisco-restart 301
+Sending NOTIFY of type 'cisco-restart' to '301'</code>
+        <br>
+        <h2 id="sip notify cisco-reset">sip notify cisco-reset</h2>
+        Does full reset of the phone. See <a href="sip-notify-conf.html">SIP Notify Commands</a> for more information.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip notify cisco-reset 301
+Sending NOTIFY of type 'cisco-reset to '301'</code>
+        <br>
+        <div class="horizontal-rule"></div>
+        <h2 id="sip show peer">sip show peer</h2>
+        SIP peer details now include the call forward, do not disturb, hunt group login state. For Cisco phone peers the device name, subscriptions and any bulk-registered peers will also be shown.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip show peer 301
+
+  * Name       : 301
+  ...
+  DND          : Yes
+  CallFwd Ext. : 305
+  Hunt Group   : No
+  Device Name  : SEP58971ECC97C1
+  Subscriptions: 302@extensions
+                 303@extensions
+  BulkReg.Peers: 311 (Line 2)
+                 321 (Line 3)</code>
+       <br>
+       <h2 id="core show hints">core show hints</h2>
+       The presence state of a hint is now included in core show hints.<br>
+       <br>
+       <code class="command-line">asterisk*CLI&gt; core show hints
+
+Location                  Hints                           DeviceState     PresenceState   Watchers
+301@extensions            SIP/301,SIP/301                 InUse           Available       3 
+302@extensions            SIP/302,SIP/303                 Idle            DND             2 
+303@extensions            SIP/303,SIP/303                 Idle            Available       0
+...</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

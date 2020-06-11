@@ -1,0 +1,232 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v18/KFOkCnqEu92Fr1Mu51xIIzI.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v18/KFOjCnqEu92Fr1Mu51TzBic6CsQ.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v38/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+/*
+ *
+ */
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    box-sizing: border-box;
+    color: rgb(80, 80, 80);
+    display: flex;
+    flex-direction: column;
+    font: normal normal 13pt/17pt Roboto, sans-serif;
+    height: 100%;
+    margin: 0px;
+}
+
+a, a:visited {
+    color: rgb(0, 126, 255);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: rgb(82, 188, 255);
+}
+
+/*
+ *
+ */
+
+header {
+    background-color: rgb(250, 250, 250);
+    border-bottom: 1px solid rgb(203, 203, 203);
+    flex: none;
+    padding: 10px 50px 10px 50px;
+}
+
+header > img {
+    float: left;
+    padding: 0px 30px 0px 0px;
+}
+
+header > h1 {
+    display: inline-block;
+    font-size: 19pt;
+    line-height: 21pt;
+    margin: 0px;
+    padding: 5px 5px 0px 5px;
+    vertical-align: top;
+}
+
+header > h1 span {
+    color: rgb(155, 8, 25);
+}
+
+header > h2 {
+    display: inline-block;
+    font-size: 13pt;
+    line-height: 21pt;
+    margin: 0px;
+    padding: 5px 0px 0px 0px;
+    vertical-align: top;
+}
+
+header > h2 span {
+    color: rgb(52, 123, 164);
+}
+
+/*
+ *
+ */
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+}
+
+/*
+ *
+ */
+
+main > nav {
+    background-color: rgb(255, 255, 255);
+    flex: 0 1 auto;
+}
+
+main > nav ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 15px 50px 0px 50px;
+}
+
+main > nav ul li {
+    border-bottom: 1px solid transparent;
+    padding: 3px 0px 3px 0px;
+    white-space: nowrap;
+}
+
+main > nav ul li h3 {
+    color: rgb(155, 8, 25);
+    font-size: 10pt;
+    padding: 0px;
+    margin: 0px;
+}
+
+main > nav ul li span.icon {
+    color: rgb(160, 160, 160);
+    display: inline-block;
+    font-family: "Material Icons";
+    font-size: 15pt;
+    padding: 0px 5px 0px 0px;
+    vertical-align: middle;
+}
+
+main > nav ul li span.selected {
+    color: rgb(52, 123, 164);	
+}
+
+main > nav ul li a, main > nav ul li a:visited {
+    color: rgb(80, 80, 80);
+    cursor: pointer;
+}
+
+main > nav ul li a:hover, main > nav li u a:active {
+    border-bottom: 1px dashed rgb(130, 130, 130);
+    color: rgb(130, 130, 130);
+}
+
+/*
+ *
+ */
+
+main > article {
+    flex: 1 1 auto;
+    padding: 15px 50px 15px 0px;
+}
+
+main > article h1 {
+    color: rgb(155, 8, 25);
+    font-size: 17pt;
+    font-weight: bold;
+    margin: 0px 0px 10px 0px;
+}
+
+main > article div.horizontal-rule {
+    border-top: 1px solid rgb(203, 203, 203);
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+}
+
+main > article h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    margin: 0px 0px 5px 0px;
+}
+
+main > article span.icon {
+    color: rgb(160, 160, 160);
+    display: inline-block;
+    font-family: "Material Icons";
+    font-size: 13pt;
+    vertical-align: text-top;
+}
+
+main > article table {
+    border-collapse: collapse;
+}
+
+main > article table tr td {
+    padding: 3px 15px 3px 0px;
+}
+
+main > article table tr td.vertical-rule {
+    border-left: 1px solid rgb(203, 203, 203);
+    padding: 3px 15px 3px 15px;
+}
+
+main > article code.command-line {
+    border: 1px dashed rgb(203, 203, 203);
+    display: block;
+    padding: 5px;
+    font-family: monospace;
+    white-space: pre;
+}
+
+/*
+ *
+ */
+
+footer {
+    display: none;
+    flex: none;
+}

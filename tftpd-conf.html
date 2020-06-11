@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TFTP Provisioning</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript" src="includes/lang-tftpd.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon selected">file_download</span> <b>TFTP Provisioning</b></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>TFTP Provisioning</h1>
+        Example rewrite map for tftpd-hpa (optional). A sample tftpboot directory containing templates for <code class="literal">SEPMAC.cnf.xml</code>, <code class="literal">Softkeys.xml</code>, <code class="literal">FeaturePolicy.xml</code>, <code class="literal">DialTemplate.xml</code>, <code class="literal">AppDialRules.xml</code>, background images and ring-tones can be downloaded from the URL below.<br>
+        <br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/tftpboot/archive/v1.0.tar.gz">tftpboot.tar.gz</a> (122K) <span class="icon">event</span> 06/05/2020 <span class="icon">security</span> SHA256:3fee40026d8b730ed9dad21cb39102c0c7416d7b0e68b0917230ecf5e4af7cf7.<br>
+        <br>
+        To keep the firmware, locale and ring-tone files separate, rewrite rules can be used (optional).<br>
+        <br>
+        <code class="prettify lang-tftpd"># Keep firmware in a separate directory (optional)
+ri ^(.+\.loads)$ firmware/\1
+ri ^(.+\.sbn)$ firmware/\1
+
+# Keep locales in a separate directory (optional)
+ri ^(.+)/(.+-sip.jar)$ locales/\1/\2
+ri ^(.+)/(.+-tones.xml)$ locales/\1/\2
+
+# Keep ring-tones in a separate directory (optional)
+ri ^(Ringlist)(\.xml|-wb\.xml)(\.sgn)?$ ringtones/\1\2\3
+ri ^(.+)(\.raw|\.rwb)(\.sgn)?$ ringtones/\1\2\3
+
+# Rename Desktops to wallpapers (optional)
+ri ^Desktops/(.+)/(List\.xml)(\.sgn)?$ wallpapers/\1/\2\3
+ri ^Desktops/(.+)/(.+\.png)(\.sgn)?$ wallpapers/\1/\2\3</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

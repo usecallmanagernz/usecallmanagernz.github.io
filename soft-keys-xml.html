@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Soft Keys</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon selected">power_input</span> <b>Soft Keys</b></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Soft Keys</h1>
+        Soft keys control what features are available on the row of keys below the phone's screen based on the current call state. Set by the &lt;<code class="tag">softKeyFile</code>&gt; element in <a href="sepmac-cnf-xml.html#softKeyFile">SEPMAC.cnf.xml</a>. <b>Note</b>: Some phone models do not support certain soft keys and those features may instead be available as <a href="line-keys-xml.html">Line Keys</a>.<br>
+        <br>
+        The <b>8961</b>, <b>9951</b> and <b>9971</b> models use the <a href="feature-policy-xml.html">Feature Policy</a> to determine what features are available instead unless &lt;<code class="tag">softKeyControl</code>&gt; is enabled.<br>
+        <br>
+        <b>Note:</b> For models that have dedicated <code class="literal">Transfer</code>, <code class="literal">Conference</code>, <code class="literal">Hold</code> and <code class="literal">EndCall</code> keys those features are also controlled using soft key definitions.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;softKeyCfg&gt;
+  &lt;versionStamp&gt;a92f70b3-6320-46f1-bf5e-bc9f59b66daf&lt;/versionStamp&gt;
+  &lt;typeSoftKey&gt;</code>
+        <br>
+        <h2 id="Undefined">Undefined</h2>
+        Undefined or empty soft key, must have a <code class="literal">keyID</code> of <code class="literal">Undefined</code> or <code class="literal">Null</code>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Undefined&quot;&gt;
+      &lt;tag&gt;0&lt;/tag&gt;
+      &lt;eventID&gt;0&lt;/eventID&gt;
+      &lt;helpID&gt;0&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Redial">Redial</h2>
+        Redials last number dialed.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Redial&quot;&gt;
+      &lt;tag&gt;1&lt;/tag&gt;
+      &lt;eventID&gt;1&lt;/eventID&gt;
+      &lt;helpID&gt;301&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="NewCall">NewCall</h2>
+        Make a new outgoing call.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;NewCall&quot;&gt;
+      &lt;tag&gt;2&lt;/tag&gt;
+      &lt;eventID&gt;2&lt;/eventID&gt;
+      &lt;helpID&gt;302&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Hold">Hold</h2>
+        Place the currently selected call on hold.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Hold&quot;&gt;
+      &lt;tag&gt;3&lt;/tag&gt;
+      &lt;eventID&gt;3&lt;/eventID&gt;
+      &lt;helpID&gt;303&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Transfer">Transfer</h2>
+        Transfer the currently selected call. <b>7900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Transfer&quot;&gt;
+      &lt;tag&gt;4&lt;/tag&gt;
+      &lt;eventID&gt;4&lt;/eventID&gt;
+      &lt;helpID&gt;304&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="CFwdAll">CFwdAll</h2>
+        Sets or removes the current call-forwarding target. The phone make a call to <code class="literal">x-cisco-serviceuri-cfwdall-XXX</code> where <code class="literal">XXX</code> is replaced by the forwarding target dialed by the user. The phone will make a call to <code class="literal">x-cisco-serviceuri-cfwdall</code> when clearing the forwarding target. See <a href="extensions-conf.html#cfwdall">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;CFwdAll&quot;&gt;
+      &lt;tag&gt;5&lt;/tag&gt;
+      &lt;eventID&gt;5&lt;/eventID&gt;
+      &lt;helpID&gt;305&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="&lt;&lt;">&lt;&lt;</h2>
+        Backspace (delete) over a digit you have dialed.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID="&amp;lt;&amp;lt;"&gt;
+      &lt;tag&gt;8&lt;/tag&gt;
+      &lt;eventID&gt;8&lt;/eventID&gt;
+      &lt;helpID&gt;308&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="EndCall">EndCall</h2>
+        End the currently selected call.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;EndCall&quot;&gt;
+      &lt;tag&gt;9&lt;/tag&gt;
+      &lt;eventID&gt;9&lt;/eventID&gt;
+      &lt;helpID&gt;309&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Resume">Resume</h2>
+        Retrieve a call you previously placed on hold.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Resume&quot;&gt;
+      &lt;tag&gt;10&lt;/tag&gt;
+      &lt;eventID&gt;10&lt;/eventID&gt;
+      &lt;helpID&gt;310&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Answer">Answer</h2>
+        Answer the currently selected ringing call.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Answer&quot;&gt;
+      &lt;tag&gt;11&lt;/tag&gt;
+      &lt;eventID&gt;11&lt;/eventID&gt;
+      &lt;helpID&gt;311&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Confrn">Confrn</h2>
+        Start a new ad-hoc conference. <b>7900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Confrn&quot;&gt;
+      &lt;tag&gt;13&lt;/tag&gt;
+      &lt;eventID&gt;13&lt;/eventID&gt;
+      &lt;helpID&gt;313&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Park">Park</h2>
+        Park the currently selected call.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Park&quot;&gt;
+      &lt;tag&gt;14&lt;/tag&gt;
+      &lt;eventID&gt;14&lt;/eventID&gt;
+      &lt;helpID&gt;314&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Join">Join</h2>
+        Join the list of selected calls together into a conference. <b>7900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Join&quot;&gt;
+      &lt;tag&gt;15&lt;/tag&gt;
+      &lt;eventID&gt;15&lt;/eventID&gt;
+      &lt;helpID&gt;315&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="MeetMe">MeetMe</h2>
+        Create a meetme conference. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-meetme-XXX</code> where <code class="literal">XXX</code> is replaced with the meetme number dialed by the user. See <a href="extensions-conf.html#meetme">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;MeetMe&quot;&gt;
+      &lt;tag&gt;16&lt;/tag&gt;
+      &lt;eventID&gt;16&lt;/eventID&gt;
+      &lt;helpID&gt;316&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="PickUp">PickUp</h2>
+        Pick-up a the oldest ringing call on one of the phones in you call group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-pickup</code>. See <a href="extensions-conf.html#pickup">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;PickUp&quot;&gt;
+      &lt;tag&gt;17&lt;/tag&gt;
+      &lt;eventID&gt;17&lt;/eventID&gt;
+      &lt;helpID&gt;317&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="GPickUp">GPickUp</h2>
+        Pick-up the oldest ringing call in a specified call group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-gickup-XXX</code> where <code class="literal">XXX</code> is replaced with the group number dialed by the user.See <a href="extensions-conf.html#gpickup">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;GPickUp&quot;&gt;
+      &lt;tag&gt;18&lt;/tag&gt;
+      &lt;eventID&gt;18&lt;/eventID&gt;
+      &lt;helpID&gt;318&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="RmLstC">RmLstC</h2>
+        Remove last participant added to the selected ad-hoc conference. <b>7900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;RmLstC&quot;&gt;
+      &lt;tag&gt;57&lt;/tag&gt;
+      &lt;eventID&gt;19&lt;/eventID&gt;
+      &lt;helpID&gt;319&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="CallBack">CallBack</h2>
+        Activate a call-back for the current outgoing call. Phone will notify you when the extension becomes available. You need to have a <a href="ring-list-xml.html">ring-tone</a> named <code class="literal">Callback.raw</code> to get an audible notification.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;CallBack&quot;&gt;
+      &lt;tag&gt;65&lt;/tag&gt;
+      &lt;eventID&gt;20&lt;/eventID&gt;
+      &lt;helpID&gt;320&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="DND">DND</h2>
+        Set or remove Do Not Disturb presence status. <b>7900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;DND&quot;&gt;
+      &lt;tag&gt;63&lt;/tag&gt;
+      &lt;eventID&gt;69&lt;/eventID&gt;
+      &lt;helpID&gt;369&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="QRT">QRT</h2>
+        Quality reporting tool, indicates that Asterisk should log RTP statistics when the call finishes. &lt;<code class="tag">callStats</code>&gt; must be set to <code class="literal">true</code> in <a href="sepmac-cnf-xml.html#callStats">SEPMAC.cnf.xml</a>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;QRT&quot;&gt;
+      &lt;tag&gt;75&lt;/tag&gt;
+      &lt;eventID&gt;22&lt;/eventID&gt;
+      &lt;helpID&gt;322&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="MCID">MCID</h2>
+        Identify and log the current call as being malicious.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;MCID&quot;&gt;
+      &lt;tag&gt;76&lt;/tag&gt;
+      &lt;eventID&gt;27&lt;/eventID&gt;
+      &lt;helpID&gt;327&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Select">Select</h2>
+        Add or remove the currently selected call to the list of calls to be joined together into a conference. <b>7900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Select&quot;&gt;
+      &lt;tag&gt;78&lt;/tag&gt;
+      &lt;eventID&gt;29&lt;/eventID&gt;
+      &lt;helpID&gt;329&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="ConfList">ConfList</h2>
+        Provide a list participants in the currently selected ad-hoc conference. Participants can be muted/un-muted by pressing <code class="literal">Mute</code> or removed by pressing <code class="literal">Remove</code>. Participants that are muted have their caller ID prefixed with a <code class="literal">-</code> (minus) and those that are talking are prefixed with a <code class="literal">+</code> (plus).<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;ConfList&quot;&gt;
+      &lt;tag&gt;79&lt;/tag&gt;
+      &lt;eventID&gt;30&lt;/eventID&gt;
+      &lt;helpID&gt;330&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="iDivert">iDivert</h2>
+        Diverts a ringing call on your phone by sending a busy signal or sends a call to <code class="literal">idivert</code> extension if the call is connected. See <a href="extensions-conf.html#idivert">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;iDivert&quot;&gt;
+      &lt;tag&gt;80&lt;/tag&gt;
+      &lt;eventID&gt;31&lt;/eventID&gt;
+      &lt;helpID&gt;331&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="OPickUp">OPickUp</h2>
+        Pick-up the oldest ringing on a phone in your other pickup group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-opickup</code>. See <a href="extensions-conf.html#opickup">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;OPickUp&quot;&gt;
+      &lt;tag&gt;91&lt;/tag&gt;
+      &lt;eventID&gt;34&lt;/eventID&gt;
+      &lt;helpID&gt;334&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="HLog">HLog</h2>
+        Login or Logout from the hunt group. <b>7900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;HLog&quot;&gt;
+      &lt;tag&gt;92&lt;/tag&gt;
+      &lt;eventID&gt;35&lt;/eventID&gt;
+      &lt;helpID&gt;335&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="AbbrDial">AbbrDial</h2>
+        Use abbreviated (speed) dialing. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-abbrdial-XXX</code> where <code class="literal">XXX</code> is replaced with the number dialed by the user. See <a href="extensions-conf.html#abbrdial">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;AbbrDial&quot;&gt;
+      &lt;tag&gt;7740&lt;/tag&gt;
+      &lt;eventID&gt;71&lt;/eventID&gt;
+      &lt;helpID&gt;371&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;</code>
+        <br>
+        <h2 id="Record">Record</h2>
+        Record the currently selected call, the separate inbound and outbound audio streams of the call duplicated on the phone and sent to the <code class="literal">record</code> extension. See <a href="extensions-conf.html#record">Dialplan Extensions</a> for an example.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeyDef keyID=&quot;Record&quot;&gt;
+      &lt;tag&gt;7747&lt;/tag&gt;
+      &lt;eventID&gt;74&lt;/eventID&gt;
+      &lt;helpID&gt;374&lt;/helpID&gt;
+    &lt;/softKeyDef&gt;
+  &lt;/typeSoftKey&gt;
+  &lt;softKeySets&gt;</code>
+        <br>
+        <h2 id=&quot;softKeySet&quot;>softKeySet</h2>
+        Specify what soft keys to display in a call state. There is a maximum of <code class="literal">16</code> soft keys for each state.<br>
+        <br>
+        <h2 id=&quot;On Hook&quot;>On Hook</h2>
+        Valid soft keys are <span class="literal">Redial</span>, <span class="literal">NewCall</span> (mandatory), <span class="literal">DND</span>, <span class="literal">CFwdALL</span>, <span class="literal">HLog</span>, <span class="literal">PickUp</span>, <span class="literal">GPickUp</span>, <span class="literal">OPickUp</span>, <span class="literal">CallBack</span>, <span class="literal">MeetMe</span>, <span class="literal">QRT</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;On Hook&quot;&gt;
+      &lt;softKey keyID=&quot;Redial&quot; /&gt;
+      &lt;softKey keyID=&quot;NewCall&quot; /&gt;
+      &lt;softKey keyID=&quot;DND&quot; /&gt;
+      &lt;softKey keyID=&quot;CFwdAll&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Off Hook&quot;>Off Hook</h2>
+        Valid soft keys are <span class="literal">Redial</span>, <span class="literal">EndCall</span>, <span class="literal">DND</span>, <span class="literal">CFwdALL</span>, <span class="literal">HLog</span>, <span class="literal">PickUp</span>, <span class="literal">GPickUp</span>, <span class="literal">OPickUp</span>, <span class="literal">AbbrDial</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Off Hook&quot;&gt;
+      &lt;softKey keyID=&quot;Redial&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+      &lt;softKey keyID=&quot;PickUp&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Off Hook With Feature&quot;>Off Hook With Feature</h2>
+        Valid soft keys are <span class="literal">Redial</span>, <span class="literal">EndCall</span>, <span class="literal">DND</span>, <span class="literal">AbbrDial</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Off Hook With Feature&quot;&gt;
+      &lt;softKey keyID=&quot;Redial&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Digits After First&quot;>Digits After First</h2>
+        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">&lt;&lt;</span> (mandatory), <span class="literal">DND</span>, <span class="literal">AbbrDial</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Digits After First&quot;&gt;
+      &lt;softKey keyid=&quot;&amp;lt;&amp;lt;&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Ring Out&quot;>Ring Out</h2>
+        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">DND</span>, <span class="literal">CallBack</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Ring Out&quot;&gt;
+      &lt;softKey keyID=&quot;Undefined&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Connected&quot;>Connected</h2>
+        Valid soft keys are <span class="literal">Hold</span>, <span class="literal">EndCall</span> (mandatory), <span class="literal">Transfer</span>, <span class="literal">Park</span>, <span class="literal">Confrn</span>, <span class="literal">ConfList</span>, <span class="literal">RmLstC</span>, <span class="literal">Record</span>, <span class="literal">iDivert</span>, <span class="literal">DND</span>, <span class="literal">HLog</span>, <span class="literal">QRT</span>, <span class="literal">MCID</span>, <span class="literal">Select</span>, <span class="literal">Join</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected&quot;&gt;
+      &lt;softKey keyID=&quot;Hold&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+      &lt;softKey keyID=&quot;Transfer&quot; /&gt;
+      &lt;softKey keyID=&quot;Confrn&quot; /&gt;
+      &lt;softKey keyID=&quot;ConfList&quot; /&gt;
+      &lt;softKey keyID=&quot;Park&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Connected No Feature&quot;>Connected No Feature</h2>
+        Valid soft keys are <span class="literal">EndCall</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected No Feature&quot;&gt;
+      &lt;softKey keyID=&quot;Undefined&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Connected Transfer&quot;>Connected Transfer</h2>
+        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">Transfer</span> (mandatory), <span class="literal">CallBack</span>, <span class="literal">QRT</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected Transfer&quot;&gt;
+      &lt;softKey keyID=&quot;Undefined&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+      &lt;softKey keyID=&quot;Transfer&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Connected Conference&quot;>Connected Conference</h2>
+        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">Confrn</span> (mandatory), <span class="literal">DND</span>, <span class="literal">QRT</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected Conference&quot;&gt;
+      &lt;softKey keyID=&quot;Undefined&quot; /&gt;
+      &lt;softKey keyID=&quot;EndCall&quot; /&gt;
+      &lt;softKey keyID=&quot;Confrn&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;On Hold&quot;>On Hold</h2>
+        Valid soft keys are <span class="literal">Resume</span> (mandatory), <span class="literal">NewCall</span>, <span class="literal">iDivert</span>, <span class="literal">DND</span>, <span class="literal">Select</span>, <span class="literal">Join</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;On Hold&quot;&gt;
+      &lt;softKey keyID=&quot;Resume&quot; /&gt;
+      &lt;softKey keyID=&quot;NewCall&quot; /&gt;
+    &lt;/softKeySet&gt;</code>
+        <br>
+        <h2 id=&quot;Ring In&quot;>Ring In</h2>
+        Valid soft keys are <span class="literal">Answer</span>, <span class="literal">iDivert</span>, <span class="literal">DND</span> and <span class="literal">Undefined</span>.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Ring In&quot;&gt;
+      &lt;softKey keyID=&quot;Answer&quot; /&gt;
+      &lt;softKey keyID=&quot;iDivert&quot; /&gt;
+      &lt;softKey keyID=&quot;DND&quot; /&gt;
+    &lt;/softKeySet&gt;
+    &lt;softKeySet id=&quot;Remote In Use&quot; /&gt;
+  &lt;/softKeySets&gt;
+&lt;/softKeyCfg&gt;</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

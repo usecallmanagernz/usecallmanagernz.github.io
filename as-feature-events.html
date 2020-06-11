@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AS Feature Events</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript" src="includes/lang-other.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon selected">extension</span> <b>AS Feature Events</b></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>AS Feature Events</h1>
+        The patch also enables support for Do Not Disturb and Call Forward synchronization using Application Server Feature Events (<span class="icon">open_in_browser</span> <a href="https://www.ecma-international.org/publications/standards/Ecma-323.htm">ECMA-323</a>). Listed below are the per-vendor configuration options required.<br>
+        <br>
+        You do not need to make any changes in <a href="sip-conf.html">sip.conf</a> to enable this feature.<br>
+        <br>
+        <h2 id="Polycom">Polycom</h2>
+        <br>
+        <code class="prettify lang-xml">&lt;polycomConfig&gt;
+  &lt;reg ... reg.1.serverFeatureControl.cf=&quot;1&quot; reg.1.serverFeatureControl.dnd=&quot;1&quot; /&gt;
+  ...
+&lt;/polycomConfig&gt;</code>
+        <br>
+        <h2 id="Cisco SPA">Cisco SPA and Multiplatform Firmware</h2>
+        <br>
+        <code class="prettify lang-xml">&lt;flat-profile&gt;
+  ...
+  &lt;Feature_Key_Sync_1_&gt;Yes&lt;/Feature_Key_Sync_1_&gt;
+&lt;/flat-profile&gt;</code>
+        <br>
+        <h2 id="SNOM">SNOM</h2>
+        <br>
+        <code class="prettify lang-xml">&lt;settings&gt;
+  &lt;phone-settings&gt;
+    ...
+    &lt;dfks&gt;on&lt;/dfks&gt;
+  &lt;/phone-settings&gt;
+&lt;/settings&gt;</code>
+        <br>
+        <h2 id="Aastra">Aastra</h2>
+        <br>
+        <code class="prettify lang-other">...
+sip line1 as-feature-event subscription: 1</code>
+        <br>
+        <h2 id="Yealink">Yealink</h2>
+        <br>
+        <code class="prettify lang-other">...
+bw.feature_key_sync = 1</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

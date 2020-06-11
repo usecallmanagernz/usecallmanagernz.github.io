@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ring Tones</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon selected">ring_volume</span> <b>Ring Tones</b></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Ring Tones</h1>
+        The list of available ring-tones is specified in a file called <code class="literal">Ringlist.xml</code> which the phone downloads from the provisioning server. A maximum of <code class="literal">50</code> &lt;<code class="tag">Ring</code>&gt; entries can be defined.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;CiscoIPPhoneRingList&gt;
+  &lt;Ring&gt;</code>
+        <br >
+        <h2 id="DisplayName">DisplayName</h2>
+        The name of the ring-tone when displayed in the list of ring-tones. Must not be longer than 25 characters.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;DisplayName&gt;Old Telephone&lt;/DisplayName&gt;</code>
+        <br >
+        <h2 id="FileName">FileName</h2>
+        Name of the file to download, must end in <code class="literal">.raw</code> and must not be longer than 25 characters.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;FileName&gt;Old_Telephone.raw&lt;/FileName&gt;
+  &lt;/Ring&gt;
+  ...
+&lt;/CiscoIPPhoneRingList&gt;</code>
+        <br>
+        <h2 id="Using SoX">Using SoX</h2>
+        Ring-tones are raw PCM (no header), u-law encoded with 8-bits per sample, mono at 8000Hz between 240 and 16080 samples (2 seconds) in length. The example below shows how a <code class="literal">.wav</code> file can be converted to <code class="literal">.raw</code> using <code class="literal">sox</code>.<br>
+        <br>
+        <code class="command-line">~$ sox input.wav -t raw -e u-law -b 8 -c 1 -r 8000 output.raw</code>
+        <br>
+        <h2 id="Wideband Ring Tones">Wideband Ring Tones</h2>
+        The <b>7800</b> and <b>8800</b> series phones use wideband ring-tones. The list of available wideband ring-tones is specified in a file called <code class="literal">Ringlist-wb.xml</code> which is in the same format as <code class="literal">Ringlist.xml</code>. Wideband ring-tone filenames must end in <code class="literal">.rwb</code>.<br>
+        <br>
+        Wideband ring-tones are raw PCM (no header), signed-integer encoded with 16-bits per sample, mono at 16000Hz between 240 and 160800 samples (10 seconds) in length. The example below shows how a <code class="literal">.wav</code> file can be converted to <code class="literal">.rwb</code> using <code class="literal">sox</code>.<br>
+        <br>
+        <code class="command-line">~$ sox input.wav -t raw -e signed-integer -b 16 -c 1 -r 16000 output.rwb</code>
+        <br>
+        <h2 id="Alert-Info">Alert-Info</h2>
+        The phone can be made to play a different built-in ring-tone by using the <code class="literal">Alert-Info</code> header.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>Bellcore-dr1</b> or <b>Bellcore-dr2</b></td>
+              <td>Play the user selected ring-tone</td>
+            </tr>
+            <tr>
+              <td><b>Bellcore-dr3</b></td>
+              <td>Basic ring-tone 1</td>
+            </tr>
+            <tr>
+              <td><b>Bellcore-dr4</b></td>
+              <td>Basic ring-tone 2</td>
+            </tr>
+            <tr>
+              <td><b>Bellcore-dr5</b></td>
+              <td>Ring once</td>
+            </tr>
+            <tr>
+              <td><b>Flashonly-Ring</b></td>
+              <td>Ring silently</td>
+            </tr>
+            <tr>
+              <td><b>Precedence-Ring</b></td>
+              <td>Ring constantly</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

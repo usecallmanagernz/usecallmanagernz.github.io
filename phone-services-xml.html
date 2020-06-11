@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Phone Services</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon selected">settings</span> <b>Phone Services</b></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Phone Services</h1>
+        The phone can make HTTP requests to a remote web-server to display text, menus and images as well as check whether a <a href="cgi-execute-xml.html">CGI Execute</a> requests will be allowed. URLs assigned to fixed-keys (eg: services, directories) and line keys are defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. An archive containing these sample scripts can be downloaded from the URL below.<br>
+        <br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/services/archive/v1.0.tar.gz">services.tar.gz</a> (9.6K) <span class="icon">event</span> 06/06/2016 <span class="icon">security</span> SHA256:fd7bfb50e0adf931db2b9d2fcfa9dae96ec597a6614b99f22ceaeb5464a906aa.<br>
+        <br>
+        See the <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
+        <br>
+        <h2 id="authenticationURL">authenticationURL</h2>
+        If defined, the phone will make requests to this URL containing the username and password that was included in the <code class="literal">Authorization</code> header in the request to http://<code class="literal">x</code>.<code class="literal">x</code>.<code class="literal">x</code>.<code class="literal">x</code>/<code class="function">CGI</code>/<code class="function">Execute</code>. See <a href="cgi-execute-xml.html">CGI Execute</a> for more information.<br>
+        <br>
+        The script handling the request must respond exactly with <code class="literal">AUTHORIZED</code> (with no newline character at end) otherwise the request will be denied.<br>
+        <br>
+        <code class="prettify lang-perl">#!/usr/bin/perl
+#
+# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
+# This program is free software, distributed under the terms of
+# the GNU General Public License Version 2.
+
+use strict;
+use English qw/-no_match_vars/;
+use CGI::Simple;
+
+# Directory containing the SEPMAC.cnf.xml files
+our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
+
+# Basic-auth username and password credentials
+our $CGI_USERNAME = 'cisco';
+our $CGI_PASSWORD = 'cisco';
+
+eval {
+    my $cgi = CGI::Simple-&gt;new;
+
+    # Fix silly capitization of UserID and Password
+    foreach my $name (qw/UserID Password/) {
+        $cgi-&gt;param (lc $name, $cgi-&gt;param ($name));
+        $cgi-&gt;delete ($name);
+    }
+
+    print 'Status: 200 OK', &quot;\r\n&quot;,
+          'Content-Type: text/plain', &quot;\r\n&quot;,
+          &quot;\r\n&quot;;
+
+    # Check that the device exists and the username and password are correct
+    if ($cgi-&gt;param ('devicename') =~ m/^SEP[0-9A-F]{12}$/
+        &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('devicename') . '.cnf.xml')
+        &amp;&amp; $cgi-&gt;param ('userid') eq $CGI_USERNAME &amp;&amp; $cgi-&gt;param ('password') eq $CGI_PASSWORD) {
+        print 'AUTHORIZED';
+    } else {
+        print 'UNAUTHORIZED';
+    }    
+};
+
+warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+        <br>
+        <h2 id="directoryURL">directoryURL</h2>
+        The URL accessed when the directories button is pressed. Requires that the Asterisk manager web-interface is enabled.<br>
+        <br>
+        <code class="prettify lang-perl">#!/usr/bin/perl
+#
+# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
+# This program is free software, distributed under the terms of
+# the GNU General Public License Version 2.
+
+use strict;
+use English qw/-no_match_vars/;
+use CGI::Simple;
+use URI::Escape;
+use HTML::Entities;
+use LWP::UserAgent;
+use HTTP::Cookies;
+use XML::LibXML;
+
+# Directory containing the SEPMAC.cnf.xml files
+our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
+
+# Login credentials set in manager.conf
+our $MANAGER_HOSTNAME = 'localhost:8088';
+our $MANAGER_USERNAME = 'asterisk';
+our $MANAGER_PASSWORD = 'asterisk';
+
+sub how_to_use {
+    my $cgi = shift;
+
+    print '&lt;CiscoIPPhoneText&gt;',
+            '&lt;Title&gt;How To Use&lt;/Title&gt;',
+            '&lt;Text&gt;Use the keypad or navigation key to select the first letter of the person\'s name.&lt;/Text&gt;',
+            '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;',
+            '&lt;SoftKeyItem&gt;',
+              '&lt;Name&gt;Back&lt;/Name&gt;',
+              '&lt;URL&gt;SoftKey:Exit&lt;/URL&gt;',
+              '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
+            '&lt;/SoftKeyItem&gt;',
+          '&lt;/CiscoIPPhoneText&gt;';
+}
+
+sub directory_index {
+    my $cgi = shift;
+
+    print '&lt;CiscoIPPhoneMenu&gt;',
+            '&lt;Title&gt;Local Directory&lt;/Title&gt;';
+
+   foreach my $index ('1', '2 ABC', '3 DEF', '4 GHI', '5 JKL', '6 MNO', '7 PRQS', '8 TUV', '9 WXYZ', '*', '0', '#') {
+       print '&lt;MenuItem&gt;',
+               '&lt;Name&gt;', encode_entities ($index), '&lt;/Name&gt;',
+               '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
+                 '&amp;amp;menuitem=yes&amp;amp;index=', encode_entities ($index), '&lt;/URL&gt;',
+             '&lt;/MenuItem&gt;';
+   }
+
+   print   '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Exit&lt;/Name&gt;',
+             '&lt;URL&gt;Init:Directories&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+           '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Back&lt;/Name&gt;',
+             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+           '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Help&lt;/Name&gt;',
+             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
+               '&amp;amp;menuitem=yes&amp;amp;index=howtouse&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 2 : 3, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+         '&lt;/CiscoIPPhoneMenu&gt;';
+}
+
+sub directory_entries {
+    my $cgi = shift;
+
+    my $useragent = LWP::UserAgent-&gt;new;
+
+    $useragent-&gt;cookie_jar (HTTP::Cookies-&gt;new (hide_cookie2 =&gt; 1));
+
+    my ($request, $response);
+
+    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Login'
+                                    . '&amp;Username=' . uri_escape ($MANAGER_USERNAME)
+                                    . '&amp;Secret=' . uri_escape ($MANAGER_PASSWORD));
+    $response = $useragent-&gt;request ($request);
+
+    die $response-&gt;as_string unless ($response-&gt;is_success);
+
+    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=SIPPeers');
+    $response = $useragent-&gt;request ($request);
+
+    die $response-&gt;as_string unless ($response-&gt;is_success);
+
+    my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
+
+    my $directory = {};
+
+    foreach my $element ($document-&gt;findnodes ('/ajax-response/response/generic[@event=&quot;PeerEntry&quot;]')) {
+        my $peer = $element-&gt;getAttribute ('objectname');
+
+        # This will be slow if you have a large number of SIP peers
+        $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=SIPShowPeer'
+                                        . '&amp;Peer=' . uri_escape ($peer));
+        $response = $useragent-&gt;request ($request);
+
+        die $response-&gt;as_string unless ($response-&gt;is_success);
+
+        my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
+
+        my ($name, $phone_number)
+            = ($document-&gt;findvalue ('/ajax-response/response/generic/@callerid') =~ m/^&quot;([^\&quot;]*)&quot; &lt;([^&gt;]*)&gt;$/);
+
+        next unless ($phone_number =~ m/^\d+$/);
+        next if (index ($cgi-&gt;param ('index'), ucfirst substr ($name, 0, 1)) == -1);
+
+        $directory-&gt;{$phone_number} = $name;
+    }
+
+    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Logoff');
+    $response = $useragent-&gt;request ($request);
+
+    die $response-&gt;as_string unless ($response-&gt;is_success);
+
+    print '&lt;CiscoIPPhoneMenu&gt;',
+            '&lt;Title&gt;', encode_entities ($cgi-&gt;param ('index')), '&lt;/Title&gt;';
+
+    foreach my $phone_number (sort ({$directory-&gt;{$a} cmp $directory-&gt;{$b}} keys %{$directory})) {
+       my $name = $directory-&gt;{$phone_number};
+
+       print '&lt;MenuItem&gt;',
+               '&lt;Name&gt;', encode_entities ($name), '&lt;/Name&gt;',
+               '&lt;URL&gt;Dial:', encode_entities ($phone_number), '&lt;/URL&gt;',
+             '&lt;/MenuItem&gt;';
+    }
+
+    print  '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Exit&lt;/Name&gt;',
+             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
+               '&amp;amp;menuitem=yes&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+           '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Dial&lt;/Name&gt;',
+             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+         '&lt;/CiscoIPPhoneMenu&gt;';
+}
+
+eval {
+    my $cgi = CGI::Simple-&gt;new;
+
+    # Check that the device exists
+    unless ($cgi-&gt;param ('name') =~ m/^SEP[0-9A-F]{12}$/
+            &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('name') . '.cnf.xml')) {
+        print 'Status: 403 Forbidden', &quot;\r\n&quot;,
+              'Content-Type: text/plain', &quot;\r\n&quot;,
+              &quot;\r\n&quot;,
+              'Invalid or unknown device name';
+
+        return;
+    }
+
+    print 'Status: 200 OK', &quot;\r\n&quot;,
+          'Content-Type: text/xml', &quot;\r\n&quot;,
+          &quot;\r\n&quot;;
+
+    # 7900 series need a menu item displayed first
+    if ($cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ &amp;&amp; !length $cgi-&gt;param ('menuitem')) {
+        print '&lt;CiscoIPPhoneMenu&gt;',
+                '&lt;MenuItem&gt;',
+                  '&lt;Name&gt;Local Directory&lt;/Name&gt;',
+                  '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
+                    '&amp;amp;menuitem=yes&lt;/URL&gt;',
+                '&lt;/MenuItem&gt;',
+              '&lt;/CiscoIPPhoneMenu&gt;';
+    } elsif ($cgi-&gt;param ('index') eq 'howtouse') {
+        how_to_use ($cgi);
+    } elsif ($cgi-&gt;param ('index') =~ m/^[A-Z0-9*#]+$/) {
+        directory_entries ($cgi);
+    } else {
+        directory_index ($cgi);
+    }
+};
+
+warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+        <br>
+        <h2 id="servicesURL">servicesURL</h2>
+        The URL accessed when the services button is pressed. Requires that the Asterisk manager web-interface is enabled.<br>
+        <br>
+        <code class="prettify lang-perl">#!/usr/bin/perl
+#
+# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
+# This program is free software, distributed under the terms of
+# the GNU General Public License Version 2.
+
+use strict;
+use English qw/-no_match_vars/;
+use CGI::Simple;
+use URI::Escape;
+use HTML::Entities;
+use LWP::UserAgent;
+use HTTP::Cookies;
+use XML::LibXML;
+
+# Directory containing the SEPMAC.cnf.xml files
+our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
+
+# Login credentials set in manager.conf
+our $MANAGER_HOSTNAME = 'localhost:8088';
+our $MANAGER_USERNAME = 'asterisk';
+our $MANAGER_PASSWORD = 'asterisk';
+
+sub parked_calls {
+    my $cgi = shift;
+
+    my $useragent = LWP::UserAgent-&gt;new;
+
+    $useragent-&gt;cookie_jar (HTTP::Cookies-&gt;new (hide_cookie2 =&gt; 1));
+
+    my ($request, $response);
+
+    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Login'
+                                    . '&amp;Username=' . uri_escape ($MANAGER_USERNAME)
+                                    . '&amp;Secret=' . uri_escape ($MANAGER_PASSWORD));
+
+    $response = $useragent-&gt;request ($request);
+
+    die $response-&gt;as_string unless ($response-&gt;is_success);
+
+    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=ParkedCalls');
+    $response = $useragent-&gt;request ($request);
+
+    die $response-&gt;as_string unless ($response-&gt;is_success);
+
+    my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
+
+    my $parked_calls = {};
+
+    foreach my $element ($document-&gt;findnodes ('/ajax-response/response/generic[@event=&quot;ParkedCall&quot;]')) {
+         my ($extension, $name);
+
+         $extension = $element-&gt;getAttribute ('exten');
+         $name      = $element-&gt;getAttribute ('callerdidname') || $element-&gt;getAttribute ('calleridnum');
+
+         $parked_calls-&gt;{$extension} = $name;
+    }
+
+    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Logoff');
+    $response = $useragent-&gt;request ($request);
+
+    die $response-&gt;as_string unless ($response-&gt;is_success);
+
+    print '&lt;CiscoIPPhoneMenu&gt;',
+            '&lt;Title&gt;Parked Calls&lt;/Title&gt;';
+
+    foreach my $extension (sort ({$parked_calls-&gt;{$a} cmp $parked_calls-&gt;{$b}} keys %{$parked_calls})) {
+       my $name = $parked_calls-&gt;{$extension};
+
+       print '&lt;MenuItem&gt;',
+               '&lt;Name&gt;', encode_entities ($name), '&lt;/Name&gt;',
+               '&lt;URL&gt;Dial:', encode_entities ($extension), '&lt;/URL&gt;',
+             '&lt;/MenuItem&gt;';
+    }
+
+    print  '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Exit&lt;/Name&gt;',
+             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
+               '&amp;amp;&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+           '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Dial&lt;/Name&gt;',
+             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+           '&lt;SoftKeyItem&gt;',
+             '&lt;Name&gt;Update&lt;/Name&gt;',
+             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
+               '&amp;amp;view=parkedcalls&lt;/URL&gt;',
+             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 2 : 3, '&lt;/Position&gt;',
+           '&lt;/SoftKeyItem&gt;',
+         '&lt;/CiscoIPPhoneMenu&gt;';
+}
+
+sub services_menu {
+    my $cgi = shift;
+
+    print '&lt;CiscoIPPhoneMenu&gt;',
+            '&lt;Title&gt;Services&lt;/Title&gt;',
+            '&lt;MenuItem&gt;',
+              '&lt;Name&gt;Parked Calls&lt;/Name&gt;',
+              '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
+                '&amp;amp;view=parkedcalls&lt;URL&gt;',
+            '&lt;/MenuItem&gt;',
+            '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;',
+            '&lt;SoftKeyItem&gt;',
+              '&lt;Name&gt;Exit&lt;/Name&gt;',
+              '&lt;URL&gt;Init:Services&lt;/URL&gt;',
+              '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
+            '&lt;/SoftKeyItem&gt;',
+            '&lt;SoftKeyItem&gt;',
+              '&lt;Name&gt;Select&lt;/Name&gt;',
+              '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
+              '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
+            '&lt;/SoftKeyItem&gt;',
+          '&lt;/CiscoIPPhoneMenu&gt;';
+}
+
+eval {
+    my $cgi = CGI::Simple-&gt;new;
+
+    # Check that the device exists
+    unless ($cgi-&gt;param ('name') =~ m/^SEP[0-9A-F]{12}$/
+            &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('name') . '.cnf.xml')) {
+        print 'Status: 403 Forbidden', &quot;\r\n&quot;,
+              'Content-Type: text/plain', &quot;\r\n&quot;,
+              &quot;\r\n&quot;,
+              'Invalid or unknown device name';
+
+        return;
+    }
+
+    print 'Status: 200 OK', &quot;\r\n&quot;,
+          'Content-Type: text/xml', &quot;\r\n&quot;,
+          &quot;\r\n&quot;;
+
+    if ($cgi-&gt;param ('view') eq 'parkedcalls') {
+        parked_calls ($cgi);
+    } else {
+        services_menu ($cgi);
+    }
+};
+
+warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+        <br>
+        <h2 id="problemReportUploadURL">problemReportUploadURL</h2>
+        The URL that the logs are uploaded to when the report problem option is selected. <b>7800</b> and <b>8800</b> series only.<br>
+        <br>
+        <code class="prettify lang-perl">#!/usr/bin/perl
+#
+# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
+# This program is free software, distributed under the terms of
+# the GNU General Public License Version 2.
+
+use strict;
+use English qw/-no_match_vars/;
+use CGI::Simple;
+use POSIX qw/strftime/;
+
+# Directory containing the SEPMAC.cnf.xml files
+our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
+
+# Directory to store uploaded log files
+our $PRT_LOGS_DIRECTORY = '/var/log/cisco';
+
+eval {
+    $CGI::Simple::DISABLE_UPLOADS = 0;
+    $CGI::Simple::POST_MAX = -1;
+
+    my $cgi = CGI::Simple-&gt;new;
+
+    # Check that the device exists
+    unless ($cgi-&gt;param ('devicename') =~ m/^SEP[0-9A-F]{12}$/
+            &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('devicename') . '.cnf.xml')) {
+        print 'Status: 403 Forbidden', &quot;\r\n&quot;,
+              'Content-Type: text/plain', &quot;\r\n&quot;,
+              &quot;\r\n&quot;,
+              'Invalid or unknown device name';
+
+        return;
+    }
+
+    # Include a timestamp in the filename so the phone can upload multiple logs
+    my $time = strftime ('%Y%m%d%H%M', localtime time);
+
+    unless ($cgi-&gt;upload ($cgi-&gt;param ('prt_file'),
+                          $PRT_LOGS_DIRECTORY . '/' . $cgi-&gt;param ('devicename') . '-' . $time . '.tar.gz')) {
+        print 'Status: 500 Internal Server Error', &quot;\r\n&quot;,
+              'Content-Type: text/plain', &quot;\r\n&quot;,
+              &quot;\r\n&quot;,
+              'Unable to create log file';
+
+        return;
+    }
+
+    print 'Status: 200 OK', &quot;\r\n&quot;,
+          'Content-Type: text/plain', &quot;\r\n&quot;,
+          &quot;\r\n&quot;,
+          'Log file saved';
+};
+
+warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

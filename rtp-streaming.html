@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RTP Streaming</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript" src="includes/lang-astexten.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon selected">volume_up</span> <b>RTP Streaming</b></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>RTP Streaming</h1>
+        Audio can be directly streamed one-way to a Cisco phone using the new <code class="function">SIPCiscoPage</code>() application either via a unicast or multicast RTP stream.<br>
+        <br>
+        <h2>Options</h2>
+        The following application options are available.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>m(address)</b></td>
+              <td>Stream audio to the specified multicast IP address.</td>
+            </tr>
+            <tr>
+              <td><b>p(port)</b></td>
+              <td>Port on the phone to receive the audio, an even number between <code class="literal">20480</code> (default) and <code class="literal">32768</code>.</td>
+            </tr>
+            <tr>
+              <td><b>v(volume)</b></td>
+              <td>Set the receive volume percentage (<code class="literal">1</code>-<code class="literal">100</code>) on the phone's speaker.</td>
+            </tr>
+            <tr>
+              <td><b>d(message)</b></td>
+              <td>Display a message in the status line of the phone for <code class="literal">10</code> seconds.</td>
+            </tr>
+            <tr>
+              <td><b>a</b></td>
+              <td>Play an alert beep on the phone.</td>
+            </tr>
+            <tr>
+              <td><b>o</b></td>
+              <td>Indicate that peers are off-hook when paging.</td>
+            </tr>
+            <tr>
+              <td><b>b</b></td>
+              <td>Page the phone even if it is busy (Off-Hook, Ringing, Busy or DND).</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="unicast">Unicast Audio</h2>
+        Unicast uses a separate RTP audio stream for each phone.<br>
+        <br>
+        <code class="prettify lang-astexten">; Unicast page 301 and 302 and set speaker volume to 75%
+exten =&gt; 380,1,SIPCiscoPage(301&amp;302,ov(75)ad(From ${CALLERID(number)}))</code>
+        <br>
+        <br>
+        <h2 id="unicast">Multicast Audio</h2>
+        Multicast uses only a single RTP audio stream for all phones. You must specify a multicast IP address.<br>
+        <br>
+        <code class="prettify lang-astexten">; Multicast page 301, 302 and 303
+exten =&gt; 380,1,SIPCiscoPage(301&amp;302&amp;303,oam(224.0.1.1))</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

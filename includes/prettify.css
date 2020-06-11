@@ -1,0 +1,68 @@
+.plain {
+    color: rgb(80, 80, 80);
+}
+
+.string {
+    color: rgb(155, 8, 25);
+}
+
+.keyword {
+    color: rgb(52, 123, 164);
+}
+
+.comment {
+    color: rgb(140, 140, 140);
+}
+
+.type {
+    color: rgb(162, 113, 10);
+}
+
+.source {
+    color: rgb(80, 80, 80);
+    font-weight: bold;
+}
+
+.literal {
+    color: rgb(155, 8, 25);
+}
+
+.punctuation, .open-bracket, .close-bracket {
+    color: rgb(80, 80, 80);
+}
+
+.tag {
+    color: rgb(52, 123, 164);
+}
+
+.attribute-name {
+    color: rgb(80, 80, 80);
+}
+
+.attribute-value {
+    color: rgb(155, 8, 25);
+}
+
+.declaration {
+    color: rgb(162, 114, 10);
+}
+
+.variable {
+    color: rgb(155, 8, 25);
+}
+
+.function {
+    color: rgb(162, 113, 10);
+}
+
+code.prettify {
+    border: 1px dashed rgb(203, 203, 203);
+    display: block;
+    padding: 5px;
+    white-space: pre;
+}
+
+code.prettify ol.line-numbers {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Background Images</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon selected">wallpaper</span> <b>Background Images</b></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon">phone_forwarded</span> <a href="cgi-execute-xml.html">CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Background Images</h1>
+        The list of available background images is specified in a file called <code class="literal">Desktops/</code><code class="keyword"><i>width</i></code><code class="literal">x</code><code class="keyword"><i>height</i></code><code class="literal">x</code><code class="keyword"><i>depth</i></code><code class="literal">/List.xml</code> which the phone downloads from the provisioning server. The width, height and depth are determined by the capabilities of the phone's display. A maximum of <code class="literal">50</code> &lt;<code class="tag">ImageItem</code>&gt; entries can be specified.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;CiscoIPPhoneImageList&gt;</code>
+        <br>
+        <h2 id="ImageItem">ImageItem</h2>
+        Defines a user-selectable background image. Both full-size and thumbnail images must be in PNG format. <b>Note</b>: while <code class="literal">TFTP</code> is the only valid scheme that can be specified, the phone will automatically use <a href="apache-conf.html">HTTP</a> provisioning if enabled.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>Image</b></td>
+              <td>The small image to display when previewing the list of available background images.</td>
+            </tr>
+            <tr>
+              <td><b>URL</b></td>
+              <td>The full-size image to download.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;ImageItem Image=&quot;TFTP:Desktops/320x212x16/Logo_Preview.png&quot; URL=&quot;TFTP:Desktops/320x212x16/Logo.png&quot; /&gt;
+  ...
+&lt;/CiscoIPPhoneImageList&gt;</code>
+        <br>
+        <h2 id="Sizes">Sizes</h2>
+        The table below shows the width, height and depth of background image supported by each phone model.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>Model</b></td>
+              <td class="vertical-rule"><b>Type</b></td>
+              <td class="vertical-rule"><b>Width</b></td>
+              <td><b>Height</b></td>
+              <td><b>Depth</b></td>
+              <td class="vertical-rule"><b>Preview Width</b></td>
+              <td><b>Preview Height</b></td>
+              <td class="vertical-rule"><b>Directory</b></td>
+            </tr>
+            <tr>
+              <td>7941, 7961, 7942, 7962</td>
+              <td class="vertical-rule">Greyscale</td>
+              <td class="vertical-rule">320</td>
+              <td>196</td>
+              <td>4</td>
+              <td class="vertical-rule">80</td>
+              <td>53</td>
+              <td class="vertical-rule">Desktops/320x196x4</td>
+            </tr>
+            <tr>
+              <td>7945, 7965</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">320</td>
+              <td>212</td>
+              <td>16</td>
+              <td class="vertical-rule">80</td>
+              <td>53</td>
+              <td class="vertical-rule">Desktops/320x212x16</td>
+            </tr>
+            <tr>
+              <td>7970, 7971</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">320</td>
+              <td>212</td>
+              <td>12</td>
+              <td class="vertical-rule">80</td>
+              <td>53</td>
+              <td class="vertical-rule">Desktops/320x212x12</td>
+            </tr>
+            <tr>
+              <td>7975</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">320</td>
+              <td>216</td>
+              <td>16</td>
+              <td class="vertical-rule">80</td>
+              <td>53</td>
+              <td class="vertical-rule">Desktops/320x216x16</td>
+            </tr>
+            <tr>
+              <td>8821</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">240</td>
+              <td>320</td>
+              <td>24</td>
+              <td class="vertical-rule">117</td>
+              <td>117</td>
+              <td class="vertical-rule">Desktops/240x320x24</td>
+            </tr>
+            <tr>
+              <td>8841, 8845, 8851, 8861, 8865</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">800</td>
+              <td>480</td>
+              <td>24</td>
+              <td class="vertical-rule">139</td>
+              <td>109</td>
+              <td class="vertical-rule">Desktops/800x480x24</td>
+            </tr>
+            <tr>
+              <td>8941, 8945</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">640</td>
+              <td>480</td>
+              <td>24</td>
+              <td class="vertical-rule">123</td>
+              <td>111</td>
+              <td class="vertical-rule">Desktops/800x480x24</td>
+            </tr>
+            <tr>
+              <td>8800 BEKEM</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">272</td>
+              <td>480</td>
+              <td>24</td>
+              <td class="vertical-rule">139</td>
+              <td>109</td>
+              <td class="vertical-rule">Desktops/272x480x24</td>
+            </tr>
+            <tr>
+              <td>8851/8861 BEKEM, 8865 BEKEM</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">320</td>
+              <td>480</td>
+              <td>24</td>
+              <td class="vertical-rule">139</td>
+              <td>109</td>
+              <td class="vertical-rule">Desktops/320x480x24</td>
+            </tr>
+            <tr>
+              <td>8861, 9951, 9971</td>
+              <td class="vertical-rule">Color</td>
+              <td class="vertical-rule">640</td>
+              <td>480</td>
+              <td>24</td>
+              <td class="vertical-rule">123</td>
+              <td>111</td>
+              <td class="vertical-rule">Desktops/640x480x24</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

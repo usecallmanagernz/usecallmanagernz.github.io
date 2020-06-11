@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CGI Execute</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery (window).on ("load", function () {
+          prettyPrint ();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Daemon Configuration</h3></li>
+          <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><span class="icon">settings_phone</span> <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a></li>
+          <li><span class="icon">dialpad</span> <a href="dial-template-xml.html">Dial Templates</a></li>
+          <li><span class="icon">import_contacts</span> <a href="app-dial-rules-xml.html">Application Dial Rules</a></li>
+          <li><span class="icon">power_input</span> <a href="soft-keys-xml.html">Soft Keys</a></li>
+          <li><span class="icon">format_list_bulleted</span> <a href="line-keys-xml.html">Line Keys</a></li>
+          <li><span class="icon">done</span> <a href="feature-policy-xml.html">Feature Policy</a></li>
+          <li><span class="icon">language</span> <a href="network-locale.html">Network Locale</a></li>
+          <li><span class="icon">face</span> <a href="user-locale.html">User Locale</a></li>
+          <li><span class="icon">file_upload</span> <a href="load-information.html">Firmware Load Information</a></li>
+          <li><span class="icon">wallpaper</span> <a href="image-list-xml.html">Background Images</a></li>
+          <li><span class="icon">ring_volume</span> <a href="ring-list-xml.html">Ring Tones</a></li>
+          <li><span class="icon">security</span> <a href="itl-file-tlv.html">Device Security</a></li>
+          <li><span class="icon">vpn_key</span> <a href="vpn-group.html">VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><span class="icon">dialer_sip</span> <a href="sip-conf.html">SIP Peers</a></li>
+          <li><span class="icon">settings_power</span> <a href="sip-notify-conf.html">SIP Notify Commands</a></li>
+          <li><span class="icon">format_list_numbered</span> <a href="extensions-conf.html">Dialplan Extensions</a></li>
+          <li><span class="icon">local_parking</span> <a href="res-parking-conf.html">Call Parking</a></li>
+          <li><span class="icon">code</span> <a href="sippeer-options.html">SIPPEER Options</a></li>
+          <li><span class="icon">volume_up</span> <a href="rtp-streaming.html">RTP Streaming</a></li>
+          <li><span class="icon">keyboard_arrow_right</span> <a href="command-line.html">Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon">settings</span> <a href="phone-services-xml.html">Phone Services</a></li>
+          <li><span class="icon selected">phone_forwarded</span> <b>CGI Execute</b></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><span class="icon">extension</span> <a href="as-feature-events.html">AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>CGI Execute</h1>
+        The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <code class="literal">http://</code><code class="keyword"><i>x.x.x.x</i></code><code class="literal">/CGI/Execute</code> with a parameter named <code class="literal">XML</code>.<br>
+        <br>
+        If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
+        <br>
+        See the <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> a list of URIs the each phone model supports.<br>
+        <br>
+        <h2 id="CiscoIPPhoneExecute">CiscoIPPhoneExecute</h2>
+        Root element of an execute request, may contain up to <code class="literal">3</code> &lt;<code class="tag">ExecuteItem</code>&gt; elements.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;CiscoIPPhoneExecute&gt;</code>
+        <br>
+        <h2 id="ExecuteItem">ExecuteItem</h2>
+        Specifies a URL to fetch or a URI to execute.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>URL</b></td>
+              <td>URL to fetch or execute. Must be ether one of the internal URIs (<code class="literal">Dial</code>, <code class="literal">Key</code>, <code class="literal">SoftKey</code>, <code class="literal">Init</code>, <code class="literal">Play</code> etc.), an http:// URL or an https:// URL.</td>
+            </tr>
+            <tr>
+              <td><b>Priority</b></td>
+              <td>Priority of the request (optional)</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><b>0</b></td>
+                      <td>Execute immediately (default)</td>
+                      <td class="vertical-rule"><b>1</b></td>
+                      <td>Execute when idle</td>
+                      <td class="vertical-rule"><b>2</b></td>
+                      <td>Execute only if idle</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;ExecuteItem URL="<i>URL</i>" Priority="<i>PRIORITY</i>" /&gt;
+&lt;/CiscoIPPhoneExecute&gt;</code>
+        <br>
+        An example command line script that sends up to three CGI execute requests to a phone is below.<br>
+        <br>
+        <code class="prettify lang-perl">#!/usr/bin/perl
+#
+# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
+# This program is free software, distributed under the terms of
+# the GNU General Public License Version 2.
+
+use strict;
+use POSIX qw/EXIT_FAILURE EXIT_SUCCESS/;
+use English qw/-no_match_vars/;
+use Getopt::Long qw//;
+use LWP::UserAgent;
+use HTML::Entities;
+use XML::LibXML;
+
+eval {
+    my $getopt = Getopt::Long-&gt;new;
+
+    $getopt-&gt;configure ('no_ignore_case');
+
+    my ($ip_address, $username, $password, $show_help);
+
+    unless ($getopt-&gt;getoptions ('i|ip-address=s' =&gt; \$ip_address,
+                                 'u|username=s'   =&gt; \$username,
+                                 'p|password=s'   =&gt; \$password,
+                                 'h|help'         =&gt; \$show_help)) {
+        die 'Error parsing options';
+    }
+
+    if ($show_help) {
+        print 'cgi-execute [OPTIONS] &lt;URL&gt; [URL] [URL]', "\n",
+              'Send a CGI execute request to a Cisco IP Phone', "\n",
+              "\n",
+              '  -i --ip-address &lt;address&gt;    IP address of the phone', "\n",
+              '  -u --username &lt;username&gt;     Authorization username', "\n",
+              '  -i --password &lt;password&gt;     Authorization password', "\n",
+              "\n",
+              'Valid URIs are Dial:, Key: SoftKey:, Init:, Play:, http: and https:', "\n",
+              "\n";
+
+        return;
+    }
+
+    my $urls = [];
+
+    while (length (my $url = shift)) {
+        die 'Invalid URL ' . $url unless ($url =~ m/^(Dial:\d+|Key:\w+|SoftKey:\w+|Init:\w+|Play:\w+|https?:\S+)$/);
+        die 'Too many URLs specified' unless (scalar (@{$urls}) &lt; 3);
+
+        push (@{$urls}, $url);
+    }
+
+    die 'Invalid IP address: ' . $ip_address unless ($ip_address =~ m/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
+    die 'No URLs specified' unless (scalar @{$urls});
+
+    my $useragent = LWP::UserAgent-&gt;new;
+
+    my $request = HTTP::Request-&gt;new (POST =&gt; 'http://' . $ip_address . '/CGI/Execute');
+
+    $request-&gt;authorization_basic ($username, $password) if (length $username);
+
+    $request-&gt;content_type ('application/x-www-form-urlencoded');
+    $request-&gt;content ('XML=&lt;CiscoIPPhoneExecute&gt;');
+
+    foreach my $url (@{$urls}) {
+        $request-&gt;add_content ('&lt;ExecuteItem URL=&quot;' . encode_entities ($url) . '&quot; Priority=&quot;0&quot; /&gt;');
+    }
+
+    $request-&gt;add_content ('&lt;/CiscoIPPhoneExecute&gt;');
+
+    my $response = $useragent-&gt;request ($request);
+
+    die $response-&gt;content unless ($response-&gt;is_success);
+    die 'Response was not XML' unless ($response-&gt;content_is_xml);
+
+    my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
+
+    if ((my $error, undef) = $document-&gt;findnodes ('/CiscoIPPhoneError')) {
+        my $reasons = ['Error parsing CiscoIPPhoneExecute object',
+                       'Error framing CiscoIPPhoneResponse object',
+                       'Internal file error',
+                       'Authentication error'];
+
+        die ($reasons-&gt;[$error-&gt;getAttribute ('Number') - 1] || 'Error ' . $error-&gt;getAttribute ('Number'))
+            . ': ' . decode_entities ($error-&gt;textContent);
+    }
+};
+
+if (length $EVAL_ERROR) {
+    warn $EVAL_ERROR;
+    exit EXIT_FAILURE;
+}
+
+exit EXIT_SUCCESS;</code>
+        <br>
+        <h2 id="setBackground">setBackground</h2>
+        Sets the background on the phone, both URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. See <a href="image-list-xml.html">Background Images</a> for more information.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;setBackground&gt;
+  &lt;background&gt;
+    &lt;icon&gt;ICON URL&lt;/icon&gt;
+    &lt;image&gt;IMAGE URL&lt;/image&gt;
+  &lt;/background&gt;
+&lt;/setBackground&gt;</code>
+        <br>
+        <h2 id="setRingTone">setRingTone</h2>
+        Sets the ring-tone on the phone, the URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. See <a href="ring-list-xml.html">Ring Tones</a> for more information.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;setRingTone&gt;
+  &lt;ringTone&gt;RINGTONE URL&lt;/ringTone&gt;
+&lt;/setRingTone&gt;</code>
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>
