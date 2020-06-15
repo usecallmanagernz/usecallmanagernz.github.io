@@ -73,8 +73,6 @@
         Example provisioning virtualhost for Apache (optional). The phones may alternatively be provisioned by HTTP instead of by TFTP. They will automatically try connecting to port <span class="literal">6970</span> of the server specified as the <span class="keyword">tftp-server-name</span> in the DHCP response.<br>
         <br>
         See <a href="tftpd-conf.html">TFTP Provisioning</a> for an archive containing sample provisioning files.<br>
-        <br>
-        To keep the firmware, locale and ring-tone files separate, rewrite rules can be used (optional).<br>
         <br> 
         <code class="prettify lang-apache">&lt;Virtualhost *:6970&gt;
   DocumentRoot /var/lib/tftpboot

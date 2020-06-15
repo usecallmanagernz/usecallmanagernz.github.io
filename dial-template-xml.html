@@ -69,7 +69,7 @@
       </nav>
       <article>
         <h1>Dial Templates</h1>
-        Dial templates control what number patterns are valid and how many seconds to wait for extra digits before dialing. Set by the &lt;<code class="tag">dialTemplate</code>&gt; element in <a href="sepmac-cnf-xml.html#dialTemplate">SEPMAC.cnf.xml</a>.<br>
+        Dial templates control what number patterns are valid and how many seconds to wait for extra digits before dialing. File is specified by &lt;<code class="tag">dialTemplate</code>&gt; in <a href="sepmac-cnf-xml.html#dialTemplate">SEPMAC.cnf.xml</a>.<br>
         <br>
         <code class="prettify lang-xml">&lt;dialTemplate&gt;
   &lt;versionStamp&gt;e68d54c1-0354-4b1a-aca4-adffc4b7de2f&lt;/versionStamp&gt;</code>
@@ -138,6 +138,10 @@
                       <td>Replace with digit</td>
                     </tr>
                     <tr>
+                      <td><b>.</b></td>
+                      <td>Each <code class="literal">.</code> is replaced by the digit that was matched by the corresponding <code class="literal">.</code> in the pattern</td>
+                    </tr>
+                    <tr>
                       <td><b>%0</b></td>
                       <td>The entire match</td>
                     </tr>
@@ -150,8 +154,8 @@
                       <td>A literal <code class="literal">%</code></td>
                     </tr>
                     <tr>
-                      <td><b>.</b></td>
-                      <td>Each <code class="literal">.</code> is replaced by the digit that was matched by the corresponding <code class="literal">.</code> in the pattern</td>
+                      <td><b>%.</b></td>
+                      <td>A literal <code class="literal">.</code></td>
                     </tr>
                   </tbody>
                 </table>

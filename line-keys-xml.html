@@ -69,7 +69,7 @@
       </nav>
       <article>
         <h1>Line Keys</h1>
-        Line keys are features assigned to the physical line buttons on the phone. Set by the &lt;<code class="tag">line</code>&gt; element in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. <b>Note</b>: Some phone models do not support certain line keys and those features may instead be available as <a href="soft-keys-xml.html">Soft Keys</a>.<br>
+        Line keys are features assigned to the physical line buttons on the phone. Specified by &lt;<code class="tag">line</code>&gt; in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. <b>Note</b>: Some phone models do not support certain line keys and those features may instead be available as <a href="soft-keys-xml.html">Soft Keys</a>.<br>
         <br>
         <h2 id="Redial">Redial</h2>
         Redials the last called number. <b>7900</b> series only.<br>
@@ -123,7 +123,7 @@
 &lt;/line&gt;</code>
         <br>
         <h2 id="Line">Line</h2>
-        Phone line, at least one of these must be defined. <code class="literal">lineIndex</code> is the number identifying the line starting from <code class="literal">1</code>. <b>Note</b>: For secondary lines, do not include &lt;<code class="tag">authName</code>&gt; and &lt;<code class="tag">authPassword</code>&gt; elements. See <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a> for more information.<br>
+        Phone line, at least one of these must be defined. <code class="literal">lineIndex</code> is the number identifying the line starting from <code class="literal">1</code>. <b>Note</b>: For secondary lines, do not include &lt;<code class="tag">authName</code>&gt; and &lt;<code class="tag">authPassword</code>&gt; as the phones only support one set of credentials. See <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button="1" lineIndex="1"&gt;
   &lt;featureID&gt;9&lt;/featureID&gt;
