@@ -26,10 +26,10 @@
           <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
         </ul>
         <ul>
-          <li><h3>Daemon Configuration</h3></li>
+          <li><h3>Network Configuration</h3></li>
           <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
-          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
           <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
         </ul>
         <ul>
           <li><h3>Phone Configuration</h3></li>
@@ -69,7 +69,7 @@
       </nav>
       <article>
         <h1>CGI Execute</h1>
-        The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <code class="literal">http://</code><code class="keyword"><i>x.x.x.x</i></code><code class="literal">/CGI/Execute</code> with a parameter named <code class="literal">XML</code>.<br>
+        The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>.<br>
         <br>
         If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
@@ -118,107 +118,183 @@
         <br>
         An example command line script that sends up to three CGI execute requests to a phone is below.<br>
         <br>
-        <code class="prettify lang-perl">#!/usr/bin/perl
-#
-# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
-# This program is free software, distributed under the terms of
-# the GNU General Public License Version 2.
+        <code class="prettify lang-python">#!/usr/bin/python3
 
-use strict;
-use POSIX qw/EXIT_FAILURE EXIT_SUCCESS/;
-use English qw/-no_match_vars/;
-use Getopt::Long qw//;
-use LWP::UserAgent;
-use HTML::Entities;
-use XML::LibXML;
+import sys
+import os.path
+import re
+import getopt
+import traceback
+import ipaddress
+from html import escape
+from lxml import etree
+import requests
+import requests.auth
 
-eval {
-    my $getopt = Getopt::Long-&gt;new;
 
-    $getopt-&gt;configure ('no_ignore_case');
+class ProgramError(Exception):
+    pass
 
-    my ($ip_address, $username, $password, $show_help);
 
-    unless ($getopt-&gt;getoptions ('i|ip-address=s' =&gt; \$ip_address,
-                                 'u|username=s'   =&gt; \$username,
-                                 'p|password=s'   =&gt; \$password,
-                                 'h|help'         =&gt; \$show_help)) {
-        die 'Error parsing options';
-    }
-
-    if ($show_help) {
-        print 'cgi-execute [OPTIONS] &lt;URL&gt; [URL] [URL]', "\n",
-              'Send a CGI execute request to a Cisco IP Phone', "\n",
-              "\n",
-              '  -i --ip-address &lt;address&gt;    IP address of the phone', "\n",
-              '  -u --username &lt;username&gt;     Authorization username', "\n",
-              '  -i --password &lt;password&gt;     Authorization password', "\n",
-              "\n",
-              'Valid URIs are Dial:, Key: SoftKey:, Init:, Play:, http: and https:', "\n",
-              "\n";
-
-        return;
-    }
-
-    my $urls = [];
-
-    while (length (my $url = shift)) {
-        die 'Invalid URL ' . $url unless ($url =~ m/^(Dial:\d+|Key:\w+|SoftKey:\w+|Init:\w+|Play:\w+|https?:\S+)$/);
-        die 'Too many URLs specified' unless (scalar (@{$urls}) &lt; 3);
-
-        push (@{$urls}, $url);
-    }
-
-    die 'Invalid IP address: ' . $ip_address unless ($ip_address =~ m/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
-    die 'No URLs specified' unless (scalar @{$urls});
-
-    my $useragent = LWP::UserAgent-&gt;new;
-
-    my $request = HTTP::Request-&gt;new (POST =&gt; 'http://' . $ip_address . '/CGI/Execute');
-
-    $request-&gt;authorization_basic ($username, $password) if (length $username);
-
-    $request-&gt;content_type ('application/x-www-form-urlencoded');
-    $request-&gt;content ('XML=&lt;CiscoIPPhoneExecute&gt;');
-
-    foreach my $url (@{$urls}) {
-        $request-&gt;add_content ('&lt;ExecuteItem URL=&quot;' . encode_entities ($url) . '&quot; Priority=&quot;0&quot; /&gt;');
-    }
-
-    $request-&gt;add_content ('&lt;/CiscoIPPhoneExecute&gt;');
-
-    my $response = $useragent-&gt;request ($request);
-
-    die $response-&gt;content unless ($response-&gt;is_success);
-    die 'Response was not XML' unless ($response-&gt;content_is_xml);
-
-    my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
-
-    if ((my $error, undef) = $document-&gt;findnodes ('/CiscoIPPhoneError')) {
-        my $reasons = ['Error parsing CiscoIPPhoneExecute object',
-                       'Error framing CiscoIPPhoneResponse object',
-                       'Internal file error',
-                       'Authentication error'];
-
-        die ($reasons-&gt;[$error-&gt;getAttribute ('Number') - 1] || 'Error ' . $error-&gt;getAttribute ('Number'))
-            . ': ' . decode_entities ($error-&gt;textContent);
-    }
-};
-
-if (length $EVAL_ERROR) {
-    warn $EVAL_ERROR;
-    exit EXIT_FAILURE;
+cgi_errors = {
+    1: 'Error parsing CiscoIPPhone object',
+    2: 'Error framing CiscoIPPhone object',
+    3: 'Internal file error',
+    4: 'Authentication error'
 }
 
-exit EXIT_SUCCESS;</code>
+
+def cgi_execute(ip_address, timeout, urls, username, password):
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneExecute&gt;'
+
+    for url, priority in urls:
+        content += '&lt;ExecuteItem URL="' + escape(url) + '" Priority="' + str(priority) + '" /&gt;'
+
+    content += '&lt;/CiscoIPPhoneExecute&gt;'
+
+    if username != '':
+        auth = requests.auth.HTTPBasicAuth(username, password)
+    else:
+        auth = None
+
+    try:
+        response = requests.post(f'http://{ip_address}/CGI/Execute',
+                                 timeout = timeout, auth = auth, data = {'XML': content})
+        response.raise_for_status()
+
+    except requests.exceptions.RequestException as error:
+        raise ProgramError(error)
+
+    if response.headers['Content-Type'][0:8] != 'text/xml':
+        raise ProgramError('Unexpected Content-Type ' + response.headers['Content-Type'])
+
+    try:
+        document = etree.fromstring(response.content)
+    except etree.XMLSyntaxError as error:
+        raise ProgramError(error)
+
+    if document.tag == 'CiscoIPPhoneError':
+        number = int(document.get('Number', 0))
+
+        raise ProgramError('Error: ' + cgi_errors.get(number, f'{number}'))
+
+    for element in document.findall('ResponseItem'):
+        url = element.get('URL')
+        data = element.get('Data', '')
+
+        print(f'{url}: {data}')
+
+
+def main():
+    short_options = 'i:t:u:p:h'
+    long_options = ['ip=', 'timeout=', 'username=', 'password=', 'help']
+
+    try:
+        options, arguments = getopt.gnu_getopt(sys.argv[1:], short_options, long_options)
+    except getopt.GetoptError as error:
+        raise ProgramError(error.msg[0].upper() + error.msg[1:])
+
+    ip_address = None
+    timeout = 10
+    username = ''
+    password = ''
+    help = False
+
+    for option, argument in options:
+        if option in ('-i', '--ip'):
+            try:
+                ip_address = ipaddress.IPv4Address(argument)
+            except ipaddress.AddressValueError:
+                raise ProgramError(f'Invalid IP-address: {argument}')
+
+            ip_address = ip_address.compressed
+
+        if option in ('-t', '--timeout'):
+            try:
+                timeout = int(argument)
+            except ValueError:
+                raise ProgramError(f'Invalid timeout: {argument}')
+
+        elif option in ('-u', '--username'):
+            username = argument
+
+        elif option in ('-p', '--password'):
+            password = argument
+
+        elif option in ('-h', '--help'):
+            help = True
+
+    if help:
+        print('Usage: ' + os.path.basename(sys.argv[0]) + ' [OPTIONS] URL[@PRIORITY]...\n'
+              'Send CGI Execute URLs to a Cisco IP Phone\n'
+              '\n'
+              '  -i, --ip IP-ADDRESS        IP-address of the phone\n'
+              '  -t, --timeout TIMEOUT      request timeout in seconds (default 10)\n'
+              '  -u, --username USERNAME    authentication username\n'
+              '  -p, --password PASSWORD    authentication password\n'
+              '\n'
+              'Up to 3 URLs may be specified\n'
+              'Valid URLs are Dial:, EditDial:, Key:, SoftKey:, Init:, Play:, http: and https:\n'
+              'Optional priority is either 0 (immediately), 1 (when idle) or 2 (only if idle)\n')
+
+        return
+
+    if ip_address is None:
+        raise ProgramError('No -i/--ip option specified')
+
+    urls = []
+
+    for argument in arguments:
+        if '@' in argument:
+            url, priority = argument.rsplit('@', maxsplit = 1)
+
+            try:
+                priority = int(priority)
+
+                if priority &lt; 0 or priority &gt; 2:
+                    raise ValueError
+
+            except ValueError:
+                raise ProgramError(f'Invalid priority: {priority}')
+        else:
+            url, priority = argument, 0
+
+        if not re.search('(?x) ^ (?: (?: Dial | EditDial ) : [0-9#*]+ | (?: Key | SoftKey | Init ) : [a-zA-Z0-9]+'
+                         ' | Play: [a-zA-Z0-9._\-]+ | https? :// [^ ]+ ) $', url):
+            raise ProgramError(f'Invalid URL: {url}')
+
+        urls.append((url, priority))
+
+    if len(urls) == 0:
+        raise ProgramError('No URLs specified')
+    elif len(urls) &gt; 3:
+        raise ProgramError('A maximum of 3 URLs can be specified')
+
+    cgi_execute(ip_address, timeout, urls, username, password)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+
+    except ProgramError as error:
+        print(str(error), file = sys.stderr)
+        exit(1)
+
+    except Exception:
+        traceback.print_exc(file = sys.stderr)
+        exit(1)
+
+    exit(0)</code>
         <br>
         <h2 id="setBackground">setBackground</h2>
         Sets the background on the phone, both URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. See <a href="image-list-xml.html">Background Images</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;setBackground&gt;
   &lt;background&gt;
-    &lt;icon&gt;ICON URL&lt;/icon&gt;
-    &lt;image&gt;IMAGE URL&lt;/image&gt;
+    &lt;icon&gt;<i>ICON URL</i>&lt;/icon&gt;
+    &lt;image&gt;<i>IMAGE URL</i>&lt;/image&gt;
   &lt;/background&gt;
 &lt;/setBackground&gt;</code>
         <br>
@@ -226,7 +302,7 @@ exit EXIT_SUCCESS;</code>
         Sets the ring-tone on the phone, the URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. See <a href="ring-list-xml.html">Ring Tones</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;setRingTone&gt;
-  &lt;ringTone&gt;RINGTONE URL&lt;/ringTone&gt;
+  &lt;ringTone&gt;<i>RINGTONE URL</i>&lt;/ringTone&gt;
 &lt;/setRingTone&gt;</code>
       </article>
     </main>

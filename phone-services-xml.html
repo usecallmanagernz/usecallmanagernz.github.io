@@ -26,10 +26,10 @@
           <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
         </ul>
         <ul>
-          <li><h3>Daemon Configuration</h3></li>
+          <li><h3>Network Configuration</h3></li>
           <li><span class="icon">settings_ethernet</span> <a href="dhcpd-conf.html">DHCP Options</a></li>
-          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
           <li><span class="icon">file_download</span> <a href="apache-conf.html">HTTP Provisioning</a></li>
+          <li><span class="icon">file_download</span> <a href="tftpd-conf.html">TFTP Provisioning</a></li>
         </ul>
         <ul>
           <li><h3>Phone Configuration</h3></li>
@@ -69,454 +69,457 @@
       </nav>
       <article>
         <h1>Phone Services</h1>
-        The phone can make HTTP requests to a remote web-server to display text, menus and images as well as check whether a <a href="cgi-execute-xml.html">CGI Execute</a> requests will be allowed. URLs assigned to fixed-keys (eg: services, directories) and line keys are defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. An archive containing these sample scripts can be downloaded from the URL below.<br>
+        The phone can make HTTP requests to a remote web-server to display text, menus and images as well as check whether a <a href="cgi-execute-xml.html">CGI Execute</a> requests will be allowed. URLs assigned to fixed-keys (eg: services, directories) and line keys are defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. An archive containing a sample WSGI application can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/services/archive/v1.0.tar.gz">services-1.0.tar.gz</a> (9.6K) <span class="icon">event</span> 06/06/2016 <span class="icon">security</span> SHA256:fd7bfb50e0adf931db2b9d2fcfa9dae96ec597a6614b99f22ceaeb5464a906aa.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/services/archive/v2.0.tar.gz">services-2.0.tar.gz</a> (11K) <span class="icon">event</span> 02/06/2020 <span class="icon">security</span> SHA256:fbbd6657880801008eb502cbe4cfa61506e3ec6e8e4e29be4655becff325cba6.<br>
         <br>
-        See the <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
+        See <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
         <br>
         <h2 id="authenticationURL">authenticationURL</h2>
-        If defined, the phone will make requests to this URL containing the username and password that was included in the <code class="literal">Authorization</code> header in the request to http://<code class="literal">x</code>.<code class="literal">x</code>.<code class="literal">x</code>.<code class="literal">x</code>/<code class="function">CGI</code>/<code class="function">Execute</code>. See <a href="cgi-execute-xml.html">CGI Execute</a> for more information.<br>
+        If defined, the phone will make requests to this URL containing the username and password that was included in the <code class="literal">Authorization</code> header in the request to <b>http://<i>x.x.x.x</i>/CGI/Execute</b>. See <a href="cgi-execute-xml.html">CGI Execute</a> for more information.<br>
         <br>
-        The script handling the request must respond exactly with <code class="literal">AUTHORIZED</code> (with no newline character at end) otherwise the request will be denied.<br>
+        The script handling the request must respond exactly with <code class="literal">AUTHORIZED</code> (with no newline character at end) otherwise the request will be denied. Example below provides this on <code class="literal">/authentication</code>.<br>
         <br>
-        <code class="prettify lang-perl">#!/usr/bin/perl
-#
-# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
-# This program is free software, distributed under the terms of
-# the GNU General Public License Version 2.
+        <code class="prettify lang-python">#!/usr/bin/python3
 
-use strict;
-use English qw/-no_match_vars/;
-use CGI::Simple;
+import os.path
+import re
+from flask import Blueprint, Response, request, g
+import config
 
-# Directory containing the SEPMAC.cnf.xml files
-our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
 
-# Basic-auth username and password credentials
-our $CGI_USERNAME = 'cisco';
-our $CGI_PASSWORD = 'cisco';
+blueprint = Blueprint('authentication', __name__)
 
-eval {
-    my $cgi = CGI::Simple-&gt;new;
 
-    # Fix silly capitization of UserID and Password
-    foreach my $name (qw/UserID Password/) {
-        $cgi-&gt;param (lc $name, $cgi-&gt;param ($name));
-        $cgi-&gt;delete ($name);
-    }
+@blueprint.route('/authentication')
+def cgi_authentication():
+    username = request.args.get('UserID', '')
+    password = request.args.get('Password', '')
 
-    print 'Status: 200 OK', &quot;\r\n&quot;,
-          'Content-Type: text/plain', &quot;\r\n&quot;,
-          &quot;\r\n&quot;;
+    if username != config.cgi_username or password != config.cgi_password:
+        return Response('UNAUTHORIZED', mimetype = 'text/plain'), 200
 
-    # Check that the device exists and the username and password are correct
-    if ($cgi-&gt;param ('devicename') =~ m/^SEP[0-9A-F]{12}$/
-        &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('devicename') . '.cnf.xml')
-        &amp;&amp; $cgi-&gt;param ('userid') eq $CGI_USERNAME &amp;&amp; $cgi-&gt;param ('password') eq $CGI_PASSWORD) {
-        print 'AUTHORIZED';
-    } else {
-        print 'UNAUTHORIZED';
-    }    
-};
+    return Response('AUTHORIZED', mimetype = 'text/plain'), 200
 
-warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+
+@blueprint.before_request
+def before_request():
+    device_name = request.args.get('devicename', '')
+
+    # check that the device name is valid
+    if not re.search(r'(?x) SEP [0-9A-F]{12} $', device_name) or \
+       not os.path.exists(f'{config.tftpboot_dir}/{device_name}.cnf.xml'):
+        return Response('ERROR'), 403
+
+    g.device_name = device_name
+
+    return None
+
+
+@blueprint.errorhandler(Exception)
+def error_handler(error):
+    return Response('ERROR', mimetype = 'text/plain'), 500</code>
         <br>
         <h2 id="directoryURL">directoryURL</h2>
-        The URL accessed when the directories button is pressed. Requires that the Asterisk manager web-interface is enabled.<br>
+        The URL accessed when the directories button is pressed. Example below provides this on <code class="literal">/directory</code> and <code class="literal">/directory/79xx</code> (<b>7900</b> series). Requires that the Asterisk manager web-interface is enabled.<br>
         <br>
-        <code class="prettify lang-perl">#!/usr/bin/perl
-#
-# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
-# This program is free software, distributed under the terms of
-# the GNU General Public License Version 2.
+        <code class="prettify lang-python">#!/usr/bin/python3
 
-use strict;
-use English qw/-no_match_vars/;
-use CGI::Simple;
-use URI::Escape;
-use HTML::Entities;
-use LWP::UserAgent;
-use HTTP::Cookies;
-use XML::LibXML;
+import os.path
+import re
+from urllib.parse import quote_plus
+from html import escape
+from lxml import etree
+import requests
+from flask import Blueprint, Response, request, g, redirect
+import config
 
-# Directory containing the SEPMAC.cnf.xml files
-our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
 
-# Login credentials set in manager.conf
-our $MANAGER_HOSTNAME = 'localhost:8088';
-our $MANAGER_USERNAME = 'asterisk';
-our $MANAGER_PASSWORD = 'asterisk';
+blueprint = Blueprint('directory', __name__)
 
-sub how_to_use {
-    my $cgi = shift;
 
-    print '&lt;CiscoIPPhoneText&gt;',
-            '&lt;Title&gt;How To Use&lt;/Title&gt;',
-            '&lt;Text&gt;Use the keypad or navigation key to select the first letter of the person\'s name.&lt;/Text&gt;',
-            '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;',
-            '&lt;SoftKeyItem&gt;',
-              '&lt;Name&gt;Back&lt;/Name&gt;',
-              '&lt;URL&gt;SoftKey:Exit&lt;/URL&gt;',
-              '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
-            '&lt;/SoftKeyItem&gt;',
-          '&lt;/CiscoIPPhoneText&gt;';
-}
+@blueprint.route('/directory')
+def directory_index():
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneMenu&gt;' \
+          '&lt;Title&gt;Local Directory&lt;/Title&gt;'
 
-sub directory_index {
-    my $cgi = shift;
+    for index in ('1', '2ABC', '3DEF', '4GHI', '5JKL', '6MNO', '7PRQS', '8TUV', '9WXYZ', '0'):
+        content += '&lt;MenuItem&gt;' \
+              '&lt;Name&gt;' + escape(index) + '&lt;/Name&gt;' \
+              '&lt;URL&gt;' + request.url_root + 'directory/entries?name=' + quote_plus(g.device_name) + '&amp;amp;index=' + quote_plus(index) + '&lt;/URL&gt;' \
+            '&lt;/MenuItem&gt;'
 
-    print '&lt;CiscoIPPhoneMenu&gt;',
-            '&lt;Title&gt;Local Directory&lt;/Title&gt;';
+    if g.is_79xx:
+        content += '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;'
 
-   foreach my $index ('1', '2 ABC', '3 DEF', '4 GHI', '5 JKL', '6 MNO', '7 PRQS', '8 TUV', '9 WXYZ', '*', '0', '#') {
-       print '&lt;MenuItem&gt;',
-               '&lt;Name&gt;', encode_entities ($index), '&lt;/Name&gt;',
-               '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
-                 '&amp;amp;menuitem=yes&amp;amp;index=', encode_entities ($index), '&lt;/URL&gt;',
-             '&lt;/MenuItem&gt;';
-   }
+    content += '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Exit&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('3' if g.is_79xx else '1') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;Init:Directories&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+          '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Select&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+          '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Help&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('2' if g.is_79xx else '3') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;' + request.url_root + 'directory/help?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+        '&lt;/CiscoIPPhoneMenu&gt;'
 
-   print   '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Exit&lt;/Name&gt;',
-             '&lt;URL&gt;Init:Directories&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-           '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Back&lt;/Name&gt;',
-             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-           '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Help&lt;/Name&gt;',
-             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
-               '&amp;amp;menuitem=yes&amp;amp;index=howtouse&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 2 : 3, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-         '&lt;/CiscoIPPhoneMenu&gt;';
-}
+    return Response(content, mimetype = 'text/xml'), 200
 
-sub directory_entries {
-    my $cgi = shift;
 
-    my $useragent = LWP::UserAgent-&gt;new;
+@blueprint.route('/directory/entries')
+def directory_entries():
+    index = request.args.get('index', '')
 
-    $useragent-&gt;cookie_jar (HTTP::Cookies-&gt;new (hide_cookie2 =&gt; 1));
+    if not len(index):
+        return redirect('/directory/index?name=' + escape(g.device_name))
 
-    my ($request, $response);
+    session = requests.Session()
 
-    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Login'
-                                    . '&amp;Username=' . uri_escape ($MANAGER_USERNAME)
-                                    . '&amp;Secret=' . uri_escape ($MANAGER_PASSWORD));
-    $response = $useragent-&gt;request ($request);
+    response = session.get(config.manager_url, timeout = 5, params = {'Action': 'Login',
+                                                                      'Username': config.manager_username,
+                                                                      'Secret': config.manager_secret})
+    response.raise_for_status()
 
-    die $response-&gt;as_string unless ($response-&gt;is_success);
+    response = session.get(config.manager_url, timeout = 5, params = {'Action': 'VoicemailUsersList'})
+    response.raise_for_status()
 
-    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=SIPPeers');
-    $response = $useragent-&gt;request ($request);
+    document = etree.fromstring(response.content)
+    entries = []
 
-    die $response-&gt;as_string unless ($response-&gt;is_success);
+    for element in document.findall('response/generic[@event="VoicemailUserEntry"]'):
+        extension = element.get('voicemailbox')
+        name = element.get('fullname', '')
 
-    my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
+        if name[0].upper() not in index:
+            continue
 
-    my $directory = {};
+        entries.append((extension, name))
 
-    foreach my $element ($document-&gt;findnodes ('/ajax-response/response/generic[@event=&quot;PeerEntry&quot;]')) {
-        my $peer = $element-&gt;getAttribute ('objectname');
+    response = session.get(config.manager_url, timeout = 5, params = {'Action': 'Logoff'})
+    response.raise_for_status()
 
-        # This will be slow if you have a large number of SIP peers
-        $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=SIPShowPeer'
-                                        . '&amp;Peer=' . uri_escape ($peer));
-        $response = $useragent-&gt;request ($request);
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneMenu&gt;' \
+          '&lt;Title&gt;' + escape(index) + '&lt;/Title&gt;'
 
-        die $response-&gt;as_string unless ($response-&gt;is_success);
+    for extension, name in entries:
+        content += '&lt;MenuItem&gt;' \
+                     '&lt;Name&gt;' + escape(name) + '&lt;/Name&gt;' \
+                     '&lt;URL&gt;Dial:' + quote_plus(extension) + '&lt;/URL&gt;' \
+                   '&lt;/MenuItem&gt;'
 
-        my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
+    if g.is_79xx:
+        content += '&lt;Prompt&gt;Select entry&lt;/Prompt&gt;'
 
-        my ($name, $phone_number)
-            = ($document-&gt;findvalue ('/ajax-response/response/generic/@callerid') =~ m/^&quot;([^\&quot;]*)&quot; &lt;([^&gt;]*)&gt;$/);
+    content += '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Exit&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('3' if g.is_79xx else '1') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;' + request.url_root + 'directory?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+          '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Dial&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+        '&lt;/CiscoIPPhoneMenu&gt;'
 
-        next unless ($phone_number =~ m/^\d+$/);
-        next if (index ($cgi-&gt;param ('index'), ucfirst substr ($name, 0, 1)) == -1);
+    return Response(content, mimetype = 'text/xml'), 200
 
-        $directory-&gt;{$phone_number} = $name;
-    }
 
-    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Logoff');
-    $response = $useragent-&gt;request ($request);
+@blueprint.route('/directory/help')
+def directory_help():
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneText&gt;' \
+        '&lt;Title&gt;Help&lt;/Title&gt;' \
+        '&lt;Text&gt;Use the keypad or navigation key to select the first letter of the person\'s name.&lt;/Text&gt;'
 
-    die $response-&gt;as_string unless ($response-&gt;is_success);
+    if g.is_79xx:
+        content += '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;'
 
-    print '&lt;CiscoIPPhoneMenu&gt;',
-            '&lt;Title&gt;', encode_entities ($cgi-&gt;param ('index')), '&lt;/Title&gt;';
+    content += '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Back&lt;/Name&gt;' \
+            '&lt;URL&gt;SoftKey:Exit&lt;/URL&gt;' \
+            '&lt;Position&gt;' + ('3' if g.is_79xx else '1') + '&lt;/Position&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+        '&lt;/CiscoIPPhoneText&gt;'
 
-    foreach my $phone_number (sort ({$directory-&gt;{$a} cmp $directory-&gt;{$b}} keys %{$directory})) {
-       my $name = $directory-&gt;{$phone_number};
+    return Response(content, mimetype = 'text/xml'), 200
 
-       print '&lt;MenuItem&gt;',
-               '&lt;Name&gt;', encode_entities ($name), '&lt;/Name&gt;',
-               '&lt;URL&gt;Dial:', encode_entities ($phone_number), '&lt;/URL&gt;',
-             '&lt;/MenuItem&gt;';
-    }
 
-    print  '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Exit&lt;/Name&gt;',
-             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
-               '&amp;amp;menuitem=yes&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-           '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Dial&lt;/Name&gt;',
-             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-         '&lt;/CiscoIPPhoneMenu&gt;';
-}
+@blueprint.route('/directory/79xx')
+def directory_menuitem():
+    # 79xx series need a menu item before the index
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneMenu&gt;' \
+          '&lt;MenuItem&gt;' \
+            '&lt;Name&gt;Local Directory&lt;/Name&gt;' \
+            '&lt;URL&gt;' + request.url_root + 'directory?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
+          '&lt;/MenuItem&gt;' \
+        '&lt;/CiscoIPPhoneMenu&gt;'
 
-eval {
-    my $cgi = CGI::Simple-&gt;new;
+    return Response(content, mimetype = 'text/xml'), 200
 
-    # Check that the device exists
-    unless ($cgi-&gt;param ('name') =~ m/^SEP[0-9A-F]{12}$/
-            &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('name') . '.cnf.xml')) {
-        print 'Status: 403 Forbidden', &quot;\r\n&quot;,
-              'Content-Type: text/plain', &quot;\r\n&quot;,
-              &quot;\r\n&quot;,
-              'Invalid or unknown device name';
 
-        return;
-    }
+@blueprint.before_request
+def before_request():
+    device_name = request.args.get('name', '')
 
-    print 'Status: 200 OK', &quot;\r\n&quot;,
-          'Content-Type: text/xml', &quot;\r\n&quot;,
-          &quot;\r\n&quot;;
+    if not re.search(r'(?x) ^ SEP [0-9A-F]{12} $', device_name) or \
+       not os.path.exists(f'{config.tftpboot_dir}/{device_name}.cnf.xml'):
+        return Response('Invalid device', mimetype = 'text/plain'), 500
 
-    # 7900 series need a menu item displayed first
-    if ($cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ &amp;&amp; !length $cgi-&gt;param ('menuitem')) {
-        print '&lt;CiscoIPPhoneMenu&gt;',
-                '&lt;MenuItem&gt;',
-                  '&lt;Name&gt;Local Directory&lt;/Name&gt;',
-                  '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
-                    '&amp;amp;menuitem=yes&lt;/URL&gt;',
-                '&lt;/MenuItem&gt;',
-              '&lt;/CiscoIPPhoneMenu&gt;';
-    } elsif ($cgi-&gt;param ('index') eq 'howtouse') {
-        how_to_use ($cgi);
-    } elsif ($cgi-&gt;param ('index') =~ m/^[A-Z0-9*#]+$/) {
-        directory_entries ($cgi);
-    } else {
-        directory_index ($cgi);
-    }
-};
+    g.device_name = device_name
+    g.is_79xx = re.search(r'(?x) ^ CP-79', request.headers.get('X-CiscoIPPhoneModelName', ''))
 
-warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+    return None
+
+
+@blueprint.errorhandler(Exception)
+def error_handler(error):
+    return Response(str(error), mimetype = 'text/plain'), 500</code>
         <br>
         <h2 id="servicesURL">servicesURL</h2>
-        The URL accessed when the services button is pressed. Requires that the Asterisk manager web-interface is enabled.<br>
+        The URL accessed when the services or applications button is pressed. Example below provides this on <code class="literal">/services</code>. Requires that the Asterisk manager web-interface is enabled.<br>
         <br>
-        <code class="prettify lang-perl">#!/usr/bin/perl
-#
-# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
-# This program is free software, distributed under the terms of
-# the GNU General Public License Version 2.
+        <code class="prettify lang-python">#!/usr/bin/python3
 
-use strict;
-use English qw/-no_match_vars/;
-use CGI::Simple;
-use URI::Escape;
-use HTML::Entities;
-use LWP::UserAgent;
-use HTTP::Cookies;
-use XML::LibXML;
+import os.path
+import re
+from urllib.parse import quote_plus
+from html import escape
+from lxml import etree
+import requests
+from flask import Blueprint, Response, request, g
+import config
 
-# Directory containing the SEPMAC.cnf.xml files
-our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
 
-# Login credentials set in manager.conf
-our $MANAGER_HOSTNAME = 'localhost:8088';
-our $MANAGER_USERNAME = 'asterisk';
-our $MANAGER_PASSWORD = 'asterisk';
+blueprint = Blueprint('services', __name__)
 
-sub parked_calls {
-    my $cgi = shift;
 
-    my $useragent = LWP::UserAgent-&gt;new;
+@blueprint.route('/services')
+def services_menu():
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneMenu&gt;' \
+          '&lt;Title&gt;Services&lt;/Title&gt;' \
+          '&lt;MenuItem&gt;' \
+            '&lt;Name&gt;Parked Calls&lt;/Name&gt;' \
+            '&lt;URL&gt;' + request.url_root + 'services/parked-calls?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
+          '&lt;/MenuItem&gt;'
 
-    $useragent-&gt;cookie_jar (HTTP::Cookies-&gt;new (hide_cookie2 =&gt; 1));
+    if g.is_79xx:
+        content += '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;'
 
-    my ($request, $response);
+    content += '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Exit&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('3' if g.is_79xx else '1') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;Init:Services&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+          '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Select&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+        '&lt;/CiscoIPPhoneMenu&gt;'
 
-    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Login'
-                                    . '&amp;Username=' . uri_escape ($MANAGER_USERNAME)
-                                    . '&amp;Secret=' . uri_escape ($MANAGER_PASSWORD));
+    return Response(content, mimetype = 'text/xml'), 200
 
-    $response = $useragent-&gt;request ($request);
 
-    die $response-&gt;as_string unless ($response-&gt;is_success);
+@blueprint.route('/services/parked-calls')
+def parked_calls():
+    session = requests.Session()
 
-    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=ParkedCalls');
-    $response = $useragent-&gt;request ($request);
+    response = session.get(config.manager_url, timeout = 5, params = {'Action': 'Login',
+                                                                      'Username': config.manager_username,
+                                                                      'Secret': config.manager_secret})
+    response.raise_for_status()
 
-    die $response-&gt;as_string unless ($response-&gt;is_success);
+    response = session.get(config.manager_url, timeout = 5, params = {'Action': 'ParkedCalls'})
+    response.raise_for_status()
 
-    my $document = XML::LibXML-&gt;load_xml (string =&gt; $response-&gt;content);
+    document = etree.fromstring(response.content)
+    calls = []
 
-    my $parked_calls = {};
+    for element in document.findall('response/generic[@event="ParkedCall"]'):
+        extension = element.get('exten')
+        name = element.get('calleridname') or element.get('calleridnum')
 
-    foreach my $element ($document-&gt;findnodes ('/ajax-response/response/generic[@event=&quot;ParkedCall&quot;]')) {
-         my ($extension, $name);
+        calls.append((extension, name))
 
-         $extension = $element-&gt;getAttribute ('exten');
-         $name      = $element-&gt;getAttribute ('callerdidname') || $element-&gt;getAttribute ('calleridnum');
+    response = session.get(config.manager_url, timeout = 5, params = {'Action': 'Logoff'})
+    response.raise_for_status()
 
-         $parked_calls-&gt;{$extension} = $name;
-    }
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneMenu&gt;' \
+          '&lt;Title&gt;Parked Calls&lt;/Title&gt;'
 
-    $request  = HTTP::Request-&gt;new (GET =&gt; 'http://' . $MANAGER_HOSTNAME . '/mxml?Action=Logoff');
-    $response = $useragent-&gt;request ($request);
+    for extension, name in calls:
+        content += '&lt;MenuItem&gt;' \
+                     '&lt;Name&gt;' + escape(name) + '&lt;/Name&gt;' \
+                     '&lt;URL&gt;Dial:' + quote_plus(extension) + '&lt;/URL&gt;' \
+                   '&lt;/MenuItem&gt;'
 
-    die $response-&gt;as_string unless ($response-&gt;is_success);
+    if g.is_79xx:
+        content += '&lt;Prompt&gt;Select call&lt;/Prompt&gt;'
 
-    print '&lt;CiscoIPPhoneMenu&gt;',
-            '&lt;Title&gt;Parked Calls&lt;/Title&gt;';
+    content += '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Exit&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('3' if g.is_79xx else '1') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;' + request.url_root + 'services?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+          '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Dial&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+          '&lt;SoftKeyItem&gt;' \
+            '&lt;Name&gt;Update&lt;/Name&gt;' \
+            '&lt;Position&gt;' + ('2' if g.is_79xx else '3') + '&lt;/Position&gt;' \
+            '&lt;URL&gt;SoftKey:Update&lt;/URL&gt;' \
+          '&lt;/SoftKeyItem&gt;' \
+        '&lt;/CiscoIPPhoneMenu&gt;'
 
-    foreach my $extension (sort ({$parked_calls-&gt;{$a} cmp $parked_calls-&gt;{$b}} keys %{$parked_calls})) {
-       my $name = $parked_calls-&gt;{$extension};
+    return Response(content, mimetype = 'text/xml'), 200
 
-       print '&lt;MenuItem&gt;',
-               '&lt;Name&gt;', encode_entities ($name), '&lt;/Name&gt;',
-               '&lt;URL&gt;Dial:', encode_entities ($extension), '&lt;/URL&gt;',
-             '&lt;/MenuItem&gt;';
-    }
 
-    print  '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Exit&lt;/Name&gt;',
-             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
-               '&amp;amp;&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-           '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Dial&lt;/Name&gt;',
-             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-           '&lt;SoftKeyItem&gt;',
-             '&lt;Name&gt;Update&lt;/Name&gt;',
-             '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
-               '&amp;amp;view=parkedcalls&lt;/URL&gt;',
-             '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 2 : 3, '&lt;/Position&gt;',
-           '&lt;/SoftKeyItem&gt;',
-         '&lt;/CiscoIPPhoneMenu&gt;';
-}
+@blueprint.before_request
+def before_request():
+    device_name = request.args.get('name', '')
 
-sub services_menu {
-    my $cgi = shift;
+    if not re.search(r'(?x) ^ SEP [0-9A-F]{12} $', device_name) or \
+       not os.path.exists(f'{config.tftpboot_dir}/{device_name}.cnf.xml'):
+        return Response('Invalid device', mimetype = 'text/plain'), 500
 
-    print '&lt;CiscoIPPhoneMenu&gt;',
-            '&lt;Title&gt;Services&lt;/Title&gt;',
-            '&lt;MenuItem&gt;',
-              '&lt;Name&gt;Parked Calls&lt;/Name&gt;',
-              '&lt;URL&gt;', $cgi-&gt;url, '?name=', encode_entities ($cgi-&gt;param ('name')),
-                '&amp;amp;view=parkedcalls&lt;URL&gt;',
-            '&lt;/MenuItem&gt;',
-            '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;',
-            '&lt;SoftKeyItem&gt;',
-              '&lt;Name&gt;Exit&lt;/Name&gt;',
-              '&lt;URL&gt;Init:Services&lt;/URL&gt;',
-              '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 3 : 1, '&lt;/Position&gt;',
-            '&lt;/SoftKeyItem&gt;',
-            '&lt;SoftKeyItem&gt;',
-              '&lt;Name&gt;Select&lt;/Name&gt;',
-              '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;',
-              '&lt;Position&gt;', $cgi-&gt;http ('X-Cisco-IPPhoneModelName') =~ m/^CP-79/ ? 1 : 2, '&lt;/Position&gt;',
-            '&lt;/SoftKeyItem&gt;',
-          '&lt;/CiscoIPPhoneMenu&gt;';
-}
+    g.device_name = device_name
+    g.is_79xx = re.search(r'(?x) ^ CP-79', request.headers.get('X-CiscoIPPhoneModelName', ''))
 
-eval {
-    my $cgi = CGI::Simple-&gt;new;
+    return None
 
-    # Check that the device exists
-    unless ($cgi-&gt;param ('name') =~ m/^SEP[0-9A-F]{12}$/
-            &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('name') . '.cnf.xml')) {
-        print 'Status: 403 Forbidden', &quot;\r\n&quot;,
-              'Content-Type: text/plain', &quot;\r\n&quot;,
-              &quot;\r\n&quot;,
-              'Invalid or unknown device name';
 
-        return;
-    }
-
-    print 'Status: 200 OK', &quot;\r\n&quot;,
-          'Content-Type: text/xml', &quot;\r\n&quot;,
-          &quot;\r\n&quot;;
-
-    if ($cgi-&gt;param ('view') eq 'parkedcalls') {
-        parked_calls ($cgi);
-    } else {
-        services_menu ($cgi);
-    }
-};
-
-warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+@blueprint.errorhandler(Exception)
+def error_handler(error):
+    return Response(str(error), mimetype = 'text/plain'), 500</code>
         <br>
         <h2 id="problemReportUploadURL">problemReportUploadURL</h2>
-        The URL that the logs are uploaded to when the report problem option is selected. <b>7800</b> and <b>8800</b> series only.<br>
+        The URL that the logs are uploaded to when the report problem option is selected. Example below provides this on <code class="literal">/problem-report</code>. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
-        <code class="prettify lang-perl">#!/usr/bin/perl
-#
-# Copyright (c) 2015 Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;
-# This program is free software, distributed under the terms of
-# the GNU General Public License Version 2.
+        <code class="prettify lang-python">#!/usr/bin/python3
 
-use strict;
-use English qw/-no_match_vars/;
-use CGI::Simple;
-use POSIX qw/strftime/;
+import os.path
+import re
+from datetime import datetime
+from flask import Blueprint, Response, request, g
+import config
 
-# Directory containing the SEPMAC.cnf.xml files
-our $TFTPBOOT_DIRECTORY = '/var/lib/tftpboot';
 
-# Directory to store uploaded log files
-our $PRT_LOGS_DIRECTORY = '/var/log/cisco';
+blueprint = Blueprint('problem_report', __name__)
 
-eval {
-    $CGI::Simple::DISABLE_UPLOADS = 0;
-    $CGI::Simple::POST_MAX = -1;
 
-    my $cgi = CGI::Simple-&gt;new;
+@blueprint.route('/problem-report', methods = ['POST'])
+def problem_report():
+    prt_file = request.files.get('prt_file')
 
-    # Check that the device exists
-    unless ($cgi-&gt;param ('devicename') =~ m/^SEP[0-9A-F]{12}$/
-            &amp;&amp; stat ($TFTPBOOT_DIRECTORY . '/' . $cgi-&gt;param ('devicename') . '.cnf.xml')) {
-        print 'Status: 403 Forbidden', &quot;\r\n&quot;,
-              'Content-Type: text/plain', &quot;\r\n&quot;,
-              &quot;\r\n&quot;,
-              'Invalid or unknown device name';
+    if prt_file is None:
+        return Response('Missing problem report', mimetype = 'text/plain'), 500
 
-        return;
-    }
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    prt_file.save(f'{config.reports_dir}/{g.device_name}-{timestamp}.tar.gz')
 
-    # Include a timestamp in the filename so the phone can upload multiple logs
-    my $time = strftime ('%Y%m%d%H%M', localtime time);
+    return Response('Log saved', mimetype = 'text/plain'), 200
 
-    unless ($cgi-&gt;upload ($cgi-&gt;param ('prt_file'),
-                          $PRT_LOGS_DIRECTORY . '/' . $cgi-&gt;param ('devicename') . '-' . $time . '.tar.gz')) {
-        print 'Status: 500 Internal Server Error', &quot;\r\n&quot;,
-              'Content-Type: text/plain', &quot;\r\n&quot;,
-              &quot;\r\n&quot;,
-              'Unable to create log file';
 
-        return;
-    }
+@blueprint.before_request
+def before_request():
+    device_name = request.form.get('devicename', '')
 
-    print 'Status: 200 OK', &quot;\r\n&quot;,
-          'Content-Type: text/plain', &quot;\r\n&quot;,
-          &quot;\r\n&quot;,
-          'Log file saved';
-};
+    if not re.search(r'(?x) SEP [0-9A-F]{12} $', device_name) or \
+       not os.path.exists(f'{config.tftpboot_dir}/{device_name}.cnf.xml'):
+        return Response('Invalid device', mimetype = 'text/plain'), 403
 
-warn $EVAL_ERROR if (length $EVAL_ERROR);</code>
+    g.device_name = device_name
+
+    return None
+
+
+@blueprint.errorhandler(Exception)
+def error_handler(error):
+    return Response(str(error), mimetype = 'text/plain'), 500</code>
+        <br>
+        <h2 id="WSGIApplication">WSGI Application</h2>
+        Entry point for the WSGI application. Additional configuration can be specified by the <code class="literal">FLASK_CONFIG</code> environment variable.<br>
+        <br>
+        <code class="prettify lang-python">#!/usr/bin/python3
+
+from flask import Flask, Response
+import authentication
+import services
+import directory
+import problem_report
+
+
+application = Flask(__name__)
+
+application.register_blueprint(authentication.blueprint)
+application.register_blueprint(services.blueprint)
+application.register_blueprint(directory.blueprint)
+application.register_blueprint(problem_report.blueprint)
+
+
+@application.route('/')
+def index():
+    return Response('', mimetype = 'text/plain'), 200
+
+
+@application.errorhandler(Exception)
+def error_handler(error):
+    return Response(str(error), mimetype = 'text/plain'), 500
+
+
+if __name__ == '__main__':
+    application.config.from_envvar('FLASK_CONFIG', silent = True)
+    application.run()</code>
+        <br>
+        <h2 id="AppConfig">Application Configuration</h2>
+        Parses <code class="literal">config.yml</code> which contains the paths and credentials for the application. A different location can be specified by the <code class="literal">SERVICES_CONFIG</code> environment variable.<br>
+        <br>
+        <code class="prettify lang-python">#!/usr/bin/python3
+
+import os
+import yaml
+
+
+tftpboot_dir = '/var/lib/tftpboot'
+reports_dir = '/var/log/cisco'
+
+cgi_username = 'cisco'
+cgi_password = 'cisco'
+
+manager_url = 'http://localhost:8088/mxml'
+manager_username = 'asterisk'
+manager_secret = 'asterisk'
+
+config_file = os.environ.get('SERVICES_CONFIG', 'config.yml')
+
+if os.path.exists(config_file):
+    with open(config_file) as file:
+        document = yaml.safe_load(file)
+
+        if document:
+            tftpboot_dir = document.get('tftpboot-dir', tftpboot_dir)
+            reports_dir = document.get('reports-dir', reports_dir)
+
+            cgi_username = document.get('cgi-username', cgi_username)
+            cgi_password = document.get('cgi-password', cgi_password)
+
+            manager_url = document.get('manager-url', manager_url)
+            manager_username = document.get('manager-username', manager_username)
+            manager_secret = document.get('manager-secret', manager_secret)</code>
       </article>
     </main>
     <footer></footer>
