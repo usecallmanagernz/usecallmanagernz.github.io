@@ -78,7 +78,7 @@
         <h2 id="gencert">gencert</h2>
         <code class="literal">gencert</code> is basic script to generate RSA private keys and sign X509 certificates. If you already have certificates they can be used instead.<br>
         <br>
-        <b>1.</b> Create a CA certificate valid for 20 years. This will function as the <code class="literal">SAST</code> (System Administrator Security Token) certificate.<br>
+        <b>1.</b> Create a CA certificate valid for 20 years. This will function as the <code class="literal">sast</code> (System Administrator Security Token) certificate.<br>
         <br>
         <code class="command-line">~/certutils$ ./gencert -n -C "Certificate Authority" -b 2048 -y 20 -o CA.pem</code>
         <br>
@@ -96,31 +96,31 @@
         <table>
           <tbody>
             <tr>
-              <td><b>SAST</b></td>
+              <td><b>sast</b></td>
               <td>System Administrator Security Token, signs and verifies <code class="literal">.tlv</code> files</td>
             </tr>
             <tr>
-              <td><b>CCM</b></td>
+              <td><b>ccm</b></td>
               <td>Verifies the SIP-TLS connection to Asterisk</td>
             </tr>
             <tr>
-              <td><b>TFTP</b></td>
-              <td>Signs and verifies provisioning files downloaded via TFTP or HTTP</td>
+              <td><b>tftp</b></td>
+              <td>Signs and verifies provisioning files downloaded via HTTP or TFTP</td>
             </tr>
             <tr>
-              <td><b>CCM+TFTP</b></td>
-              <td>Combined CCM and TFTP functions</td>
+              <td><b>ccm+tftp</b></td>
+              <td>Combined <code class="literal">ccm</code> and <code class="literal">tftp</code> functions</td>
             </tr>
             <tr>
-              <td><b>HTTPS</b></td>
+              <td><b>https</b></td>
               <td>Verifies HTTPS connections to phone services</td>
             </tr>
           </tbody>
         </table>
         <br>
-        <b>Note:</b> Once a phone has installed a <code class="literal">.tlv</code> new versions of that file can only be signed by a previously known certificate with the <code class="literal">SAST</code> function.<br>
+        <b>Note:</b> Once a phone has installed a <code class="literal">.tlv</code> new versions of that file can only be signed by a previously known certificate with the <code class="literal">sast</code> function.<br>
         <br>
-        <b>1.</b> Create <code class="literal">ITLFile.tlv</code> in the tftpboot provisioning directory, the certificate used to sign the <code class="literal">.tlv</code> file is automatically included as providing the <code class="literal">SAST</code> function.<br>
+        <b>1.</b> Create <code class="literal">ITLFile.tlv</code> in the tftpboot provisioning directory, the certificate used to sign the <code class="literal">.tlv</code> file is automatically included as providing the <code class="literal">sast</code> function.<br>
         <br>
         <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -c CA.pem \
   -r asterisk.pem -f ccm -r apache.pem -f https</code>
@@ -138,7 +138,7 @@
         <b>4.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>
         <br>
         <h2 id="sgnfile">sgnfile</h2>
-        <code class="literal">sgnfile</code> is used to build or parse <code class="literal">.sgn</code> files which are any non-firmware files the phone downloads during provisioning with a digital signature added. You only need to sign files if the <code class="literal">TFTP</code> function has been included in the phone's <code class="literal">.tlv</code> file.<br>
+        <code class="literal">sgnfile</code> is used to build or parse <code class="literal">.sgn</code> files which are any non-firmware files the phone downloads during provisioning with a digital signature added. You only need to sign files if the <code class="literal">tftp</code> function has been included in the phone's <code class="literal">.tlv</code> file.<br>
         <br>
         <b>1.</b> Sign SEPMAC.cnf.xml, soft-key and dial-plan files.<br>
         <br>
