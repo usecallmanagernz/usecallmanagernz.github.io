@@ -69,14 +69,16 @@
       </nav>
       <article>
         <h1>CGI Execute</h1>
-        The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>.<br>
+        The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>. An archive containing sample command line utilties can be downloaded from the URL below.<br>
+        <br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/commands/archive/v1.0.tar.gz">commands-1.0.tar.gz</a> (13K) <span class="icon">event</span> 06/06/2020 <span class="icon">security</span> SHA256:1e4b266b3bb000170f89c527d2067c33f48ae465e3b2fa016839616d52489767.<br>
         <br>
         If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
         See the <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> a list of URIs the each phone model supports.<br>
         <br>
         <h2 id="CiscoIPPhoneExecute">CiscoIPPhoneExecute</h2>
-        Root tag of an execute request, up to <code class="literal">3</code> &lt;<code class="tag">ExecuteItem</code>&gt; tags can be specified .<br>
+        Root tag of an execute request, up to <code class="literal">3</code> &lt;<code class="tag">ExecuteItem</code>&gt; tags can be specified.<br>
         <br>
         <code class="prettify lang-xml">&lt;CiscoIPPhoneExecute&gt;</code>
         <br>
@@ -116,7 +118,7 @@
         <code class="prettify lang-xml">  &lt;ExecuteItem URL="<i>URL</i>" Priority="<i>PRIORITY</i>" /&gt;
 &lt;/CiscoIPPhoneExecute&gt;</code>
         <br>
-        An example command line script that sends up to three CGI execute requests to a phone is below.<br>
+        An example script that can send up to three CGI execute requests to a phone is below. Available as the <code class="literal">cgiexecute</code> script from the commands archive above.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3
 
@@ -235,13 +237,13 @@ def main():
               '  -p, --password PASSWORD    authentication password\n'
               '\n'
               'Up to 3 URLs may be specified\n'
-              'Valid URLs are Dial:, EditDial:, Key:, SoftKey:, Init:, Play:, http: and https:\n'
-              'Optional priority is either 0 (immediately), 1 (when idle) or 2 (only if idle)\n')
+              'URL is one of Dial:, EditDial:, Key:, SoftKey:, Init:, Play:, http: or https:\n'
+              'Optional PRIORITY is either 0 (immediately), 1 (when idle) or 2 (only if idle)\n')
 
         return
 
-    if ip_address is None:
-        raise ProgramError('No -i/--ip option specified')
+    if not len(arguments):
+        raise ProgramError('No URLs specified')
 
     urls = []
 
@@ -264,12 +266,13 @@ def main():
                          ' | Play: [a-zA-Z0-9._\-]+ | https? :// [^ ]+ ) $', url):
             raise ProgramError(f'Invalid URL: {url}')
 
+        if len(urls) == 3:
+            raise ProgramError('A maximum of 3 URLs can be specified')
+
         urls.append((url, priority))
 
-    if len(urls) == 0:
-        raise ProgramError('No URLs specified')
-    elif len(urls) &gt; 3:
-        raise ProgramError('A maximum of 3 URLs can be specified')
+    if ip_address is None:
+        raise ProgramError('No -i/--ip option specified')
 
     cgi_execute(ip_address, timeout, urls, username, password)
 
@@ -289,7 +292,9 @@ if __name__ == '__main__':
     exit(0)</code>
         <br>
         <h2 id="setBackground">setBackground</h2>
-        Sets the background on the phone, both URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. See <a href="image-list-xml.html">Background Images</a> for more information.<br>
+        Sets the background on the phone, both URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. An example <code class="literal">setbackground</code> script can be found in the archive above.<br>
+        <br>
+        See <a href="image-list-xml.html">Background Images</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;setBackground&gt;
   &lt;background&gt;
@@ -299,7 +304,9 @@ if __name__ == '__main__':
 &lt;/setBackground&gt;</code>
         <br>
         <h2 id="setRingTone">setRingTone</h2>
-        Sets the ring-tone on the phone, the URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. See <a href="ring-list-xml.html">Ring Tones</a> for more information.<br>
+        Sets the ring-tone on the phone, the URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. An example <code class="literal">setringtone</code> script can be found in the archive above.<br>
+        <br>
+        See <a href="ring-list-xml.html">Ring Tones</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;setRingTone&gt;
   &lt;ringTone&gt;<i>RINGTONE URL</i>&lt;/ringTone&gt;

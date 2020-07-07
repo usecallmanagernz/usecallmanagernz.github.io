@@ -203,7 +203,7 @@
         <table>
           <tbody>
             <tr>
-              <td><b>url</b></td> 
+              <td><b>url</b></td>
               <td>URL to access. The phone's device-name is automatically included in the <code class="literal">name</code> parameter.</td>
             </tr>
           </tbody>
@@ -279,7 +279,9 @@ transport=tls
 [encrypted-mode](!)
 transport=tls
 ; The res_srtp module needs to be loaded. encryption_taglen is set per-model below
-encryption=yes</code>
+; Note: 7941 and 7961 cannot use encrypted mode because they only support and obsolete SSL version
+encryption=yes
+encryption_taglen=80</code>
         <br>
         <h2 id="Device Model Template">Device Model Template</h2>
         Example individual device templates for each Cisco SIP phone model to handle the different features, inherits the settings from the <code class="literal">cisco-usecallmanager</code> template.<br>
@@ -288,15 +290,12 @@ encryption=yes</code>
 ; These should match &lt;busyTrigger&gt; and &lt;maxNumCalls&gt; in SEPMAC.cnf.xml
 busylevel=3
 call-limit=4
-; Force huntgroup login so that the prompt does not show the logged out message 
+; Force huntgroup login so that the prompt does not show the logged out message
 huntgroup_default=yes
-; 7900 series only support 32-bit SRTP
-encryption_taglen=32
 
 [cisco-8841](!,cisco-usecallmanager)
 busylevel=4
 call-limit=5
-encryption_taglen=80
 
 [cisco-8865](!,cisco-usecallmanager)
 busylevel=4
@@ -305,7 +304,6 @@ call-limit=5
 videosupport=yes
 ; Allow the video codec
 allow=h264
-encryption_taglen=80
 
 [cisco-9951](!,cisco-usecallmanager)
 busylevel=5
@@ -313,8 +311,7 @@ call-limit=6
 ; &lt;videoCapability&gt; also needs to be enabled in SEPMAC.cnf.xml
 videosupport=yes
 ; Allow the video codec
-allow=h264
-encryption_taglen=80</code>
+allow=h264</code>
         <br>
         <h2 id="SIP Phone Peers">SIP Phone Peers</h2>
         Individual peer definitions for Cisco SIP phones, inherits the settings from the <code class="literal">cisco-</code><code class="keyword">MODEL</code> template.<br>
