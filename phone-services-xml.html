@@ -71,7 +71,7 @@
         <h1>Phone Services</h1>
         The phone can make HTTP requests to a remote web-server to display text, menus and images as well as check whether a <a href="cgi-execute-xml.html">CGI Execute</a> requests will be allowed. URLs assigned to fixed-keys (eg: services, directories) and line keys are defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. An archive containing a sample WSGI application can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/services/archive/v2.0.tar.gz">services-2.0.tar.gz</a> (11K) <span class="icon">event</span> 02/06/2020 <span class="icon">security</span> SHA256:fbbd6657880801008eb502cbe4cfa61506e3ec6e8e4e29be4655becff325cba6.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/services/archive/v2.1.tar.gz">services-2.1.tar.gz</a> (11K) <span class="icon">event</span> 28/07/2020 <span class="icon">security</span> SHA256:7b80ca5053c5fc64ca67df2021818a0305f64d39a586a11a28151ad3e02a8edd.<br>
         <br>
         See <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
         <br>
@@ -127,11 +127,12 @@ def error_handler(error):
 
 import os.path
 import re
+from math import ceil
 from urllib.parse import quote_plus
 from html import escape
 from lxml import etree
 import requests
-from flask import Blueprint, Response, request, g, redirect
+from flask import Blueprint, Response, request, g
 import config
 
 
@@ -146,9 +147,9 @@ def directory_index():
 
     for index in ('1', '2ABC', '3DEF', '4GHI', '5JKL', '6MNO', '7PRQS', '8TUV', '9WXYZ', '0'):
         content += '&lt;MenuItem&gt;' \
-              '&lt;Name&gt;' + escape(index) + '&lt;/Name&gt;' \
-              '&lt;URL&gt;' + request.url_root + 'directory/entries?name=' + quote_plus(g.device_name) + '&amp;amp;index=' + quote_plus(index) + '&lt;/URL&gt;' \
-            '&lt;/MenuItem&gt;'
+            '&lt;Name&gt;' + escape(index) + '&lt;/Name&gt;' \
+            '&lt;URL&gt;' + request.url_root + 'directory/entries?name=' + quote_plus(g.device_name) + '&amp;amp;index=' + quote_plus(index) + '&lt;/URL&gt;' \
+          '&lt;/MenuItem&gt;'
 
     if g.is_79xx:
         content += '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;'
@@ -159,7 +160,7 @@ def directory_index():
             '&lt;URL&gt;Init:Directories&lt;/URL&gt;' \
           '&lt;/SoftKeyItem&gt;' \
           '&lt;SoftKeyItem&gt;' \
-            '&lt;Name&gt;Select&lt;/Name&gt;' \
+            '&lt;Name&gt;' + ('Select' if g.is_79xx else 'View') + '&lt;/Name&gt;' \
             '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
           '&lt;/SoftKeyItem&gt;' \
@@ -178,7 +179,7 @@ def directory_entries():
     index = request.args.get('index', '')
 
     if not len(index):
-        return redirect('/directory/index?name=' + escape(g.device_name))
+        return directory_index()
 
     session = requests.Session()
 
@@ -202,33 +203,62 @@ def directory_entries():
 
         entries.append((extension, name))
 
+    entries.sort(key = lambda entry: entry[1])
+
     response = session.get(config.manager_url, timeout = 5, params = {'Action': 'Logoff'})
     response.raise_for_status()
 
-    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
-        '&lt;CiscoIPPhoneMenu&gt;' \
-          '&lt;Title&gt;' + escape(index) + '&lt;/Title&gt;'
+    # 10 entries per page
+    pages = ceil(len(entries) / 10)
 
-    for extension, name in entries:
-        content += '&lt;MenuItem&gt;' \
-                     '&lt;Name&gt;' + escape(name) + '&lt;/Name&gt;' \
-                     '&lt;URL&gt;Dial:' + quote_plus(extension) + '&lt;/URL&gt;' \
-                   '&lt;/MenuItem&gt;'
+    try:
+        page = int(request.args.get('page', '1'))
+
+        if page &gt; pages:
+            raise ValueError
+
+    except ValueError:
+        page = 1
+
+    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+        '&lt;CiscoIPPhoneDirectory&gt;' \
+          '&lt;Title&gt;' + escape(index) + (' ' + str(page) + '/' + str(pages) if pages &gt; 1 else '') + '&lt;/Title&gt;'
+
+    for extension, name in entries[(page - 1) * 10:page * 10]:
+        content += '&lt;DirectoryEntry&gt;' \
+              '&lt;Name&gt;' + escape(name) + '&lt;/Name&gt;' \
+              '&lt;Telephone&gt;' + quote_plus(extension) + '&lt;/Telephone&gt;' \
+            '&lt;/DirectoryEntry&gt;'
 
     if g.is_79xx:
         content += '&lt;Prompt&gt;Select entry&lt;/Prompt&gt;'
 
     content += '&lt;SoftKeyItem&gt;' \
-            '&lt;Name&gt;Exit&lt;/Name&gt;' \
-            '&lt;Position&gt;' + ('3' if g.is_79xx else '1') + '&lt;/Position&gt;' \
-            '&lt;URL&gt;' + request.url_root + 'directory?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
-          '&lt;/SoftKeyItem&gt;' \
-          '&lt;SoftKeyItem&gt;' \
-            '&lt;Name&gt;Dial&lt;/Name&gt;' \
-            '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
-            '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
-          '&lt;/SoftKeyItem&gt;' \
-        '&lt;/CiscoIPPhoneMenu&gt;'
+          '&lt;Name&gt;Exit&lt;/Name&gt;' \
+          '&lt;Position&gt;' + ('3' if g.is_79xx else '1') + '&lt;/Position&gt;' \
+          '&lt;URL&gt;' + request.url_root + 'directory?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
+        '&lt;/SoftKeyItem&gt;' \
+        '&lt;SoftKeyItem&gt;' \
+          '&lt;Name&gt;' + ('Dial' if g.is_79xx else 'Call') + '&lt;/Name&gt;' \
+          '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
+          '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
+        '&lt;/SoftKeyItem&gt;'
+
+    if page &lt; pages:
+        content += '&lt;SoftKeyItem&gt;' \
+              '&lt;Name&gt;Next&lt;/Name&gt;' \
+              '&lt;URL&gt;' + request.url_root + 'directory/entries?name=' + quote_plus(g.device_name) + '&amp;amp;index=' + quote_plus(index) + '&amp;amp;page=' + str(page + 1) + '&lt;/URL&gt;' \
+              '&lt;Position&gt;' + ('2' if g.is_79xx else '3') + '&lt;/Position&gt;' \
+            '&lt;/SoftKeyItem&gt;'
+
+    if page &gt; 1:
+        content += '&lt;SoftKeyItem&gt;' \
+              '&lt;Name&gt;Previous&lt;/Name&gt;' \
+              '&lt;URL&gt;' + request.url_root + 'directory/entries?name=' + quote_plus(g.device_name) + '&amp;amp;index=' + quote_plus(index) + '&amp;amp;page=' + str(page - 1) + '&lt;/URL&gt;' \
+              '&lt;Position&gt;' + ('4' if g.is_79xx else '4') + '&lt;/Position&gt;' \
+            '&lt;/SoftKeyItem&gt;'
+
+    content += '&lt;/CiscoIPPhoneDirectory&gt;'
 
     return Response(content, mimetype = 'text/xml'), 200
 
@@ -237,8 +267,8 @@ def directory_entries():
 def directory_help():
     content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
         '&lt;CiscoIPPhoneText&gt;' \
-        '&lt;Title&gt;Help&lt;/Title&gt;' \
-        '&lt;Text&gt;Use the keypad or navigation key to select the first letter of the person\'s name.&lt;/Text&gt;'
+          '&lt;Title&gt;How To Use&lt;/Title&gt;' \
+          '&lt;Text&gt;Use the keypad or navigation key to select the first letter of the person\'s name.&lt;/Text&gt;'
 
     if g.is_79xx:
         content += '&lt;Prompt&gt;Your current options&lt;/Prompt&gt;'
@@ -352,18 +382,20 @@ def parked_calls():
 
         calls.append((extension, name))
 
+    calls.sort(key = lambda call: call[0])
+
     response = session.get(config.manager_url, timeout = 5, params = {'Action': 'Logoff'})
     response.raise_for_status()
 
     content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
-        '&lt;CiscoIPPhoneMenu&gt;' \
+        '&lt;CiscoIPPhoneDirectory&gt;' \
           '&lt;Title&gt;Parked Calls&lt;/Title&gt;'
 
     for extension, name in calls:
-        content += '&lt;MenuItem&gt;' \
-                     '&lt;Name&gt;' + escape(name) + '&lt;/Name&gt;' \
-                     '&lt;URL&gt;Dial:' + quote_plus(extension) + '&lt;/URL&gt;' \
-                   '&lt;/MenuItem&gt;'
+        content += '&lt;DirectoryEntry&gt;' \
+              '&lt;Name&gt;' + escape(name) + '&lt;/Name&gt;' \
+              '&lt;Telephone&gt;' + quote_plus(extension) + '&lt;/Telephone&gt;' \
+            '&lt;/DirectoryEntry&gt;'
 
     if g.is_79xx:
         content += '&lt;Prompt&gt;Select call&lt;/Prompt&gt;'
@@ -374,7 +406,7 @@ def parked_calls():
             '&lt;URL&gt;' + request.url_root + 'services?name=' + quote_plus(g.device_name) + '&lt;/URL&gt;' \
           '&lt;/SoftKeyItem&gt;' \
           '&lt;SoftKeyItem&gt;' \
-            '&lt;Name&gt;Dial&lt;/Name&gt;' \
+            '&lt;Name&gt;' + ('Dial' if g.is_79xx else 'Call') + '&lt;/Name&gt;' \
             '&lt;Position&gt;' + ('1' if g.is_79xx else '2') + '&lt;/Position&gt;' \
             '&lt;URL&gt;SoftKey:Select&lt;/URL&gt;' \
           '&lt;/SoftKeyItem&gt;' \
@@ -383,7 +415,7 @@ def parked_calls():
             '&lt;Position&gt;' + ('2' if g.is_79xx else '3') + '&lt;/Position&gt;' \
             '&lt;URL&gt;SoftKey:Update&lt;/URL&gt;' \
           '&lt;/SoftKeyItem&gt;' \
-        '&lt;/CiscoIPPhoneMenu&gt;'
+        '&lt;/CiscoIPPhoneDirectory&gt;'
 
     return Response(content, mimetype = 'text/xml'), 200
 
@@ -464,6 +496,7 @@ import problem_report
 
 
 application = Flask(__name__)
+application.config.from_envvar('FLASK_CONFIG', silent = True)
 
 application.register_blueprint(authentication.blueprint)
 application.register_blueprint(services.blueprint)
@@ -482,7 +515,6 @@ def error_handler(error):
 
 
 if __name__ == '__main__':
-    application.config.from_envvar('FLASK_CONFIG', silent = True)
     application.run()</code>
         <br>
         <h2 id="AppConfig">Application Configuration</h2>
