@@ -124,7 +124,7 @@ tls-priorities = "NONE:+VERS-TLS-ALL:+MAC-ALL:+RSA:+AES-128-CBC:+SIGN-ALL:+COMP-
 ...</code>
         <br>
         <h2 id="certhash">certhash</h2>
-        <code class="literal">certhash</code> is used to generate an encoded version of the hash of the VPN server certificate. The hash is then set in one of &lt;<code class="tag">certHash1</code>&gt; ... &lt;<code class="tag">certHash10</code>&gt; in <a href="sepmac-cnf-xml.html#certHash1">SEPMAC.cnf.xml</a><br>
+        <code class="literal">certhash</code> is used to generate a base64 encoded version of the hash of the VPN server certificate. The hash is then set in one of &lt;<code class="tag">certHash1</code>&gt; ... &lt;<code class="tag">certHash10</code>&gt; in <a href="sepmac-cnf-xml.html#certHash1">SEPMAC.cnf.xml</a><br>
         <br>
         <code class="command-line">~/certutils$ ./certhash vpn.pem
 s4U4A2DqXtupmzGuEGm2NCjxW/Y=</code>
