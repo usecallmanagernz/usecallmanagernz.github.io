@@ -1370,15 +1370,13 @@ var prettyPrint;
       ['default-markup', 'htm', 'html', 'mxml', 'xhtml', 'xml', 'xsl']);
   registerLangHandler(
       createSimpleLexer(
+          [[PR_ATTRIBUTE_VALUE, /^(?:\"[^\"]*\"?|\'[^\']*\'?)/, null, '\"\'']],
           [
-           [PR_PLAIN,        /^[\s]+/, null, ' \t\r\n'],
-           [PR_ATTRIBUTE_VALUE, /^(?:\"[^\"]*\"?|\'[^\']*\'?)/, null, '\"\'']
-           ],
-          [
-           [PR_TAG,          /^^<\/?[a-z](?:[\w.:-]*\w)?|\/?>$/i],
-           [PR_ATTRIBUTE_NAME,  /^(?!style[\s=]|on)[a-z](?:[\w:-]*\w)?/i],
-           ['lang-uq.val',   /^=\s*([^>\'\"\s]*(?:[^>\'\"\s\/]|\/(?=\s)))/],
+           [PR_ATTRIBUTE_NAME, /^\s+(?!style[\s=]|on)[a-z](?:[\w:-]*\w)?/i],
+           [PR_PLAIN,        /^[\s]+/],
            [PR_PUNCTUATION,  /^[=<>\/]+/],
+           [PR_TAG,          /^[a-z](?:[\w.:-]*\w)?/i],
+           ['lang-uq.val',   /^=\s*([^>\'\"\s]*(?:[^>\'\"\s\/]|\/(?=\s)))/],
            ['lang-js',       /^on\w+\s*=\s*\"([^\"]+)\"/i],
            ['lang-js',       /^on\w+\s*=\s*\'([^\']+)\'/i],
            ['lang-js',       /^on\w+\s*=\s*([^\"\'>\s]+)/i],
