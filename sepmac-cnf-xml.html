@@ -73,7 +73,91 @@
         <br>
         <code class="prettify lang-xml">&lt;device&gt;
   &lt;fullConfig&gt;true&lt;/fullConfig&gt;
-  &lt;deviceProtocol&gt;SIP&lt;/deviceProtocol&gt;
+  &lt;deviceProtocol&gt;SIP&lt;/deviceProtocol&gt;</code>
+        <br>
+        <h2 id="ipAddresMode">ipAddressMode</h2>
+        IP address family to use on the phone.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>IPv4</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>IPv6</td>
+              <td class="vertical-rule"><b>2</b></td>
+              <td>IPv4 and IPv6</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;ipAddressMode&gt;0&lt;/ipAddressMode&gt;</code>
+        <br>
+        <h2 id="allowAutoConfig">allowAutoConfig</h2>
+        Allow IPv6 auto-configuration.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>false</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>true</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;allowAutoConfig&gt;true&lt;/allowAutoConfig&gt;</code>
+        <br>
+        <h2 id="dadEnable">dadEnable</h2>
+        IPv6 Duplicate IP address Detection.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>false</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>true</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;dadEnable&gt;true&lt;/dadEnable&gt;
+  &lt;redirectEnable&gt;false&lt;/redirectEnable&gt;
+  &lt;echoMultiEnable&gt;false&lt;/echoMultiEnable&gt;</code>
+        <br>
+        <h2 id="ipPreferenceModeControl">ipPreferenceModeControl</h2>
+        Preferred IP address family for signalling.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>IPv4</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>IPv6</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;ipPreferenceModeControl&gt;0&lt;/ipPreferenceModeControl&gt;</code>
+        <br>
+        <h2 id="ipMediaAddressFamilyPreference">ipMediaAddressFamilyPreference</h2>
+        Preferred IP address family for media.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>IPv4</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>IPv6</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;ipMediaAddressFamilyPreference&gt;0&lt;/ipMediaAddressFamilyPreference&gt;
   &lt;devicePool&gt;
     &lt;dateTimeSetting&gt;</code>
         <br>

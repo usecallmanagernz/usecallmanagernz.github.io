@@ -107,7 +107,7 @@
         <br>
         An archive containing the scripts need to generate and hash X509 certificates files can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.1.tar.gz">certutils-2.1.tar.gz</a> (15K) <span class="icon">event</span> 03/06/2020 <span class="icon">security</span> SHA256:53e5965fe90b8a8cb2cac9b947333e509f6018778e7249e417ff02bb24e01cb3.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.2.tar.gz">certutils-2.2.tar.gz</a> (15K) <span class="icon">event</span> 16/08/2020 <span class="icon">security</span> SHA256:e36b8a483a3490eb84d75145d7eba0899857fd72754d815ce44f92d7ed996b23.<br>
         <br>
         <code class="prettify">...
 # Only username and password authentication is supported for Cisco phones.
@@ -119,10 +119,24 @@ auth = "plain[passwd=/etc/ocserv/passwd]"
 server-cert = "/etc/ocserv/vpn.pem"
 server-key = "/etc/ocserv/vpn.pem"
 
-# Force the cipher to AES-128 as the TLS cipher must be the same as the DTLS
-# cipher otherwise the phone will log an "old session cipher not returned"
-# error.
-tls-priorities = "NONE:+VERS-TLS-ALL:+MAC-ALL:+RSA:+AES-128-CBC:+SIGN-ALL:+COMP-ALL:+CTYPE-ALL:%COMPAT"
+# Any unused TCP port can be used.
+tcp-port = 443
+
+# Disable DTLS. To use GCM ciphers DTLS support must be disabled because
+# the phone negotiates a SSLv3 connection which only allows for CBC mode
+# ciphers.
+udp-port = 0
+
+# Prefer 256-bit ciphers, ECDHE-RSA-AES-256-GCM or RSA-AES-256-CBC.
+tls-priorities = "SECURE256:%COMPAT"
+
+# Alternatively[1], prefer 128-bit ciphers, ECDHE-RSA-AES-128-GCM or RSA-AES-128-CBC.
+# tls-priorities = "SECURE128:%COMPAT"
+
+# Alternatively[2], force CBC ciphers so that DTLS can be enabled.
+# udp-port = 443
+# tls-priorities = "NONE:+VERS-TLS-ALL:+RSA:+SHA:+AES-256-CBC:+AES-128-CBC:+SIGN-ALL:+COMP-ALL:+CTYPE-ALL:%COMPAT"
+# dtls-legacy = true
 ...</code>
         <br>
         <h2 id="certhash">certhash</h2>

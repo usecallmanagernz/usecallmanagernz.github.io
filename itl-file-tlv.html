@@ -73,7 +73,7 @@
         <br>
         An archive containing the scripts need to generate X509 certificates, build <code class="literal">.tlv</code> and <code class="literal">.sgn</code> files can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.1.tar.gz">certutils-2.1.tar.gz</a> (15K) <span class="icon">event</span> 03/06/2020 <span class="icon">security</span> SHA256:53e5965fe90b8a8cb2cac9b947333e509f6018778e7249e417ff02bb24e01cb3.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.2.tar.gz">certutils-2.2.tar.gz</a> (15K) <span class="icon">event</span> 16/08/2020 <span class="icon">security</span> SHA256:e36b8a483a3490eb84d75145d7eba0899857fd72754d815ce44f92d7ed996b23.<br>
         <br>
         <h2 id="gencert">gencert</h2>
         <code class="literal">gencert</code> is basic script to generate RSA private keys and sign X509 certificates. If you already have certificates they can be used instead.<br>
@@ -136,6 +136,13 @@
   -r apache1.pem -f https -r apache2.pem -f https -F CTLFile.tlv</code>
         <br>
         <b>4.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>
+        <br>
+        <h2 id="libsrtp">libsrtp</h2>
+        To use secure (encrypted) RTP <code class="literal">libsrtp</code> must be installed. The latest release is available from the <span class="icon">open_in_browser</span> <a href="https://github.com/cisco/libsrtp/releases" target="_blank">libsrtp GitHub repository</a>.<br>
+        <br>
+        <code class="command-line">~/libsrtp-2.3.0$ ./configure --prefix=/usr --enable-openssl
+~/libsrtp-2.3.0$ make shared_library
+~/libsrtp-2.3.0$ sudo make install</code>
         <br>
         <h2 id="sgnfile">sgnfile</h2>
         <code class="literal">sgnfile</code> is used to build or parse <code class="literal">.sgn</code> files which are any non-firmware files the phone downloads during provisioning with a digital signature added. You only need to sign files if the <code class="literal">tftp</code> function has been included in the phone's <code class="literal">.tlv</code> file.<br>

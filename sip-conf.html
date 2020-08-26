@@ -266,9 +266,10 @@ huntgroup_default=no</code>
         <br>
         <code class="prettify lang-astsip">[general]
 ...
-; Only the following ciphers are supported, phone may fail to connect if others are specified,
-; NULL cipher is required for Authenticated mode
-tlscipher=AES128-SHA:AES128-SHA256:AES256-SHA:AES256-SHA256:NULL
+; Only the following ciphers are supported, phone may fail to connect if others are specified
+tlscipher=ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA
+; NULL cipher is only needed if you are using Authenticated mode, otherwise is should not be enabled
+;tlscipher+=:NULL
 
 [insecure-mode](!)
 transport=tcp
@@ -278,10 +279,11 @@ transport=tls
 
 [encrypted-mode](!)
 transport=tls
-; The res_srtp module needs to be loaded. encryption_taglen is set per-model below
-; Note: 7941 and 7961 cannot use encrypted mode because they only support and obsolete SSL version
+; The res_srtp module must be loaded.
 encryption=yes
 encryption_taglen=80</code>
+        <br>
+        <b>Note</b>: To enable RTP encryption <code class="literal">libsrtp</code> must be installed. Additionally to use the newer <code class="literal">AES-128-GCM</code> and <code class="literal">AES-256-GCM</code> ciphers both Asterisk and <code class="literal">libsrtp</code> must have been compiled with support for them enabled. See <a href="itl-file-tlv.html#libsrtp">Device Security</a> for more information.<br>
         <br>
         <h2 id="Device Model Template">Device Model Template</h2>
         Example individual device templates for each Cisco SIP phone model to handle the different features, inherits the settings from the <code class="literal">cisco-usecallmanager</code> template.<br>

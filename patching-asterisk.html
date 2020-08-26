@@ -73,7 +73,7 @@
         <br>
         <b>2.</b> Download the version of Asterisk that matches the version number in the name of the patch.<br>
         <br>
-        <span class="icon">open_in_browser</span> <a href="http://asterisk.org/downloads">Asterisk Downloads</a> (http://asterisk.org/downloads).<br>
+        <span class="icon">open_in_browser</span> <a href="http://asterisk.org/downloads">Asterisk Downloads</a>.<br>
         <br>
         <b>3.</b> Extract the archive and apply the patch.<br>
         <br>
@@ -81,12 +81,12 @@
 ~$ cd asterisk-16.12.0
 ~/asterisk-16.12.0$ patch -p1 &lt; ../cisco-usecallmanager-16.12.0.patch</code>
         <br>
-        <b>4.</b> Configure and build Asterisk.<br>
+        <b>4.</b> Configure the build environment and build the source.<br>
         <br>
-        <code class="command-line">~/asterisk-16.12.0$ ./configure
+        <code class="command-line">~/asterisk-16.12.0$ CFLAGS="-DENABLE_SRTP_AES_GCM -DENABLE_SRTP_AES_256" ./configure
 ~/asterisk-16.12.0$ make</code>
         <br>
-        <b>5.</b> Install the patched version of Asterisk.<br>
+        <b>5.</b> Install the patched version.<br>
         <br>
         <code class="command-line">~/asterisk-16.12.0$ sudo make install</code>
         <br>
