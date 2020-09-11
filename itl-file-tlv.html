@@ -78,17 +78,17 @@
         <h2 id="gencert">gencert</h2>
         <code class="literal">gencert</code> is basic script to generate RSA private keys and sign X509 certificates. If you already have certificates they can be used instead.<br>
         <br>
-        <b>1.</b> Create a CA certificate valid for 20 years. This will function as the <code class="literal">sast</code> (System Administrator Security Token) certificate.<br>
+        <b>1.</b> Create a CA (Certificate Authority) certificate valid for 20 years. This will function as the <code class="literal">sast</code> (System Administrator Security Token) certificate.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -n -C "Certificate Authority" -b 2048 -y 20 -o CA.pem</code>
+        <code class="command-line">~/certutils$ ./gencert -n -C "Certificate Authority" -b 2048 -y 20 -o ca.pem</code>
         <br>
-        <b>2.</b> Create a certificate for Asterisk signed by the CA for 1 year. This will function as the <code class="literal">CCM</code> certificate.<br>
+        <b>2.</b> Create a certificate for Asterisk signed by the CA for 1 year. This will function as the <code class="literal">ccm</code> certificate.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c CA.pem -C Asterisk -b 2048 -y 1 -o asterisk.pem</code>
+        <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "Asterisk" -b 2048 -y 1 -o asterisk.pem</code>
         <br>
-        <b>3.</b> Create a certificate for Apache signed by the CA for 1 year (optional). This will function as an <code class="literal">HTTPS</code> certificate.<br>
+        <b>3.</b> Create a certificate for Apache signed by the CA for 1 year (optional). This will function as an <code class="literal">https</code> certificate.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c CA.pem -C Apache -b 2048 -y 1 -o apache.pem</code>
+        <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "Apache" -b 2048 -y 1 -o apache.pem</code>
         <br>
         <h2 id="tlvfile">tlvfile</h2>
         <code class="literal">tlvfile</code> is used to build or parse <code class="literal">.tlv</code> files. Each certificate has an function specifying where it is used and the same certificate can be included multiple times to provide different functions. Valid functions are listed below.<br>
@@ -122,17 +122,17 @@
         <br>
         <b>1.</b> Create <code class="literal">ITLFile.tlv</code> in the tftpboot provisioning directory, the certificate used to sign the <code class="literal">.tlv</code> file is automatically included as providing the <code class="literal">sast</code> function.<br>
         <br>
-        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -c CA.pem \
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -c ca.pem \
   -r asterisk.pem -f ccm -r apache.pem -f https</code>
         <br>
         <b>2.</b> Optionally, the default <code class="literal">ITLFile.tlv</code> can be overridden using a file name based on the MAC address of the phone, eg: <code class="literal">ITLSEP58971ECC97C1.tlv</code>.<br>
         <br>
-        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLSEP58971ECC97C1.tlv -c CA.pem \
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLSEP58971ECC97C1.tlv -c ca.pem \
   -r asterisk1.pem -f ccm -r asterisk2.pem -f ccm -F ITLFile.tlv</code>
         <br>
         <b>3.</b> Optionally, additional certificates can be included using a file name based on the MAC address of the phone, eg: <code class="literal">CTLSEP58971ECC97C1.tlv</code>.<br>
         <br>
-        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv -c CA.pem \
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv -c ca.pem \
   -r apache1.pem -f https -r apache2.pem -f https -F CTLFile.tlv</code>
         <br>
         <b>4.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>

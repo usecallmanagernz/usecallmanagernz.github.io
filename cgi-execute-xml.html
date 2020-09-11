@@ -165,7 +165,7 @@ def cgi_execute(ip_address, timeout, urls, username, password):
                                  timeout = timeout, auth = auth, data = {'XML': content})
         response.raise_for_status()
 
-    except requests.exceptions.RequestException as error:
+    except requests.RequestException as error:
         raise ProgramError(error)
 
     if response.headers['Content-Type'][0:8] != 'text/xml':

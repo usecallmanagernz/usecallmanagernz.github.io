@@ -69,7 +69,7 @@
       </nav>
       <article>
         <h1>VPN Connection</h1>
-        The <b>7942</b>, <b>7962</b>, <b>7945</b>, <b>7965</b> and <b>7975</b> models and the <b>8800</b>, <b>8900</b> and <b>9900</b> series phones can setup a VPN using the AnyConnect protocol which connects via HTTPS and DTLS. To enable the VPN connection set &lt;<code class="tag">url1</code>&gt; and &lt;<code class="tag">certHash1</code>&gt; in <a href="sepmac-cnf-xml.html#url1">SEPMAC.cnf.xml</a> and then enter your username and password via the settings or applications menu on the phone.<br>
+        The <b>6900</b>, <b>7800</b>, <b>8800</b>, <b>8900</b> and <b>9900</b> series phones can setup a VPN using the AnyConnect protocol which connects via HTTPS and optionally, DTLS. To enable the VPN connection set &lt;<code class="tag">url1</code>&gt; and &lt;<code class="tag">certHash1</code>&gt; in <a href="sepmac-cnf-xml.html#url1">SEPMAC.cnf.xml</a> and then enter your username and password via the settings or applications menu on the phone.<br>
         <br>
         Steps for patching, compiling and installed the modified version of OpenConnect Server are below. You should be familiar with building from source before attempting this.<br>
         <br>
@@ -103,7 +103,7 @@
         <h2 id="ocserv.conf">ocserv.conf</h2>
         The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">gencert</code>.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c CA.pem -C "OpenConnect VPN" -b 2048 -y 1 -o vpn.pem</code>
+        <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "OpenConnect" -b 2048 -y 1 -o vpn.pem</code>
         <br>
         An archive containing the scripts need to generate and hash X509 certificates files can be downloaded from the URL below.<br>
         <br>

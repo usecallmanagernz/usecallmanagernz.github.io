@@ -107,12 +107,12 @@
 &lt;/Virtualhost&gt;</code>
         <br>
         <h2>XML Services</h2>
-        Example configuration for a WSGI application providing phone XML services. There are two &lt;<code class="tag">VirtualHost</code>&gt; below, one for services using HTTP on <code class="literal">6973</code> and the other for secure services using HTTPS on <code class="literal">6974</code>. Any ports can be used.<br>
+        Example configuration for a WSGI application providing phone XML services. There are two &lt;<code class="tag">VirtualHost</code>&gt; below, one for services using HTTP on <code class="literal">6972</code> and the other for secure services using HTTPS on <code class="literal">6973</code>. Any ports can be used.<br>
         <br>
         See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
         <code class="prettify lang-apache"># For &lt;servicesURL&gt;, &lt;directoryURL&gt; and &lt;authenticationURL&gt;
-&lt;Virtualhost *:6973&gt;
+&lt;Virtualhost *:6972&gt;
   DocumentRoot /var/www/services
 
   &lt;Directory /var/www/services&gt;
@@ -127,7 +127,7 @@
 &lt;/Virtualhost&gt;
 
 # For &lt;secureServicesURL&gt;, &lt;secureDirectoryURL&gt; and &lt;secureAuthenticationURL&gt;
-&lt;Virtualhost *:6974&gt;
+&lt;Virtualhost *:6973&gt;
   DocumentRoot /var/www/services
 
   &lt;Directory /var/www/services&gt;
