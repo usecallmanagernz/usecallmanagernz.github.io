@@ -77,10 +77,11 @@
         <br>
         <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/tftpboot/archive/v1.0.tar.gz">tftpboot-1.0.tar.gz</a> (122K) <span class="icon">event</span> 06/05/2020 <span class="icon">security</span> SHA256:3fee40026d8b730ed9dad21cb39102c0c7416d7b0e68b0917230ecf5e4af7cf7.<br>
         <br>
-        <code class="prettify lang-apache">&lt;Virtualhost *:6970&gt;
+        <code class="prettify lang-apache">Listen 6970
+  &lt;Virtualhost *:6970&gt;
   DocumentRoot /var/lib/tftpboot
 
-  &lt;Directory /var/www/tftpboot&gt;
+  &lt;Directory /var/lib/tftpboot&gt;
     Options +FollowSymlinks
     Require all granted
   &lt;/Directory&gt;
