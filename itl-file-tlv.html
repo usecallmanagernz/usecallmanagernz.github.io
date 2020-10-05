@@ -73,7 +73,7 @@
         <br>
         An archive containing the scripts need to generate X509 certificates, build <code class="literal">.tlv</code> and <code class="literal">.sgn</code> files can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.2.tar.gz">certutils-2.2.tar.gz</a> (15K) <span class="icon">event</span> 16/08/2020 <span class="icon">security</span> SHA256:e36b8a483a3490eb84d75145d7eba0899857fd72754d815ce44f92d7ed996b23.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.3.tar.gz">certutils-2.3.tar.gz</a> (16K) <span class="icon">event</span> 05/10/2020 <span class="icon">security</span> SHA256:fb878bd06ebc2d39bb0cf64434a7af405585c4fd78581764e96416386893776d.<br>
         <br>
         <h2 id="gencert">gencert</h2>
         <code class="literal">gencert</code> is basic script to generate RSA private keys and sign X509 certificates. If you already have certificates they can be used instead.<br>
@@ -82,11 +82,16 @@
         <br>
         <code class="command-line">~/certutils$ ./gencert -n -C "Certificate Authority" -b 2048 -y 20 -o ca.pem</code>
         <br>
-        <b>2.</b> Create a certificate for Asterisk signed by the CA for 1 year. This will function as the <code class="literal">ccm</code> certificate.<br>
+        <b>2.</b> Create a certificate for Asterisk signed by the CA for 1 year. This will function as the <code class="literal">ccm</code> and <code class="literal">tftp</code> certificate.<br>
         <br>
         <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "Asterisk" -b 2048 -y 1 -o asterisk.pem</code>
         <br>
-        <b>3.</b> Create a certificate for Apache signed by the CA for 1 year (optional). This will function as an <code class="literal">https</code> certificate.<br>
+
+        <b>3.</b> Create a certificate for Apache with an EC key signed by the CA for 1 year (optional). This will function as an <code class="literal">tftp</code> certificate for HTTPS provisioning.<br>
+        <br>
+        <code class="command-line">~/certutils$ ./gencert -c ca.pem -E secp384r1 -C "Apache-EC" -b 2048 -y 1 -o apache-EC.pem</code>
+        <br>
+        <b>4.</b> Create a certificate for Apache signed by the CA for 1 year (optional). This will function as an <code class="literal">https</code> certificate.<br>
         <br>
         <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "Apache" -b 2048 -y 1 -o apache.pem</code>
         <br>
@@ -105,7 +110,7 @@
             </tr>
             <tr>
               <td><b>tftp</b></td>
-              <td>Signs and verifies provisioning files downloaded via HTTP or TFTP</td>
+              <td>Signs and verifies provisioning files downloaded via HTTP, HTTPS or TFTP</td>
             </tr>
             <tr>
               <td><b>ccm+tftp</b></td>
@@ -120,7 +125,7 @@
         <br>
         <b>Note</b>: Once a phone has installed a <code class="literal">.tlv</code> new versions of that file can only be signed by a previously known certificate with the <code class="literal">sast</code> function. A <code class="literal">.tlv</code> can have a maximum of <code class="literal">2</code> certificates with the <code class="literal">sast</code> function.<br>
         <br>
-        <b>1.</b> Create <code class="literal">ITLFile.tlv</code> in the tftpboot provisioning directory, the certificate used to sign the <code class="literal">.tlv</code> file is automatically included as providing the <code class="literal">sast</code> function.<br>
+        <b>1.</b> Create an <code class="literal">ITLFile.tlv</code> in the tftpboot provisioning directory, the certificate used to sign the <code class="literal">.tlv</code> file is automatically included as providing the <code class="literal">sast</code> function.<br>
         <br>
         <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -c ca.pem \
   -r asterisk.pem -f ccm -r apache.pem -f https</code>
@@ -135,7 +140,12 @@
         <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv -c ca.pem \
   -r apache1.pem -f https -r apache2.pem -f https -F CTLFile.tlv</code>
         <br>
-        <b>4.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>
+        <b>4.</b> Optionally, use HTTPS provisioning for SEPMAC.cnf.xml and signing for the other configuration files. <b>Note</b>: the certificate used to verify the HTTPS connection must use an EC (Elliptic Curve) key.<br>
+        <br>
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -v 1.1 -c ca.pem \
+  -r asterisk.pem -f tftp -r apache-EC.pem -f tftp</code>
+        <br>
+        <b>5.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>
         <br>
         <h2 id="libsrtp">libsrtp</h2>
         To use secure (encrypted) RTP <code class="literal">libsrtp</code> must be installed. The latest release is available from the <span class="icon">open_in_browser</span> <a href="https://github.com/cisco/libsrtp/releases" target="_blank">libsrtp GitHub repository</a>.<br>

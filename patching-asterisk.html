@@ -66,8 +66,8 @@
         <br>
         <b>1.</b> Download a copy of the patch below, the patch is also available from the Asterisk issue tracker.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-16.12.0.patch">cisco-usecallmanager-16.12.0.patch</a> (347K) <span class="icon">event</span> 28/07/2020 <span class="icon">security</span> SHA256:51e9e977de240ddaa1b709a70917014cdf227b86abeba8757e10569eed6d63f0.<br>
-        <span class="icon">file_download</span> <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-13.35.0.patch">cisco-usecallmanager-13.35.0.patch</a> (353K) <span class="icon">event</span> 28/07/2020 <span class="icon">security</span> SHA256:15ce8a79a197b52c4c6ed5473a7cb73c3b748a8be73088d1a63fb77e0629014f.<br>
+        <span class="icon">file_download</span> <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-16.13.0.patch">cisco-usecallmanager-16.13.0.patch</a> (320K) <span class="icon">event</span> 05/10/2020 <span class="icon">security</span> SHA256:e30ae3eecb42cf2f78e89dcdb81ddd986ece41ed2913eeaaac39e5db9f61d55b.<br>
+        <span class="icon">file_download</span> <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-13.36.0.patch">cisco-usecallmanager-13.36.0.patch</a> (325K) <span class="icon">event</span> 05/10/2020 <span class="icon">security</span> SHA256:292fdfad5e1a41629bfc223d398d4e39cfbcda3976f9b68f7ccdc890f41705d9.<br>
         <br>
         Digium/Asterisk JIRA issue <span class="icon">open_in_browser</span> <a href="https://issues.asterisk.org/jira/browse/ASTERISK-13145">ASTERISK-13145</a>.<br>
         <br>
@@ -77,22 +77,22 @@
         <br>
         <b>3.</b> Extract the archive and apply the patch.<br>
         <br>
-        <code class="command-line">~$ tar -zxvf asterisk-16.12.0.tar.gz
-~$ cd asterisk-16.12.0
-~/asterisk-16.12.0$ patch -p1 &lt; ../cisco-usecallmanager-16.12.0.patch</code>
+        <code class="command-line">~$ tar -zxvf asterisk-16.13.0.tar.gz
+~$ cd asterisk-16.13.0
+~/asterisk-16.13.0$ patch -p1 &lt; ../cisco-usecallmanager-16.13.0.patch</code>
         <br>
         <b>4.</b> Configure the build environment and build the source.<br>
         <br>
-        <code class="command-line">~/asterisk-16.12.0$ CFLAGS="-DENABLE_SRTP_AES_GCM -DENABLE_SRTP_AES_256" ./configure
-~/asterisk-16.12.0$ make</code>
+        <code class="command-line">~/asterisk-16.13.0$ CFLAGS="-DENABLE_SRTP_AES_GCM -DENABLE_SRTP_AES_256" ./configure
+~/asterisk-16.13.0$ make</code>
         <br>
         <b>5.</b> Install the patched version.<br>
         <br>
-        <code class="command-line">~/asterisk-16.12.0$ sudo make install</code>
+        <code class="command-line">~/asterisk-16.13.0$ sudo make install</code>
         <br>
         <b>6.</b> Optionally install the sample configuration files. <b>Note</b>: sample sip.conf, sip_notify.conf and res_parking.conf contain patch-specific features so you will need to do this at least once.<br>
         <br>
-        <code class="command-line">~/asterisk-16.12.0$ sudo make samples</code>
+        <code class="command-line">~/asterisk-16.13.0$ sudo make samples</code>
       </article>
     </main>
     <footer></footer>

@@ -245,7 +245,7 @@ dndbusy=yes
 huntgroup_default=no</code>
         <br>
         <h2 id="Transport Layer Security">Transport Layer Security</h2>
-        Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>.<br>
+        Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>. The SSL certificate used by Asterisk must be included in <code class="literal">ITLFile.tlv</code> wih the <code class="literal">ccm</code> function. See <a href="itl-file-tlv.html#tlvfile">Device Security</a><br>
         <br>
         <table>
           <tbody>
@@ -270,6 +270,7 @@ huntgroup_default=no</code>
 tlscipher=ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA
 ; NULL cipher is only needed if you are using Authenticated mode, otherwise is should not be enabled
 ;tlscipher+=:NULL
+...
 
 [insecure-mode](!)
 transport=tcp

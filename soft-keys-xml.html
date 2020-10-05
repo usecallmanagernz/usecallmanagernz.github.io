@@ -71,9 +71,7 @@
         <h1>Soft Keys</h1>
         Soft keys control what features are available on the row of keys below the phone's screen based on the current call state. File is specified by &lt;<code class="tag">softKeyFile</code>&gt; in <a href="sepmac-cnf-xml.html#softKeyFile">SEPMAC.cnf.xml</a>. <b>Note</b>: Some phone models do not support certain soft keys and those features may instead be available as <a href="line-keys-xml.html">Line Keys</a>.<br>
         <br>
-        The <b>8961</b>, <b>9951</b> and <b>9971</b> models use the <a href="feature-policy-xml.html">Feature Policy</a> to determine what features are available instead unless &lt;<code class="tag">softKeyControl</code>&gt; is enabled.<br>
-        <br>
-        <b>Note</b>: For models that have dedicated <code class="literal">Transfer</code>, <code class="literal">Conference</code>, <code class="literal">Hold</code> and <code class="literal">EndCall</code> keys those features are also controlled using soft key definitions.<br>
+        The <b>8961</b>, <b>9951</b> and <b>9971</b> models use the <a href="feature-policy-xml.html">Feature Policy</a> to determine what features are available instead unless &lt;<code class="tag">softKeyControl</code>&gt; is enabled. <b>Note</b>: For models that have dedicated <code class="literal">Transfer</code>, <code class="literal">Conference</code>, <code class="literal">Hold</code> and <code class="literal">EndCall</code> keys those features are also controlled using soft key definitions.<br>
         <br>
         <code class="prettify lang-xml">&lt;softKeyCfg&gt;
   &lt;versionStamp&gt;a92f70b3-6320-46f1-bf5e-bc9f59b66daf&lt;/versionStamp&gt;
@@ -333,11 +331,11 @@
   &lt;/typeSoftKey&gt;
   &lt;softKeySets&gt;</code>
         <br>
-        <h2 id=&quot;softKeySet&quot;>softKeySet</h2>
+        <h2 id="softKeySet">softKeySet</h2>
         Specify what soft keys to display in a call state. There is a maximum of <code class="literal">16</code> soft keys for each state.<br>
         <br>
-        <h2 id=&quot;On Hook&quot;>On Hook</h2>
-        Valid soft keys are <span class="literal">Redial</span>, <span class="literal">NewCall</span> (mandatory), <span class="literal">DND</span>, <span class="literal">CFwdALL</span>, <span class="literal">HLog</span>, <span class="literal">PickUp</span>, <span class="literal">GPickUp</span>, <span class="literal">OPickUp</span>, <span class="literal">CallBack</span>, <span class="literal">MeetMe</span>, <span class="literal">QRT</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="On Hook">On Hook</h2>
+        Valid soft keys are <code class="literal">Redial</code>, <code class="literal">NewCall</code> (mandatory), <code class="literal">DND</code>, <code class="literal">CFwdALL</code>, <code class="literal">HLog</code>, <code class="literal">PickUp</code>, <code class="literal">GPickUp</code>, <code class="literal">OPickUp</code>, <code class="literal">CallBack</code>, <code class="literal">MeetMe</code>, <code class="literal">QRT</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;On Hook&quot;&gt;
       &lt;softKey keyID=&quot;Redial&quot; /&gt;
@@ -346,8 +344,8 @@
       &lt;softKey keyID=&quot;CFwdAll&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Off Hook&quot;>Off Hook</h2>
-        Valid soft keys are <span class="literal">Redial</span>, <span class="literal">EndCall</span>, <span class="literal">DND</span>, <span class="literal">CFwdALL</span>, <span class="literal">HLog</span>, <span class="literal">PickUp</span>, <span class="literal">GPickUp</span>, <span class="literal">OPickUp</span>, <span class="literal">AbbrDial</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Off Hook">Off Hook</h2>
+        Valid soft keys are <code class="literal">Redial</code>, <code class="literal">EndCall</code>, <code class="literal">DND</code>, <code class="literal">CFwdALL</code>, <code class="literal">HLog</code>, <code class="literal">PickUp</code>, <code class="literal">GPickUp</code>, <code class="literal">OPickUp</code>, <code class="literal">AbbrDial</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Off Hook&quot;&gt;
       &lt;softKey keyID=&quot;Redial&quot; /&gt;
@@ -355,32 +353,32 @@
       &lt;softKey keyID=&quot;PickUp&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Off Hook With Feature&quot;>Off Hook With Feature</h2>
-        Valid soft keys are <span class="literal">Redial</span>, <span class="literal">EndCall</span>, <span class="literal">DND</span>, <span class="literal">AbbrDial</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Off Hook With Feature">Off Hook With Feature</h2>
+        Valid soft keys are <code class="literal">Redial</code>, <code class="literal">EndCall</code>, <code class="literal">DND</code>, <code class="literal">AbbrDial</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Off Hook With Feature&quot;&gt;
       &lt;softKey keyID=&quot;Redial&quot; /&gt;
       &lt;softKey keyID=&quot;EndCall&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Digits After First&quot;>Digits After First</h2>
-        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">&lt;&lt;</span> (mandatory), <span class="literal">DND</span>, <span class="literal">AbbrDial</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Digits After First">Digits After First</h2>
+        Valid soft keys are <code class="literal">EndCall</code>, <code class="literal">&lt;&lt;</code> (mandatory), <code class="literal">DND</code>, <code class="literal">AbbrDial</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Digits After First&quot;&gt;
       &lt;softKey keyid=&quot;&amp;lt;&amp;lt;&quot; /&gt;
       &lt;softKey keyID=&quot;EndCall&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Ring Out&quot;>Ring Out</h2>
-        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">DND</span>, <span class="literal">CallBack</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Ring Out">Ring Out</h2>
+        Valid soft keys are <code class="literal">EndCall</code>, <code class="literal">DND</code>, <code class="literal">CallBack</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Ring Out&quot;&gt;
       &lt;softKey keyID=&quot;Undefined&quot; /&gt;
       &lt;softKey keyID=&quot;EndCall&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Connected&quot;>Connected</h2>
-        Valid soft keys are <span class="literal">Hold</span>, <span class="literal">EndCall</span> (mandatory), <span class="literal">Transfer</span>, <span class="literal">Park</span>, <span class="literal">Confrn</span>, <span class="literal">ConfList</span>, <span class="literal">RmLstC</span>, <span class="literal">Record</span>, <span class="literal">iDivert</span>, <span class="literal">DND</span>, <span class="literal">HLog</span>, <span class="literal">QRT</span>, <span class="literal">MCID</span>, <span class="literal">Select</span>, <span class="literal">Join</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Connected">Connected</h2>
+        Valid soft keys are <code class="literal">Hold</code>, <code class="literal">EndCall</code> (mandatory), <code class="literal">Transfer</code>, <code class="literal">Park</code>, <code class="literal">Confrn</code>, <code class="literal">ConfList</code>, <code class="literal">RmLstC</code>, <code class="literal">Record</code>, <code class="literal">iDivert</code>, <code class="literal">DND</code>, <code class="literal">HLog</code>, <code class="literal">QRT</code>, <code class="literal">MCID</code>, <code class="literal">Select</code>, <code class="literal">Join</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected&quot;&gt;
       &lt;softKey keyID=&quot;Hold&quot; /&gt;
@@ -391,16 +389,16 @@
       &lt;softKey keyID=&quot;Park&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Connected No Feature&quot;>Connected No Feature</h2>
-        Valid soft keys are <span class="literal">EndCall</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Connected No Feature">Connected No Feature</h2>
+        Valid soft keys are <code class="literal">EndCall</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected No Feature&quot;&gt;
       &lt;softKey keyID=&quot;Undefined&quot; /&gt;
       &lt;softKey keyID=&quot;EndCall&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Connected Transfer&quot;>Connected Transfer</h2>
-        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">Transfer</span> (mandatory), <span class="literal">CallBack</span>, <span class="literal">QRT</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Connected Transfer">Connected Transfer</h2>
+        Valid soft keys are <code class="literal">EndCall</code>, <code class="literal">Transfer</code> (mandatory), <code class="literal">CallBack</code>, <code class="literal">QRT</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected Transfer&quot;&gt;
       &lt;softKey keyID=&quot;Undefined&quot; /&gt;
@@ -408,8 +406,8 @@
       &lt;softKey keyID=&quot;Transfer&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Connected Conference&quot;>Connected Conference</h2>
-        Valid soft keys are <span class="literal">EndCall</span>, <span class="literal">Confrn</span> (mandatory), <span class="literal">DND</span>, <span class="literal">QRT</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Connected Conference">Connected Conference</h2>
+        Valid soft keys are <code class="literal">EndCall</code>, <code class="literal">Confrn</code> (mandatory), <code class="literal">DND</code>, <code class="literal">QRT</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Connected Conference&quot;&gt;
       &lt;softKey keyID=&quot;Undefined&quot; /&gt;
@@ -417,16 +415,16 @@
       &lt;softKey keyID=&quot;Confrn&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;On Hold&quot;>On Hold</h2>
-        Valid soft keys are <span class="literal">Resume</span> (mandatory), <span class="literal">NewCall</span>, <span class="literal">iDivert</span>, <span class="literal">DND</span>, <span class="literal">Select</span>, <span class="literal">Join</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="On Hold">On Hold</h2>
+        Valid soft keys are <code class="literal">Resume</code> (mandatory), <code class="literal">NewCall</code>, <code class="literal">iDivert</code>, <code class="literal">DND</code>, <code class="literal">Select</code>, <code class="literal">Join</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;On Hold&quot;&gt;
       &lt;softKey keyID=&quot;Resume&quot; /&gt;
       &lt;softKey keyID=&quot;NewCall&quot; /&gt;
     &lt;/softKeySet&gt;</code>
         <br>
-        <h2 id=&quot;Ring In&quot;>Ring In</h2>
-        Valid soft keys are <span class="literal">Answer</span>, <span class="literal">iDivert</span>, <span class="literal">DND</span> and <span class="literal">Undefined</span>.<br>
+        <h2 id="Ring In">Ring In</h2>
+        Valid soft keys are <code class="literal">Answer</code>, <code class="literal">iDivert</code>, <code class="literal">DND</code> and <code class="literal">Undefined</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeySet id=&quot;Ring In&quot;&gt;
       &lt;softKey keyID=&quot;Answer&quot; /&gt;
