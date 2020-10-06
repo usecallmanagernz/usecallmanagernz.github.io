@@ -89,7 +89,7 @@
 
         <b>3.</b> Create a certificate for Apache with an EC key signed by the CA for 1 year (optional). This will function as an <code class="literal">tftp</code> certificate for HTTPS provisioning.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c ca.pem -E secp384r1 -C "Apache-EC" -b 2048 -y 1 -o apache-EC.pem</code>
+        <code class="command-line">~/certutils$ ./gencert -c ca.pem -E secp384r1 -C "Apache-EC" -y 1 -o apache-EC.pem</code>
         <br>
         <b>4.</b> Create a certificate for Apache signed by the CA for 1 year (optional). This will function as an <code class="literal">https</code> certificate.<br>
         <br>
