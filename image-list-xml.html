@@ -69,7 +69,7 @@
       </nav>
       <article>
         <h1>Background Images</h1>
-        The list of available background images is specified in a file called <code class="literal">Desktops/</code><code class="keyword"><i>width</i></code><code class="literal">x</code><code class="keyword"><i>height</i></code><code class="literal">x</code><code class="keyword"><i>depth</i></code><code class="literal">/List.xml</code> which the phone downloads from the provisioning server. The width, height and depth are determined by the capabilities of the phone's display. A maximum of <code class="literal">50</code> &lt;<code class="tag">ImageItem</code>&gt; entries can be specified.<br>
+        The list of available background images is specified in a file called <code class="literal">Desktops/<i>WIDTH</i>x<i>HEIGHT</i>x<i>DEPTH</i>/List.xml</code> which the phone downloads from the provisioning server. The width, height and depth are determined by the capabilities of the phone's display. A maximum of <code class="literal">50</code> &lt;<code class="tag">ImageItem</code>&gt; entries can be specified.<br>
         <br>
         <code class="prettify lang-xml">&lt;CiscoIPPhoneImageList&gt;</code>
         <br>
@@ -80,7 +80,7 @@
           <tbody>
             <tr>
               <td><b>Image</b></td>
-              <td>The small image to display when previewing the list of available background images.</td>
+              <td>The preview image to display when previewing the list of available background images.</td>
             </tr>
             <tr>
               <td><b>URL</b></td>
@@ -89,7 +89,7 @@
           </tbody>
         </table>
         <br>
-        <code class="prettify lang-xml">  &lt;ImageItem Image=&quot;TFTP:Desktops/320x212x16/Logo_Preview.png&quot; URL=&quot;TFTP:Desktops/320x212x16/Logo.png&quot; /&gt;
+        <code class="prettify lang-xml">  &lt;ImageItem Image=&quot;TFTP:Desktops/<i>SIZE</i>/<i>PREVIEW.png</i>&quot; URL=&quot;TFTP:Desktops/<i>SIZE</i>/<i>IMAGE.png</i>&quot; /&gt;
   ...
 &lt;/CiscoIPPhoneImageList&gt;</code>
         <br>

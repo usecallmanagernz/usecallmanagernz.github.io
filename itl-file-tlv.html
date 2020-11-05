@@ -73,21 +73,21 @@
         <br>
         An archive containing the scripts need to generate X509 certificates, build <code class="literal">.tlv</code> and <code class="literal">.sgn</code> files can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.3.tar.gz">certutils-2.3.tar.gz</a> (16K) <span class="icon">event</span> 05/10/2020 <span class="icon">security</span> SHA256:fb878bd06ebc2d39bb0cf64434a7af405585c4fd78581764e96416386893776d.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.4.tar.gz">certutils-2.4.tar.gz</a> (16K) <span class="icon">event</span> 05/11/2020 <span class="icon">security</span> SHA256:205aa54ef00752bf3245276b7104a512f6deb5fe09948aaaa309ce8db2dc5d9e.<br>
         <br>
         <h2 id="gencert">gencert</h2>
         <code class="literal">gencert</code> is basic script to generate RSA private keys and sign X509 certificates. If you already have certificates they can be used instead.<br>
         <br>
         <b>1.</b> Create a CA (Certificate Authority) certificate valid for 20 years. This will function as the <code class="literal">sast</code> (System Administrator Security Token) certificate.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -n -C "Certificate Authority" -b 2048 -y 20 -o ca.pem</code>
+        <code class="command-line">~/certutils$ ./gencert -r -C "Certificate Authority" -b 2048 -y 20 -o ca.pem</code>
         <br>
         <b>2.</b> Create a certificate for Asterisk signed by the CA for 1 year. This will function as the <code class="literal">ccm</code> and <code class="literal">tftp</code> certificate.<br>
         <br>
         <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "Asterisk" -b 2048 -y 1 -o asterisk.pem</code>
         <br>
 
-        <b>3.</b> Create a certificate for Apache with an EC key signed by the CA for 1 year (optional). This will function as an <code class="literal">tftp</code> certificate for HTTPS provisioning.<br>
+        <b>3.</b> Create a certificate for Apache with an EC (elliptic curve) key signed by the CA for 1 year (optional). This will function as an <code class="literal">tftp</code> certificate for HTTPS provisioning.<br>
         <br>
         <code class="command-line">~/certutils$ ./gencert -c ca.pem -E secp384r1 -C "Apache-EC" -y 1 -o apache-EC.pem</code>
         <br>

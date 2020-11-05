@@ -95,7 +95,7 @@
   &lt;featureID&gt;2&lt;/featureID&gt;
   &lt;featureLabel&gt;<i>LABEL</i>&lt;/featureLabel&gt;
   &lt;speedDialNumber&gt;<i>NUMBER</i>&lt;/speedDialNumber&gt;
-  &lt;speedDialIndex&gt;<i>NUMBER</i>&lt;/speedDialIndex&gt;
+  &lt;speedDialIndex&gt;<i>INDEX</i>&lt;/speedDialIndex&gt;
 &lt;/line&gt;</code>
         <br>
         <h2 id="Hold">Hold</h2>
@@ -193,15 +193,15 @@
 &lt;/line&gt;</code>
         <br>
         <h2 id="BLF Directed Call Park">BLF Directed Call Park</h2>
-        Speed Dial that monitors the state of a parking extension, only displays idle and busy device states. &lt;<code class="tag">speedDialNumber</code>&gt; contains the number dialed and &lt;<code class="tag">contact</code>&gt; contains the extension subscribed to. See above for additional subscription requirements.<br>
+        Speed Dial that monitors the state of a parking extension, only displays idle and busy device states. &lt;<code class="tag">speedDialNumber</code>&gt; contains the number dialed and the optional &lt;<code class="tag">contact</code>&gt; contains the extension subscribed to. See above for additional subscription requirements.<br>
         <br>
-        When idle, the current call will be blind-transferred to <code class="literal">x-cisco-serviceuri-dpark-XXX</code> where <code class="literal">XXX</code> is replaced by the number in &lt;<code class="tag">speedDialNumber</code>&gt;. Otherwise when the in-use a call will be made to the number in &lt;<code class="tag">speedDialNumber</code>&gt; optionally prefixed by &lt;<code class="tag">retrievalPrefix</code>&gt;. See <a href="extensions-conf.html#dpark">Dialplan Extensions</a> for an example.<br>
+        When idle, the current call will be blind-transferred to <code class="literal">x-cisco-serviceuri-dpark-XXX</code> where <code class="literal">XXX</code> is replaced by the number in &lt;<code class="tag">speedDialNumber</code>&gt;. Otherwise if the parking extension is in-use a call will be made to the number in &lt;<code class="tag">speedDialNumber</code>&gt; optionally prefixed by &lt;<code class="tag">retrievalPrefix</code>&gt;. See <a href="extensions-conf.html#dpark">Dialplan Extensions</a> for an example.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
   &lt;featureID&gt;22&lt;/featureID&gt;
   &lt;featureLabel&gt;<i>LABEL</i>&lt;/featureLabel&gt;
   &lt;speedDialNumber&gt;<i>NUMBER</i>&lt;/speedDialNumber&gt;
-  &lt;contact&gt;NUMBER&lt;/contact&gt;
+  &lt;contact /&gt;
   &lt;retrievalPrefix /&gt;
 &lt;/line&gt;</code>
         <br>
@@ -371,7 +371,7 @@
 &lt;/line&gt;</code>
         <br>
         <h2 id="Messages">Messages</h2>
-        Same as the <code class="literal">messages</code> button, needed for phone models like the <b>7931</b> that do not have a dedicated key for this feature.. <b>7900</b> series only.<br>
+        Same as the <code class="literal">messages</code> button, needed for phone models like the <b>7931</b> that do not have a dedicated key for this feature. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
   &lt;featureID&gt;194&lt;/featureID&gt;
@@ -379,7 +379,7 @@
 &lt;/line&gt;</code>
         <br>
         <h2 id="Directories">Directories</h2>
-        Same as the <code class="literal">directories</code> button, needed for phone models like the <b>7931</b> that do not have a dedicated key for this feature.. <b>7900</b> series only.<br>
+        Same as the <code class="literal">directories</code> button, needed for phone models like the <b>7931</b> that do not have a dedicated key for this feature. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
   &lt;featureID&gt;195&lt;/featureID&gt;

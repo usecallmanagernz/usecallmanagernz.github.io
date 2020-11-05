@@ -75,7 +75,7 @@
         <h2>Provisioning</h2>
         The phone will use HTTP to download files from port <code class="literal">6970</code> on the server specified as the <code class="keyword">tftp-server-name</code> in the DHCP response first before falling-back to TFTP on failure. A sample tftpboot directory containing templates for <code class="literal">SEPMAC.cnf.xml</code>, <code class="literal">Softkeys.xml</code>, <code class="literal">FeaturePolicy.xml</code>, <code class="literal">DialTemplate.xml</code>, <code class="literal">AppDialRules.xml</code>, background images and ring-tones can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/tftpboot/archive/v1.0.tar.gz">tftpboot-1.0.tar.gz</a> (122K) <span class="icon">event</span> 06/05/2020 <span class="icon">security</span> SHA256:3fee40026d8b730ed9dad21cb39102c0c7416d7b0e68b0917230ecf5e4af7cf7.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/tftpboot/archive/v1.1.tar.gz">tftpboot-1.1.tar.gz</a> (122K) <span class="icon">event</span> 16/08/2020 <span class="icon">security</span> SHA256:51e0524a74bdf135242c5555dd3f7bf056eae4f9f002139c29ed3dca324f5129.<br>
         <br>
         <code class="prettify lang-apache">Listen 6970
   &lt;Virtualhost *:6970&gt;
@@ -88,9 +88,9 @@
 &lt;/Virtualhost&gt;</code>
         <br>
         <h2>Secure Provisioning</h2>
-        If the <code class="literal">ITLFile.tlv</code> has a version of <code class="literal">1.1</code> the phone will use HTTPS to download <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a> from port <code class="literal">6971</code> on the server before falling back to HTTP on failure. The SSL certificate used by server must use an EC (Elliptic Curve) key and be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function. See <a href="itl-file.tlv#tlvfile">Device Security</a> for more information.<br>
+        If the <code class="literal">ITLFile.tlv</code> has a version of <code class="literal">1.1</code> the phone will use HTTPS to download <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a> from port <code class="literal">6971</code> on the server before falling back to HTTP on failure. The SSL certificate used by server must use an EC (Elliptic Curve) key and be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function.<br>
         <br>
-        The remaining provisioning files like soft keys, dial template and ring-tones will be downloaded on port <code class="literal">6970</code> and must be signed with a certificate that uses an RSA key an be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function.<br>
+        While the phone requests its configuration file with a <code class="literal">.sgn</code> extension the response must contain an unsigned file. All remaining provisioning files like soft keys, dial template and ring-tones will be downloaded on port <code class="literal">6970</code> and must be signed with a certificate that uses an RSA key an be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function. See <a href="itl-file.tlv#tlvfile">Device Security</a> for more information.<br>
         <br>
         <code class="prettify lang-apache">&lt;Virtualhost *:6971&gt;
   DocumentRoot /var/lib/tftpboot

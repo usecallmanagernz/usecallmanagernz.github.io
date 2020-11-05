@@ -71,7 +71,7 @@
         <h1>Phone Services</h1>
         The phone can make HTTP requests to a remote web-server to display text, menus and images as well as check whether a <a href="cgi-execute-xml.html">CGI Execute</a> requests will be allowed. URLs assigned to fixed-keys (eg: services, directories) and line keys are defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. An archive containing a sample WSGI application can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/services/archive/v2.1.tar.gz">services-2.1.tar.gz</a> (11K) <span class="icon">event</span> 28/07/2020 <span class="icon">security</span> SHA256:7b80ca5053c5fc64ca67df2021818a0305f64d39a586a11a28151ad3e02a8edd.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/services/archive/v2.2.tar.gz">services-2.2.tar.gz</a> (11K) <span class="icon">event</span> 05/11/2020 <span class="icon">security</span> SHA256:b75a24037a1a69298a8d64edcb2d17c51c45bb4f3aa34375cdbc0948d7e70355.<br>
         <br>
         See <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
         <br>
@@ -107,7 +107,7 @@ def before_request():
     device_name = request.args.get('devicename', '')
 
     # check that the device name is valid
-    if not re.search(r'(?x) SEP [0-9A-F]{12} $', device_name) or \
+    if not re.search(r'(?x) ^ SEP [0-9A-F]{12} $', device_name) or \
        not os.path.exists(f'{config.tftpboot_dir}/{device_name}.cnf.xml'):
         return Response('ERROR'), 403
 
@@ -470,7 +470,7 @@ def problem_report():
 def before_request():
     device_name = request.form.get('devicename', '')
 
-    if not re.search(r'(?x) SEP [0-9A-F]{12} $', device_name) or \
+    if not re.search(r'(?x) ^ SEP [0-9A-F]{12} $', device_name) or \
        not os.path.exists(f'{config.tftpboot_dir}/{device_name}.cnf.xml'):
         return Response('Invalid device', mimetype = 'text/plain'), 403
 
