@@ -1074,7 +1074,12 @@
         <h2 id="loadInformation">loadInformation</h2>
         Name of the firmware load file without the <code class="literal">.loads</code> file extension.<br>
         <br>
-        <code class="prettify lang-xml">  &lt;loadInformation&gt;<i>LOADS FILE</i>&lt;/loadInformation&gt;
+        <code class="prettify lang-xml">  &lt;loadInformation&gt;<i>LOADS FILE</i>&lt;/loadInformation&gt;</code>
+        <br>
+        <h2 id="inactiveLoadInformation">inactiveLoadInformation</h2>
+        Name of the inactive firmware load file without the <code class="literal">.loads</code> file extension. Allows the phone to revert to using this load without having to re-download firmware, <b>8800</b>, <b>8900</b> and <b>9900</b> series only.<br>
+        <br>
+        <code class="prettify lang-xml">  &lt;inactiveLoadInformation&gt;<i>LOADS FILE</i>&lt;/inactiveLoadInformation&gt;
   &lt;vendorConfig&gt;</code>
         <br>
         <h2 id="defaultWallpaperFile">defaultWallpaperFiler</h2>
@@ -2270,8 +2275,12 @@
         <br>
         <code class="prettify lang-xml">    &lt;name&gt;<i>USER LOCALE NAME</i>&lt;/name&gt;
     &lt;uid&gt;1&lt;/uid&gt;
-    &lt;langCode&gt;&lt;/langCode&gt;
-    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;</code>
+    &lt;langCode&gt;&lt;/langCode&gt;</code>
+        <br>
+        <h2 id="userLocale/vesion">version</h2>
+        User locale version, the phone will only download a new locale when the version changes.<br>
+        <br>
+        <code class="prettify">    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;</code>
         <br>
         <h2 id="winCharSet">winCharSet</h2>
         Character set used by the locale, either <code class="literal">iso-8859-1</code> or <code class="literal">utf-8</code>.<br>
@@ -2284,8 +2293,12 @@
         <h2 id="networkLocale/name">name</h2>
         The dowloadable network locale allows the tones (dial-tone, ringing, busy etc.) to be those specified by the local phone network. If you do not have the locale file use the default of <code class="literal">United_States</code> See <a href="user-locale.html">User Locale</a> for examples.<br>
         <br>
-        <code class="prettify lang-xml">    &lt;name&gt;<i>NETWORK LOCALE NAME</i>&lt;/name&gt;
-    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;
+        <code class="prettify lang-xml">    &lt;name&gt;<i>NETWORK LOCALE NAME</i>&lt;/name&gt;</code>
+        <br>
+        <h2 id="networkLocale/vesion">version</h2>
+        Network locale version, the phone will only download a new locale when the version changes.<br>
+        <br>
+        <code class="prettify">    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;
   &lt;/networkLocaleInfo&gt;</code>
         <br>
         <h2 id="deviceSecurityMode">deviceSecurityMode</h2>
@@ -2561,7 +2574,9 @@
   &lt;capfAuthMode&gt;0&lt;/capfAuthMode&gt;
   &lt;capfList&gt;&lt;/capfList&gt;
   &lt;certHash&gt;&lt;/certHash&gt;
-  &lt;encrConfig&gt;false&lt;/encrConfig&gt;</code>
+  &lt;encrConfig&gt;false&lt;/encrConfig&gt;
+  &lt;userId&gt;&lt;/userId&gt;
+  &lt;ownerId&gt;&lt;/ownerId&gt;</code>
         <br>
         <h2 id="sshUserId">sshUserId</h2>
         SSH username that the SSH server on the phone will accept. Once logged in enter the username <code class="literal">debug</code> and the password <code class="literal">debug</code> for the <b>7800</b>, <b>7900</b>, <b>8800</b>, and <b>9900</b> series or <code class="literal">admin</code> with no password for the <b>6900</b> series to access the debugging shell.<br>
