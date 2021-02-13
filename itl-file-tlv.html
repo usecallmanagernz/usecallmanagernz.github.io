@@ -75,25 +75,24 @@
         <br>
         <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.5.tar.gz">certutils-2.5.tar.gz</a> (16K) <span class="icon">event</span> 29/01/2021 <span class="icon">security</span> SHA256:da620e52e4e982dba8ff000f682fecf4fd6af10d80e0528939fda5b817342ece.<br>
         <br>
-        <h2 id="gencert">gencert</h2>
-        <code class="literal">gencert</code> is basic script to generate RSA private keys and sign X509 certificates. If you already have certificates they can be used instead.<br>
+        <h2 id="gencert">mkcert</h2>
+        <code class="literal">mkcert</code> is basic script to generate RSA private keys and self-signed X509 certificates. If you already have certificates they can be used instead.<br>
         <br>
-        <b>1.</b> Create a CA (Certificate Authority) certificate valid for 20 years. This will function as the <code class="literal">sast</code> (System Administrator Security Token) certificate.<br>
+        <b>1.</b> Create a certificate to sign <code class="literal">ITLFile.tlv</code>. This will have the <code class="literal">sast</code> (System Administrator Security Token) role.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -r -C "Certificate Authority" -b 2048 -y 20 -o ca.pem</code>
+        <code class="command-line">~/certutils$ ./mkcert -c "SAST" -y 20 -f sast.pem</code>
         <br>
-        <b>2.</b> Create a certificate for Asterisk signed by the CA for 1 year. This will function as the <code class="literal">ccm</code> and <code class="literal">tftp</code> certificate.<br>
+        <b>2.</b> Create a certificate for Asterisk. This will have the <code class="literal">ccm</code> role for SIP-TLS connections. Optionally, this can also have the <code class="literal">tftp</code> role to sign provisioning files.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "Asterisk" -b 2048 -y 1 -o asterisk.pem</code>
+        <code class="command-line">~/certutils$ ./mkcert -c "Asterisk" -f asterisk.pem</code>
         <br>
-
-        <b>3.</b> Create a certificate for Apache with an EC (elliptic curve) key signed by the CA for 1 year (optional). This will function as an <code class="literal">tftp</code> certificate for HTTPS provisioning.<br>
+        <b>3.</b> Optionally, create a certificate for Apache with an EC (elliptic curve) key. This will have the <code class="literal">tftp</code> role for HTTPS provisioning.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c ca.pem -E secp384r1 -C "Apache-EC" -y 1 -o apache-EC.pem</code>
+        <code class="command-line">~/certutils$ ./mkcert -c "Apache-EC" -E secp384r1 -f apache-ec.pem</code>
         <br>
-        <b>4.</b> Create a certificate for Apache signed by the CA for 1 year (optional). This will function as an <code class="literal">https</code> certificate.<br>
+        <b>4.</b> Optionally, create a certificate for Apache. This will have the <code class="literal">https</code> role for secure XML services.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "Apache" -b 2048 -y 1 -o apache.pem</code>
+        <code class="command-line">~/certutils$ ./mkcert -c "Apache" -f apache.pem</code>
         <br>
         <h2 id="tlvfile">tlvfile</h2>
         <code class="literal">tlvfile</code> is used to build or parse <code class="literal">.tlv</code> files. Each certificate has an function specifying where it is used and the same certificate can be included multiple times to provide different functions. Valid functions are listed below.<br>
@@ -127,23 +126,23 @@
         <br>
         <b>1.</b> Create an <code class="literal">ITLFile.tlv</code> in the tftpboot provisioning directory, the certificate used to sign the <code class="literal">.tlv</code> file is automatically included as providing the <code class="literal">sast</code> function.<br>
         <br>
-        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -c ca.pem \
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -s sast.pem \
   -r asterisk.pem -f ccm -r apache.pem -f https</code>
         <br>
         <b>2.</b> Optionally, the default <code class="literal">ITLFile.tlv</code> can be overridden using a file name based on the MAC address of the phone, eg: <code class="literal">ITLSEP58971ECC97C1.tlv</code>.<br>
         <br>
-        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLSEP58971ECC97C1.tlv -c ca.pem \
-  -r asterisk1.pem -f ccm -r asterisk2.pem -f ccm -F ITLFile.tlv</code>
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLSEP58971ECC97C1.tlv -s sast.pem \
+  -r asterisk-1.pem -f ccm -r asterisk-2.pem -f ccm -F ITLFile.tlv</code>
         <br>
         <b>3.</b> Optionally, additional certificates can be included using a file name based on the MAC address of the phone, eg: <code class="literal">CTLSEP58971ECC97C1.tlv</code>.<br>
         <br>
-        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv -c ca.pem \
-  -r apache1.pem -f https -r apache2.pem -f https -F CTLFile.tlv</code>
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv -s sast.pem \
+  -r apache-1.pem -f https -r apache-2.pem -f https -F CTLFile.tlv</code>
         <br>
         <b>4.</b> Optionally, use HTTPS provisioning for SEPMAC.cnf.xml and signing for the other configuration files. <b>Note</b>: the certificate used to verify the HTTPS connection must use an EC (Elliptic Curve) key.<br>
         <br>
-        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -v 1.1 -c ca.pem \
-  -r asterisk.pem -f tftp -r apache-EC.pem -f tftp</code>
+        <code class="command-line">~/certutils$ ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -v 1.1 -s sast.pem \
+  -r asterisk.pem -f tftp -r apache-ec.pem -f tftp</code>
         <br>
         <b>5.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>
         <br>
@@ -159,29 +158,29 @@
         <br>
         <b>1.</b> Sign SEPMAC.cnf.xml, soft-key and dial-plan files.<br>
         <br>
-        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/SEP58971ECC97C1.cnf.xml -c asterisk.pem
-~/certutils$ ./sgnfile -b /var/lib/tftpboot/SoftKeys.xml -c asterisk.pem
-~/certutils$ ./sgnfile -b /var/lib/tftpboot/DialTemplate.xml -c asterisk.pem</code>
+        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/SEP58971ECC97C1.cnf.xml -t asterisk.pem
+~/certutils$ ./sgnfile -b /var/lib/tftpboot/SoftKeys.xml -t asterisk.pem
+~/certutils$ ./sgnfile -b /var/lib/tftpboot/DialTemplate.xml -t asterisk.pem</code>
         <br>
         <b>2.</b> Sign network and user locale files.<br>
         <br>
-        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/New_Zealand/g3-tones.xml -c asterisk.pem \
+        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/New_Zealand/g3-tones.xml -t asterisk.pem \
   -F New_Zealand/g3-tones.xml.sgn
-~/certutils$ ./sgnfile -b /var/lib/tftpboot/New_Zealand/mk-sip.jar -c asterisk.pem \
+~/certutils$ ./sgnfile -b /var/lib/tftpboot/New_Zealand/mk-sip.jar -t asterisk.pem \
   -F New_Zealand/mk-sip.jar.sgn</code>
         <br>
         <b>3.</b> Sign ring-tones (optional).<br>
         <br>
-        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/Ringlist.xml -c asterisk.pem
-~/certutils$ ./sgnfile -b /var/lib/tftpboot/Old_Telephone.raw -c asterisk.pem</code>
+        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/Ringlist.xml -t asterisk.pem
+~/certutils$ ./sgnfile -b /var/lib/tftpboot/Old_Telephone.raw -t asterisk.pem</code>
         <br>
         <b>4.</b> Sign background images (optional).<br>
         <br>
-        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/Desktops/320x196x4/List.xml -c asterisk.pem \
+        <code class="command-line">~/certutils$ ./sgnfile -b /var/lib/tftpboot/Desktops/320x196x4/List.xml -t asterisk.pem \
   -F Desktops/320x196x4/List.xml.sgn
-~/certutils$ ./sgnfile -b /var/lib/tftpboot/Desktops/320x196x4/Logo.png -c asterisk.pem \
+~/certutils$ ./sgnfile -b /var/lib/tftpboot/Desktops/320x196x4/Logo.png -t asterisk.pem \
   -F Desktops/320x196x4/Logo.png.sgn
-~/certutils$ ./sgnfile -b /var/lib/tftpboot/Desktops/320x196x4/Logo_Preview.png -c asterisk.pem \
+~/certutils$ ./sgnfile -b /var/lib/tftpboot/Desktops/320x196x4/Logo_Preview.png -t asterisk.pem \
   -F Desktops/320x196x4/Logo_Preview.png.sgn</code>
       </article>
     </main>

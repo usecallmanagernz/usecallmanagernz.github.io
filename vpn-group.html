@@ -101,9 +101,9 @@
         <code class="command-line">~/ocserv-0.12.6$ sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
         <br>
         <h2 id="ocserv.conf">ocserv.conf</h2>
-        The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">gencert</code>.<br>
+        The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>.<br>
         <br>
-        <code class="command-line">~/certutils$ ./gencert -c ca.pem -C "OpenConnect" -b 2048 -y 1 -o vpn.pem</code>
+        <code class="command-line">~/certutils$ ./mkcert -c "OpenConnect" -f ocserv.pem</code>
         <br>
         An archive containing the scripts need to generate and hash X509 certificates files can be downloaded from the URL below.<br>
         <br>
@@ -116,8 +116,8 @@ auth = "plain[passwd=/etc/ocserv/passwd]"
 
 # The key and the certificates of the server. The certificate must match the
 # hash set in one of &lt;certHash1&gt; ... &lt;certHash10&gt;.
-server-cert = "/etc/ocserv/vpn.pem"
-server-key = "/etc/ocserv/vpn.pem"
+server-cert = "/etc/ocserv/ocserv.pem"
+server-key = "/etc/ocserv/ocserv.pem"
 
 # Any unused TCP port can be used.
 tcp-port = 443
@@ -142,7 +142,7 @@ tls-priorities = "SECURE256:%COMPAT"
         <h2 id="certhash">certhash</h2>
         <code class="literal">certhash</code> is used to generate a base64 encoded version of the SHA1 hash of the VPN server certificate. The hash is then set in one of &lt;<code class="tag">certHash1</code>&gt; ... &lt;<code class="tag">certHash10</code>&gt; in <a href="sepmac-cnf-xml.html#certHash1">SEPMAC.cnf.xml</a>.<br>
         <br>
-        <code class="command-line">~/certutils$ ./certhash -d sha1 vpn.pem
+        <code class="command-line">~/certutils$ ./certhash -d sha1 ocserv.pem
 s4U4A2DqXtupmzGuEGm2NCjxW/Y=</code>
       </article>
     </main>
