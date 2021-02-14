@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Document Overview</title>
+    <title>Documentation Overview</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="includes/theme.css">
@@ -32,7 +32,7 @@
     <main>
       <nav>
         <ul>
-          <li><span class="icon selected">home</span> <b>Document Overview</b></li>
+          <li><span class="icon selected">home</span> <b>Documentation Overview</b></li>
           <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
         </ul>
         <ul>
@@ -78,7 +78,7 @@
         </ul>
       </nav>
       <article>
-        <h1>Document Overview</h1>
+        <h1>Documentation Overview</h1>
         This documentation describes how to patch Asterisk to support Cisco SIP IP phones as well as how to configure the various features available on those devices. These IP phones require additional proprietary extensions to the SIP protocol to operate correctly and are only designed to operate with Cisco Unified Call Manager.<br>
         <br>
         Queries may be sent to <span class="icon">mail_outline</span> <a href="mailto:Gareth Palmer &lt;gareth.palmer3@gmail.com&gt;">gareth.palmer3@gmail.com</a>. Source code for the project (patch, utilities and documentation) is also available on <span class="icon">open_in_browser</span> <a href="https://github.com/usecallmanagernz">GitHub</a>.<br>
@@ -96,121 +96,121 @@
           <tbody>
             <tr>
               <td width="50%">
-                <h2 id="Busy Lamp Field">Busy Lamp Field</h2>
+                <h2>Busy Lamp Field</h2>
                 Support for busy-lamp-field using unsolicited notifications as the phones do not subscribe to hints. Extensions to PIDF XML support allow representation of ringing and Do Not Disturb states.
               </td>
               <td width="50%">
-                <h2 id="Off Hook Notification">Off Hook Notification</h2>
+                <h2>Off Hook Notification</h2>
                 When taken off-hook the phone will show as being in-use prior to making a call.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Call Forward Synchronization">Call Forward Synchronization</h2>
+                <h2>Call Forward Synchronization</h2>
                 The Call Forward target is recorded in Asterisk and is set back on the phone when it registers. It is also stored in Asterisk's database and will persist across restarts.
               </td>
               <td width="50%">
-                <h2 id="Do Not Disturb Synchronization">Do Not Disturb Synchronization</h2>
+                <h2>Do Not Disturb Synchronization</h2>
                 Publish requests from the phone to change the Do Not Disturb state is now handled by Asterisk and will be set back on the phone when it registers. It is also stored in Asterisk's database and will persist across restarts.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Ad-Hoc Conferencing">Ad-Hoc Conferencing</h2>
+                <h2>Ad-Hoc Conferencing</h2>
                 Dynamic server-side conferences can be created allowing more than 3 participants. Other Cisco phones can be made administrators when they join the conference.
               </td>
               <td width="50%">
-                <h2 id="Conference Management">Conference Management</h2>
+                <h2>Conference Management</h2>
                 Participants in ad-hoc conferences can be added, viewed, muted or removed from the conference by any of the conference administrators.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Call Parking">Call Parking</h2>
+                <h2>Call Parking</h2>
                 Both Park and Park Monitor methods are supported allowing single button parking. The parking extension is displayed on the phone's screen.
               </td>
               <td width="50%">
-                <h2 id="Hunt Group Login">Hunt Group Login</h2>
+                <h2>Hunt Group Login</h2>
                 Hunt-group login state is recorded in Asterisk and made available to the dial-plan. It will be set back on the phone when it registers. It is also stored in Asterisk's database and will persists across restarts.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Immediate Divert">Immediate Divert</h2>
+                <h2>Immediate Divert</h2>
                 Incoming calls can be sent a busy signal, connected calls can be diverted to specific extension.
               </td>
               <td width="50%">
-                <h2 id="Call Recording">Call Recording</h2>
+                <h2>Call Recording</h2>
                 Call recording can be initiated from the phone and does not require Asterisk to be in the media path.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Bulk Registration">Multiple Lines</h2>
+                <h2>Multiple Lines</h2>
                 Support for multiple lines using bulk-registration as the phones only register their first line. Additional secondary lines are automatically registered.
               </td>
               <td width="50%">
-                <h2 id="Call Pickup Notification">Call Pickup Notification</h2>
+                <h2>Call Pickup Notification</h2>
                 Display the from and to caller-ID numbers and play a beep tone when there an incoming call available for pickup on another phone.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="RTP Streaming">RTP Streaming</h2>
+                <h2>RTP Streaming</h2>
                 Stream audio to multiple phones either via unicast or multicast RTP.
               </td>
               <td width="50%">
-                <h2 id="Command Line">Command Line</h2>
+                <h2>Command Line</h2>
                 Call Forward, Do Not Disturb and Hunt Group Login states can be changed using Asterisk CLI. Changes will automatically update the phone.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Device Security">Device Secuirty</h2>
+                <h2>Device Secuirty</h2>
                 Phones can load X509 certificates to verify SIP-TLS and HTTPS connections.
               </td>
               <td width="50%">
-                <h2 id="Fail-over">Fail-over</h2>
+                <h2>Fail-over</h2>
                 Phones can automatically switch to a standby Asterisk if the connection to the primary fails. When the primary Asterisk becomes available the phone will revert back.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="SIPPEER Options">VPN Connection</h2>
+                <h2>VPN Connection</h2>
                 Phone can connect to a patched version of OpenConnect Server VPN either automatically or on-demand.
               </td>
               <td width="50%">
-                <h2 id="SIPPEER Options">SIPPEER Options</h2>
+                <h2>SIPPEER Options</h2>
                 Call Forward, Do Not Disturb and Hunt Group Login states can be queried and set using this function. Changing the value automatically updates the phone.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Restart and Reset">Restart and Reset</h2>
+                <h2>Restart and Reset</h2>
                 Phones can be restarted or reset using SIP notify either via AMI or the CLI.
               </td>
               <td width="50%">
-                <h2 id="AS Feature Events">AS Feature Events</h2>
+                <h2>AS Feature Events</h2>
                 Call Forward and Do Not Disturb synchronization for phones from other vendors.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="Malicious Call">Malicious Call</h2>
+                <h2>Malicious Call</h2>
                 Call can be identified as being malicious.
               </td>
               <td width="50%">
-                <h2 id="Quality Reporting Tool">Quality Reporting Tool</h2>
+                <h2>Quality Reporting Tool</h2>
                 RTP call statistics are logged to the messages log and further information can be optionally gathered via XML service URL.
               </td>
             </tr>
             <tr>
               <td width="50%">
-                <h2 id="CallBack">CallBack</h2>
+                <h2>CallBack</h2>
                 Schedule a notification when an previously called phone is no longer busy.
               </td>
               <td width="50%">
-                <h2 id="Select and Join">Select and Join</h2>
+                <h2>Select and Join</h2>
                 Select and Join support required by the 7900 series to conference-in already established calls.
               </td>
             </tr>

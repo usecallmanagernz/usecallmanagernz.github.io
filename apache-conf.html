@@ -23,7 +23,7 @@
     <main>
       <nav>
         <ul>
-          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">home</span> <a href="documentation-overview.html">Documentation Overview</a></li>
           <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
         </ul>
         <ul>
@@ -72,7 +72,7 @@
         <h1>HTTP Provisioning and Services</h1>
         HTTP is used by the phone to download its configuration, background image and ring-tone and also for providing XML services.<br>
         <br>
-        <h2>Provisioning</h2>
+        <h2 id="Provisioning">Provisioning <a href="#Provisioning" title="Link">link</a></h2>
         The phone will use HTTP to download files from port <code class="literal">6970</code> on the server specified as the <code class="keyword">tftp-server-name</code> in the DHCP response first before falling-back to TFTP on failure. A sample tftpboot directory containing templates for <code class="literal">SEPMAC.cnf.xml</code>, <code class="literal">Softkeys.xml</code>, <code class="literal">FeaturePolicy.xml</code>, <code class="literal">DialTemplate.xml</code>, <code class="literal">AppDialRules.xml</code>, background images and ring-tones can be downloaded from the URL below.<br>
         <br>
         <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/tftpboot/archive/v1.2.tar.gz">tftpboot-1.2.tar.gz</a> (123K) <span class="icon">event</span> 29/01/2021 <span class="icon">security</span> SHA256:4711a7442c7b4ceddfd177ad017a9e3c8be425858761083216490294901e747c.<br>
@@ -87,7 +87,7 @@
   &lt;/Directory&gt;
 &lt;/Virtualhost&gt;</code>
         <br>
-        <h2>Secure Provisioning</h2>
+        <h2 id="Secure Provisioning">Secure Provisioning <a href="#Secure Provisioning" title="Link">link</a></h2>
         If the <code class="literal">ITLFile.tlv</code> has a version of <code class="literal">1.1</code> the phone will use HTTPS to download <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a> from port <code class="literal">6971</code> on the server before falling back to HTTP on failure. The SSL certificate used by server must use an EC (Elliptic Curve) key and be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function.<br>
         <br>
         While the phone requests its configuration file with a <code class="literal">.sgn</code> extension the response must contain an unsigned file. All remaining provisioning files like soft keys, dial template and ring-tones will be downloaded on port <code class="literal">6970</code> and must be signed with a certificate that uses an RSA key an be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function. See <a href="itl-file.tlv#tlvfile">Device Security</a> for more information.<br>
@@ -113,7 +113,7 @@
   &lt;/IfModule&gt;
 &lt;/Virtualhost&gt;</code>
         <br>
-        <h2>XML Services</h2>
+        <h2>XML Services <a href="#XML Services" title="Link">link</a></h2>
         Example configuration for a WSGI application providing phone XML services. There are two &lt;<code class="tag">VirtualHost</code>&gt; below, one for services using HTTP on <code class="literal">6972</code> and the other for secure services using HTTPS on <code class="literal">6973</code>. Any ports can be used. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
         <code class="prettify lang-apache"># For &lt;servicesURL&gt;, &lt;directoryURL&gt; and &lt;authenticationURL&gt;

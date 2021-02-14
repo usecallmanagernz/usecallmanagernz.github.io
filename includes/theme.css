@@ -186,18 +186,36 @@ main > article div.horizontal-rule {
     width: 100%;
 }
 
-main > article h2 {
-    font-size: 13pt;
-    font-weight: bold;
-    margin: 0px 0px 5px 0px;
-}
-
 main > article span.icon {
     color: rgb(160, 160, 160);
     display: inline-block;
     font-family: "Material Icons";
     font-size: 13pt;
     vertical-align: text-top;
+}
+
+main > article h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    margin: 0px 0px 5px 0px;
+}
+
+main > article h2 > a {
+    color: rgb(0, 126, 255);
+    display: none;
+    font-family: "Material Icons";
+    font-size: 13pt;
+    font-weight: normal;
+    padding-left: 3px;
+    vertical-align: top;
+}
+
+main > article h2:hover a {
+    display: inline;
+}
+
+main > article h2:hover a:hover, main > article h2:hover a:active {
+    color: rgb(82, 188, 255);
 }
 
 main > article table {

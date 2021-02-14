@@ -23,7 +23,7 @@
     <main>
       <nav>
         <ul>
-          <li><span class="icon">home</span> <a href="document-overview.html">Document Overview</a></li>
+          <li><span class="icon">home</span> <a href="documentation-overview.html">Documentation Overview</a></li>
           <li><span class="icon">build</span> <a href="patching-asterisk.html">Patching Asterisk</a></li>
         </ul>
         <ul>
@@ -114,13 +114,13 @@ exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=no);</code>
         <code class="prettify lang-astexten">; Show the REGISTER Call-ID
 exten =&gt; _X.,1,NoOp(Register Call-ID: ${SIPPEER(${CHANNEL(peername)},regcallid)})</code>
         <br>
-        <h2 id="regcallid">ciscodevicename</h2>
+        <h2 id="ciscodevicename">ciscodevicename</h2>
         The device name provided in the Contact header when the phone registered. <b>Note</b>: this item is read-only.<br>
         <br>
         <code class="prettify lang-astexten">; Show the Device Name
 exten =&gt; _X.,1,NoOp(Device Name: ${SIPPEER(${CHANNEL(peername)},ciscodevicename)})</code>
         <br>
-        <h2 id="regcallid">ciscolineindex</h2>
+        <h2 id="ciscolineindex">ciscolineindex</h2>
         The line index assigned to the phone. Used to determine if the peer has been registered as a secondary line. <b>Note</b>: this item is read-only.<br>
         <br>
         <code class="prettify lang-astexten">; Show the Line Index
