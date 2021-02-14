@@ -75,7 +75,7 @@
         <br>
         See <span class="icon">open_in_browser</span> <a href="https://developer.cisco.com/site/ip-phone-services/overview/" target="_blank">Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
         <br>
-        <h2 id="authenticationURL">authenticationURL</h2>
+        <h2 id="authenticationURL">authenticationURL <a href="#authenticationURL" title="Link">link</a></h2>
         If defined, the phone will make requests to this URL containing the username and password that was included in the <code class="literal">Authorization</code> header in the request to <b>http://<i>x.x.x.x</i>/CGI/Execute</b>. See <a href="cgi-execute-xml.html">CGI Execute</a> for more information.<br>
         <br>
         The script handling the request must respond exactly with <code class="literal">AUTHORIZED</code> (with no newline character at end) otherwise the request will be denied. Example below provides this on <code class="literal">/authentication</code>.<br>
@@ -120,7 +120,7 @@ def before_request():
 def error_handler(error):
     return Response('ERROR', mimetype = 'text/plain'), 500</code>
         <br>
-        <h2 id="directoryURL">directoryURL</h2>
+        <h2 id="directoryURL">directoryURL <a href="#directoryURL" title="Link">link</a></h2>
         The URL accessed when the directories button is pressed. Example below provides this on <code class="literal">/directory</code> and <code class="literal">/directory/79xx</code> (<b>7900</b> series). Requires that the Asterisk manager web-interface is enabled.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3
@@ -315,7 +315,7 @@ def before_request():
 def error_handler(error):
     return Response(str(error), mimetype = 'text/plain'), 500</code>
         <br>
-        <h2 id="servicesURL">servicesURL</h2>
+        <h2 id="servicesURL">servicesURL <a href="#servicesURL" title="Link">link</a></h2>
         The URL accessed when the services or applications button is pressed. Example below provides this on <code class="literal">/services</code>. Requires that the Asterisk manager web-interface is enabled.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3
@@ -438,7 +438,7 @@ def before_request():
 def error_handler(error):
     return Response(str(error), mimetype = 'text/plain'), 500</code>
         <br>
-        <h2 id="problemReportUploadURL">problemReportUploadURL</h2>
+        <h2 id="problemReportUploadURL">problemReportUploadURL <a href="#problemReportUploadURL" title="Link">link</a></h2>
         The URL that the logs are uploaded to when the report problem option is selected. Example below provides this on <code class="literal">/problem-report</code>. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3
@@ -483,7 +483,7 @@ def before_request():
 def error_handler(error):
     return Response(str(error), mimetype = 'text/plain'), 500</code>
         <br>
-        <h2 id="WSGIApplication">WSGI Application</h2>
+        <h2 id="WSGIApplication">WSGI Application <a href="#WSGIApplication" title="Link">link</a></h2>
         Entry point for the WSGI application. Additional configuration can be specified by the <code class="literal">FLASK_CONFIG</code> environment variable.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3
@@ -517,7 +517,7 @@ def error_handler(error):
 if __name__ == '__main__':
     application.run()</code>
         <br>
-        <h2 id="AppConfig">Application Configuration</h2>
+        <h2 id="AppConfig">Application Configuration <a href="#AppConfig" title="Link">link</a></h2>
         Parses <code class="literal">config.yml</code> which contains the paths and credentials for the application. A different location can be specified by the <code class="literal">SERVICES_CONFIG</code> environment variable.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3

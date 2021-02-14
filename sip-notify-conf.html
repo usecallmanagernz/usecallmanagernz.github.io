@@ -72,7 +72,7 @@
         <h1>SIP Notify Commands</h1>
         Two new sip notify commands are provided in <code class="literal">sip_notify.conf</code> which allow for the restarting or resetting of phones, see <a href="command-line.html">Command Line</a> for more information. Entries now also support ${<code class="variable">VARIABLE</code>} expansion.<br>
         <br>
-        <h2 id="cisco-restart">cisco-restart</h2>
+        <h2 id="cisco-restart">cisco-restart <a href="#cisco-restart" title="Link">link</a></h2>
         The phone will do a quick restart which will re-download SEPMAC.cnf.xml, dial template, soft keys, feature policy and ring-tone.<br>
         <br>
         <code class="prettify lang-astsipnotify">[cisco-restart]
@@ -86,7 +86,7 @@ Content =&gt; DialplanVersionStamp={00000000-0000-0000-0000-000000000000}
 Content =&gt; SoftkeyVersionStamp={00000000-0000-0000-0000-000000000000}
 Content =&gt; FeatureControlVersionStamp={00000000-0000-0000-0000-000000000000}</code>
         <br>
-        <h2 id="cisco-reset">cisco-reset</h2>
+        <h2 id="cisco-reset">cisco-reset <a href="#cisco-reset" title="Link">link</a></h2>
         The phone will do a full reset, equivalent to powering the phone off and on again.
         <br>
         <br>

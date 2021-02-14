@@ -74,12 +74,12 @@
         <code class="prettify lang-xml">&lt;CiscoIPPhoneRingList&gt;
   &lt;Ring&gt;</code>
         <br >
-        <h2 id="DisplayName">DisplayName</h2>
+        <h2 id="DisplayName">DisplayName <a href="#DisplayName" title="Link">link</a></h2>
         The name of the ring-tone when displayed in the list of ring-tones. Must not be longer than 25 characters.<br>
         <br>
         <code class="prettify lang-xml">    &lt;DisplayName&gt;<i>NAME</i>&lt;/DisplayName&gt;</code>
         <br >
-        <h2 id="FileName">FileName</h2>
+        <h2 id="FileName">FileName <a href="#FileName" title="Link">link</a></h2>
         Name of the file to download, must end in <code class="literal">.raw</code> or <code class="literal">.rwb</code> and must not be longer than 25 characters.<br>
         <br>
         <code class="prettify lang-xml">    &lt;FileName&gt;<i>FILENAME.raw</i>&lt;/FileName&gt;
@@ -87,19 +87,19 @@
   ...
 &lt;/CiscoIPPhoneRingList&gt;</code>
         <br>
-        <h2 id="Using SoX">Using SoX</h2>
+        <h2 id="Using SoX">Using SoX <a href="#Using SoX" title="Link">link</a></h2>
         Ring-tones are raw PCM (no header), u-law encoded with 8-bits per sample, mono at 8000Hz between 240 and 16080 samples (2 seconds) in length. The example below shows how a <code class="literal">.wav</code> file can be converted to <code class="literal">.raw</code> using <code class="literal">sox</code>.<br>
         <br>
         <code class="command-line">~$ sox input.wav -t raw -e u-law -b 8 -c 1 -r 8000 output.raw</code>
         <br>
-        <h2 id="Wideband Ring Tones">Wideband Ring Tones</h2>
+        <h2 id="Wideband Ring Tones">Wideband Ring Tones <a href="#Wideband Ring Tones" title="Link">link</a></h2>
         The <b>7800</b> and <b>8800</b> series phones use wideband ring-tones. The list of available wideband ring-tones is specified in a file called <code class="literal">Ringlist-wb.xml</code> which is in the same format as <code class="literal">Ringlist.xml</code>. Wideband ring-tone filenames must end in <code class="literal">.rwb</code>.<br>
         <br>
         Wideband ring-tones are raw PCM (no header), signed-integer encoded with 16-bits per sample, mono at 16000Hz between 240 and 160800 samples (10 seconds) in length. The example below shows how a <code class="literal">.wav</code> file can be converted to <code class="literal">.rwb</code> using <code class="literal">sox</code>.<br>
         <br>
         <code class="command-line">~$ sox input.wav -t raw -e signed-integer -b 16 -c 1 -r 16000 output.rwb</code>
         <br>
-        <h2 id="Alert-Info">Alert-Info</h2>
+        <h2 id="Alert-Info">Alert-Info <a href="#Alert-Info" title="Link">link</a></h2>
         The phone can be made to play a different built-in ring-tone by using the <code class="literal">Alert-Info</code> header.<br>
         <br>
         <table>

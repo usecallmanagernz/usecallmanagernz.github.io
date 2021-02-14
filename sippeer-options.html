@@ -72,7 +72,7 @@
         <h1>SIPPEER Options</h1>
         New options have been added to the ${<code class="literal">SIPPEER</code>()} function that reflect the current status of call-forwarding, do not disturb and hunt-group login. Writing to the function will automatically update the phone's display. These settings can also be changed using the <a href="command-line.html">command line</a> interface. Read-only information about the registered device is also provided.<br>
         <br>
-        <h2 id="callforward">callforward</h2>
+        <h2 id="callforward">callforward <a href="#callforward" title="Link">link</a></h2>
         Contains the call-forwarding target.<br>
         <br>
         <code class="prettify lang-astexten">; Show the current target
@@ -84,7 +84,7 @@ exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},callforward)=${TARGET});
 ; Clear call forwarding target
 exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},callforward)=);</code>
         <br>
-        <h2 id="donotdisturb">donotdisturb</h2>
+        <h2 id="donotdisturb">donotdisturb <a href="#donotdisturb" title="Link">link</a></h2>
         Whether the phone has set do not disturb or not.<br>
         <br>
         <code class="prettify lang-astexten">; Show the current status
@@ -96,7 +96,7 @@ exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},donotdisturb)=yes);
 ; Disables do not disutrb
 exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},donotdisturb)=no);</code>
         <br>
-        <h2 id="huntgroup">huntgroup</h2>
+        <h2 id="huntgroup">huntgroup <a href="#huntgroup" title="Link">link</a></h2>
         Whether the phone has logged into the hunt-group.<br>
         <br>
         <code class="prettify lang-astexten">; Show the current status
@@ -108,19 +108,19 @@ exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=yes);
 ; Logout from hunt group
 exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=no);</code>
         <br>
-        <h2 id="regcallid">regcallid</h2>
+        <h2 id="regcallid">regcallid <a href="#regcallid" title="Link">link</a></h2>
         The SIP Call-ID of the REGISTER dialog, used when restaring or resetting the phone via <a href="sip-notify-conf.html">SIP Notify Commands</a>. <b>Note</b>: this item is read-only.<br>
         <br>
         <code class="prettify lang-astexten">; Show the REGISTER Call-ID
 exten =&gt; _X.,1,NoOp(Register Call-ID: ${SIPPEER(${CHANNEL(peername)},regcallid)})</code>
         <br>
-        <h2 id="ciscodevicename">ciscodevicename</h2>
+        <h2 id="ciscodevicename">ciscodevicename <a href="#ciscodevicename" title="Link">link</a></h2>
         The device name provided in the Contact header when the phone registered. <b>Note</b>: this item is read-only.<br>
         <br>
         <code class="prettify lang-astexten">; Show the Device Name
 exten =&gt; _X.,1,NoOp(Device Name: ${SIPPEER(${CHANNEL(peername)},ciscodevicename)})</code>
         <br>
-        <h2 id="ciscolineindex">ciscolineindex</h2>
+        <h2 id="ciscolineindex">ciscolineindex <a href="#ciscolineindex" title="Link">link</a></h2>
         The line index assigned to the phone. Used to determine if the peer has been registered as a secondary line. <b>Note</b>: this item is read-only.<br>
         <br>
         <code class="prettify lang-astexten">; Show the Line Index

@@ -75,7 +75,7 @@
         <br>
         <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/certutils/archive/v2.5.tar.gz">certutils-2.5.tar.gz</a> (16K) <span class="icon">event</span> 29/01/2021 <span class="icon">security</span> SHA256:da620e52e4e982dba8ff000f682fecf4fd6af10d80e0528939fda5b817342ece.<br>
         <br>
-        <h2 id="gencert">mkcert</h2>
+        <h2 id="gencert">mkcert <a href="#gencert" title="Link">link</a></h2>
         <code class="literal">mkcert</code> is basic script to generate RSA private keys and self-signed X509 certificates. If you already have certificates they can be used instead.<br>
         <br>
         <b>1.</b> Create a certificate to sign <code class="literal">ITLFile.tlv</code>. This will have the <code class="literal">sast</code> (System Administrator Security Token) role.<br>
@@ -94,7 +94,7 @@
         <br>
         <code class="command-line">~/certutils$ ./mkcert -c "Apache" -f apache.pem</code>
         <br>
-        <h2 id="tlvfile">tlvfile</h2>
+        <h2 id="tlvfile">tlvfile <a href="#tlvfile" title="Link">link</a></h2>
         <code class="literal">tlvfile</code> is used to build or parse <code class="literal">.tlv</code> files. Each certificate has an function specifying where it is used and the same certificate can be included multiple times to provide different functions. Valid functions are listed below.<br>
         <br>
         <table>
@@ -146,14 +146,14 @@
         <br>
         <b>5.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>
         <br>
-        <h2 id="libsrtp">libsrtp</h2>
+        <h2 id="libsrtp">libsrtp <a href="#libsrtp" title="Link">link</a></h2>
         To use secure (encrypted) RTP <code class="literal">libsrtp</code> must be installed. The latest release is available from the <span class="icon">open_in_browser</span> <a href="https://github.com/cisco/libsrtp/releases" target="_blank">libsrtp GitHub repository</a>.<br>
         <br>
         <code class="command-line">~/libsrtp-2.3.0$ ./configure --prefix=/usr --enable-openssl
 ~/libsrtp-2.3.0$ make shared_library
 ~/libsrtp-2.3.0$ sudo make install</code>
         <br>
-        <h2 id="sgnfile">sgnfile</h2>
+        <h2 id="sgnfile">sgnfile <a href="#sgnfile" title="Link">link</a></h2>
         <code class="literal">sgnfile</code> is used to build or parse <code class="literal">.sgn</code> files which are any non-firmware files the phone downloads during provisioning with a digital signature added. You only need to sign files if the <code class="literal">tftp</code> function has been included in the phone's <code class="literal">.tlv</code> file.<br>
         <br>
         <b>1.</b> Sign SEPMAC.cnf.xml, soft-key and dial-plan files.<br>

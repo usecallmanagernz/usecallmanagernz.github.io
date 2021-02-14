@@ -74,7 +74,7 @@
         <code class="prettify lang-xml">&lt;dialTemplate&gt;
   &lt;versionStamp&gt;e68d54c1-0354-4b1a-aca4-adffc4b7de2f&lt;/versionStamp&gt;</code>
         <br>
-        <h2 id="TEMPLATE">TEMPLATE</h2>
+        <h2 id="TEMPLATE">TEMPLATE <a href="#TEMPLATE" title="Link">link</a></h2>
         Specifies a pattern to match dialed digits against. <b>Note</b>: &lt;<code class="tag">TEMPLATE</code>&gt; must be in uppercase.<br>
         <br>
         <table>
@@ -203,14 +203,14 @@
   &lt;TEMPLATE match=&quot;*&quot; timeout=&quot;3&quot; /&gt;
 &lt;/dialTemplate&gt;</code>
         <br>
-        <h2 id="Hotline">Hotline</h2>
+        <h2 id="Hotline">Hotline <a href="#Hotline" title="Link">link</a></h2>
         To create a line that automatically dials a number when the phone goes off-hook use an empty pattern with a timeout of <code class="literal">0</code> and <code class="literal">rewrite</code> containing the number to dial.<br>
         <br>
         <code class="prettify lang-xml">&lt;dialTemplate&gt;
   &lt;TEMPLATE match=&quot;&quot; timeout=&quot;0&quot; rewrite=&quot;300&quot; /&gt;
 &lt;/dialTemplate&gt;</code>
         <br>
-        <h2 id="Intercom">Intercom</h2>
+        <h2 id="Intercom">Intercom <a href="#Intercom" title="Link">link</a></h2>
         Similar to a hotline, automatically dials an extension only for the Intercom line. The <code class="literal">line</code> attribute must match the <code class="literal">lineIndex</code> specified in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>.<br>
         <br>
         <code class="prettify lang-xml">&lt;dialTemplate&gt;

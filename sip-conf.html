@@ -72,7 +72,7 @@
         <h1>SIP Peers</h1>
         Example Cisco SIP peer configuration in <code class="literal">sip.conf</code>. New settings added by the patch are listed below.<br>
         <br>
-        <h2 id="cisco_usecallmanager">cisco_usecallmanager</h2>
+        <h2 id="cisco_usecallmanager">cisco_usecallmanager <a href="#cisco_usecallmanager" title="Link">link</a></h2>
         Enable support for Cisco SIP phone features, required for <code class="literal">USECALLAMANGER</code> phones. Do not enable on peers using phones from other vendors.<br>
         <br>
         <table>
@@ -86,7 +86,7 @@
           </tbody>
         </table>
         <br>
-        <h2 id="dndbusy">dndbusy</h2>
+        <h2 id="dndbusy">dndbusy <a href="#dndbusy" title="Link">link</a></h2>
         Have Asterisk automatically generate a busy response when calling a phone that has a presence state of DND, otherwise the call will be sent to the phone.<br>
         <br>
         <table>
@@ -100,7 +100,7 @@
           </tbody>
         </table>
         <br>
-        <h2 id="subscribe">subscribe</h2>
+        <h2 id="subscribe">subscribe <a href="#subscribe" title="Link">link</a></h2>
         Add a subscription for a BLF Speed Dial or BLF Directed Call Park line key, required for Cisco SIP phones as they do not send SUBSCRIBE requests. This option only applies to the phone's primary line. Multiple extensions can be specified separated by a comma.<br>
         <br>
         <table>
@@ -116,7 +116,7 @@
           </tbody>
         </table>
         <br>
-        <h2 id="register">register</h2>
+        <h2 id="register">register <a href="#register" title="Link">link</a></h2>
         Bulk-register specified peer automatically when this peer registers, required for Cisco SIP phones as they only send a REGISTER request for their primary line. The order in which the <code class="literal">register</code> entries are defined must match the <code class="literal">lineIndex</code> attribute defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. Peers registered in this way do not support subscriptions, separate <code class="literal">qualify</code> values and should have the same <code class="literal">dndbusy</code> setting as the primary line. Multiple peers can be specified separated by a comma.<br>
         <br>
         <table>
@@ -128,7 +128,7 @@
           </tbody>
         </table>
         <br>
-        <h2 id="huntgroup_default">huntgroup_default</h2>
+        <h2 id="huntgroup_default">huntgroup_default <a href="#huntgroup_default" title="Link">link</a></h2>
         Default hunt group login state of a peer. This option only applies to the phone's primary line.<br>
         <br>
         <table>
@@ -142,7 +142,7 @@
           </tbody>
         </table>
         <br>
-        <h2 id="cisco_pickup_alert">cisco_pickupnotify_alert</h2>
+        <h2 id="cisco_pickup_alert">cisco_pickupnotify_alert <a href="#cisco_pickup_alert" title="Link">link</a></h2>
         When another phone in your pickup group is ringing alert the user with one or more of the following methods. Multiple alert options can be combined using a comma, eg: <code class="literal">from,to,beep</code>. A notification will only be sent if the phone is idle and has not activated DND.<br>
         <br>
         <table>
@@ -166,10 +166,10 @@
           </tbody>
         </table>
         <br>
-        <h2 id="cisco_pickup_timer">cisco_pickupnotify_timer</h2>
+        <h2 id="cisco_pickup_timer">cisco_pickupnotify_timer <a href="#cisco_pickup_timer" title="Link">link</a></h2>
         Display timeout in seconds for the pickup notify alert when either <code class="literal">from</code> or <code class="literal">to</code> are used.<br>
         <br>
-        <h2 id="cisco_multiadmin_conference">cisco_multiadmin_conference</h2>
+        <h2 id="cisco_multiadmin_conference">cisco_multiadmin_conference <a href="#cisco_multiadmin_conference" title="Link">link</a></h2>
         When joining another participant to an ad-hoc conference who also has <code class="literal">cisco_multiadmin_conference</code> set to <code class="literal">yes</code> then make that participant a conference administrator as well. That participant can now use the Conference List feature and mute or kick participants as well as adding other participants to the conference.<br>
         <br>
         <table>
@@ -183,7 +183,7 @@
           </tbody>
         </table>
         <br>
-        <h2 id="cisco_keep_conference">cisco_keep_conference</h2>
+        <h2 id="cisco_keep_conference">cisco_keep_conference <a href="#cisco_keep_conference" title="Link">link</a></h2>
         When there are no more administrators in an ad-hoc conference (see above for how to have more than one administrator), hang up the all remaining participants.<br>
         <br>
         <table>
@@ -197,7 +197,7 @@
           </tbody>
         </table>
         <br>
-        <h2 id="cisco_qrt_url">cisco_qrt_url</h2>
+        <h2 id="cisco_qrt_url">cisco_qrt_url <a href="#cisco_qrt_url" title="Link">link</a></h2>
         Tell the phone to access this URL when QRT is enabled to gather further information from the user regarding the call.<br>
         <br>
         <table>
@@ -210,7 +210,7 @@
         </table>
         <br>
         <div class="horizontal-rule"></div>
-        <h2 id="Extension Template">Extension Template</h2>
+        <h2 id="Extension Template">Extension Template <a href="#Extension Template" title="Link">link</a></h2>
         Settings common to all SIP peers that are local extensions.<br>
         <br>
         <code class="prettify lang-astsip">[extension](!)
@@ -231,7 +231,7 @@ disallow=all
 allow=g722,ulaw,alaw,g729
 ...</code>
         <br>
-        <h2 id="Cisco SIP Phone Template">Cisco SIP Phone Template</h2>
+        <h2 id="Cisco SIP Phone Template">Cisco SIP Phone Template <a href="#Cisco SIP Phone Template" title="Link">link</a></h2>
         Settings that apply to all Cisco SIP phones, inherits the settings from the <code class="literal">extension</code> template.<br>
         <br>
         <code class="prettify lang-astsip">[cisco-usecallmanager](!,extension)
@@ -244,7 +244,7 @@ cisco_multiadmin_conference=yes
 dndbusy=yes
 huntgroup_default=no</code>
         <br>
-        <h2 id="Transport Layer Security">Transport Layer Security</h2>
+        <h2 id="Transport Layer Security">Transport Layer Security <a href="#Transport Layer Security" title="Link">link</a></h2>
         Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>. The SSL certificate used by Asterisk must be included in <code class="literal">ITLFile.tlv</code> wih the <code class="literal">ccm</code> function. See <a href="itl-file-tlv.html#tlvfile">Device Security</a><br>
         <br>
         <table>
@@ -286,7 +286,7 @@ encryption_taglen=80</code>
         <br>
         <b>Note</b>: To enable RTP encryption <code class="literal">libsrtp</code> must be installed. Additionally to use the newer <code class="literal">AES-128-GCM</code> and <code class="literal">AES-256-GCM</code> ciphers both Asterisk and <code class="literal">libsrtp</code> must have been compiled with support for them enabled. See <a href="itl-file-tlv.html#libsrtp">Device Security</a> for more information.<br>
         <br>
-        <h2 id="Device Model Template">Device Model Template</h2>
+        <h2 id="Device Model Template">Device Model Template <a href="#Device Model Template" title="Link">link</a></h2>
         Example individual device templates for each Cisco SIP phone model to handle the different features, inherits the settings from the <code class="literal">cisco-usecallmanager</code> template.<br>
         <br>
         <code class="prettify lang-astsip">[cisco-7941](!,cisco-usecallmanager)
@@ -316,7 +316,7 @@ videosupport=yes
 ; Allow the video codec
 allow=h264</code>
         <br>
-        <h2 id="SIP Phone Peers">SIP Phone Peers</h2>
+        <h2 id="SIP Phone Peers">SIP Phone Peers <a href="#SIP Phone Peers" title="Link">link</a></h2>
         Individual peer definitions for Cisco SIP phones, inherits the settings from the <code class="literal">cisco-<i>MODEL</i></code> template.<br>
         <br>
         <code class="prettify lang-astsip">[301](cisco-7941,insecure-mode)
@@ -353,7 +353,7 @@ mailbox=303@default
 setvar=SPEEDDIAL1=301
 setvar=SPEEDDIAL2=302</code>
         <br>
-        <h2 id="Multiple Lines">Multiple Lines</h2>
+        <h2 id="Multiple Lines">Multiple Lines <a href="#Multiple Lines" title="Link">link</a></h2>
         Cisco SIP phones that have more than one line must have each of those peers specified in their peer definition using <code class="literal">register</code>. Each additional bulk-registered peer will automatically have the same qualify, Do Not Disturb and Hunt Group state as the primary peer.<br>
         <br>
         <code class="prettify lang-astsip">; First line (lineIndex=1 in SEPMAC.cnf.xml)

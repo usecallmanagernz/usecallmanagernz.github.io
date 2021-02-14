@@ -100,7 +100,7 @@
         <br>
         <code class="command-line">~/ocserv-0.12.6$ sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
         <br>
-        <h2 id="ocserv.conf">ocserv.conf</h2>
+        <h2 id="ocserv.conf">ocserv.conf <a href="#ocserv.conf" title="Link">link</a></h2>
         The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>.<br>
         <br>
         <code class="command-line">~/certutils$ ./mkcert -c "OpenConnect" -f ocserv.pem</code>
@@ -139,7 +139,7 @@ tls-priorities = "SECURE256:%COMPAT"
 # dtls-legacy = true
 ...</code>
         <br>
-        <h2 id="certhash">certhash</h2>
+        <h2 id="certhash">certhash <a href="#certhash" title="Link">link</a></h2>
         <code class="literal">certhash</code> is used to generate a base64 encoded version of the SHA1 hash of the VPN server certificate. The hash is then set in one of &lt;<code class="tag">certHash1</code>&gt; ... &lt;<code class="tag">certHash10</code>&gt; in <a href="sepmac-cnf-xml.html#certHash1">SEPMAC.cnf.xml</a>.<br>
         <br>
         <code class="command-line">~/certutils$ ./certhash -d sha1 ocserv.pem
