@@ -109,7 +109,7 @@
   &lt;IfModule rewrite_module&gt;
     RewriteEngine on
     # Phone requests a .sgn file but actually wants an unsigned file
-    RewriteRule ^/(SEP.+\.xml)\.sgn$ /$1 [last,nocase]
+    RewriteRule ^/(SEP.+\.xml)\.sgn$ /$1 [last]
   &lt;/IfModule&gt;
 &lt;/Virtualhost&gt;</code>
         <br>

@@ -250,15 +250,15 @@ huntgroup_default=no</code>
         <table>
           <tbody>
             <tr>
-              <td><b>Insecure</b></td>
-              <td>Connect using TCP</td>
+              <td><b>Non-Secure Mode</b></td>
+              <td>Connect using TCP, RTP is unencrypted</td>
             </tr>
             <tr>
-              <td><b>Authenticated</b></td>
+              <td><b>Authenticated Mode</b></td>
               <td>Connect using TLS with the NULL cipher, RTP is unencrypted</td>
             </tr>
             <tr>
-              <td><b>Enncrypted</b></td>
+              <td><b>Encrypted Mode</b></td>
               <td>Connect using TLS with AES cipher, RTP is encrypted</td>
             </tr>
           </tbody>
@@ -272,7 +272,7 @@ tlscipher=ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256
 ;tlscipher+=:NULL
 ...
 
-[insecure-mode](!)
+[non-secure-mode](!)
 transport=tcp
 
 [authenticated-mode](!)
@@ -319,7 +319,7 @@ allow=h264</code>
         <h2 id="SIP Phone Peers">SIP Phone Peers <a href="#SIP Phone Peers" title="Link">link</a></h2>
         Individual peer definitions for Cisco SIP phones, inherits the settings from the <code class="literal">cisco-<i>MODEL</i></code> template.<br>
         <br>
-        <code class="prettify lang-astsip">[301](cisco-7941,insecure-mode)
+        <code class="prettify lang-astsip">[301](cisco-7941,non-secure-mode)
 secret=Gsgf90tYZ26FNQgA
 callerid="Alice" &lt;301&gt;
 description=Alice
@@ -342,7 +342,7 @@ subscribe=301
 subscribe=303
 subscribe=381
 
-[303](cisco-8865,insecure-mode)
+[303](cisco-8865,non-secure-mode)
 secret=NH3d6r1WW1Kcvo9I
 callerid="Cookie Monster" &lt;303&gt;
 description=Cookie Monster
@@ -357,7 +357,7 @@ setvar=SPEEDDIAL2=302</code>
         Cisco SIP phones that have more than one line must have each of those peers specified in their peer definition using <code class="literal">register</code>. Each additional bulk-registered peer will automatically have the same qualify, Do Not Disturb and Hunt Group state as the primary peer.<br>
         <br>
         <code class="prettify lang-astsip">; First line (lineIndex=1 in SEPMAC.cnf.xml)
-[301](cisco-9951,insecure-mode)
+[301](cisco-9951,non-secure-mode)
 secret=LJoO6dgRJYzrCE5Y
 callerid="Alice" &lt;301&gt;
 description=Alice, Line 1
@@ -369,12 +369,12 @@ register=302
 ; Third line (lineIndex=3 in SEPMAC.cnf.xml)
 register=303
 
-[302](cisco-9951,insecure-mode)
+[302](cisco-9951,non-secure-mode)
 secret=LJoO6dgRJYzrCE5Y
 callerid="Alice" &lt;302&gt;
 description=Alice, Line 2
 
-[303](cisco-9951,insecure-mode)
+[303](cisco-9951,non-secure-mode)
 secret=LJoO6dgRJYzrCE5Y
 callerid="Alice" &lt;303&gt;
 description=Alice, Line 3</code>

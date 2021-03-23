@@ -71,7 +71,7 @@
         <h1>CGI Execute</h1>
         The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>. An archive containing sample command line utilties can be downloaded from the URL below.<br>
         <br>
-        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/commands/archive/v1.3.tar.gz">commands-1.3.tar.gz</a> (13K) <span class="icon">event</span> 29/01/2021 <span class="icon">security</span> SHA256:af23bd227cd0d503a984b17df69d447d62090fc6420d2601e3874c7ebaff9d8e.<br>
+        <span class="icon">file_download</span> <a href="https://github.com/usecallmanagernz/commands/archive/v1.4.tar.gz">commands-1.4.tar.gz</a> (13K) <span class="icon">event</span> 23/03/2021 <span class="icon">security</span> SHA256:8f538afc76d19d605885012b022347fc597fb940bfed3251e6cfa4656089546d.<br>
         <br>
         If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
@@ -202,16 +202,18 @@ def main():
 
     for option, argument in options:
         if option in ('-h', '--host'):
-            if not re.search(r'(?xi) ^ (?: [a-z0-9\-]+ \.)* [a-z0-9\-]+ $', argument):
-                raise ProgramError(f'Invalid host: {argument}')
-
             hostname = argument
 
+            if not re.search(r'(?xi) ^ (?: [a-z0-9\-]+ \.)* [a-z0-9\-]+ $', hostname):
+                raise ProgramError(f'Invalid host: {hostname}')
+
         elif option in ('-t', '--timeout'):
+            timeout = argument
+
             try:
-                timeout = int(argument)
+                timeout = int(timeout)
             except ValueError:
-                raise ProgramError(f'Invalid timeout: {argument}')
+                raise ProgramError(f'Invalid timeout: {timeout}')
 
         elif option in ('-u', '--username'):
             username = argument
