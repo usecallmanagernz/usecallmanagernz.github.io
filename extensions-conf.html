@@ -87,8 +87,10 @@ same =&gt; next,ExecIf($[${LEN(${ALERT_INFO})} != 0]?SIPAddHeader(Alert-Info: &l
 same =&gt; next,Dial(SIP/${PEERNAME},30)
 same =&gt; next,Goto(${TOLOWER(${DIALSTATUS})},1)
 
+; Check if forwarded to the phone's voicemail extension
+exten =&gt; callforward,1,GotoIf($[${CALLFORWARD} = ${SIPPEER(${PEERNAME},vmexten)}]?busy,1)
 ; Cisco SIP phones support displaying diversion information
-exten =&gt; callforward,1,SIPAddHeader(Diversion: &quot;${SIPPEER(${PEERNAME},callerid_name)}&quot; &lt;sip:${SIPPEER(${PEERNAME},callerid_num)}@localhost&gt;\;screen=yes\;privacy=off)
+same =&gt; next,SIPAddHeader(Diversion: &quot;${SIPPEER(${PEERNAME},callerid_name)}&quot; &lt;sip:${SIPPEER(${PEERNAME},callerid_num)}@localhost&gt;\;screen=yes\;privacy=off)
 same =&gt; next,Goto(extensions,${CALLFORWARD},1)
 
 ; If ${MAILBOX} is empty send congestion, otherwise go to voicemail extension below
@@ -249,9 +251,9 @@ same =&gt; next,ConfBridge(${RECORD_UNIQUEID})
 same =&gt; next,Hangup(normal_clearing)</code>
         <br>
         <h2 id="abbrdial">abbrdial <a href="#abbrdial" title="Link">link</a></h2>
-        Abbrievated (or speed) dials, soft key is available from the dial number screen. Example uses ${<code class="variable">SPEEDDIAL&lt;X&gt;</code>} which is set in the phone's <a href="sip-conf.html">sip.conf</a> entry.<br>
+        Abbrievated (or speed) dials, soft key is available from the dial number screen. Example uses ${<code class="variable">SPEEDDIAL_<i>XXX</i></code>} which is set in the phone's <a href="sip-conf.html">sip.conf</a> entry.<br>
         <br>
-        <code class="prettify lang-astexten">exten =&gt; _abbrdial-.,1,Set(SPEEDDIAL=${EVAL(SPEEDDIAL${EXTEN:9})})
+        <code class="prettify lang-astexten">exten =&gt; _abbrdial-.,1,Set(SPEEDDIAL=${EVAL(SPEEDDIAL_${EXTEN:9})})
 same =&gt; next,GotoIf($[${LEN(${SPEEDDIAL})} != 0]?extensions,${SPEEDDIAL},1)
 same =&gt; next,Hangup(unallocated)</code>
         <br>

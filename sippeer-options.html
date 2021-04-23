@@ -108,6 +108,12 @@ exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=yes);
 ; Logout from hunt group
 exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=no);</code>
         <br>
+        <h2 id="vmexten">vmexten <a href="#vmexten" title="Link">link</a></h2>
+        The <code class="literal">vmexten</code> configured for the phone. <b>Note</b>: this item is read-only.<br>
+        <br>
+        <code class="prettify lang-astexten">; Show the vmexten
+exten =&gt; _X.,1,NoOp(VM extension: ${SIPPEER(${CHANNEL(peername)},vmetxen)})</code>
+        <br>
         <h2 id="regcallid">regcallid <a href="#regcallid" title="Link">link</a></h2>
         The SIP Call-ID of the REGISTER dialog, used when restaring or resetting the phone via <a href="sip-notify-conf.html">SIP Notify Commands</a>. <b>Note</b>: this item is read-only.<br>
         <br>
