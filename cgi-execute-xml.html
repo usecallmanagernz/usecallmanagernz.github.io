@@ -185,102 +185,98 @@ def cgi_execute(hostname, timeout, urls, username, password):
 
 
 def main():
-    short_options = 'h:t:u:p:H'
-    long_options = ['host=', 'timeout=', 'username=', 'password=', 'help']
-
     try:
-        options, arguments = getopt.gnu_getopt(sys.argv[1:], short_options, long_options)
-    except getopt.GetoptError as error:
-        raise ProgramError(error.msg[0].upper() + error.msg[1:] +
-                           '. Try \'' + os.path.basename(sys.argv[0]) + ' --help\' for more information')
+        short_options = 'h:t:u:p:H'
+        long_options = ['host=', 'timeout=', 'username=', 'password=', 'help']
 
-    hostname = None
-    timeout = 10
-    username = ''
-    password = ''
-    help = False
+        try:
+            options, arguments = getopt.gnu_getopt(sys.argv[1:], short_options, long_options)
+        except getopt.GetoptError as error:
+            raise ProgramError(error.msg[0].upper() + error.msg[1:] +
+                               '. Try \'' + os.path.basename(sys.argv[0]) + ' --help\' for more information')
 
-    for option, argument in options:
-        if option in ('-h', '--host'):
-            hostname = argument
+        hostname = None
+        timeout = 10
+        username = ''
+        password = ''
+        help = False
 
-            if not re.search(r'(?xi) ^ (?: [a-z0-9\-]+ \.)* [a-z0-9\-]+ $', hostname):
-                raise ProgramError(f'Invalid host: {hostname}')
+        for option, argument in options:
+            if option in ('-h', '--host'):
+                hostname = argument
 
-        elif option in ('-t', '--timeout'):
-            timeout = argument
+                if not re.search(r'(?xi) ^ (?: [a-z0-9\-]+ \.)* [a-z0-9\-]+ $', hostname):
+                    raise ProgramError(f'Invalid host: {hostname}')
 
-            try:
-                timeout = int(timeout)
-            except ValueError:
-                raise ProgramError(f'Invalid timeout: {timeout}')
+            elif option in ('-t', '--timeout'):
+                timeout = argument
 
-        elif option in ('-u', '--username'):
-            username = argument
+                try:
+                    timeout = int(timeout)
+                except ValueError:
+                    raise ProgramError(f'Invalid timeout: {timeout}')
 
-        elif option in ('-p', '--password'):
-            password = argument
+            elif option in ('-u', '--username'):
+                username = argument
 
-        elif option in ('-H', '--help'):
-            help = True
+            elif option in ('-p', '--password'):
+                password = argument
 
-    if help:
-        print('Usage: ' + os.path.basename(sys.argv[0]) + ' [OPTIONS] URL[@PRIORITY]...\n'
-              'Send CGI Execute URLs to a Cisco IP Phone\n'
-              '\n'
-              '  -h, --host HOST            host name or IP-address of the phone\n'
-              '  -t, --timeout TIMEOUT      request timeout in seconds (default 10)\n'
-              '  -u, --username USERNAME    authentication username\n'
-              '  -p, --password PASSWORD    authentication password\n'
-              '  -H, --help                 print this help and exit\n'
-              '\n'
-              'Up to 3 URLs may be specified\n'
-              'URL is one of Dial:, EditDial:, Key:, SoftKey:, Init:, Play:, Display:, http: or https:\n'
-              'Optional PRIORITY is either 0 (immediately), 1 (when idle) or 2 (only if idle)\n')
+            elif option in ('-H', '--help'):
+                help = True
 
-        return
+        if help:
+            print('Usage: ' + os.path.basename(sys.argv[0]) + ' [OPTIONS] URL[@PRIORITY]...\n'
+                  'Send CGI Execute URLs to a Cisco IP Phone\n'
+                  '\n'
+                  '  -h, --host HOST            host name or IP-address of the phone\n'
+                  '  -t, --timeout TIMEOUT      request timeout in seconds (default 10)\n'
+                  '  -u, --username USERNAME    authentication username\n'
+                  '  -p, --password PASSWORD    authentication password\n'
+                  '  -H, --help                 print this help and exit\n'
+                  '\n'
+                  'Up to 3 URLs may be specified\n'
+                  'URL is one of Dial:, EditDial:, Key:, SoftKey:, Init:, Play:, Display:, http: or https:\n'
+                  'Optional PRIORITY is either 0 (immediately), 1 (when idle) or 2 (only if idle)\n')
 
-    if not len(arguments):
-        raise ProgramError('No URLs specified')
+            return
 
-    urls = []
+        if not len(arguments):
+            raise ProgramError('No URLs specified')
 
-    for argument in arguments:
-        if '@' in argument:
-            url, priority = argument.rsplit('@', maxsplit = 1)
+        urls = []
 
-            try:
-                priority = int(priority)
+        for argument in arguments:
+            if '@' in argument:
+                url, priority = argument.rsplit('@', maxsplit = 1)
 
-                if priority &lt; 0 or priority &gt; 2:
-                    raise ValueError
+                try:
+                    priority = int(priority)
 
-            except ValueError:
-                raise ProgramError(f'Invalid priority: {priority}')
-        else:
-            url, priority = argument, 0
+                    if priority &lt; 0 or priority &gt; 2:
+                        raise ValueError
 
-        if not re.search(r'(?x) ^ (?: (?: Dial | EditDial) : [0-9#*]+'
-                          ' | (?: Key | SoftKey | Init) : [a-zA-Z]+'
-                          ' | Play: [a-zA-Z0-9._\-]+'
-                          ' | Display : (?: Off | On | Default) (:? : [0-9]+)?'
-                          ' | https? :// [^ ]+) $', url):
-            raise ProgramError(f'Invalid URL: {url}')
+                except ValueError:
+                    raise ProgramError(f'Invalid priority: {priority}')
+            else:
+                url, priority = argument, 0
 
-        if len(urls) == 3:
-            raise ProgramError('A maximum of 3 URLs can be specified')
+            if not re.search(r'(?x) ^ (?: (?: Dial | EditDial) : [0-9#*]+'
+                              ' | (?: Key | SoftKey | Init) : [a-zA-Z]+'
+                              ' | Play: [a-zA-Z0-9._\-]+'
+                              ' | Display : (?: Off | On | Default) (:? : [0-9]+)?'
+                              ' | https? :// [^ ]+) $', url):
+                raise ProgramError(f'Invalid URL: {url}')
 
-        urls.append((url, priority))
+            if len(urls) == 3:
+                raise ProgramError('A maximum of 3 URLs can be specified')
 
-    if hostname is None:
-        raise ProgramError('No host specified')
+            urls.append((url, priority))
 
-    cgi_execute(hostname, timeout, urls, username, password)
+        if hostname is None:
+            raise ProgramError('No host specified')
 
-
-if __name__ == '__main__':
-    try:
-        main()
+        cgi_execute(hostname, timeout, urls, username, password)
 
     except ProgramError as error:
         print(str(error), file = sys.stderr)
@@ -290,7 +286,11 @@ if __name__ == '__main__':
         traceback.print_exc(file = sys.stderr)
         exit(1)
 
-    exit(0)</code>
+    exit(0)
+
+
+if __name__ == '__main__':
+    main()</code>
         <br>
         <h2 id="setBackground">setBackground <a href="#setBackground" title="Link">link</a></h2>
         Sets the background on the phone, both URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. An example <code class="literal">setbackground</code> script can be found in the archive above.<br>
