@@ -17,7 +17,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png">
+      <img src="images/logo.png" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -210,7 +210,7 @@
         </table>
         <br>
         <div class="horizontal-rule"></div>
-        <h2 id="Extension Template">Extension Template <a href="#Extension Template" title="Link">link</a></h2>
+        <h2 id="Extension-Template">Extension Template <a href="#Extension-Template" title="Link">link</a></h2>
         Settings common to all SIP peers that are local extensions.<br>
         <br>
         <code class="prettify lang-astsip">[extension](!)
@@ -231,7 +231,7 @@ disallow=all
 allow=g722,ulaw,alaw,g729
 ...</code>
         <br>
-        <h2 id="Cisco SIP Phone Template">Cisco SIP Phone Template <a href="#Cisco SIP Phone Template" title="Link">link</a></h2>
+        <h2 id="Cisco-SIP-Phone-Template">Cisco SIP Phone Template <a href="#Cisco-SIP-Phone-Template" title="Link">link</a></h2>
         Settings that apply to all Cisco SIP phones, inherits the settings from the <code class="literal">extension</code> template.<br>
         <br>
         <code class="prettify lang-astsip">[cisco-usecallmanager](!,extension)
@@ -244,7 +244,7 @@ cisco_multiadmin_conference=yes
 dndbusy=yes
 huntgroup_default=no</code>
         <br>
-        <h2 id="Transport Layer Security">Transport Layer Security <a href="#Transport Layer Security" title="Link">link</a></h2>
+        <h2 id="Transport-Layer-Security">Transport Layer Security <a href="#Transport-Layer-Security" title="Link">link</a></h2>
         Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>. The SSL certificate used by Asterisk must be included in <code class="literal">ITLFile.tlv</code> wih the <code class="literal">ccm</code> function. See <a href="itl-file-tlv.html#tlvfile">Device Security</a><br>
         <br>
         <table>
@@ -286,7 +286,7 @@ encryption_taglen=80</code>
         <br>
         <b>Note</b>: To enable RTP encryption <code class="literal">libsrtp</code> must be installed. Additionally to use the newer <code class="literal">AES-128-GCM</code> and <code class="literal">AES-256-GCM</code> ciphers both Asterisk and <code class="literal">libsrtp</code> must have been compiled with support for them enabled. See <a href="itl-file-tlv.html#libsrtp">Device Security</a> for more information.<br>
         <br>
-        <h2 id="Device Model Template">Device Model Template <a href="#Device Model Template" title="Link">link</a></h2>
+        <h2 id="Device-Model-Template">Device Model Template <a href="#Device-Model-Template" title="Link">link</a></h2>
         Example individual device templates for each Cisco SIP phone model to handle the different features, inherits the settings from the <code class="literal">cisco-usecallmanager</code> template.<br>
         <br>
         <code class="prettify lang-astsip">[cisco-7941](!,cisco-usecallmanager)
@@ -316,7 +316,7 @@ videosupport=yes
 ; Allow the video codec
 allow=h264</code>
         <br>
-        <h2 id="SIP Phone Peers">SIP Phone Peers <a href="#SIP Phone Peers" title="Link">link</a></h2>
+        <h2 id="SIP-Phone-Peers">SIP Phone Peers <a href="#SIP-Phone-Peers" title="Link">link</a></h2>
         Individual peer definitions for Cisco SIP phones, inherits the settings from the <code class="literal">cisco-<i>MODEL</i></code> template.<br>
         <br>
         <code class="prettify lang-astsip">[301](cisco-7941,non-secure-mode)
@@ -353,7 +353,7 @@ mailbox=303@default
 setvar=SPEEDDIAL_1=301
 setvar=SPEEDDIAL_2=302</code>
         <br>
-        <h2 id="Multiple Lines">Multiple Lines <a href="#Multiple Lines" title="Link">link</a></h2>
+        <h2 id="Multiple-Lines">Multiple Lines <a href="#Multiple-Lines" title="Link">link</a></h2>
         Cisco SIP phones that have more than one line must have each of those peers specified in their peer definition using <code class="literal">register</code>. Each additional bulk-registered peer will automatically have the same qualify, Do Not Disturb and Hunt Group state as the primary peer.<br>
         <br>
         <code class="prettify lang-astsip">; First line (lineIndex=1 in SEPMAC.cnf.xml)
@@ -370,12 +370,10 @@ register=302
 register=303
 
 [302](cisco-9951,non-secure-mode)
-secret=LJoO6dgRJYzrCE5Y
 callerid="Alice" &lt;302&gt;
 description=Alice, Line 2
 
 [303](cisco-9951,non-secure-mode)
-secret=LJoO6dgRJYzrCE5Y
 callerid="Alice" &lt;303&gt;
 description=Alice, Line 3</code>
       </article>

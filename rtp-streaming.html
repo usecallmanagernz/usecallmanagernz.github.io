@@ -17,7 +17,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png">
+      <img src="images/logo.png" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -108,24 +108,24 @@
           </tbody>
         </table>
         <br>
-        <h2 id="unicast">Unicast Audio <a href="#unicast" title="Link">link</a></h2>
+        <h2 id="Unicast-Audio">Unicast Audio <a href="#Unicast-Audio" title="Link">link</a></h2>
         Unicast uses a separate RTP audio stream for each phone.<br>
         <br>
         <code class="prettify lang-astexten">; Unicast page 301 and 302 and set speaker volume to 75%
 exten =&gt; 380,1,SIPCiscoPage(301&amp;302,ov(75)ad(From ${CALLERID(number)}))</code>
         <br>
         <br>
-        <h2 id="unicast">Multicast Audio <a href="#unicast" title="Link">link</a></h2>
+        <h2 id="Multicast-Audio">Multicast Audio <a href="#Multicast-Audio" title="Link">link</a></h2>
         Multicast uses only a single RTP audio stream for all phones. You must specify a multicast IP address.<br>
         <br>
         <code class="prettify lang-astexten">; Multicast page 301, 302 and 303
 exten =&gt; 380,1,SIPCiscoPage(301&amp;302&amp;303,oam(224.0.1.1))</code>
         <br>
         <br>
-        <h2 id="mediastream">External Streaming <a href="#mediastream" title="Link">link</a></h2>
+        <h2 id="External-Streaming">External Streaming <a href="#External-Streaming" title="Link">link</a></h2>
         The <code class="literal">mediastream</code> script from the commands archive below can be used to stream a <code class="literal">.wav</code> file to multiple phones. See <a href="cgi-execute-xml.html">CGI Execute</a> for more information.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/commands/archive/v1.5.tar.gz"><span class="icon">file_download</span> commands-1.5.tar.gz</a> (13K) <span class="icon">event</span> 23/04/2021 <span class="icon">security</span> SHA256:91b535765bc08f76c7874a39d583379af7adc65ef4597d2b13125995197fb28e.
+        <a href="https://github.com/usecallmanagernz/commands/archive/v1.6.tar.gz"><span class="icon">file_download</span> commands-1.6.tar.gz</a> (13K) <span class="icon">event</span> 09/06/2021 <span class="icon">security</span> SHA256:3c25b2266a791b178a868a7a05cf7a10677cc513ea1560dd3230c25597225458.
       </article>
     </main>
     <footer></footer>

@@ -17,7 +17,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png">
+      <img src="images/logo.png" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -87,7 +87,7 @@
   &lt;/Directory&gt;
 &lt;/Virtualhost&gt;</code>
         <br>
-        <h2 id="Secure Provisioning">Secure Provisioning <a href="#Secure Provisioning" title="Link">link</a></h2>
+        <h2 id="Secure-Provisioning">Secure Provisioning <a href="#Secure-Provisioning" title="Link">link</a></h2>
         If the <code class="literal">ITLFile.tlv</code> has a version of <code class="literal">1.1</code> the phone will use HTTPS to download <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a> from port <code class="literal">6971</code> on the server before falling back to HTTP on failure. The SSL certificate used by server must use an EC (Elliptic Curve) key and be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function.<br>
         <br>
         While the phone requests its configuration file with a <code class="literal">.sgn</code> extension the response must contain an unsigned file. All remaining provisioning files like soft keys, dial template and ring-tones will be downloaded on port <code class="literal">6970</code> and must be signed with a certificate that uses an RSA key an be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">tftp</code> function. See <a href="itl-file.tlv#tlvfile">Device Security</a> for more information.<br>
@@ -113,7 +113,7 @@
   &lt;/IfModule&gt;
 &lt;/Virtualhost&gt;</code>
         <br>
-        <h2>XML Services <a href="#XML Services" title="Link">link</a></h2>
+        <h2 id="XML-Services">XML Services <a href="#XML-Services" title="Link">link</a></h2>
         Example configuration for a WSGI application providing phone XML services. There are two &lt;<code class="tag">VirtualHost</code>&gt; below, one for services using HTTP on <code class="literal">6972</code> and the other for secure services using HTTPS on <code class="literal">6973</code>. Any ports can be used. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
         <code class="prettify lang-apache"># For &lt;servicesURL&gt;, &lt;directoryURL&gt; and &lt;authenticationURL&gt;

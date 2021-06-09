@@ -18,7 +18,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png">
+      <img src="images/logo.png" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -188,7 +188,7 @@ same =&gt; next,Hangup(normal_clearing)</code>
 same =&gt; next,Hangup(normal_circuit_congestion)</code>
         <br>
         <h2 id="blfpickup">blfpickup <a href="#blfpickup" title="Link">link</a></h2>
-        Busy Lamp Field Directed Call Pickup, ${<code class="variable">EXTEN</code>:<code class="literal">10</code>} is the number specified as the &lt;<code class="tag">speedDialNumber</code>&gt; in a BLF speed-dial <a href="line-keys-xml.html#BLF Speed Dial">line key</a> definition, also needs to have a matching <code class="literal">subscribe</code> entry in <a href="sip-conf.html">sip.conf.</a><br>
+        Busy Lamp Field Directed Call Pickup, ${<code class="variable">EXTEN</code>:<code class="literal">10</code>} is the number specified as the &lt;<code class="tag">speedDialNumber</code>&gt; in a BLF speed-dial <a href="line-keys-xml.html#BLF-Speed-Dial">line key</a> definition, also needs to have a matching <code class="literal">subscribe</code> entry in <a href="sip-conf.html">sip.conf.</a><br>
         <br>
         <code class="prettify lang-astexten">exten =&gt; _blfpickup-.,1,PickupChan(SIP/${EXTEN:10})
 same =&gt; next,Hangup(normal_circuit_congestion)</code>
@@ -220,7 +220,7 @@ exten =&gt; park,1,Park(default,st(60)T(50)c(extensions,370,1))
 include =&gt; parked-calls</code>
         <br>
         <h2 id="dpark">dpark <a href="#dpark" title="Link">link</a></h2>
-        Directed BLF Call Park, blind-transfers the current call to this extension. ${<code class="variable">EXTEN</code>:<code class="literal">6</code>} is the number specified as the &lt;<code class="tag">speedDialNumber</code>&gt; in a BLF Directed Call Park <a href="line-keys-xml.html#BLF Directed Call Park">line key</a> definition, also needs to have a matching <code class="literal">subscribe</code> entry in <a href="sip-conf.html">sip.conf</a>. The <code class="literal">dpark</code> prefix is only used when that parking extension is not in use, otherwise it uses the optional &lt;<code class="tag">retrievalPrefix</code>&gt;.<br>
+        Directed BLF Call Park, blind-transfers the current call to this extension. ${<code class="variable">EXTEN</code>:<code class="literal">6</code>} is the number specified as the &lt;<code class="tag">speedDialNumber</code>&gt; in a BLF Directed Call Park <a href="line-keys-xml.html#BLF-Directed-Call-Park">line key</a> definition, also needs to have a matching <code class="literal">subscribe</code> entry in <a href="sip-conf.html">sip.conf</a>. The <code class="literal">dpark</code> prefix is only used when that parking extension is not in use, otherwise it uses the optional &lt;<code class="tag">retrievalPrefix</code>&gt;.<br>
         <br>
         <code class="prettify lang-astexten">exten =&gt; _dpark-.,1,Set(PARKINGEXTEN=${EXTEN:6})
 same =&gt; next,Goto(park,1)</code>

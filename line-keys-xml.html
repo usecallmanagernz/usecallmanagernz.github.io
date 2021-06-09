@@ -16,7 +16,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png">
+      <img src="images/logo.png" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -79,7 +79,7 @@
   &lt;featureLabel&gt;Redial&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Speed Dial">Speed Dial <a href="#Speed Dial" title="Link">link</a></h2>
+        <h2 id="Speed-Dial">Speed Dial <a href="#Speed-Dial" title="Link">link</a></h2>
         Dials the number specified by the &lt;<code class="tag">speedDialNumber</code>&gt;. To have the phone pause for <code class="literal">2</code> seconds before dialing the remaining digits use a <code class="literal">,</code> (comma), multiple pauses can be specified.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -88,7 +88,7 @@
   &lt;speedDialNumber&gt;<i>NUMBER</i>&lt;/speedDialNumber&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Abbreviated Speed Dial">Abbreviated Speed Dial <a href="#Abbreviated Speed Dial" title="Link">link</a></h2>
+        <h2 id="Abbreviated-Speed-Dial">Abbreviated Speed Dial <a href="#Abbreviated-Speed-Dial" title="Link">link</a></h2>
         The phone will dial <code class="literal">x-cisco-serviceuri-abbrdial-XXX</code> where <code class="literal">XXX</code> is specified in &lt;<code class="tag">speedDialIndex</code>&gt; which is a number between <code class="literal">1</code> and <code class="literal">99</code>. These numbers will also appear in the phone's speed dial menu. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -114,7 +114,7 @@
   &lt;featureLabel&gt;Transfer&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Call Forward">Call Forward <a href="#Call Forward" title="Link">link</a></h2>
+        <h2 id="Call-Forward">Call Forward <a href="#Call-Forward" title="Link">link</a></h2>
         Sets or clears the currentl call forward target. The phone make a call to <code class="literal">x-cisco-serviceuri-cfwdall-XXX</code> where <code class="literal">XXX</code> is replaced by the forwarding target dialed by the user. The phone will make a call to <code class="literal">x-cisco-serviceuri-cfwdall</code> when clearing the forwarding target. See <a href="extensions-conf.html#cfwdall">Dialplan Extensions</a> for an example. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -162,7 +162,7 @@
   &lt;featureLabel&gt;Settings&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Service URI">Service URI <a href="#Service URI" title="Link">link</a></h2>
+        <h2 id="Service-URI">Service URI <a href="#Service-URI" title="Link">link</a></h2>
         Load an XML service specified in &lt;<code class="tag">serviceURI</code>&gt;. <b>Note</b>: If an HTTPS URL is used the line key will behave as if &lt;<code class="tag">secureServiceURI</code>&gt; was used. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -171,7 +171,7 @@
   &lt;serviceURI&gt;<i>URL</i>&lt;/serviceURI&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Secure Service URI">Secure Service URI <a href="#Secure Service URI" title="Link">link</a></h2>
+        <h2 id="Secure-Service-URI">Secure Service URI <a href="#Secure-Service-URI" title="Link">link</a></h2>
         Load an HTTPS XML service specified in &lt;<code class="tag">secureServiceURI</code>&gt;. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -180,7 +180,7 @@
   &lt;secureServiceURI&gt;<i>URL</i>&lt;/secureServiceURI&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="BLF Speed Dial">BLF Speed Dial <a href="#BLF Speed Dial" title="Link">link</a></h2>
+        <h2 id="BLF-Speed-Dial">BLF Speed Dial <a href="#BLF-Speed-Dial" title="Link">link</a></h2>
         Speed Dial that monitors the device and presence state of an extension, a corresponding <code class="keyword">hint</code> must be created in <a href="extensions-conf.html">extensions.conf</a> as well as a <code class="literal">subscribe</code> entry in <a href="sip-conf.html">sip.conf</a>.<br>
         <br>
         Using a &lt;<code class="tag">featureOptionMask</code>&gt; of <code class="literal">1</code> will also display whether that extension is ringing and will perform a directed call pickup request when pressed by dialing <code class="literal">x-cisco-serviceuri-blfpickup-XXX</code> where <code class="literal">XXX</code> is replaced by the number specified in &lt;<code class="tag">speedDialNumber</code>&gt;. See <a href="extensions-conf.html#blfpickup">Dialplan Extensions</a> for an example.<br>
@@ -192,7 +192,7 @@
   &lt;speedDialNumber&gt;<i>NUMBER</i>&lt;/speedDialNumber&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="BLF Directed Call Park">BLF Directed Call Park <a href="#BLF Directed Call Park" title="Link">link</a></h2>
+        <h2 id="BLF-Directed-Call-Park">BLF Directed Call Park <a href="#BLF-Directed-Call-Park" title="Link">link</a></h2>
         Speed Dial that monitors the state of a parking extension, only displays idle and busy device states. &lt;<code class="tag">speedDialNumber</code>&gt; contains the number dialed and the optional &lt;<code class="tag">contact</code>&gt; contains the extension subscribed to. See above for additional subscription requirements.<br>
         <br>
         When idle, the current call will be blind-transferred to <code class="literal">x-cisco-serviceuri-dpark-XXX</code> where <code class="literal">XXX</code> is replaced by the number in &lt;<code class="tag">speedDialNumber</code>&gt;. Otherwise if the parking extension is in-use a call will be made to the number in &lt;<code class="tag">speedDialNumber</code>&gt; optionally prefixed by &lt;<code class="tag">retrievalPrefix</code>&gt;. See <a href="extensions-conf.html#dpark">Dialplan Extensions</a> for an example.<br>
@@ -226,7 +226,7 @@
   &lt;busyTrigger&gt;1&lt;/busyTrigger&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Malicious Call">Malicious Call <a href="#Malicious Call" title="Link">link</a></h2>
+        <h2 id="Malicious-Call">Malicious Call <a href="#Malicious-Call" title="Link">link</a></h2>
         Report that the current call is suspicious or harrasing.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -242,7 +242,7 @@
   &lt;featureLabel&gt;Conference&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Meet Me">Meet Me <a href="#Meet Me" title="Link">link</a></h2>
+        <h2 id="Meet-Me">Meet Me <a href="#Meet-Me" title="Link">link</a></h2>
         Create a meetme conference. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-meetme-XXX</code> where <code class="literal">XXX</code> is replaced with the meetme number dialed by the user. See <a href="extensions-conf.html#meetme">Dialplan Extensions</a> for an example.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -266,7 +266,7 @@
   &lt;featureLabel&gt;PickUp&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Group PickUp">Group PickUp <a href="#Group PickUp" title="Link">link</a></h2>
+        <h2 id="Group-PickUp">Group PickUp <a href="#Group-PickUp" title="Link">link</a></h2>
         Pick-up an incoming call in a specific call group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-gickup-XXX</code> where <code class="literal">XXX</code> is replaced with the group number dialed by the user. See <a href="extensions-conf.html#gpickup">Dialplan Extensions</a> for an example.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -274,7 +274,7 @@
   &lt;featureLabel&gt;Group PickUp&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Do Not Disturb">Do Not Disturb <a href="#Do Not Disturb" title="Link">link</a></h2>
+        <h2 id="Do-Not-Disturb">Do Not Disturb <a href="#Do-Not-Disturb" title="Link">link</a></h2>
         Set to remove Do Not Disturb status. Line key lamp will be red or orange (depending on phone model) when Do Not Disturb is set.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -282,7 +282,7 @@
   &lt;featureLabel&gt;Do Not Disturb&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Remove Last Participant">Remove Last Participant <a href="#Remove Last Participant" title="Link">link</a></h2>
+        <h2 id="Remove-Last-Participant">Remove Last Participant <a href="#Remove-Last-Participant" title="Link">link</a></h2>
         Remove last participant added to the selected ad-hoc conference. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -290,7 +290,7 @@
   &lt;featureLabel&gt;Remove Last Participant&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Report Quality">Report Quality <a href="#Report Quality" title="Link">link</a></h2>
+        <h2 id="Report-Quality">Report Quality <a href="#Report-Quality" title="Link">link</a></h2>
         Report a call-quality issue. RTP statistics about the call will be logged, &lt;<code class="tag">callStats</code>&gt; must be enabled. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -298,7 +298,7 @@
   &lt;featureLabel&gt;Report Quality&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Call Back">Call Back <a href="#Call Back" title="Link">link</a></h2>
+        <h2 id="Call-Back">Call Back <a href="#Call-Back" title="Link">link</a></h2>
         Activate a call-back for the current outgoing call. Phone will notify you when the extension becomes available. You need to have a <a href="ring-list-xml.html">ring-tone</a> named <code class="literal">Callback.raw</code> to get an audible notification. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -306,7 +306,7 @@
   &lt;featureLabel&gt;Call Back&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Other PickUp">Other PickUp <a href="#Other PickUp" title="Link">link</a></h2>
+        <h2 id="Other-PickUp">Other PickUp <a href="#Other-PickUp" title="Link">link</a></h2>
         Pick-up an incoming call to on of the phones in your other pickup group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-opickup</code>.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -314,7 +314,7 @@
   &lt;featureLabel&gt;Other PickUp&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="New Call">New Call <a href="#New Call" title="Link">link</a></h2>
+        <h2 id="New-Call">New Call <a href="#New-Call" title="Link">link</a></h2>
         Make a new outgoing call. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -322,7 +322,7 @@
   &lt;featureLabel&gt;New Call&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Hunt Group">Hunt Group <a href="#Hunt Group" title="Link">link</a></h2>
+        <h2 id="Hunt-Group">Hunt Group <a href="#Hunt-Group" title="Link">link</a></h2>
         Login or Logout from the Hunt Group. Line key lamp will be orange when logged-in.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -330,7 +330,7 @@
   &lt;featureLabel&gt;Hunt Group&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="All Calls">All Calls <a href="#All Calls" title="Link">link</a></h2>
+        <h2 id="All-Calls">All Calls <a href="#All-Calls" title="Link">link</a></h2>
         Display all calls on the phone. <b>7800</b> and <b>8800</b> series, <b>8961</b>, <b>9951</b> and <b>9971</b> models only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -346,7 +346,7 @@
   &lt;featureLabel&gt;Answer&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Alerting Calls">Alerting Calls <a href="#Alerting Calls" title="Link">link</a></h2>
+        <h2 id="Alerting-Calls">Alerting Calls <a href="#Alerting-Calls" title="Link">link</a></h2>
         Only show the alerting (incoming) calls on your phone. <b>7800</b> and <b>8800</b> series, <b>8961</b>, <b>9951</b> and <b>9971</b> models only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
@@ -386,7 +386,7 @@
   &lt;featureLabel&gt;Directories&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Application Menu">Application Menu <a href="#Application Menu" title="Link">link</a></h2>
+        <h2 id="Application-Menu">Application Menu <a href="#Application-Menu" title="Link">link</a></h2>
         Same as the <code class="literal">applications</code> button, needed for phone models like the <b>7931</b> that do not have a dedicated key for this feature. <b>7900</b> series only.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;

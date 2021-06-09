@@ -16,7 +16,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png">
+      <img src="images/logo.png" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -487,7 +487,7 @@ def before_request():
 def error_handler(error):
     return Response(str(error), mimetype = 'text/plain'), 500</code>
         <br>
-        <h2 id="WSGIApplication">WSGI Application <a href="#WSGIApplication" title="Link">link</a></h2>
+        <h2 id="WSGI-Application">WSGI Application <a href="#WSGI-Application" title="Link">link</a></h2>
         Entry point for the WSGI application. Additional configuration can be specified by the <code class="literal">FLASK_CONFIG</code> environment variable.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3
@@ -521,7 +521,7 @@ def error_handler(error):
 if __name__ == '__main__':
     application.run()</code>
         <br>
-        <h2 id="AppConfig">Application Configuration <a href="#AppConfig" title="Link">link</a></h2>
+        <h2 id="Application-Configuration">Application Configuration <a href="#Application-Configuration" title="Link">link</a></h2>
         Parses <code class="literal">config.yml</code> which contains the paths and credentials for the application. A different location can be specified by the <code class="literal">SERVICES_CONFIG</code> environment variable.<br>
         <br>
         <code class="prettify lang-python">#!/usr/bin/python3

@@ -16,7 +16,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png">
+      <img src="images/logo.png" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -87,12 +87,12 @@
   ...
 &lt;/CiscoIPPhoneRingList&gt;</code>
         <br>
-        <h2 id="Using SoX">Using SoX <a href="#Using SoX" title="Link">link</a></h2>
+        <h2 id="Using-SoX">Using SoX <a href="#Using-SoX" title="Link">link</a></h2>
         Ring-tones are raw PCM (no header), u-law encoded with 8-bits per sample, mono at 8000Hz between 240 and 16080 samples (2 seconds) in length. The example below shows how a <code class="literal">.wav</code> file can be converted to <code class="literal">.raw</code> using <code class="literal">sox</code>.<br>
         <br>
         <code class="command-line">~$ sox input.wav -t raw -e u-law -b 8 -c 1 -r 8000 output.raw</code>
         <br>
-        <h2 id="Wideband Ring Tones">Wideband Ring Tones <a href="#Wideband Ring Tones" title="Link">link</a></h2>
+        <h2 id="Wideband-Ring-Tones">Wideband Ring Tones <a href="#Wideband-Ring-Tones" title="Link">link</a></h2>
         The <b>7800</b> and <b>8800</b> series phones use wideband ring-tones. The list of available wideband ring-tones is specified in a file called <code class="literal">Ringlist-wb.xml</code> which is in the same format as <code class="literal">Ringlist.xml</code>. Wideband ring-tone filenames must end in <code class="literal">.rwb</code>.<br>
         <br>
         Wideband ring-tones are raw PCM (no header), signed-integer encoded with 16-bits per sample, mono at 16000Hz between 240 and 160800 samples (10 seconds) in length. The example below shows how a <code class="literal">.wav</code> file can be converted to <code class="literal">.rwb</code> using <code class="literal">sox</code>.<br>
