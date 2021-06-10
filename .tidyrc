@@ -1,4 +1,3 @@
 output-file: /dev/null
 quiet: yes
-mute-id: yes
-mute: TRIM_EMPTY_ELEMENT
+drop-empty-elements: no
