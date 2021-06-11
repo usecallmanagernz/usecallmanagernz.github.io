@@ -1,4 +1,4 @@
-name: html lint check
+name: html lint
   
 on:
   push:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   tidy:
-    name: Run html lint check
+    name: Run html linter 
     runs-on: ubuntu-latest
 
     steps:
