@@ -75,7 +75,7 @@
         <br>
         <b>1.</b> Download a copy of the patch below.<br>
         <br>
-        <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/ocserv/cisco-webvpnlogin-0.12.6.patch"><span class="icon">file_download</span> cisco-webvpnlogin-0.12.6.patch</a> (15K) <span class="icon">event</span> 24/03/2020 <span class="icon">security</span> SHA256:0e1bda447cac1a2ab8189144bb9f7ee9e903fccf163436f7dd6f7cd3bbbfff6d.<br>
+        <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/ocserv/cisco-webvpnlogin-1.1.3.patch"><span class="icon">file_download</span> cisco-webvpnlogin-1.1.3.patch</a> (20K) <span class="icon">event</span> 11/06/2021 <span class="icon">security</span> SHA256:865139aba7044c18ba153e1a48f65c89b72d689ea500f2df2427b68a9f0d9e09.<br>
         <br>
         <b>2.</b> Download the version of OpenConnect Server that matches the version number in the name of the patch.<br>
         <br>
@@ -83,22 +83,22 @@
         <br>
         <b>3.</b> Extract the archive and apply the patch.<br>
         <br>
-        <code class="command-line">~$ tar -Jxvf ocserv-0.12.6.tar.xz
-~$ cd ocserv-0.12.6
-~/ocserv-0.12.6$ patch -p1 &lt; ../cisco-webvpnlogin-0.12.6.patch</code>
+        <code class="command-line">~$ tar -Jxvf ocserv-1.1.3.tar.xz
+~$ cd ocserv-1.1.3
+~/ocserv-1.1.3$ patch -p1 &lt; ../cisco-webvpnlogin-1.1.3.patch</code>
         <br>
         <b>4.</b> Configure and build OpenConnect Server.<br>
         <br>
-        <code class="command-line">~/ocserv-0.12.6$ ./configure --prefix=/usr --sysconfdir=/etc/ocserv --disable-maintainer-mode
-~/ocserv-0.12.6$ make</code>
+        <code class="command-line">~/ocserv-1.1.3$ ./configure --prefix=/usr --sysconfdir=/etc/ocserv --disable-maintainer-mode
+~/ocserv-1.1.3$ make</code>
         <br>
         <b>5.</b> Install the patched version of OpenConnect Server.<br>
         <br>
-        <code class="command-line">~/ocserv-0.12.6$ sudo make install</code>
+        <code class="command-line">~/ocserv-1.1.3$ sudo make install</code>
         <br>
         <b>6.</b> Install the sample configuration file.<br>
         <br>
-        <code class="command-line">~/ocserv-0.12.6$ sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
+        <code class="command-line">~/ocserv-1.1.3$ sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
         <br>
         <h2 id="ocserv.conf">ocserv.conf <a href="#ocserv.conf" title="Link">link</a></h2>
         The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>.<br>
