@@ -14,7 +14,7 @@ on:
       - '*.html'
 
 jobs:
-  tidy:
+  lint:
     name: Run html linter 
     runs-on: ubuntu-latest
 
