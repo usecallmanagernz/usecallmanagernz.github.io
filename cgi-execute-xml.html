@@ -4,13 +4,14 @@
     <title>CGI Execute</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="includes/theme.css">
     <link rel="stylesheet" type="text/css" href="includes/prettify.css">
-    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="includes/prettify.js"></script>
     <script type="text/javascript">
-      jQuery (window).on ("load", function () {
-          prettyPrint ();
+      jQuery(window).on("load", function () {
+          prettyPrint();
       });
     </script>
   </head>
@@ -35,16 +36,17 @@
           <li><h3>Phone Configuration</h3></li>
           <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
           <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
-          <li><a href="app-dial-rules-xml.html"><span class="icon">import_contacts</span> Application Dial Rules</a></li>
+          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
           <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
           <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
-          <li><a href="feature-policy-xml.html"><span class="icon">done</span> Feature Policy</a></li>
+          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
           <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
           <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
           <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
           <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
           <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
@@ -71,7 +73,7 @@
         <h1>CGI Execute</h1>
         The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>. An archive containing sample command line utilties can be downloaded from the URL below.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/commands/archive/v1.7.tar.gz"><span class="icon">file_download</span> commands-1.7.tar.gz</a> (13K) <span class="icon">event</span> 15/06/2021 <span class="icon">security</span> SHA256:9f907a74ff96132cb05d95e2a8ad6a00e4962bcd339730add7491dba7f3fb2aa.<br>
+        <a href="https://github.com/usecallmanagernz/commands/archive/v1.8.tar.gz"><span class="icon">file_download</span> commands-1.8.tar.gz</a> (14K) <span class="icon">event</span> 23/06/2021 <span class="icon">security</span> SHA256:f68bcf281340d2b2e56c6df2bf186f00958b9c990b2e9cdc642e131cc375b9c6.<br>
         <br>
         If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
@@ -228,17 +230,17 @@ def main():
 
         if help:
             print('Usage: ' + os.path.basename(sys.argv[0]) + ' [OPTIONS] URL[@PRIORITY]...\n'
-                  'Send CGI Execute URLs to a Cisco IP Phone\n'
+                  'Send CGI Execute URLs to a Cisco IP Phone.\n'
                   '\n'
-                  '  -h, --host HOST            host name or IP-address of the phone\n'
+                  '  -h, --host HOST            host name or IP address of the phone\n'
                   '  -t, --timeout TIMEOUT      request timeout in seconds (default 10)\n'
                   '  -u, --username USERNAME    authentication username\n'
                   '  -p, --password PASSWORD    authentication password\n'
                   '  -H, --help                 print this help and exit\n'
                   '\n'
-                  'Up to 3 URLs may be specified\n'
+                  'Up to 3 URLs may be specified.\n'
                   'URL is one of Dial:, EditDial:, Key:, SoftKey:, Init:, Play:, Display:, http: or https:\n'
-                  'Optional PRIORITY is either 0 (immediately), 1 (when idle) or 2 (only if idle)\n')
+                  'Optional PRIORITY is either 0 (immediately), 1 (when idle) or 2 (only if idle).\n')
 
             return
 
@@ -263,7 +265,7 @@ def main():
                 url, priority = argument, 0
 
             if not re.search(r'(?x) ^ (?: (?: Dial | EditDial) : [0-9#*]+'
-                             r' | (?: Key | SoftKey | Init) : [a-zA-Z]+'
+                             r' | (?: Key | SoftKey | Init) : [a-zA-Z0-9]+'
                              r' | Play: [a-zA-Z0-9._\-]+'
                              r' | Display : (?: Off | On | Default) (:? : [0-9]+)?'
                              r' | https? :// [^ ]+) $', url):

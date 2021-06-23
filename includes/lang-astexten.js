@@ -9,7 +9,7 @@ PR['registerLangHandler'](
          ['lang-astexten-application', /^[,\?\):]([a-z_]+)\(/i],
          [PR['PR_SOURCE'], /^\[[\w\-]+\](?![\w,\-])/i],
 
-         [PR['PR_KEYWORD'], /^(?:exten|same|next|hint|include|switch|ignorepat|yes|no|on|off|true|false)(?=[^\-\w]|$)/],
+         [PR['PR_KEYWORD'], /^(?:exten|same|next|hint|include|switch|ignorepat)(?=[^\-\w]|$)/],
          [PR['PR_COMMENT'], /^;[^\r\n]*/],
          [PR['PR_LITERAL'], /^(?:\d+|\d*\.\d+)/i],
          [PR['PR_PLAIN'], /^[a-z_][\w-]*/i],

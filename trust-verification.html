@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RTP Streaming</title>
+    <title>Trust Verification</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="includes/theme.css">
     <link rel="stylesheet" type="text/css" href="includes/prettify.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="includes/prettify.js"></script>
-    <script type="text/javascript" src="includes/lang-astexten.js"></script>
     <script type="text/javascript">
       jQuery(window).on("load", function () {
           prettyPrint();
@@ -47,7 +47,7 @@
           <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
-          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><span class="icon selected">verified</span> <b>Trust Verification</b></li>
           <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
@@ -57,7 +57,7 @@
           <li><a href="extensions-conf.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
           <li><a href="res-parking-conf.html"><span class="icon">local_parking</span> Call Parking</a></li>
           <li><a href="sippeer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
-          <li><span class="icon selected">volume_up</span> <b>RTP Streaming</b></li>
+          <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
         </ul>
         <ul>
@@ -71,63 +71,43 @@
         </ul>
       </nav>
       <article>
-        <h1>RTP Streaming</h1>
-        Audio can be directly streamed one-way to a Cisco phone using the new <code class="function">SIPCiscoPage</code>() application either via a unicast or multicast RTP stream.<br>
+        <h1>Trust Verification</h1>
+        The Trust Verification Service allows phones to query the validity of a certificate that is not included in <code class="literal">ITLFile.tlv</code> on demand. Certificates used for <code class="literal">CCM</code>, <code class="literal">TFTP</code> and <code class="literal">APP-SERVER</code> roles can be dynamically provisioned without the phone having to re-download <code class="literal">ITLFile.tlv</code>.<br>
         <br>
-        <h2>Options</h2>
-        The following application options are available.<br>
+        To enable use of Trust Verification set &lt;<code class="tag">address</code>&gt; and &lt;<code class="tag">port</code>&gt; in <a href="sepmac-cnf-xml.html#TVS/member">SEPMAC.cnf.xml</a> and include a certificate with the <code class="literal">TVS</code> role in <code class="literal">ITLFile.tlv</code>. <b>Note</b>: The entry for the <code class="literal">TVS</code> role must appear before any roles other than <code class="literal">SAST</code> otherwise the phone will not be able to validate the certificate used by <code class="literal">tvsd</code>.<br>
         <br>
-        <table>
-          <tbody>
-            <tr>
-              <td><b>m(address)</b></td>
-              <td>Stream audio to the specified multicast IP address.</td>
-            </tr>
-            <tr>
-              <td><b>p(port)</b></td>
-              <td>Port on the phone to receive the audio, an even number between <code class="literal">20480</code> (default) and <code class="literal">32768</code>.</td>
-            </tr>
-            <tr>
-              <td><b>v(volume)</b></td>
-              <td>Set the receive volume percentage (<code class="literal">1</code>-<code class="literal">100</code>) on the phone's speaker.</td>
-            </tr>
-            <tr>
-              <td><b>d(message)</b></td>
-              <td>Display a message in the status line of the phone for <code class="literal">10</code> seconds.</td>
-            </tr>
-            <tr>
-              <td><b>a</b></td>
-              <td>Play an alert beep on the phone.</td>
-            </tr>
-            <tr>
-              <td><b>o</b></td>
-              <td>Indicate that peers are off-hook when paging.</td>
-            </tr>
-            <tr>
-              <td><b>b</b></td>
-              <td>Page the phone even if it is busy (Off-Hook, Ringing, Busy or DND).</td>
-            </tr>
-          </tbody>
-        </table>
+        <a href="https://github.com/usecallmanagernz/daemons/archive/v1.0.tar.gz"><span class="icon">file_download</span> daemons-1.0.tar.gz</a> (14K) <span class="icon">event</span> 23/06/2021 <span class="icon">security</span> SHA256:260870d6d3befc4ac43f80292c7d6d371f38ff6a79ad9f430fe4626c0b903b01.<br>
         <br>
-        <h2 id="Unicast-Audio">Unicast Audio <a href="#Unicast-Audio" title="Link">link</a></h2>
-        Unicast uses a separate RTP audio stream for each phone.<br>
+        <h2 id="tvsctl">tvsctl <a href="#tvsctl" title="Link">link</a></h2>
+        The <code class="literal">tvsctl</code> utility is used to manage the database file used by <code class="literal">tvsd</code>. The following adds certificates used for <code class="literal">CCM</code> and <code class="literal">APP-SERVER</code> roles to a database file in <code class="literal">/var/lib/tvs</code>.<br>
         <br>
-        <code class="prettify lang-astexten">; Unicast page 301 and 302 and set speaker volume to 75%
-exten =&gt; 380,1,SIPCiscoPage(301&amp;302,ov(75)ad(From ${CALLERID(number)}))</code>
+        <code class="command-line">~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db -i /etc/asterisk/keys/asterisk.pem -c
+~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db -i /etc/apache2/ssl-certs/apache.pem -A</code>
         <br>
+        Certificates can be assigned multiple roles and a optional TTL (time to live). If the certificate already exists in the database file the settings will be overwritten.<br>
         <br>
-        <h2 id="Multicast-Audio">Multicast Audio <a href="#Multicast-Audio" title="Link">link</a></h2>
-        Multicast uses only a single RTP audio stream for all phones. You must specify a multicast IP address.<br>
+        <code class="command-line">~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db -i /etc/asterisk/keys/asterisk.pem -c -A -L 3600</code>
         <br>
-        <code class="prettify lang-astexten">; Multicast page 301, 302 and 303
-exten =&gt; 380,1,SIPCiscoPage(301&amp;302&amp;303,oam(224.0.1.1))</code>
+        A list of certificates and roles in the database file can be shown.<br>
         <br>
+        <code class="command-line">~/daemons-1.0$ ./tvsctl /var/lib/tvsd/cert.db -l</code>
         <br>
-        <h2 id="External-Streaming">External Streaming <a href="#External-Streaming" title="Link">link</a></h2>
-        The <code class="literal">mediastream</code> script from the commands archive below can be used to stream a <code class="literal">.wav</code> file to multiple phones. See <a href="cgi-execute-xml.html">CGI Execute</a> for more information.<br>
+        <h2 id="tvsd">tvsd <a href="#tvsd" title="Link">link</a></h2>
+        The Trust Verification Service requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/commands/archive/v1.8.tar.gz"><span class="icon">file_download</span> commands-1.8.tar.gz</a> (14K) <span class="icon">event</span> 23/06/2021 <span class="icon">security</span> SHA256:f68bcf281340d2b2e56c6df2bf186f00958b9c990b2e9cdc642e131cc375b9c6.
+        <code class="command-line">~/certutils-4.0$ sudo ./mkcert -c "TVS" /var/lib/tvs/tvs.pem</code>
+        <br>
+        Add the TVS certificate to <code class="literal">ITLFile.tlv</code> using <code class="literal">tlvfile</code> and restart phones to have them download the new version.<br>
+        <br>
+        <code class="command-line">~/certutils-4.0$ sudo ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -s /etc/ssl/private/sast.pem \
+    -T /var/lib/tvs/tvs.pem ...</code>
+        <br>
+        Run the daemon by specifying the path to the database file and the certificate that has the <code class="literal">TVS</code> role. <code class="literal">INSTALL.md</code> has example instructions to run the daemon as a service.<br>
+        <br>
+        <code class="command-line">~/daemon-1.0$ ./tvsd /var/lib/tvsd/cert.db -T /var/lib/tvsd/tvs.pem</code>
+        <br>
+        <h2 id="tvsc">tvsc <a href="#tvsc" title="Link">link</a></h2>
+        <code class="literal">tvsc</code> is a command line client that connects to the <code class="literal">tvsd</code> to query the validity of a certificate. This can be used to debug certificate verification failures.
       </article>
     </main>
     <footer></footer>

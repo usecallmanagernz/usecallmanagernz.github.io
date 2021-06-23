@@ -4,13 +4,14 @@
     <title>SEPMAC.cnf.xml</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="includes/theme.css">
     <link rel="stylesheet" type="text/css" href="includes/prettify.css">
-    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="includes/prettify.js"></script>
     <script type="text/javascript">
-      jQuery (window).on ("load", function () {
-          prettyPrint ();
+      jQuery(window).on("load", function () {
+          prettyPrint();
       });
     </script>
   </head>
@@ -35,16 +36,17 @@
           <li><h3>Phone Configuration</h3></li>
           <li><span class="icon selected">settings_phone</span> <b>SEPMAC.cnf.xml</b></li>
           <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
-          <li><a href="app-dial-rules-xml.html"><span class="icon">import_contacts</span> Application Dial Rules</a></li>
+          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
           <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
           <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
-          <li><a href="feature-policy-xml.html"><span class="icon">done</span> Feature Policy</a></li>
+          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
           <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
           <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
           <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
           <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
           <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
@@ -291,9 +293,9 @@
         &lt;ntp&gt;</code>
         <br>
         <h2 id="ntp/name">name <a href="#ntp/name" title="Link">link</a></h2>
-        Hostname or IP address of the NTP server when using <code class="literal">unicast</code> mode.<br>
+        Host name or IP address of the NTP server when using <code class="literal">unicast</code> mode.<br>
         <br>
-        <code class="prettify lang-xml">          &lt;name&gt;<i>IP ADDRESS</i>&lt;/name&gt;</code>
+        <code class="prettify lang-xml">          &lt;name&gt;<i>HOST</i>&lt;/name&gt;</code>
         <br>
         <h2 id="ntpMode">ntpMode <a href="#ntpMode" title="Link">link</a></h2>
         How the phone synchronises the clock.<br>
@@ -318,8 +320,8 @@
     &lt;callManagerGroup&gt;
       &lt;members&gt;</code>
         <br>
-        <h2 id="member">member <a href="#member" title="Link">link</a></h2>
-        Specifies the IP address and SIP port of the device running Asterisk. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it is disconnected from the current member.<br>
+        <h2 id="callManagerGroup/member">member <a href="#callManagerGroup/member" title="Link">link</a></h2>
+        Specifies the host name or IP address and SIP port of the server running Asterisk. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it is disconnected from the current member.<br>
         <br>
         <table>
           <tbody>
@@ -335,25 +337,54 @@
             &lt;ports&gt;</code>
         <br>
         <h2 id="sipPort">sipPort <a href="#sipPort" title="Link">link</a></h2>
-        SIP port to connect to on the device running Asterisk.<br>
+        SIP port to connect to on the server running Asterisk.<br>
         <br>
         <code class="prettify lang-xml">              &lt;sipPort&gt;5060&lt;/sipPort&gt;</code>
         <br>
         <h2 id="securedSipPort">securedSipPort <a href="#securedSipPort" title="Link">link</a></h2>
-        SIP-TLS port to connect to on the device running Asterisk.<br>
+        SIP-TLS port to connect to on the server running Asterisk.<br>
         <br>
         <code class="prettify lang-xml">              &lt;securedSipPort&gt;5061&lt;/securedSipPort&gt;
             &lt;/ports&gt;</code>
         <br>
-        <h2 id="processNodeName">processNodeName <a href="#processNodeName" title="Link">link</a></h2>
-        IP address or hostname of the device running Asterisk.<br>
+        <h2 id="callManagerGroup/processNodeName">processNodeName <a href="#callManagerGroup/processNodeName" title="Link">link</a></h2>
+        Host name or IP address of the server running Asterisk.<br>
         <br>
-        <code class="prettify lang-xml">            &lt;processNodeName&gt;<i>IP ADDRESS</i>&lt;/processNodeName&gt;
+        <code class="prettify lang-xml">            &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;
           &lt;/callManager&gt;
         &lt;/member&gt;
       &lt;/members&gt;
     &lt;/callManagerGroup&gt;
   &lt;/devicePool&gt;
+  &lt;TVS&gt;
+    &lt;members&gt;</code>
+        <br>
+        <h2 id="TVS/member">member <a href="#TVS/member" title="Link">link</a></h2>
+        Specifies the host name or IP address and port of the server running the Trust Verification Service. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it cannot connect to a member.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>priority</b></td>
+              <td><code class="literal">0</code> to <code class="literal">4</code>, the connection priority of this member, lower priorities are tried first.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">      &lt;member priority="0"&gt;</code>
+        <br>
+        <h2 id="TVS/port">port <a href="#TVS/port" title="Link">link</a></h2>
+        Port to connect to on the server running the Trust Verification Service.<br>
+        <br>
+        <code class="prettify lang-xml">        &lt;port&gt;2445&lt;/port&gt;</code>
+        <br>
+        <h2 id="TVS/address">address <a href="#TVS/address" title="Link">link</a></h2>
+        Host name or IP address of the server running the Trust Verification Service.<br>
+        <br>
+        <code class="prettify lang-xml">        &lt;address&gt;<i>HOST</i>&lt;/address&gt;
+      &lt;/member&gt;
+    &lt;/members&gt;
+  &lt;/TVS&gt;
   &lt;vpnGroup&gt;
     &lt;mtu&gt;1290&lt;/mtu&gt;
     &lt;failConnectTime&gt;30&lt;/failConnectTime&gt;
@@ -392,7 +423,7 @@
         <code class="prettify lang-xml">    &lt;autoNetDetect&gt;1&lt;/autoNetDetect&gt;</code>
         <br>
         <h2 id="enableHostIDCheck">enableHostIDCheck <a href="#enableHostIDCheck" title="Link">link</a></h2>
-        Compare the hostname part of the URL set below to the name in the certificate that the VPN server uses and abort the connection if the do not match.<br>
+        Compare the host name part of the URL set below to the name in the certificate that the VPN server uses and abort the connection if the do not match.<br>
         <br>
         <table>
           <tbody>
@@ -409,7 +440,7 @@
     &lt;addresses&gt;</code>
         <br>
         <h2 id="url1">url1 <a href="#url1" title="Link">link</a></h2>
-        URL of the VPN server using the format <b>https://<i>HOSTNAME</i>/svc</b>. Up to <code class="literal">3</code> URLs can be specified by including &lt;<code class="tag">url2</code>&gt; ... &lt;<code class="tag">url3</code>&gt;. <b>Note</b>: the path must be <code class="literal">/svc</code> when using the patched version of OpenConnect Server.<br>
+        URL of the VPN server using the format <b>https://<i>HOST</i>/svc</b>. Up to <code class="literal">3</code> URLs can be specified by including &lt;<code class="tag">url2</code>&gt; ... &lt;<code class="tag">url3</code>&gt;. <b>Note</b>: the path must be <code class="literal">/svc</code> when using the patched version of OpenConnect Server.<br>
         <br>
         <code class="prettify lang-xml">      &lt;url1&gt;<i>URL</i>&lt;/url1&gt;
     &lt;/addresses&gt;

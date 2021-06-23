@@ -4,13 +4,14 @@
     <title>VPN Connection</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="includes/theme.css">
     <link rel="stylesheet" type="text/css" href="includes/prettify.css">
-    <script type="text/javascript" src="includes/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="includes/prettify.js"></script>
     <script type="text/javascript">
-      jQuery (window).on ("load", function () {
-          prettyPrint ();
+      jQuery(window).on("load", function () {
+          prettyPrint();
       });
     </script>
   </head>
@@ -35,16 +36,17 @@
           <li><h3>Phone Configuration</h3></li>
           <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
           <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
-          <li><a href="app-dial-rules-xml.html"><span class="icon">import_contacts</span> Application Dial Rules</a></li>
+          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
           <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
           <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
-          <li><a href="feature-policy-xml.html"><span class="icon">done</span> Feature Policy</a></li>
+          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
           <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
           <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
           <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
           <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
           <li><span class="icon selected">vpn_key</span> <b>VPN Connection</b></li>
         </ul>
         <ul>
@@ -101,13 +103,9 @@
         <code class="command-line">~/ocserv-1.1.3$ sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
         <br>
         <h2 id="ocserv.conf">ocserv.conf <a href="#ocserv.conf" title="Link">link</a></h2>
-        The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>.<br>
+        The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils$ ./mkcert -c "OpenConnect" -f ocserv.pem</code>
-        <br>
-        An archive containing scripts to generate and hash X509 certificates can be downloaded from the URL below.<br>
-        <br>
-        <a href="https://github.com/usecallmanagernz/certutils/archive/v3.2.tar.gz"><span class="icon">file_download</span> certutils-3.2.tar.gz</a> (16K) <span class="icon">event</span> 09/06/2021 <span class="icon">security</span> SHA256:631f7257e0b3796e2f48273cb20772a17cfca400970427606dec42925df51afb.<br>
+        <code class="command-line">~/certutils-4.0$ sudo ./mkcert -c "OpenConnect" /etc/ocserv/ocserv.pem</code>
         <br>
         <code class="prettify">...
 # Only username and password authentication is supported for Cisco phones.
