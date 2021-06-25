@@ -89,7 +89,7 @@
         <br>
         <code class="command-line">~/certutils-4.0$ sudo ./mkcert -c "Asterisk" /etc/asterisk/keys/asterisk.pem</code>
         <br>
-        <b>3.</b> Optionally, create a certificate for Apache with an EC (elliptic curve) key. This will have the <code class="literal">TFTP</code> role for HTTPS provisioning.<br>
+        <b>3.</b> Optionally, create a certificate for Apache with an EC (elliptic curve) key. This will have the <code class="literal">TFTP</code> role for HTTPS provisioning. See <a href="apache-conf.html#Secure-Provisioning">Secure Provisioning</a> for more information.<br>
         <br>
         <code class="command-line">~/certutils-4.0$ sudo ./mkcert -c "Apache-EC" -E secp384r1 /etc/apache/ssl-certs/apache-ec.pem</code>
         <br>

@@ -277,7 +277,7 @@ same =&gt; next,Set(CONFBRIDGE(user,admin)=no)
 same =&gt; next,ConfBridge(${EXTEN})
 same =&gt; next,Hangup(normal_clearing)</code>
         <br>
-        <h2>idivert</h2>
+        <h2 id="idivert">idivert <a href="#idivert" title="Link">link</a></h2>
         Divert (Connected), allow call to be diverted to voicemail after being answered.<br>
         <br>
         <code class="prettify lang-astexten">exten =&gt; idivert,1,Answer()
@@ -286,7 +286,7 @@ same =&gt; next,Set(MAILBOX=${SIPPEER(${IDIVERT_PEERNAME},mailbox)})
 same =&gt; next,VoiceMail(${MAILBOX},b)
 same =&gt; next,Hangup(normal_clearing)</code>
         <br>
-        <h2>cisco_callback_number</h2>
+        <h2 id="cisco_callback_number">cisco_callback_number <a href="#cisco_callback_number" title="Link">link</a></h2>
         Specifies the number the phone stores in the call history without modifying the caller-ID number. Example use is to include a prefix required for an outside line so it can be dialed unedited from the call history entry.<br>
         <br>
         <code class="prettify lang-astexten">; If dialing outside numbers requires that they be prefixed with a '1'

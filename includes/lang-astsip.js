@@ -9,7 +9,7 @@ PR['registerLangHandler'](
          [PR['PR_SOURCE'], /^\[[\w\-]+\](?![\w,\-])/i],
          ['lang-astsip-template', /^\(([\w\!\-,]+)\)/i],
 	 [PR['PR_PLAIN'], /^([\w\-]+)=/],
-         [PR['PR_KEYWORD'], /^(peer|user|friend|dynamic|tcp|udp|tls|rpid|pai|ulaw|alaw|g729|g722|h264)(?=[^\-\w]|$)/],
+         [PR['PR_KEYWORD'], /^(peer|user|friend|dynamic|tcp|udp|tls|rpid|pai|all|ulaw|alaw|g729|g722|h264)(?=[^\-\w]|$)/],
          [PR['PR_LITERAL'], /^(?:\d+|\d*\.\d+)/i],
          [PR['PR_LITERAL'], /^(?:yes|no)(?![-\w]+)/i],
          [PR['PR_PLAIN'], /^[a-z_][\w-]*/i],

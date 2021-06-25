@@ -189,9 +189,9 @@ var prettyPrint;
   var PERL_KEYWORDS = "caller,delete,die,do,dump,elsif,eval,exit,foreach,for," +
       "goto,if,import,last,local,m,my,next,no,our,print,package,q,qq,qw,qx,redo,require," +
       "s,sub,tr,undef,unless,until,use,wantarray,while,y,BEGIN,END";
-  var PYTHON_KEYWORDS = [FLOW_CONTROL_KEYWORDS, "and,as,assert,class,def,del," +
-      "elif,except,exec,finally,from,global,import,in,is,lambda," +
-      "nonlocal,not,or,pass,print,raise,try,with,yield," +
+  var PYTHON_KEYWORDS = [FLOW_CONTROL_KEYWORDS, "and,as,assert,async,bool,bytearray,bytes,class," +
+      "def,del,dict,elif,except,exec,finally,from,global,import,in,int,is,lambda,list," +
+      "nonlocal,not,or,pass,print,raise,str,try,with,yield," +
       "False,True,None"];
   var SH_KEYWORDS = [FLOW_CONTROL_KEYWORDS, "case,done,elif,esac,eval,fi," +
       "function,in,local,set,then,until"];

@@ -267,7 +267,7 @@ def main():
             if not re.search(r'(?x) ^ (?: (?: Dial | EditDial) : [0-9#*]+'
                              r' | (?: Key | SoftKey | Init) : [a-zA-Z0-9]+'
                              r' | Play: [a-zA-Z0-9._\-]+'
-                             r' | Display : (?: Off | On | Default) (:? : [0-9]+)?'
+                             r' | Display : (?: Off | On | Default) (: [0-9]+)?'
                              r' | https? :// [^ ]+) $', url):
                 raise ProgramError(f'Invalid URL: {url}')
 
