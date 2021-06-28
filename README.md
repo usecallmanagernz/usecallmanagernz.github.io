@@ -1,4 +1,4 @@
-[![html lint](https://github.com/usecallmanagernz/usecallmanagernz.github.io/actions/workflows/tidy.yml/badge.svg?branch=master)](https://github.com/usecallmanagernz/usecallmanagernz.github.io/actions/workflows/tidy.yml)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/usecallmanagernz/usecallmanagernz.github.io/html%20lint/master?label=html%20lint)
 
 # USECALLMANAGER.nz Website
 
