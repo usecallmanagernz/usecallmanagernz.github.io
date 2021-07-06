@@ -73,7 +73,7 @@
         <h1>CGI Execute</h1>
         The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>. An archive containing sample command line utilties can be downloaded from the URL below.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/commands/archive/v1.8.tar.gz"><span class="icon">file_download</span> commands-1.8.tar.gz</a> (14K) <span class="icon">event</span> 23/06/2021 <span class="icon">security</span> SHA256:f68bcf281340d2b2e56c6df2bf186f00958b9c990b2e9cdc642e131cc375b9c6.<br>
+        <a href="https://github.com/usecallmanagernz/commands/archive/v2.0.tar.gz" download><span class="icon">file_download</span> commands-2.0.tar.gz</a> (14K) <span class="icon">event</span> 07/06/2021 <span class="icon">security</span> SHA256:b2308fea50545bb021c25bf0acbad2a0f4b9b851f4f4f3763418393f78ed43fa.<br>
         <br>
         If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
@@ -128,13 +128,20 @@ import getopt
 import traceback
 from html import escape
 
-from lxml import etree
 import requests
 import requests.auth
+import requests.adapters
+from lxml import etree
 
 
 class ProgramError(Exception):
     pass
+
+
+class HTTPSAdapter(requests.adapters.HTTPAdapter):
+    def init_poolmanager(self, *args, **kwargs):
+        kwargs['assert_hostname'] = False
+        super().init_poolmanager(*args, **kwargs)
 
 
 cgi_errors = {
@@ -145,30 +152,35 @@ cgi_errors = {
 }
 
 
-def cgi_execute(hostname, timeout, urls, username, password):
-    content = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
-        '&lt;CiscoIPPhoneExecute&gt;'
+def cgi_execute(hostname, port, timeout, username, password, certificate, urls):
+    xml = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
+	'&lt;CiscoIPPhoneExecute&gt;'
 
     for url, priority in urls:
-        content += '&lt;ExecuteItem URL="' + escape(url) + '" Priority="' + str(priority) + '" /&gt;'
+        xml += '&lt;ExecuteItem URL="' + escape(url) + '" Priority="' + str(priority) + '" /&gt;'
 
-    content += '&lt;/CiscoIPPhoneExecute&gt;'
+    xml += '&lt;/CiscoIPPhoneExecute&gt;'
 
     if username != '':
         auth = requests.auth.HTTPBasicAuth(username, password)
     else:
         auth = None
 
+    scheme = 'https' if certificate else 'http'
+
     try:
-        response = requests.post(f'http://{hostname}:80/CGI/Execute',
-                                 timeout = timeout, auth = auth, data = {'XML': content})
+        session = requests.Session()
+        session.mount('https://', HTTPSAdapter())
+
+        response = session.post(f'{scheme}://{hostname}:{port}/CGI/Execute',
+                                timeout = timeout, auth = auth, verify = certificate, data = {'XML': xml})
         response.raise_for_status()
 
     except requests.RequestException as error:
         raise ProgramError(error)
 
     if response.headers['Content-Type'][0:8] != 'text/xml':
-        raise ProgramError('Unexpected Content-Type ' + response.headers['Content-Type'])
+        raise ProgramError('Unexpected Content-Type: ' + response.headers['Content-Type'])
 
     try:
         document = etree.fromstring(response.content)
@@ -189,8 +201,8 @@ def cgi_execute(hostname, timeout, urls, username, password):
 
 def main():
     try:
-        short_options = 'h:t:u:p:H'
-        long_options = ['host=', 'timeout=', 'username=', 'password=', 'help']
+        short_options = 'h:t:u:p:c:H'
+        long_options = ['host=', 'timeout=', 'username=', 'password=', 'certificate=', 'help']
 
         try:
             options, arguments = getopt.gnu_getopt(sys.argv[1:], short_options, long_options)
@@ -199,14 +211,28 @@ def main():
                                '. Try \'' + os.path.basename(sys.argv[0]) + ' --help\' for more information')
 
         hostname = None
+        port = None
         timeout = 10
         username = ''
         password = ''
+        certificate = None
         help = False
 
         for option, argument in options:
             if option in ('-h', '--host'):
                 hostname = argument
+
+                if ':' in hostname:
+                    hostname, port = hostname.rsplit(':', maxsplit = 1)
+
+                    try:
+                        port = int(port)
+
+                        if port &lt; 1 or port &gt; 65535:
+                            raise ValueError
+
+                    except ValueError:
+                        raise ProgramError(f'Invalid port: {port}')
 
                 if not re.search(r'(?xi) ^ (?: [a-z0-9\-]+ \.)* [a-z0-9\-]+ $', hostname):
                     raise ProgramError(f'Invalid host: {hostname}')
@@ -225,6 +251,9 @@ def main():
             elif option in ('-p', '--password'):
                 password = argument
 
+            elif option in ('-c', '--certificate'):
+                certificate = argument
+
             elif option in ('-H', '--help'):
                 help = True
 
@@ -232,11 +261,12 @@ def main():
             print('Usage: ' + os.path.basename(sys.argv[0]) + ' [OPTIONS] URL[@PRIORITY]...\n'
                   'Send CGI Execute URLs to a Cisco IP Phone.\n'
                   '\n'
-                  '  -h, --host HOST            host name or IP address of the phone\n'
-                  '  -t, --timeout TIMEOUT      request timeout in seconds (default 10)\n'
-                  '  -u, --username USERNAME    authentication username\n'
-                  '  -p, --password PASSWORD    authentication password\n'
-                  '  -H, --help                 print this help and exit\n'
+                  '  -h, --host HOST[:PORT]         host name or IP address and port of the phone\n'
+                  '  -t, --timeout TIMEOUT          connection timeout in seconds (default 10)\n'
+                  '  -u, --username USERNAME        authentication username\n'
+                  '  -p, --password PASSWORD        authentication password\n'
+                  '  -c, --certificate CERT-FILE    connect using SSL and verify using certificate\n'
+                  '  -H, --help                     print this help and exit\n'
                   '\n'
                   'Up to 3 URLs may be specified.\n'
                   'URL is one of Dial:, EditDial:, Key:, SoftKey:, Init:, Play:, Display:, http: or https:\n'
@@ -250,7 +280,9 @@ def main():
         urls = []
 
         for argument in arguments:
-            if '@' in argument:
+            url = argument
+
+            if '@' in url:
                 url, priority = argument.rsplit('@', maxsplit = 1)
 
                 try:
@@ -262,11 +294,11 @@ def main():
                 except ValueError:
                     raise ProgramError(f'Invalid priority: {priority}')
             else:
-                url, priority = argument, 0
+                priority = 0
 
             if not re.search(r'(?x) ^ (?: (?: Dial | EditDial) : [0-9#*]+'
                              r' | (?: Key | SoftKey | Init) : [a-zA-Z0-9]+'
-                             r' | Play: [a-zA-Z0-9._\-]+'
+                             r' | Play : [a-zA-Z0-9._\-]+'
                              r' | Display : (?: Off | On | Default) (: [0-9]+)?'
                              r' | https? :// [^ ]+) $', url):
                 raise ProgramError(f'Invalid URL: {url}')
@@ -279,7 +311,10 @@ def main():
         if hostname is None:
             raise ProgramError('No host specified')
 
-        cgi_execute(hostname, timeout, urls, username, password)
+        if port is None:
+            port = 443 if certificate else 80
+
+        cgi_execute(hostname, port, timeout, username, password, certificate, urls)
 
     except ProgramError as error:
         print(str(error), file = sys.stderr)

@@ -76,35 +76,35 @@
         <br>
         To enable use of Trust Verification set &lt;<code class="tag">address</code>&gt; and &lt;<code class="tag">port</code>&gt; in <a href="sepmac-cnf-xml.html#TVS/member">SEPMAC.cnf.xml</a> and include a certificate with the <code class="literal">TVS</code> role in <code class="literal">ITLFile.tlv</code>. <b>Note</b>: The entry for the <code class="literal">TVS</code> role must appear before any roles other than <code class="literal">SAST</code> otherwise the phone will not be able to validate the certificate used by <code class="literal">tvsd</code>.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/daemons/archive/v1.0.tar.gz"><span class="icon">file_download</span> daemons-1.0.tar.gz</a> (14K) <span class="icon">event</span> 23/06/2021 <span class="icon">security</span> SHA256:260870d6d3befc4ac43f80292c7d6d371f38ff6a79ad9f430fe4626c0b903b01.<br>
+        <a href="https://github.com/usecallmanagernz/daemons/archive/v1.0.tar.gz" download><span class="icon">file_download</span> daemons-1.0.tar.gz</a> (14K) <span class="icon">event</span> 23/06/2021 <span class="icon">security</span> SHA256:260870d6d3befc4ac43f80292c7d6d371f38ff6a79ad9f430fe4626c0b903b01.<br>
         <br>
         <h2 id="tvsctl">tvsctl <a href="#tvsctl" title="Link">link</a></h2>
         The <code class="literal">tvsctl</code> utility is used to manage the database file used by <code class="literal">tvsd</code>. The following adds certificates used for <code class="literal">CCM</code> and <code class="literal">APP-SERVER</code> roles to a database file in <code class="literal">/var/lib/tvs</code>.<br>
         <br>
-        <code class="command-line">~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db -i /etc/asterisk/keys/asterisk.pem -c
-~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db -i /etc/apache2/ssl-certs/apache.pem -A</code>
+        <code class="command-line">~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db --insert /etc/asterisk/keys/asterisk.pem --ccm
+~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db --insert /etc/apache2/ssl-certs/apache.pem --app-server</code>
         <br>
         Certificates can be assigned multiple roles and a optional TTL (time to live). If the certificate already exists in the database file the settings will be overwritten.<br>
         <br>
-        <code class="command-line">~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db -i /etc/asterisk/keys/asterisk.pem -c -A -L 3600</code>
+        <code class="command-line">~/daemons-1.0$ sudo ./tvsctl /var/lib/tvsd/cert.db --insert /etc/asterisk/keys/asterisk.pem --ccm --app-server --ttl 3600</code>
         <br>
         A list of certificates and roles in the database file can be shown.<br>
         <br>
-        <code class="command-line">~/daemons-1.0$ ./tvsctl /var/lib/tvsd/cert.db -l</code>
+        <code class="command-line">~/daemons-1.0$ ./tvsctl /var/lib/tvsd/cert.db --list</code>
         <br>
         <h2 id="tvsd">tvsd <a href="#tvsd" title="Link">link</a></h2>
         The Trust Verification Service requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-4.0$ sudo ./mkcert -c "TVS" /var/lib/tvs/tvs.pem</code>
+        <code class="command-line">~/certutils-4.1$ sudo ./mkcert --common "TVS" /var/lib/tvs/tvs.pem</code>
         <br>
         Add the TVS certificate to <code class="literal">ITLFile.tlv</code> using <code class="literal">tlvfile</code> and restart phones to have them download the new version.<br>
         <br>
-        <code class="command-line">~/certutils-4.0$ sudo ./tlvfile -b /var/lib/tftpboot/ITLFile.tlv -s /etc/ssl/private/sast.pem \
-    -T /var/lib/tvs/tvs.pem ...</code>
+        <code class="command-line">~/certutils-4.1$ sudo ./tlvfile --build /var/lib/tftpboot/ITLFile.tlv --sast /etc/ssl/private/sast.pem \
+    --tvs /var/lib/tvs/tvs.pem ...</code>
         <br>
         Run the daemon by specifying the path to the database file and the certificate that has the <code class="literal">TVS</code> role. <code class="literal">INSTALL.md</code> has example instructions to run the daemon as a service.<br>
         <br>
-        <code class="command-line">~/daemon-1.0$ ./tvsd /var/lib/tvsd/cert.db -T /var/lib/tvsd/tvs.pem</code>
+        <code class="command-line">~/daemons-1.0$ ./tvsd /var/lib/tvsd/cert.db --tvs /var/lib/tvsd/tvs.pem</code>
         <br>
         <h2 id="tvsc">tvsc <a href="#tvsc" title="Link">link</a></h2>
         <code class="literal">tvsc</code> is a command line client that connects to the <code class="literal">tvsd</code> to query the validity of a certificate. This can be used to debug certificate verification failures.
