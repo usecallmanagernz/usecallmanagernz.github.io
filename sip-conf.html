@@ -48,6 +48,7 @@
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
           <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
           <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
@@ -247,7 +248,7 @@ dndbusy=yes
 huntgroup_default=no</code>
         <br>
         <h2 id="Transport-Layer-Security">Transport Layer Security <a href="#Transport-Layer-Security" title="Link">link</a></h2>
-        Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>. The SSL certificate used by Asterisk must be included in <code class="literal">ITLFile.tlv</code> wih the <code class="literal">ccm</code> function. See <a href="itl-file-tlv.html#tlvfile">Device Security</a><br>
+        Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>. The SSL certificate used by Asterisk must be included in <code class="literal">ITLFile.tlv</code> wih the <code class="literal">CCM</code> function or verifiable via TVS. See <a href="itl-file-tlv.html#tlvfile">Device Security</a> and <a href="trust-verification.html">Trust Verification</a> for more information.<br>
         <br>
         <table>
           <tbody>

@@ -47,6 +47,7 @@
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
           <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
           <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
@@ -71,7 +72,7 @@
       </nav>
       <article>
         <h1>User Locale</h1>
-        The user locale allows the phone to display text (menu items, soft keys etc.) native to the phone's language. To download locale packages you will first need to register for a login (free, at the time of writing) at <a href="http://www.cisco.com"><span class="icon">open_in_browser</span> www.cisco.com</a>. Locale packages are selected from the <b>Unified Communications Manager Endpoints Locale Installer</b> link when downloading software.<br>
+        The user locale allows the phone to display text (menu items, soft keys etc.) native to the phone's language. To download locale packages you will first need to register for a login (free, at the time of writing) at <a href="https://www.cisco.com"><span class="icon">open_in_browser</span> www.cisco.com</a>. Locale packages are selected from the <b>Unified Communications Manager Endpoints Locale Installer</b> link when downloading software.<br>
         <br>
         The user locale package is named <code class="literal">po-locale-<i>LANGUAGE</i>-<i>VERSION</i>.cop.sgn</code> or <code class="literal">.cop.sha512</code>, the <code class="literal">LANGUAGE</code> is the ISO code for your region, eg: <code class="literal">en_GB</code> is English (United Kingdom). The name of the directory to download the user locale <code class="literal">.jar</code> file from is specified by &lt;<code class="tag">name</code>&gt; inside &lt;<code class="tag">userLocale</code>&gt; in <a href="sepmac-cnf-xml.html#userLocale/name">SEPMAC.cnf.xml</a>.<br>
         <br>
@@ -79,15 +80,15 @@
         <br>
         <a href="https://raw.githubusercontent.com/usecallmanagernz/certutils/master/stripsgn" download><span class="icon">file_download</span> stripsgn</a> (3.3K) <span class="icon">event</span> 09/06/2021 <span class="icon">security</span> SHA256:3c524c31ff938f7718a0edf83097323c25deecc98fec908aac35053a6ef081a2.<br>
         <br>
-        <code class="command-line">~$ ./stripsgn po-locale-en_GB-k3-12.0.1.1000-1.cop.sgn</code>
+        <code class="command-line">~$ ./stripsgn po-locale-en_GB-k3-X.X.X.1000-1.cop.sgn</code>
         <br>
         <b>2.</b> Extract the archive.<br>
         <br>
-        <code class="command-line">~$ tar zxf po-locale-en_GB-k3-12.0.1.1000-1.cop</code>
+        <code class="command-line">~$ tar --extract --gzip --file po-locale-en_GB-k3-X.X.X.1000-1.cop</code>
         <br>
         <b>3.</b> Extract the <code class="literal">.tar</code> file that the archive contained.<br>
         <br>
-        <code class="command-line">~$ tar xf po-locale-en_GB-k3-12.0.1.1000-1.tar</code>
+        <code class="command-line">~$ tar --extract --file po-locale-en_GB-k3-X.X.X.1000-1.tar</code>
         <br>
         <b>4.</b> Change into the directory containing the user locale for your language.<br>
         <br>

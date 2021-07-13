@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Certificate Enrollment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="includes/theme.css">
+    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="includes/prettify.js"></script>
+    <script type="text/javascript">
+      jQuery(window).on("load", function () {
+          prettyPrint();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.png" alt="">
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="documentation-overview.html"><span class="icon">home</span> Documentation Overview</a></li>
+          <li><a href="patching-asterisk.html"><span class="icon">build</span> Patching Asterisk</a></li>
+        </ul>
+        <ul>
+          <li><h3>Network Configuration</h3></li>
+          <li><a href="dhcpd-conf.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
+          <li><a href="apache-conf.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
+          <li><a href="tftpd-conf.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
+          <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
+          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
+          <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
+          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
+          <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
+          <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
+          <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
+          <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
+          <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
+          <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><span class="icon selected">card_membership</span> <b>Certificate Enrollment</b></li>
+          <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><a href="sip-conf.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
+          <li><a href="sip-notify-conf.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><a href="extensions-conf.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
+          <li><a href="res-parking-conf.html"><span class="icon">local_parking</span> Call Parking</a></li>
+          <li><a href="sippeer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
+          <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><a href="phone-services-xml.html"><span class="icon">settings</span> Phone Services</a></li>
+          <li><a href="cgi-execute-xml.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><a href="as-feature-events.html"><span class="icon">extension</span> AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Certificate Enrollment</h1>
+        The Certificate Authentication Proxy Function (CAPF) allows a local certificate authority to issue certificates to phones which can then be used to authenticate SIP-TLS and VPN connections. There are two types of certificate on the phone.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>MIC</b></td>
+              <td>Manufacturer Installed Certificate, issued at the factory by Cisco with a 10 year expiry. It cannot be updated and is used when no LSC is present.</td>
+            </tr>
+            <tr>
+              <td><b>LSC</b></td>
+              <td>Locally Significant Certificate, issued by CAPF and can be updated and deleted. When installed this certificate is used instead of the MIC.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        Using the Manufacturer Installed Certificate (MIC) to authenticate a phone does not require CAPF. Instead download and combine the <b>Cisco Root CA 2048</b> and <b>Cisco Manufacturing CA 2</b> certificates available at <a href="https://www.cisco.com/security/pki/"><span class="icon">open_in_browser</span> https://www.cisco.com/security/pki</a> into a certificate chain.<br>
+        <br>
+        To enable use of CAPF set &lt;<code class="tag">processNodeName</code>&gt; and &lt;<code class="tag">phonePort</code>&gt; in <a href="sepmac-cnf-xml.html#capf/processNodeName">SEPMAC.cnf.xml</a> and include a certificate with the <code class="literal">CAPF</code> role in <code class="literal">ITLFile.tlv</code> or via the Trust Verification Service. An archive containing the server and client utilities can be downloaded from the URL below.<br>
+        <br>
+        <a href="https://github.com/usecallmanagernz/daemons/archive/v1.5.tar.gz" download><span class="icon">file_download</span> daemons-1.5.tar.gz</a> (22K) <span class="icon">event</span> 13/07/2021 <span class="icon">security</span> SHA256:ccf079af84ce4fd089688c412eea9fdbfb748f02c78bda5aa7e875054830528a.<br>
+        <br>
+        <h2 id="capfctl">capfctl <a href="#capfctl" title="Link">link</a></h2>
+        The <code class="literal">capfctl</code> utility is used to manage the database file used by <code class="literal">capfd</code>. The following sets the device to install a new certificate when it connects to CAPF without requiring a password to the database file in <code class="literal">/var/lib/capf</code>.<br>
+        <br>
+        <code class="command-line">~/daemons-X.X$ sudo ./capfctl /var/lib/capf/capf.sqlite3 --set SEP58971ECC97C1 --operation INSTALL</code>
+        <br>
+        If the device already exists in the database file the settings will be overwritten. The LSC certificate can be deleted from the phone by setting the operation to <code class="literal">DELETE</code>. Once a phone has completed the specified operation it will will revert to <code class="literal">NONE</code>.<br>
+        <br>
+        <code class="command-line">~/daemons-X.X$ sudo ./capfctl /var/lib/capf/capf.sqlite3 --set SEP58971ECC97C1 --operation DELETE</code>
+        <br>
+        A list of devices in the database file can be shown.<br>
+        <br>
+        <code class="command-line">~/daemons-X.X$ ./capfctl /var/lib/capf/capf.sqlite3 --list</code>
+        <br>
+        Supported CAPF operations are listed below.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>INSTALL</b></td>
+              <td>Install a new LSC certificate</td>
+            </tr>
+            <tr>
+              <td><b>DELETE</b></td>
+              <td>Delete the LSC certificate</td>
+            </tr>
+            <tr>
+              <td><b>FETCH</b></td>
+              <td>Fetch the LSC certificate</td>
+            </tr>
+            <tr>
+              <td><b>NONE</b></td>
+              <td>No operation</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <h2 id="capfd">capfd <a href="#capfd" title="Link">link</a></h2>
+        The Certificate Authentication Proxy Function requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
+        <br>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "CAPF" --organization "CAPF" /var/lib/capf/capf.pem</code>
+        <br>
+        Add the CAPF certificate to <code class="literal">ITLFile.tlv</code> using <code class="literal">tlvfile</code> and restart phones to have them download the new version. Alternatively use TVS to verify the CAPF certificate, see <a href="trust-verification.html">Trust Verification</a> for more information.<br>
+        <br>
+        <code class="command-line">~/certutils-X.X$ sudo ./tlvfile --build /var/lib/tftpboot/ITLFile.tlv --sast /etc/ssl/private/sast.pem \
+    --capf /var/lib/capf/capf.pem ...</code>
+        <br>
+        Run the daemon by specifying the path to the database file and the certificate that has the <code class="literal">CAPF</code> role. <code class="literal">INSTALL.md</code> has example instructions to run the daemon as a service.<br>
+        <br>
+        <code class="command-line">~/daemons-X.X$ ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem</code>
+        <br>
+        An optional issuer certificate can be specified to sign the new certificates, otherwise the CAPF certificate is used.<br>
+        <br>
+        <code class="command-line">~/daemons-X.X$ ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
+    --issuer /var/lib/capf/issuer.pem --days 90</code>
+        <br>
+        <h2 id="capfc">capfc <a href="#capfc" title="Link">link</a></h2>
+        <code class="literal">capfc</code> is a command line client that connects to <code class="literal">capfd</code> to perform the current operation. This can be used to debug certificate enrollment failures.
+      </article>
+    </main>
+    <footer></footer>
+  </body>
+</html>

@@ -40,6 +40,7 @@
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
           <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
           <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
@@ -83,22 +84,22 @@
         <br>
         <b>3.</b> Extract the archive and apply the patch.<br>
         <br>
-        <code class="command-line">~$ tar --extract --gzip --file asterisk-18.4.0.tar.gz
-~$ cd asterisk-18.4.0
-~/asterisk-18.4.0$ patch --strip=1 &lt; ../cisco-usecallmanager-18.4.0.patch</code>
+        <code class="command-line">~$ tar --extract --gzip --file asterisk-X.X.X.tar.gz
+~$ cd asterisk-X.X.X
+~/asterisk-X.X.X$ patch --strip=1 &lt; ../cisco-usecallmanager-X.X.X.patch</code>
         <br>
         <b>4.</b> Configure the build environment and build the source.<br>
         <br>
-        <code class="command-line">~/asterisk-18.4.0$ CFLAGS="-DENABLE_SRTP_AES_GCM -DENABLE_SRTP_AES_256" ./configure
-~/asterisk-18.4.0$ make</code>
+        <code class="command-line">~/asterisk-X.X.X$ CFLAGS="-DENABLE_SRTP_AES_GCM -DENABLE_SRTP_AES_256" ./configure
+~/asterisk-X.X.X$ make</code>
         <br>
         <b>5.</b> Install the patched version.<br>
         <br>
-        <code class="command-line">~/asterisk-18.4.0$ sudo make install</code>
+        <code class="command-line">~/asterisk-X.X.X$ sudo make install</code>
         <br>
         <b>6.</b> Optionally install the sample configuration files. <b>Note</b>: sample sip.conf, sip_notify.conf and res_parking.conf contain patch-specific features so you will need to do this at least once.<br>
         <br>
-        <code class="command-line">~/asterisk-18.4.0$ sudo make samples</code>
+        <code class="command-line">~/asterisk-X.X.X$ sudo make samples</code>
       </article>
     </main>
     <footer></footer>

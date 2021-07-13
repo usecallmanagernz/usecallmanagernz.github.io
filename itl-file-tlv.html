@@ -5,7 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="includes/theme.css">
     <link rel="stylesheet" type="text/css" href="includes/prettify.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -48,6 +47,7 @@
           <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
           <li><span class="icon selected">security</span> <b>Device Security</b></li>
           <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
           <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
@@ -76,27 +76,27 @@
         <br>
         An archive containing scripts to generate X509 certificates, build <code class="literal">.tlv</code> and <code class="literal">.sgn</code> files can be downloaded from the URL below.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/certutils/archive/v4.1.tar.gz" download><span class="icon">file_download</span> certutils-4.1.tar.gz</a> (16K) <span class="icon">event</span> 06/07/2021 <span class="icon">security</span> SHA256:cc757de1e1435b3905ad1e00deab9cb4c490d59f382b3246df154fb44d2b2d8a.<br>
+        <a href="https://github.com/usecallmanagernz/certutils/archive/v4.2.tar.gz" download><span class="icon">file_download</span> certutils-4.2.tar.gz</a> (16K) <span class="icon">event</span> 13/07/2021 <span class="icon">security</span> SHA256:9d5873b757c3ce6844ef8a57807680df80b491f99a0363bfe9d43182dd43fd04.<br>
         <br>
         <h2 id="mkcert">mkcert <a href="#mkcert" title="Link">link</a></h2>
-        <code class="literal">mkcert</code> is basic script to generate RSA private keys and self-signed X509 certificates. If you already have certificates they can be used instead. <b>Note:</b> The maximum supported size for RSA keys is <code class="literal">2048</code> bits.<br>
+        <code class="literal">mkcert</code> is basic script to generate RSA private keys and self-signed X509 certificates. If you already have certificates they can be used instead, commonName (<code class="literal">CN</code>) and organizationName (<code class="literal">O</code>) attributes are required. <b>Note:</b> The maximum supported size for RSA keys is <code class="literal">2048</code> bits.<br>
         <br>
         <b>1.</b> Create a certificate to sign <code class="literal">ITLFile.tlv</code>. This will have the <code class="literal">SAST</code> (System Administrator Security Token) role.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./mkcert --common "SAST" --years 20 /etc/ssl/private/sast.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "SAST" --organization "SAST" --years 20 /etc/ssl/private/sast.pem</code>
         <br>
         <b>2.</b> Create a certificate for Asterisk. This will have the <code class="literal">CCM</code> role for SIP-TLS connections. Optionally, this can also have the <code class="literal">TFTP</code> role to sign provisioning files.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./mkcert --common "Asterisk" /etc/asterisk/keys/asterisk.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Asterisk" --organization "Asterisk" /etc/asterisk/keys/asterisk.pem</code>
         <br>
         <b>3.</b> Optionally, create a certificate for Apache with an EC (elliptic curve) key. This will have the <code class="literal">TFTP</code> role for HTTPS provisioning. See <a href="apache-conf.html#Secure-Provisioning">Secure Provisioning</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./mkcert --common "Apache-EC" --curve secp384r1 /etc/apache/ssl-certs/apache-ec.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Apache-EC" --organization "Apache-EC" --curve secp384r1 /etc/apache/ssl-certs/apache-ec.pem</code>
         <br>
         <b>4.</b> Optionally, create a certificate for Apache. This will have the <code class="literal">APP-SERVER</code> role for secure XML services.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./mkcert --common "Apache" /etc/apache/ssl-certs/apache.pem</code>
-        <br>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Apache" --organization "Apache" /etc/apache/ssl-certs/apache.pem</code>
+         <br>
         <h2 id="tlvfile">tlvfile <a href="#tlvfile" title="Link">link</a></h2>
         <code class="literal">tlvfile</code> is used to build or parse <code class="literal">.tlv</code> files. Each certificate has a role specifying where it is used and the same certificate can be included multiple times to provide different roles. Valid roles are listed below.<br>
         <br>
@@ -119,6 +119,10 @@
               <td>Combined <code class="literal">CCM</code> and <code class="literal">TFTP</code> roles</td>
             </tr>
             <tr>
+              <td><b>CAPF</b></td>
+              <td>Verifies the SSL connection to the Certificate Authentication Proxy Service</td>
+            </tr>
+            <tr>
               <td><b>APP-SERVER</b></td>
               <td>Verifies HTTPS connections to phone XML services</td>
             </tr>
@@ -133,22 +137,22 @@
         <br>
         <b>1.</b> Create an <code class="literal">ITLFile.tlv</code> in the tftpboot provisioning directory, the certificate used to sign the <code class="literal">.tlv</code> file is automatically included as providing the <code class="literal">SAST</code> role.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./tlvfile --build /var/lib/tftpboot/ITLFile.tlv --sast /etc/ssl/private/sast.pem \
+        <code class="command-line">~/certutils-X.X$ sudo ./tlvfile --build /var/lib/tftpboot/ITLFile.tlv --sast /etc/ssl/private/sast.pem \
   --ccm /etc/asterisk/keys/asterisk.pem --app-server /etc/apache2/ssl-certs/apache.pem</code>
         <br>
         <b>2.</b> Optionally, the default <code class="literal">ITLFile.tlv</code> can be overridden using a file name based on the MAC address of the phone, eg: <code class="literal">ITLSEP58971ECC97C1.tlv</code>.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./tlvfile --build /var/lib/tftpboot/ITLSEP58971ECC97C1.tlv --sast /etc/ssl/private/sast.pem \
+        <code class="command-line">~/certutils-X.X$ sudo ./tlvfile --build /var/lib/tftpboot/ITLSEP58971ECC97C1.tlv --sast /etc/ssl/private/sast.pem \
   --ccm /etc/asterisk/keys/asterisk-1.pem --ccm /etc/asterisk/keys/asterisk-2.pem --filename ITLFile.tlv</code>
         <br>
         <b>3.</b> Optionally, additional certificates can be included using a file name based on the MAC address of the phone, eg: <code class="literal">CTLSEP58971ECC97C1.tlv</code>.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./tlvfile --build /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv --sast /etc/ssl/private/sast.pem \
+        <code class="command-line">~/certutils-X.X$ sudo ./tlvfile --build /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv --sast /etc/ssl/private/sast.pem \
   --app-server /etc/apache2/ssl-certs/apache-1.pem --app-server /etc/apache2/ssl-certs/apache-2.pem --filename CTLFile.tlv</code>
         <br>
         <b>4.</b> Optionally, use HTTPS provisioning for SEPMAC.cnf.xml and signing for the other configuration files. <b>Note</b>: the certificate used to verify the HTTPS connection must use an EC (Elliptic Curve) key.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./tlvfile --build /var/lib/tftpboot/ITLFile.tlv --version 1.1 --sast /etc/ssl/private/sast.pem \
+        <code class="command-line">~/certutils-X.X$ sudo ./tlvfile --build /var/lib/tftpboot/ITLFile.tlv --version 1.1 --sast /etc/ssl/private/sast.pem \
   --ccm /etc/asterisk/keys/asterisk.pem --tftp /etc/apache2/ssl-certs/apache-ec.pem</code>
         <br>
         <b>5.</b> Enable SIP-TLS mode by setting &lt;<code class="tag">transportLayerProtocol</code>&gt; to <code class="literal">3</code> and setting &lt;<code class="tag">deviceSecurityMode</code>&gt; to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) in <a href="sepmac-cnf-xml.html">SEPMAC.cnf.xml</a>. Optionally, any XML services can be configured to use HTTPS.<br>
@@ -156,38 +160,38 @@
         <h2 id="libsrtp">libsrtp <a href="#libsrtp" title="Link">link</a></h2>
         To use secure (encrypted) RTP <code class="literal">libsrtp</code> must be installed. The latest release is available from the <a href="https://github.com/cisco/libsrtp/releases"><span class="icon">open_in_browser</span> libsrtp GitHub repository</a>.<br>
         <br>
-        <code class="command-line">~/libsrtp-2.3.0$ ./configure --prefix=/usr --enable-openssl
-~/libsrtp-2.3.0$ make shared_library
-~/libsrtp-2.3.0$ sudo make install</code>
+        <code class="command-line">~/libsrtp-X.X.X$ ./configure --prefix=/usr --enable-openssl
+~/libsrtp-X.X.X$ make shared_library
+~/libsrtp-X.X.X$ sudo make install</code>
         <br>
         <h2 id="sgnfile">sgnfile <a href="#sgnfile" title="Link">link</a></h2>
         <code class="literal">sgnfile</code> is used to build or parse <code class="literal">.sgn</code> files which are any non-firmware files the phone downloads during provisioning with a digital signature added. You only need to sign files if the <code class="literal">TFTP</code> role has been included in the phone's <code class="literal">.tlv</code> file.<br>
         <br>
         <b>1.</b> Sign SEPMAC.cnf.xml, soft-key and dial-plan files.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/SEP58971ECC97C1.cnf.xml --tftp /etc/asterisk/kys/asterisk.pem
-~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/SoftKeys.xml --tftp /etc/asterisk/keys/asterisk.pem
-~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/DialTemplate.xml --tftp /etc/asterisk/keys/asterisk.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/SEP58971ECC97C1.cnf.xml --tftp /etc/asterisk/kys/asterisk.pem
+~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/SoftKeys.xml --tftp /etc/asterisk/keys/asterisk.pem
+~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/DialTemplate.xml --tftp /etc/asterisk/keys/asterisk.pem</code>
         <br>
         <b>2.</b> Sign network and user locale files.<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/New_Zealand/g3-tones.xml --tftp /etc/asterisk/keys/asterisk.pem \
+        <code class="command-line">~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/New_Zealand/g3-tones.xml --tftp /etc/asterisk/keys/asterisk.pem \
   --filename New_Zealand/g3-tones.xml.sgn
-~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/New_Zealand/mk-sip.jar --tftp /etc/asterisk/keys/asterisk.pem \
+~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/New_Zealand/mk-sip.jar --tftp /etc/asterisk/keys/asterisk.pem \
   --filename New_Zealand/mk-sip.jar.sgn</code>
         <br>
         <b>3.</b> Sign ring-tones (optional).<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/Ringlist.xml --tftp /etc/asterisk/keys/asterisk.pem
-~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/Old_Telephone.raw --tftp /etc/asterisk/keys/asterisk.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/Ringlist.xml --tftp /etc/asterisk/keys/asterisk.pem
+~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/Old_Telephone.raw --tftp /etc/asterisk/keys/asterisk.pem</code>
         <br>
         <b>4.</b> Sign background images (optional).<br>
         <br>
-        <code class="command-line">~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/Desktops/320x196x4/List.xml --tftp /etc/asterisk/keys/asterisk.pem \
+        <code class="command-line">~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/Desktops/320x196x4/List.xml --tftp /etc/asterisk/keys/asterisk.pem \
   --filename Desktops/320x196x4/List.xml.sgn
-~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/Desktops/320x196x4/Logo.png --tftp /etc/asterisk/keys/asterisk.pem \
+~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/Desktops/320x196x4/Logo.png --tftp /etc/asterisk/keys/asterisk.pem \
   --filename Desktops/320x196x4/Logo.png.sgn
-~/certutils-4.1$ sudo ./sgnfile --build /var/lib/tftpboot/Desktops/320x196x4/Logo_Preview.png --tftp /etc/asterisk/keys/asterisk.pem \
+~/certutils-X.X$ sudo ./sgnfile --build /var/lib/tftpboot/Desktops/320x196x4/Logo_Preview.png --tftp /etc/asterisk/keys/asterisk.pem \
   --filename Desktops/320x196x4/Logo_Preview.png.sgn</code>
       </article>
     </main>
