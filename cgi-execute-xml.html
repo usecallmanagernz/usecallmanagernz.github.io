@@ -153,7 +153,7 @@ cgi_errors = {
 }
 
 
-def cgi_execute(hostname, port, timeout, username, password, certificate, urls):
+def cgi_execute(hostname, port, timeout, username, password, certificate_file, urls):
     xml = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' \
 	'&lt;CiscoIPPhoneExecute&gt;'
 
@@ -167,14 +167,14 @@ def cgi_execute(hostname, port, timeout, username, password, certificate, urls):
     else:
         auth = None
 
-    scheme = 'https' if certificate else 'http'
+    scheme = 'https' if certificate_file else 'http'
 
     try:
         session = requests.Session()
         session.mount('https://', HTTPSAdapter())
 
         response = session.post(f'{scheme}://{hostname}:{port}/CGI/Execute',
-                                timeout = timeout, auth = auth, verify = certificate, data = {'XML': xml})
+                                timeout = timeout, auth = auth, verify = certificate_file, data = {'XML': xml})
         response.raise_for_status()
 
     except requests.RequestException as error:
@@ -216,7 +216,7 @@ def main():
         timeout = 10
         username = ''
         password = ''
-        certificate = None
+        certificate_file = None
         help = False
 
         for option, argument in options:
@@ -253,7 +253,7 @@ def main():
                 password = argument
 
             elif option in ('-c', '--certificate'):
-                certificate = argument
+                certificate_file = argument
 
             elif option in ('-H', '--help'):
                 help = True
@@ -313,9 +313,9 @@ def main():
             raise ProgramError('No host specified')
 
         if port is None:
-            port = 443 if certificate else 80
+            port = 443 if certificate_file else 80
 
-        cgi_execute(hostname, port, timeout, username, password, certificate, urls)
+        cgi_execute(hostname, port, timeout, username, password, certificate_file, urls)
 
     except ProgramError as error:
         print(str(error), file = sys.stderr)
