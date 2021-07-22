@@ -388,8 +388,25 @@
   &lt;/TVS&gt;
   &lt;vpnGroup&gt;
     &lt;mtu&gt;1290&lt;/mtu&gt;
-    &lt;failConnectTime&gt;30&lt;/failConnectTime&gt;
-    &lt;authMethod&gt;0&lt;/authMethod&gt;</code>
+    &lt;failConnectTime&gt;30&lt;/failConnectTime&gt;</code>
+        <br>
+        <h2 id="authMethod">authMethod <a href="#authMethod" title="Link">link</a></h2>
+        Method the phone uses to authenticate to the VPN server.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>User name and password</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>Password only</td>
+              <td class="vertical-rule"><b>2</b></td>
+              <td>Certificate (MIC or LSC)</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">    &lt;authMethod&gt;0&lt;/authMethod&gt;</code>
         <br>
         <h2 id="pswdPersistent">pswdPersistent <a href="#pswdPersistent" title="Link">link</a></h2>
         Locally store the password entered by the user. If disabled the user has to re-enter the password if the phone is reset.<br>
