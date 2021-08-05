@@ -96,11 +96,11 @@
         <h2 id="capfctl">capfctl <a href="#capfctl" title="Link">link</a></h2>
         The <code class="literal">capfctl</code> utility is used to manage the database file used by <code class="literal">capfd</code>. The following sets the device to install a new certificate when it connects to CAPF without requiring a password to the database file in <code class="literal">/var/lib/capf</code>.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ sudo ./capfctl /var/lib/capf/capf.sqlite3 --set SEP58971ECC97C1 --operation INSTALL</code>
+        <code class="command-line">~/daemons-X.X$ sudo -u capf ./capfctl /var/lib/capf/capf.sqlite3 --set SEP58971ECC97C1 --operation INSTALL</code>
         <br>
         If the device already exists in the database file the settings will be overwritten. The LSC certificate can be deleted from the phone by setting the operation to <code class="literal">DELETE</code>. Once a phone has completed the specified operation it will will revert to <code class="literal">NONE</code>.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ sudo ./capfctl /var/lib/capf/capf.sqlite3 --set SEP58971ECC97C1 --operation DELETE</code>
+        <code class="command-line">~/daemons-X.X$ sudo -u capf ./capfctl /var/lib/capf/capf.sqlite3 --set SEP58971ECC97C1 --operation DELETE</code>
         <br>
         A list of devices in the database file can be shown.<br>
         <br>
@@ -141,11 +141,11 @@
         <br>
         Run the daemon by specifying the path to the database file and the certificate that has the <code class="literal">CAPF</code> role. <code class="literal">INSTALL.md</code> has example instructions to run the daemon as a service. Issued certificates are stored in the database and also saved to a file based on the device name, by default the directory used is the same as the database file.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem</code>
+        <code class="command-line">~/daemons-X.X$ sudo -u capf ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem</code>
         <br>
         An optional issuer certificate can be specified to sign the new certificates, otherwise the CAPF certificate is used.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
+        <code class="command-line">~/daemons-X.X$ sudo -u capf ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
     --issuer /var/lib/capf/issuer.pem --days 90</code>
         <br>
         <h2 id="capfc">capfc <a href="#capfc" title="Link">link</a></h2>
