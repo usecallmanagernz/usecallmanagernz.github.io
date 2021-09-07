@@ -92,7 +92,8 @@ same =&gt; next,Goto(${TOLOWER(${DIALSTATUS})},1)
 ; Check if forwarded to the phone's voicemail extension
 exten =&gt; callforward,1,GotoIf($[${CALLFORWARD} = ${SIPPEER(${PEERNAME},vmexten)}]?busy,1)
 ; Cisco SIP phones support displaying diversion information
-same =&gt; next,SIPAddHeader(Diversion: &quot;${SIPPEER(${PEERNAME},callerid_name)}&quot; &lt;sip:${SIPPEER(${PEERNAME},callerid_num)}@localhost&gt;\;screen=yes\;privacy=off)
+same =&gt; next,Set(REDIRECTING(from-all,i)="${SIPPEER(${PEERNAME},callerid_name)}&quot; &lt;${SIPPEER(${PEERNAME},callerid_num)}&gt;)
+same =&gt; next,Set(REDIRECTING(reason,i)=cfu)
 same =&gt; next,Goto(extensions,${CALLFORWARD},1)
 
 ; If ${MAILBOX} is empty send congestion, otherwise go to voicemail extension below
@@ -292,8 +293,18 @@ same =&gt; next,Hangup(normal_clearing)</code>
         <br>
         <code class="prettify lang-astexten">; If dialing outside numbers requires that they be prefixed with a '1'
 exten =&gt; _X.,1,Set(_CISCO_CALLBACK_NUMBER=1${CALLERID(number)})
-same =&gt; next,Dial(SIP/${EXTEN},30)
+same =&gt; next,Dial(SIP/${EXTEN},,30)
 ...</code>    
+
+        <br>
+        <h2 id="cisco_huntpilot">cisco_huntpilot <a href="#cisco_huntpilot" title="Link">link</a></h2>
+        Specifies the caller-ID for the hunt-group which will be shown on the phone and stored in the call history. <b>Note</b>: The phone must be logged-in to the hunt-group for the information to be shown.<br>
+        <br>
+        <code class="prettify lang-astexten">; Specify a name and number for the hunt-group.
+exten =&gt; _X.,1,Set(_CISCO_HUNTGROUP="Ring All" &lt;${EXTEN}&gt;))
+same =&gt; next,Dial(SIP/301&amp;SIP/302&amp;SIP/303,,30)
+...</code>
+
       </article>
     </main>
     <footer></footer>

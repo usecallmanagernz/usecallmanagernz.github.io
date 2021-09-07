@@ -220,11 +220,7 @@
 type=friend
 context=extensions
 host=dynamic
-nat=no
 trustrpid=no
-sendrpid=rpid
-rpid_update=yes
-rpid_immediate=yes
 parkinglot=default
 allowsubscribe=yes
 notifyhold=no
@@ -239,13 +235,20 @@ allow=g722,ulaw,alaw,g729
         <br>
         <code class="prettify lang-astsip">[cisco-usecallmanager](!,extension)
 transport=tcp
+nat=no
+sendrpid=rpid
+rpid_update=yes
+rpid_immediate=yes
+send_diversion=yes
+use_q850_reason=yes
+dndbusy=yes
 cisco_usecallmanager=yes
 cisco_pickupnotify_alert=from,to
 cisco_pickupnotify_timer=5
 cisco_keep_conference=no
 cisco_multiadmin_conference=yes
-dndbusy=yes
-huntgroup_default=no</code>
+huntgroup_default=no
+...</code>
         <br>
         <h2 id="Transport-Layer-Security">Transport Layer Security <a href="#Transport-Layer-Security" title="Link">link</a></h2>
         Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>. The SSL certificate used by Asterisk must be included in <code class="literal">ITLFile.tlv</code> wih the <code class="literal">CCM</code> function or verifiable via TVS. See <a href="itl-file-tlv.html#tlvfile">Device Security</a> and <a href="trust-verification.html">Trust Verification</a> for more information.<br>
