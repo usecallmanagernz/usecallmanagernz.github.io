@@ -123,9 +123,15 @@ Sending NOTIFY of type 'cisco-restart' to '301'</code>
         <code class="command-line">asterisk*CLI&gt; sip notify cisco-reset 301
 Sending NOTIFY of type 'cisco-reset to '301'</code>
         <br>
+        <h2 id="sip-notify-cisco-prt-report">sip notify cisco-prt-report <a href="#sip-notify-cisco-prt-report" title="Link">link</a></h2>
+        Tell the phone to upload a problem report. See <a href="phone-services-xml.html#problemReportUploadURL">Phone Services</a> for more information.<br>
+        <br>
+        <code class="command-line">asterisk*CLI&gt; sip notify cisco-prt-report 301
+Sending NOTIFY of type 'cisco-prt-report to '301'</code>
+        <br>
         <div class="horizontal-rule"></div>
         <h2 id="sip-show-peer">sip show peer <a href="#sip-show-peer" title="Link">link</a></h2>
-        SIP peer details now include the call forward, do not disturb, hunt group login state. For Cisco phone peers the device name, subscriptions and any bulk-registered peers will also be shown.<br>
+        SIP peer details now include the call forward, do not disturb, hunt group login state. For Cisco phone peers the device name, firmware versions, subscriptions and any bulk-registered peers will also be shown.<br>
         <br>
         <code class="command-line">asterisk*CLI&gt; sip show peer 301
 
@@ -135,6 +141,8 @@ Sending NOTIFY of type 'cisco-reset to '301'</code>
   CallFwd Ext. : 305
   Hunt Group   : No
   Device Name  : SEP58971ECC97C1
+  Active Load  : sip8845_65.12-7-1-0001-393
+  Inactive Load: sip8845_65.12-5-1SR1-4
   Subscriptions: 302@extensions
                  303@extensions
   BulkReg.Peers: 311 (Line 2)

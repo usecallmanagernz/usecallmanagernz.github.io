@@ -74,15 +74,15 @@
         <h1>VPN Connection</h1>
         The <b>8800</b>, <b>8900</b> and <b>9900</b> series phones can setup a VPN using the AnyConnect protocol which connects via HTTPS and optionally, DTLS. To enable the VPN connection set &lt;<code class="tag">url1</code>&gt; and &lt;<code class="tag">certHash1</code>&gt; in <a href="sepmac-cnf-xml.html#url1">SEPMAC.cnf.xml</a> and then enter your username and password via the settings or applications menu on the phone.<br>
         <br>
-        Steps for patching, compiling and installed the modified version of Openconnect VPN Server are below. You should be familiar with building from source before attempting this.<br>
+        Steps for patching, compiling and installed the modified version of OpenConnect VPN Server are below. You should be familiar with building from source before attempting this.<br>
         <br>
         <b>1.</b> Download a copy of the patch below.<br>
         <br>
         <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/ocserv/cisco-webvpnlogin-1.1.3.patch" download><span class="icon">file_download</span> cisco-webvpnlogin-1.1.3.patch</a> (24K) <span class="icon">event</span> 22/07/2021 <span class="icon">security</span> SHA256:36f5088dbe2163be7f4ec09badbac882f453e201a1a65449d1b2df48ab0d5014.<br>
         <br>
-        <b>2.</b> Download the version of Openconnect that matches the version number in the name of the patch.<br>
+        <b>2.</b> Download the version of OpenConnect that matches the version number in the name of the patch.<br>
         <br>
-        <a href="https://ocserv.gitlab.io/www/download.html"><span class="icon">open_in_browser</span> Openconnect VPN Server Downloads</a>.<br>
+        <a href="https://ocserv.gitlab.io/www/download.html"><span class="icon">open_in_browser</span> OpenConnect VPN Server Downloads</a>.<br>
         <br>
         <b>3.</b> Extract the archive and apply the patch.<br>
         <br>
@@ -90,12 +90,12 @@
 ~$ cd ocserv-X.X.X
 ~/ocserv-X.X.X$ patch --strip=1 &lt; ../cisco-webvpnlogin-X.X.X.patch</code>
         <br>
-        <b>4.</b> Configure and build Openconnect.<br>
+        <b>4.</b> Configure and build OpenConnect.<br>
         <br>
         <code class="command-line">~/ocserv-X.X.X$ ./configure --prefix=/usr --sysconfdir=/etc/ocserv --disable-maintainer-mode
 ~/ocserv-X.X.X$ make</code>
         <br>
-        <b>5.</b> Install the patched version of Openconnect.<br>
+        <b>5.</b> Install the patched version of OpenConnect.<br>
         <br>
         <code class="command-line">~/ocserv-X.X.X$ sudo make install</code>
         <br>
@@ -106,7 +106,7 @@
         <h2 id="ocserv.conf">ocserv.conf <a href="#ocserv.conf" title="Link">link</a></h2>
         The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Openconnect" --organization "Openconnect" /etc/ocserv/ocserv.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "OpenConnect" --organization "OpenConnect" --unit "OpenConnect" /etc/ocserv/ocserv.pem</code>
         <br>
         <code class="prettify">...
 # Username and password authentication, the ocpasswd(1) tool can be used to
@@ -115,9 +115,9 @@ auth = "plain[passwd=/etc/ocserv/passwd]"
 
 # Alternatively[1] use either the MIC or LSC for authentication
 #auth = certificate
-# User is C/commonName
+# User is commonName (CN)
 #cert-user-oid = 2.5.4.3
-# Group is O/organizationName
+# Group is organizationName (O)
 #cert-group-oid = 2.5.4.10
 
 # Authenticate MIC using Cisco Root CA 2048 + Cisco Manufacturing CA 2

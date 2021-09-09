@@ -87,11 +87,11 @@ Content =&gt; RegisterCallId={${SIPPEER(${PEERNAME},regcallid)}}
 Content =&gt; ConfigVersionStamp={00000000-0000-0000-0000-000000000000}
 Content =&gt; DialplanVersionStamp={00000000-0000-0000-0000-000000000000}
 Content =&gt; SoftkeyVersionStamp={00000000-0000-0000-0000-000000000000}
-Content =&gt; FeatureControlVersionStamp={00000000-0000-0000-0000-000000000000}</code>
+Content =&gt; FeatureControlVersionStamp={00000000-0000-0000-0000-000000000000}
+Content =&gt; HeadsetVersionStamp={0-0000000000}</code>
         <br>
         <h2 id="cisco-reset">cisco-reset <a href="#cisco-reset" title="Link">link</a></h2>
-        The phone will do a full reset, equivalent to powering the phone off and on again.
-        <br>
+        The phone will do a full reset, equivalent to powering the phone off and on again.<br>
         <br>
         <code class="prettify lang-astsipnotify">[cisco-reset]
 Event =&gt; service-control
@@ -102,7 +102,18 @@ Content =&gt; RegisterCallId={${SIPPEER(${PEERNAME},regcallid)}}
 Content =&gt; ConfigVersionStamp={00000000-0000-0000-0000-000000000000}
 Content =&gt; DialplanVersionStamp={00000000-0000-0000-0000-000000000000}
 Content =&gt; SoftkeyVersionStamp={00000000-0000-0000-0000-000000000000}
-Content =&gt; FeatureControlVersionStamp={00000000-0000-0000-0000-000000000000}</code>
+Content =&gt; FeatureControlVersionStamp={00000000-0000-0000-0000-000000000000}
+Content =&gt; HeadsetVersionStamp={0-0000000000}</code>
+        <br>
+        <h2 id="cisco-prt-report">cisco-prt-report <a href="#cisco-prt-report" title="Link">link</a></h2>
+        The phone will upload a problem report to the URL set in &lt;<code class="tag">problemReportUploadURL</code>&gt;.<br>
+        <br>
+        <code class="prettify lang-astsipnotify">[cisco-prt-report]
+Event =&gt; service-control
+Subscription-State =&gt; active
+Content-Type =&gt; text/plain
+Content =&gt; action=prt-report
+Content =&gt; RegisterCallId={${SIPPEER(${PEERNAME},regcallid)}}</code>
       </article>
     </main>
     <footer></footer>

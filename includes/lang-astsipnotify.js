@@ -8,7 +8,6 @@ PR['registerLangHandler'](
 	 [PR['PR_COMMENT'], /^;[^\r\n]*/],
 	 ['lang-astsipnotify-variable', /^\${(\w+)/i],
          [PR['PR_SOURCE'], /^\[[\w\-]+\](?![\w,\-])/i],
-         [PR['PR_KEYWORD'], /^(?:service-control|active|restart|reset)/i],
          [PR['PR_LITERAL'], /^(?:\d+|\d*\.\d+)/i],
          [PR['PR_PLAIN'], /^[a-z_][\w-]*/i],
          [PR['PR_PUNCTUATION'], /^[^\s\w\'\"\$]+/]

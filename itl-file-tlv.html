@@ -83,19 +83,19 @@
         <br>
         <b>1.</b> Create a certificate to sign <code class="literal">ITLFile.tlv</code>. This will have the <code class="literal">SAST</code> (System Administrator Security Token) role.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "SAST" --organization "SAST" --years 20 /etc/ssl/private/sast.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "SAST" --organization "SAST" --unit "SAST" --years 20 /etc/ssl/private/sast.pem</code>
         <br>
         <b>2.</b> Create a certificate for Asterisk. This will have the <code class="literal">CCM</code> role for SIP-TLS connections. Optionally, this can also have the <code class="literal">TFTP</code> role to sign provisioning files.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Asterisk" --organization "Asterisk" /etc/asterisk/keys/asterisk.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Asterisk" --organization "Asterisk" --unit "Asterisk" /etc/asterisk/keys/asterisk.pem</code>
         <br>
         <b>3.</b> Optionally, create a certificate for Apache with an EC (elliptic curve) key. This will have the <code class="literal">TFTP</code> role for HTTPS provisioning. See <a href="apache-conf.html#Secure-Provisioning">Secure Provisioning</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Apache-EC" --organization "Apache-EC" --curve secp384r1 /etc/apache/ssl-certs/apache-ec.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Apache-EC" --organization "Apache-EC" --unit "Asterisk-EC" --curve secp384r1 /etc/apache/ssl-certs/apache-ec.pem</code>
         <br>
         <b>4.</b> Optionally, create a certificate for Apache. This will have the <code class="literal">APP-SERVER</code> role for secure XML services.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Apache" --organization "Apache" /etc/apache/ssl-certs/apache.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "Apache" --organization "Apache" --unit "Apache" /etc/apache/ssl-certs/apache.pem</code>
          <br>
         <h2 id="tlvfile">tlvfile <a href="#tlvfile" title="Link">link</a></h2>
         <code class="literal">tlvfile</code> is used to build or parse <code class="literal">.tlv</code> files. Each certificate has a role specifying where it is used and the same certificate can be included multiple times to provide different roles. Valid roles are listed below.<br>
