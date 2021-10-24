@@ -140,7 +140,10 @@ same =&gt; next,ExecIf($[${SIPPEER(${PEERNAME},huntgroup)} = yes]?Set(DIALGROUP(
 same =&gt; next,EndWhile()
 ; Send congestion if the dial group is empty
 same =&gt; next,ExecIf($[${LEN(${DIALGROUP(huntgroup)})} = 0]?Congestion(10))
-same =&gt; next,Dial(${DIALGROUP(huntgroup)},30,i)
+; Phones support 'Answered Elsewhere' so the 'c' flag is included
+; Later series need to be logged into the hunt-group and have CISCO_HUNTPILOT set to not record answered calls as missed
+same =&gt; next,Set(_CISCO_HUNTPILOT="Ring All" &lt;${EXTEN}&gt;)
+same =&gt; next,Dial(${DIALGROUP(huntgroup)},30,ic)
 same =&gt; next,Hangup(${HANGUPCAUSE})</code>
         <br>
         <h2 id="paging">paging <a href="#paging" title="Link">link</a></h2>
@@ -298,7 +301,7 @@ same =&gt; next,Dial(SIP/${EXTEN},,30)
 
         <br>
         <h2 id="cisco_huntpilot">cisco_huntpilot <a href="#cisco_huntpilot" title="Link">link</a></h2>
-        Specifies the caller-ID for the hunt-group which will be shown on the phone and stored in the call history. <b>Note</b>: The phone must be logged-in to the hunt-group for the information to be shown.<br>
+        Specifies the caller-ID for the hunt-group which will be shown on the phone and stored in the call history. For later models this needs to be set to avoid logging calls answered on other phones as missed calls. <b>Note</b>: The phone must be logged-in to the hunt-group for the information to be shown.<br>
         <br>
         <code class="prettify lang-astexten">; Specify a name and number for the hunt-group.
 exten =&gt; _X.,1,Set(_CISCO_HUNTGROUP="Ring All" &lt;${EXTEN}&gt;))
