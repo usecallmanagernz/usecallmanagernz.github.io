@@ -81,12 +81,12 @@
         <h2 id="tvsctl">tvsctl <a href="#tvsctl" title="Link">link</a></h2>
         The <code class="literal">tvsctl</code> utility is used to manage the database file used by <code class="literal">tvsd</code>. The following adds certificates used for <code class="literal">CCM</code> and <code class="literal">APP-SERVER</code> roles to a database file in <code class="literal">/var/lib/tvs</code>.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ sudo -u tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/asterisk/keys/asterisk.pem --ccm
-~/daemons-X.X$ sudo -u tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/apache2/ssl-certs/apache.pem --app-server</code>
+        <code class="command-line">~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/asterisk/keys/asterisk.pem --ccm
+~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/apache2/ssl-certs/apache.pem --app-server</code>
         <br>
         Certificates can be assigned multiple roles and a optional TTL (time to live). If the certificate already exists in the database file the settings will be overwritten.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ sudo -u tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/asterisk/keys/asterisk.pem --ccm --app-server --ttl 3600</code>
+        <code class="command-line">~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/asterisk/keys/asterisk.pem --ccm --app-server --ttl 3600</code>
         <br>
         A list of certificates and roles in the database file can be shown.<br>
         <br>
