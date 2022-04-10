@@ -188,9 +188,9 @@ def cgi_execute(hostname, port, timeout, username, password, certificate_file, u
         raise ProgramError(error)
 
     if document.tag == 'CiscoIPPhoneError':
-        number = document.get('Number')
+        number = document.get('Number', '')
 
-        raise ProgramError('Error: ' + cgi_errors.get(number, f'{number}'))
+        raise ProgramError('Error: ' + cgi_errors.get(number, number))
 
     for element in document.findall('ResponseItem'):
         url = element.get('URL')

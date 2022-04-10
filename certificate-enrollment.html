@@ -132,7 +132,8 @@
         <h2 id="capfd">capfd <a href="#capfd" title="Link">link</a></h2>
         The Certificate Authentication Proxy Function requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "CAPF" --organization "CAPF" /var/lib/capf/capf.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "CAPF" --organization "CAPF" --unit "CAPF" \
+    /var/lib/capf/capf.pem</code>
         <br>
         Add the CAPF certificate to <code class="literal">ITLFile.tlv</code> using <code class="literal">tlvfile</code> and restart phones to have them download the new version. Alternatively use TVS to verify the CAPF certificate, see <a href="trust-verification.html">Trust Verification</a> for more information.<br>
         <br>

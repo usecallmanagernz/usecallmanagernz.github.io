@@ -106,7 +106,8 @@
         <h2 id="ocserv.conf">ocserv.conf <a href="#ocserv.conf" title="Link">link</a></h2>
         The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "OpenConnect" --organization "OpenConnect" --unit "OpenConnect" /etc/ocserv/ocserv.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "OpenConnect" --organization "OpenConnect" --unit "OpenConnect" \
+    /etc/ocserv/ocserv.pem</code>
         <br>
         <code class="prettify">...
 # Username and password authentication, the ocpasswd(1) tool can be used to

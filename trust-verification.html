@@ -95,7 +95,8 @@
         <h2 id="tvsd">tvsd <a href="#tvsd" title="Link">link</a></h2>
         The Trust Verification Service requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "TVS" --organization "TVS" /var/lib/tvs/tvs.pem</code>
+        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "TVS" --organization "TVS" --unit "TVS" \
+    /var/lib/tvs/tvs.pem</code>
         <br>
         Add the TVS certificate to <code class="literal">ITLFile.tlv</code> using <code class="literal">tlvfile</code> and restart phones to have them download the new version.<br>
         <br>
