@@ -72,21 +72,25 @@
       </nav>
       <article>
         <h1>Trust Verification</h1>
-        The Trust Verification Service (TVS) allows phones to query the validity of a certificate that is not included in <code class="literal">ITLFile.tlv</code> on demand. Certificates used for <code class="literal">CCM</code>, <code class="literal">TFTP</code> and <code class="literal">APP-SERVER</code> roles can be dynamically provisioned without the phone having to re-download <code class="literal">ITLFile.tlv</code>.<br>
+        The Trust Verification Service (TVS) allows phones to query the validity of a certificate that is not included in <code class="literal">ITLFile.tlv</code> on demand. Certificates used for <code class="literal">CCM</code>, <code class="literal">TFTP</code>, <code class="literal">CAPF</code> and <code class="literal">APP-SERVER</code> roles can be dynamically provisioned without the phone having to re-download <code class="literal">ITLFile.tlv</code>.<br>
         <br>
         To enable use of TVS set &lt;<code class="tag">address</code>&gt; and &lt;<code class="tag">port</code>&gt; in <a href="sepmac-cnf-xml.html#TVS/member">SEPMAC.cnf.xml</a> and include a certificate with the <code class="literal">TVS</code> role in <code class="literal">ITLFile.tlv</code>. An archive containing the server and client utilities can be downloaded from the URL below.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/daemons/archive/v1.10.tar.gz" download><span class="icon">file_download</span> daemons-1.10.tar.gz</a> (23K) <span class="icon">event</span> 07/04/2022 <span class="icon">security</span> SHA256:9aecf3abb9f84a0189424d82131a56315ec36ac24f7017c50e415bac17e63b26.<br>
+        <a href="https://github.com/usecallmanagernz/daemons/archive/v2.0.tar.gz" download><span class="icon">file_download</span> daemons-2.0.tar.gz</a> (24K) <span class="icon">event</span> 23/05/2022 <span class="icon">security</span> SHA256:15dba12ba5a8b3e6e7dce27b462ccfc181a73662de6ff03f2b88e1688fb28b2c.<br>
         <br>
         <h2 id="tvsctl">tvsctl <a href="#tvsctl" title="Link">link</a></h2>
         The <code class="literal">tvsctl</code> utility is used to manage the database file used by <code class="literal">tvsd</code>. The following adds certificates used for <code class="literal">CCM</code> and <code class="literal">APP-SERVER</code> roles to a database file in <code class="literal">/var/lib/tvs</code>.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/asterisk/keys/asterisk.pem --ccm
-~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/apache2/ssl-certs/apache.pem --app-server</code>
+        <code class="command-line">~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --add /etc/asterisk/keys/asterisk.pem --ccm
+~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --add /etc/apache2/ssl-certs/apache.pem --app-server</code>
         <br>
-        Certificates can be assigned multiple roles and a optional TTL (time to live). If the certificate already exists in the database file the settings will be overwritten.<br>
+        Multiple roles can be assigned to a certificate and a optional TTL (time to live). If the certificate already exists in the database file the settings will be overwritten.<br>
         <br>
-        <code class="command-line">~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --insert /etc/asterisk/keys/asterisk.pem --ccm --app-server --ttl 3600</code>
+        <code class="command-line">~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --add /etc/asterisk/keys/asterisk.pem --ccm --app-server --ttl 3600</code>
+        <br>
+        Certificates can be removed from the database when no longer required. The certificate hash can be specified as prefix to match.<br>
+        <br>
+        <code class="command-line">~/daemons-X.X$ sudo --user tvs ./tvsctl /var/lib/tvs/tvs.sqlite3 --remove 5dc2c141</code>
         <br>
         A list of certificates and roles in the database file can be shown.<br>
         <br>
