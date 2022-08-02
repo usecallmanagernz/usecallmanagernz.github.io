@@ -200,6 +200,10 @@ main > article code.command-line {
     white-space: pre;
 }
 
+main > article code.command-line > span.prompt {
+    font-weight: bold;
+}
+
 /*
  *
  */

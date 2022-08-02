@@ -86,27 +86,27 @@
         <br>
         <b>3.</b> Extract the archive and apply the patch.<br>
         <br>
-        <code class="command-line">~$ tar --extract --xz --file ocserv-X.X.X.tar.xz
-~$ cd ocserv-X.X.X
-~/ocserv-X.X.X$ patch --strip=1 &lt; ../cisco-webvpnlogin-X.X.X.patch</code>
+        <code class="command-line"><span class="prompt">~$</span> tar --extract --xz --file ocserv-X.X.X.tar.xz
+<span class="prompt">~$</span> cd ocserv-X.X.X
+<span class="prompt">~/ocserv-X.X.X$</span> patch --strip=1 &lt; ../cisco-webvpnlogin-X.X.X.patch</code>
         <br>
         <b>4.</b> Configure and build OpenConnect.<br>
         <br>
-        <code class="command-line">~/ocserv-X.X.X$ ./configure --prefix=/usr --sysconfdir=/etc/ocserv --disable-maintainer-mode
-~/ocserv-X.X.X$ make</code>
+        <code class="command-line"><span class="prompt">~/ocserv-X.X.X$</span> ./configure --prefix=/usr --sysconfdir=/etc/ocserv --disable-maintainer-mode
+<span class="prompt">~/ocserv-X.X.X$</span> make</code>
         <br>
         <b>5.</b> Install the patched version of OpenConnect.<br>
         <br>
-        <code class="command-line">~/ocserv-X.X.X$ sudo make install</code>
+        <code class="command-line"><span class="prompt">~/ocserv-X.X.X$</span> sudo make install</code>
         <br>
         <b>6.</b> Install the sample configuration file.<br>
         <br>
-        <code class="command-line">~/ocserv-X.X.X$ sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
+        <code class="command-line"><span class="prompt">~/ocserv-X.X.X$</span> sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
         <br>
         <h2 id="ocserv.conf">ocserv.conf <a href="#ocserv.conf" title="Link">link</a></h2>
         The VPN server requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ sudo ./mkcert --common "OpenConnect" --organization "OpenConnect" --unit "OpenConnect" \
+        <code class="command-line"><span class="prompt">~/certutils-X.X$</span> sudo ./mkcert --common "OpenConnect" --organization "OpenConnect" --unit "OpenConnect" \
     /etc/ocserv/ocserv.pem</code>
         <br>
         <code class="prettify">...
@@ -156,8 +156,7 @@ tls-priorities = "SECURE256:NORMAL:%SERVER_PRECEDENCE:%COMPAT"
         <h2 id="certhash">certhash <a href="#certhash" title="Link">link</a></h2>
         <code class="literal">certhash</code> is used to generate a base64 encoded version of the SHA1 hash of the VPN server certificate. The hash is then set in one of &lt;<code class="tag">certHash1</code>&gt; ... &lt;<code class="tag">certHash10</code>&gt; in <a href="sepmac-cnf-xml.html#certHash1">SEPMAC.cnf.xml</a>.<br>
         <br>
-        <code class="command-line">~/certutils-X.X$ ./certhash --digest sha1 ocserv.pem
-s4U4A2DqXtupmzGuEGm2NCjxW/Y=</code>
+        <code class="command-line"><span class="prompt">~/certutils-X.X$</span> ./certhash --digest sha1 /etc/ocserv/ocserv.pem</code>
       </article>
     </main>
     <footer></footer>

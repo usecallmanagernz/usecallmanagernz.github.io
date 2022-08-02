@@ -80,23 +80,23 @@
         <br>
         <a href="https://raw.githubusercontent.com/usecallmanagernz/certutils/master/stripsgn" download><span class="icon">file_download</span> stripsgn</a> (3.3K) <span class="icon">event</span> 09/06/2021 <span class="icon">security</span> SHA256:3c524c31ff938f7718a0edf83097323c25deecc98fec908aac35053a6ef081a2.<br>
         <br>
-        <code class="command-line">~$ ./stripsgn po-locale-en_GB-k3-X.X.X.1000-1.cop.sgn</code>
+        <code class="command-line"><span class="prompt">~/certutils-X.X$</span> ./stripsgn po-locale-en_GB-k3-X.X.X.1000-1.cop.sgn</code>
         <br>
         <b>2.</b> Extract the archive.<br>
         <br>
-        <code class="command-line">~$ tar --extract --gzip --file po-locale-en_GB-k3-X.X.X.1000-1.cop</code>
+        <code class="command-line"><span class="prompt">~$</span> tar --extract --gzip --file po-locale-en_GB-k3-X.X.X.1000-1.cop</code>
         <br>
         <b>3.</b> Extract the <code class="literal">.tar</code> file that the archive contained.<br>
         <br>
-        <code class="command-line">~$ tar --extract --file po-locale-en_GB-k3-X.X.X.1000-1.tar</code>
+        <code class="command-line"><span class="prompt">~$</span> tar --extract --file po-locale-en_GB-k3-X.X.X.1000-1.tar</code>
         <br>
         <b>4.</b> Change into the directory containing the user locale for your language.<br>
         <br>
-        <code class="command-line">~$ cd usr/locale/cm/tftp/english_united_kingdom</code>
+        <code class="command-line"><span class="prompt">~$</span> cd usr/locale/cm/tftp/english_united_kingdom</code>
         <br>
         <b>5.</b> Copy the locale files into a language specific directory in <code class="literal">/var/lib/tftpboot</code>. You can use any combination of letters, numbers and underscores for the language name.<br>
         <br>
-        <code class="command-line">~/usr/locale/cm/tftp/english_united_kingdom$ sudo cp *-sip.jar /var/lib/tftpboot/new_zealand</code>
+        <code class="command-line"><span class="prompt">~/usr/locale/cm/tftp/english_united_kingdom$</span> sudo cp *-sip.jar /var/lib/tftpboot/new_zealand</code>
         <br>
         Depending on the phone model, a different <code class="literal">.jar</code> file is used.<br>
         <br>
