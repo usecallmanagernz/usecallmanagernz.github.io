@@ -2646,11 +2646,15 @@
               <td>Password</td>
               <td class="vertical-rule"><b>2</b></td>
               <td>Empty password</td>
+              <td class="vertical-rule"><b>3</b></td>
+              <td>Locally Significant Certificate (LSC), fallback to Manufacturer Installed Certificate (MIC)</td>
+              <td class="vertical-rule"><b>4</b></td>
+              <td>Manufacturer Installed Certificate (MIC)</td>
             </tr>
           </tbody>
         </table>
         <br>
-        <code class="prettify lang-xml">  &lt;capfAuthMode&gt;2&lt;/capfAuthMode&gt;
+        <code class="prettify lang-xml">  &lt;capfAuthMode&gt;1&lt;/capfAuthMode&gt;
   &lt;capfList&gt;</code>
         <br>
         <h2 id="capfList/capf">capf <a href="#capfList/capf" title="Link">link</a></h2>
@@ -2659,7 +2663,7 @@
         <code class="prettify lang-xml">    &lt;capf&gt;</code>
         <br>
         <h2 id="capf/phonePort">port <a href="#capf/phonePort" title="Link">link</a></h2>
-        Port to connect to on the server running the Certificae Authentication Proxy Function.<br>
+        Port to connect to on the server running the Certificate Authentication Proxy Function.<br>
         <br>
         <code class="prettify lang-xml">      &lt;phonePort&gt;3804&lt;/phonePort&gt;</code>
         <br>
