@@ -87,11 +87,11 @@
           </tbody>
         </table>
         <br>
-        Using the Manufacturer Installed Certificate (MIC) to authenticate a phone does not require CAPF. Instead download and combine the <b>Cisco Root CA 2048</b> and <b>Cisco Manufacturing CA 2</b> certificates available at <a href="https://www.cisco.com/security/pki/"><span class="icon">open_in_browser</span> https://www.cisco.com/security/pki</a> into a certificate chain.<br>
+        Using the Manufacturer Installed Certificate (MIC) to authenticate a phone does not require CAPF. Instead download and combine the <b>Cisco Root CA 2048 (crca2048)</b> and <b>Cisco Manufacturing CA (cmca2)</b> certificates available at <a href="https://www.cisco.com/security/pki/"><span class="icon">open_in_browser</span> https://www.cisco.com/security/pki</a> into a certificate chain.<br>
         <br>
         To enable use of CAPF set &lt;<code class="tag">processNodeName</code>&gt; and &lt;<code class="tag">phonePort</code>&gt; in <a href="sepmac-cnf-xml.html#capf/processNodeName">SEPMAC.cnf.xml</a> and include a certificate with the <code class="literal">CAPF</code> role in <code class="literal">ITLFile.tlv</code> or via the Trust Verification Service. An archive containing the server and client utilities can be downloaded from the URL below.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/daemons/archive/v2.2.tar.gz" download><span class="icon">file_download</span> daemons-2.2.tar.gz</a> (24K) <span class="icon">event</span> 05/07/2022 <span class="icon">security</span> SHA256:2a5ea80967ada871b8327c0c9e4afc199a9eed02a0a91187244bd97707a51019.<br>
+        <a href="https://github.com/usecallmanagernz/daemons/archive/v3.0.tar.gz" download><span class="icon">file_download</span> daemons-3.0.tar.gz</a> (28K) <span class="icon">event</span> 11/09/2022 <span class="icon">security</span> SHA256:bab11e46a1276937df774d499f97f9c070fec4b73e628a9504cc6318b3f9e209.<br>
         <br>
         <h2 id="capfctl">capfctl <a href="#capfctl" title="Link">link</a></h2>
         The <code class="literal">capfctl</code> utility is used to manage the database file used by <code class="literal">capfd</code>. The following sets the device to install a new certificate when it connects to CAPF without requiring a password to the database file in <code class="literal">/var/lib/capf</code>. Once a phone has completed the specified operation the current operation will revert to <code class="literal">none</code>.<br>
@@ -103,6 +103,16 @@
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
     --curve secp384r1</code>
         <br>
+	Optionally specify a password that the phone must provide to authenticate with CAPF. See <a href="sepmac-cnf-xml.html#capfAuthMode">SEPMAC.cnf.xml</a> for more information.<br>
+	<br>
+	<code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
+    --password 123456</code>
+        <br>
+	Optionally specify that phone will authenticate with the CAPF using both the LSC (if installed) and MIC. See below for additional command line options to <code class="literal">capfd</code> to authenticate the MIC.<br>
+	<br>
+	<code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
+    --certificate</code>
+	<br>
         The LSC certificate can be deleted from the phone.<br>
         <br>
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --delete SEP58971ECC97C1</code>
@@ -157,6 +167,11 @@
         <br>
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
     --issuer /var/lib/capf/issuer.pem --days 90</code>
+        <br>
+	If the phone has been configured to authenticate using a certificate then the <b>Cisco Manufacturing CA (cmca2)</b> certificate used to sign the phone's MIC must also be specified. The verify option may be specified multiple times to validate additional issuers, the certificate used to issue an LSC is automatically used for verification.<br>
+	<br>
+        <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
+    --verify /var/lib/capf/cmca2.pem</code>
         <br>
         <h2 id="capfc">capfc <a href="#capfc" title="Link">link</a></h2>
         <code class="literal">capfc</code> is a command line client that connects to <code class="literal">capfd</code> to perform the current operation. This can be used to debug certificate enrollment failures.
