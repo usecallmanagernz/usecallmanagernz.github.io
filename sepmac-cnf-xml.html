@@ -1026,7 +1026,24 @@
         <h2 id="busyTrigger">busyTrigger <a href="#busyTrigger" title="Link">link</a></h2>
         Number of calls the line can have at a time before returning a busy signal.<br>
         <br>
-        <code class="prettify lang-xml">        &lt;busyTrigger&gt;4&lt;/busyTrigger&gt;
+        <code class="prettify lang-xml">        &lt;busyTrigger&gt;4&lt;/busyTrigger&gt;</code>
+        <br>
+        <h2 id="recordingOption">recordingOption <a href="#recordingOption" title="Link">link</a></h2>
+        Allow user-initiated recording of calls on this line.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>disable</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>enable</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">
+        &lt;recordingOption&gt;enable&lt;/recordingOption&gt;
       &lt;/line&gt;
     &lt;/sipLines&gt;
     &lt;externalNumberMask&gt;&lt;/externalNumberMask&gt;
@@ -1880,6 +1897,22 @@
         <br>
         <code class="prettify lang-xml">    &lt;lineMode&gt;0&lt;/lineMode&gt;</code>
         <br>
+        <h2 id="callParkMonitor">callParkMonitor <a href="#callParkMonitor" title="Link">link</a></h2>
+        Monitor the parked call's status using a line key. <b>7800</b> and <b>8800</b> series only.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">    &lt;callParkMonitor&gt;1&lt;/callParkMonitor&gt;</code>
+        <br>
         <h2 id="showCallHistoryForSelectedLine">showCallHistoryForSelectedLine <a href="#showCallHistoryForSelectedLine" title="Link">link</a></h2>
         When viewing the phone's call history only show calls for the currently selected line.<br>
         <br>
@@ -1911,6 +1944,38 @@
         </table>
         <br>
         <code class="prettify lang-xml">    &lt;dialToneFromReleaseKey&gt;0&lt;/dialToneFromReleaseKey&gt;</code>
+        <br>
+        <h2 id="markCallAsSpam">markCallAsSpam <a href="#markCallAsSpam" title="Link">link</a></h2>
+        Show mark as call as spam soft-key. <b>7800</b> and <b>8800</b> series only.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">    &lt;markCallAsSpam&gt;1&lt;/markCallAsSpam&gt;</code>
+        <br>
+        <h2 id="lowerYourVoiceAlert">lowerYourVoiceAlert <a href="#lowerYourVoiceAlert" title="Link">link</a></h2>
+        Enable an alert when input sound level is too high. <b>7800</b> and <b>8800</b> series only.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">    &lt;lowerYourVoiceAlert&gt;0&lt;/lowerYourVoiceAlert&gt;</code>
         <br>
         <h2 id="dfBit">dfBit <a href="#dfBit" title="Link">link</a></h2>
         Set the DF (Don't Fragement) bit in the IP packet header.<br>

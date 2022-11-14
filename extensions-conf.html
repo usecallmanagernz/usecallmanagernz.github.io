@@ -147,7 +147,7 @@ same =&gt; next,Dial(${DIALGROUP(huntgroup)},30,ic)
 same =&gt; next,Hangup(${HANGUPCAUSE})</code>
         <br>
         <h2 id="paging">paging <a href="#paging" title="Link">link</a></h2>
-        Page a group of phones using the <a href="rtp-streaming.html">RTP streaming</a> API.<br>
+        Page a group of phones using the <a href="rtp-streaming.html">RTP streaming</a> API. See <a href="#cisco_autoanswer">cisco_autoanswer</a> for an additional paging method.<br>
         <br>
         <code class="prettify lang-astexten">; Only allow one page at a time
 exten =&gt; 380,1,Set(GROUP()=paging)
@@ -298,7 +298,6 @@ same =&gt; next,Hangup(normal_clearing)</code>
 exten =&gt; _X.,1,Set(_CISCO_CALLBACK_NUMBER=1${CALLERID(number)})
 same =&gt; next,Dial(SIP/${EXTEN},,30)
 ...</code>    
-
         <br>
         <h2 id="cisco_huntpilot">cisco_huntpilot <a href="#cisco_huntpilot" title="Link">link</a></h2>
         Specifies the caller-ID for the hunt-group which will be shown on the phone and stored in the call history. For later models this needs to be set to avoid logging calls answered on other phones as missed calls. <b>Note</b>: The phone must be logged-in to the hunt-group for the information to be shown.<br>
@@ -307,7 +306,13 @@ same =&gt; next,Dial(SIP/${EXTEN},,30)
 exten =&gt; _X.,1,Set(_CISCO_HUNTGROUP="Ring All" &lt;${EXTEN}&gt;))
 same =&gt; next,Dial(SIP/301&amp;SIP/302&amp;SIP/303,,30)
 ...</code>
-
+        <br>
+        <h2 id="cisco_autoanswer">cisco_autoanswer <a href="#cisco_autoanswer" title="Link">link</a></h2>
+        When enabled phone will be requested to automatically answer the call after it sends back a ringing response.<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; _X.,1,Set(_CISCO_AUTOANSWER=yes)
+same =&gt; next,Page(SIP/301&amp;SIP/302,sni,30)
+...</code>
       </article>
     </main>
     <footer></footer>
