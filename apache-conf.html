@@ -81,7 +81,9 @@
         <a href="https://github.com/usecallmanagernz/tftpboot/archive/v1.5.tar.gz" download><span class="icon">file_download</span> tftpboot-1.5.tar.gz</a> (124K) <span class="icon">event</span> 13/11/2022 <span class="icon">security</span> SHA256:cc0243693029e4f31328d4f17ac6d99d723739457320d8439ea799fe40073694.<br>
         <br>
         <code class="prettify lang-apache">Listen 6970
+
 &lt;Virtualhost *:6970&gt;
+  # HTTP Provisioning
   DocumentRoot /var/lib/tftpboot
 
   &lt;Directory /var/lib/tftpboot&gt;
@@ -95,7 +97,10 @@
         <br>
         When the EC key is included in <code class="literal">ITLFile.tlv</code> then the remaining provisioning files need to be signed using an RSA key with the <code class="literal">TFTP</code> role, see <a href="itl-file-tlv.html#sgnfile">Device Security</a> for more information. If the phone requests it's configuration file on port <code class="literal">6971</code> with a <code class="literal">.sgn</code> extension the response must contain an unsigned file.<br>
         <br>
-        <code class="prettify lang-apache">&lt;Virtualhost *:6971&gt;
+        <code class="prettify lang-apache">Listen 6971
+
+&lt;Virtualhost *:6971&gt;
+  # HTTPS Provisioning
   DocumentRoot /var/lib/tftpboot
 
   &lt;Directory /var/lib/tftpboot&gt;
@@ -119,8 +124,10 @@
         <h2 id="XML-Services">XML Services <a href="#XML-Services" title="Link">link</a></h2>
         Example configuration for a WSGI application providing phone XML services on port <code class="literal">6972</code>, any port can be used. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
-        <code class="prettify lang-apache"># For &lt;servicesURL&gt;, &lt;directoryURL&gt; and &lt;authenticationURL&gt;
+        <code class="prettify lang-apache">Listen 6972
+
 &lt;Virtualhost *:6972&gt;
+  # For &lt;servicesURL&gt;, &lt;directoryURL&gt; and &lt;authenticationURL&gt;
   DocumentRoot /var/www/services
 
   &lt;Directory /var/www/services&gt;
@@ -137,8 +144,10 @@
         <h2 id="Secure-XML-Services">Secure XML Services <a href="#Secure-XML-Services" title="Link">link</a></h2>
         Example configuration for a WSGI application providing phone XML services on port <code class="literal">6973</code>, any port can be used. The certificate used needs to be included in <code class="literal">ITLFile.tlv</code> with the <code class="literal">APP-SERVER</code> role or verifiable via TVS. See <a href="itl-file-tlv.html#tlvfile">Device Security</a> for more information.<br>
         <br>
-        <code class="prettify lang-apache"># For &lt;secureServicesURL&gt;, &lt;secureDirectoryURL&gt; and &lt;secureAuthenticationURL&gt;
+        <code class="prettify lang-apache">Listen 6973
+
 &lt;Virtualhost *:6973&gt;
+  # For &lt;secureServicesURL&gt;, &lt;secureDirectoryURL&gt; and &lt;secureAuthenticationURL&gt;
   DocumentRoot /var/www/services
 
   &lt;Directory /var/www/services&gt;
