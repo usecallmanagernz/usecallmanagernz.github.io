@@ -231,11 +231,12 @@ allow=g722,ulaw,alaw,g729
 ...</code>
         <br>
         <h2 id="Cisco-SIP-Phone-Template">Cisco SIP Phone Template <a href="#Cisco-SIP-Phone-Template" title="Link">link</a></h2>
-        Settings that apply to all Cisco SIP phones, inherits the settings from the <code class="literal">extension</code> template.<br>
+        Default settings that apply to all Cisco SIP phones, inherits the settings from the <code class="literal">extension</code> template.<br>
         <br>
         <code class="prettify lang-astsip">[cisco-usecallmanager](!,extension)
 transport=tcp
 nat=no
+directmedia=no
 sendrpid=rpid
 rpid_update=yes
 rpid_immediate=yes
@@ -248,6 +249,11 @@ cisco_keep_conference=no
 cisco_multiadmin_conference=yes
 huntgroup_default=no
 ...</code>
+        <br>
+        <h2 id="Direct-Media">Direct Media <a href="#Direct-Media" title="Link">link</a></h2>
+        To have RTP (media) flow directly between phones replace the <code class="literal">directmedia</code> setting in the above template with <code class="literal">update</code>.<br>
+        <br>
+        <code class="prettify lang-astsip">directmedia=update</code>
         <br>
         <h2 id="Transport-Layer-Security">Transport Layer Security <a href="#Transport-Layer-Security" title="Link">link</a></h2>
         Cisco SIP Phones support three different transport security modes set using a combination of &lt;<code class="tag">transportLayerProtocol</code>&gt; and &lt;<code class="tag">deviceSecurityMode</code>&gt; in <a href="sepmac-cnf-xml.html#transportLayerProtocol">SEPMAC.cnf.xml</a>. The SSL certificate used by Asterisk must be included in <code class="literal">ITLFile.tlv</code> wih the <code class="literal">CCM</code> function or verifiable via TVS. See <a href="itl-file-tlv.html#tlvfile">Device Security</a> and <a href="trust-verification.html">Trust Verification</a> for more information.<br>
