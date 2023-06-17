@@ -17,6 +17,8 @@ on:
       - '.tidyrc'
       - '.github/workflows/tidy.yml'
 
+  workflow_dispatch:
+
 jobs:
   lint:
     name: Run html linter 
