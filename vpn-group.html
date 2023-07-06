@@ -149,8 +149,8 @@ tls-priorities = "SECURE256:NORMAL:%SERVER_PRECEDENCE:%COMPAT"
 # Alternatively[2], force CBC ciphers so that DTLS can be enabled. Only
 # port 443 can be used.
 #udp-port = 443
-#tls-priorities = "NONE:+VERS-TLS-ALL:+RSA:+SHA:+AES-256-CBC:+AES-128-CBC:+SIGN-ALL:+COMP-ALL:+CTYPE-ALL:%COMPAT"
-#dtls-legacy = true
+#tls-priorities = "NONE:+VERS-TLS-ALL:+SHA1:+RSA:+AES-128-CBC:+SIGN-ALL:+COMP-ALL"
+#dtls-legacy = false
 ...</code>
         <br>
         <h2 id="certhash">certhash <a href="#certhash" title="Link">link</a></h2>
