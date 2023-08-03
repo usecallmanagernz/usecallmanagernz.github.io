@@ -74,32 +74,27 @@
         <h1>VPN Connection</h1>
         The <b>8800</b>, <b>8900</b> and <b>9900</b> series phones can setup a VPN using the AnyConnect protocol which connects via HTTPS and optionally, DTLS. To enable the VPN connection set &lt;<code class="tag">url1</code>&gt; and &lt;<code class="tag">certHash1</code>&gt; in <a href="sepmac-cnf-xml.html#url1">SEPMAC.cnf.xml</a> and then enter your username and password via the settings or applications menu on the phone.<br>
         <br>
-        Steps for patching, compiling and installed the modified version of OpenConnect VPN Server are below. You should be familiar with building from source before attempting this.<br>
+        Steps compiling and installing OpenConnect VPN Server are below. You should be familiar with building from source before attempting this.<br>
         <br>
-        <b>1.</b> Download a copy of the patch below.<br>
-        <br>
-        <a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/ocserv/cisco-webvpnlogin-1.1.7.patch" download><span class="icon">file_download</span> cisco-webvpnlogin-1.1.7.patch</a> (23K) <span class="icon">event</span> 17/06/2023 <span class="icon">security</span> SHA256:2767716de2abed757af7c7dc064df65f943475f21b55723e73ffcbaf54b28666.<br>
-        <br>
-        <b>2.</b> Download the version of OpenConnect that matches the version number in the name of the patch.<br>
+        <b>1.</b> Download a version of OpenConnect that is <code class="literal">1.2.0</code> or newer.<br>
         <br>
         <a href="https://ocserv.gitlab.io/www/download.html"><span class="icon">open_in_browser</span> OpenConnect VPN Server Downloads</a>.<br>
         <br>
-        <b>3.</b> Extract the archive and apply the patch.<br>
+        <b>2.</b> Extract the archive.<br>
         <br>
         <code class="command-line"><span class="prompt">~$</span> tar --extract --xz --file ocserv-X.X.X.tar.xz
-<span class="prompt">~$</span> cd ocserv-X.X.X
-<span class="prompt">~/ocserv-X.X.X$</span> patch --strip=1 &lt; ../cisco-webvpnlogin-X.X.X.patch</code>
+<span class="prompt">~$</span> cd ocserv-X.X.X</code>
         <br>
-        <b>4.</b> Configure and build OpenConnect.<br>
+        <b>3.</b> Configure and build OpenConnect.<br>
         <br>
-        <code class="command-line"><span class="prompt">~/ocserv-X.X.X$</span> ./configure --prefix=/usr --sysconfdir=/etc/ocserv --disable-maintainer-mode
+        <code class="command-line"><span class="prompt">~/ocserv-X.X.X$</span> ./configure --prefix=/usr --sysconfdir=/etc/ocserv
 <span class="prompt">~/ocserv-X.X.X$</span> make</code>
         <br>
-        <b>5.</b> Install the patched version of OpenConnect.<br>
+        <b>4.</b> Install OpenConnect.<br>
         <br>
         <code class="command-line"><span class="prompt">~/ocserv-X.X.X$</span> sudo make install</code>
         <br>
-        <b>6.</b> Install the sample configuration file.<br>
+        <b>5.</b> Install the sample configuration file.<br>
         <br>
         <code class="command-line"><span class="prompt">~/ocserv-X.X.X$</span> sudo cp doc/sample.config /etc/ocserv/ocserv.conf</code>
         <br>
@@ -132,25 +127,12 @@ auth = "plain[passwd=/etc/ocserv/passwd]"
 server-cert = "/etc/ocserv/ocserv.pem"
 server-key = "/etc/ocserv/ocserv.pem"
 
-# Any unused TCP port can be used.
-tcp-port = 443
+# Enable cisco phone VPN client checks
+cisco-svc-client-compat = true
 
-# Disable DTLS. To use GCM ciphers DTLS support must be disabled because
-# the phone negotiates a SSLv3 connection which only allows for CBC mode
-# ciphers.
-udp-port = 0
-
-# Prefer 256-bit ciphers, ECDHE-RSA-AES-256-GCM or RSA-AES-256-CBC.
-tls-priorities = "SECURE256:NORMAL:%SERVER_PRECEDENCE:%COMPAT"
-
-# Alternatively[1], prefer 128-bit ciphers, ECDHE-RSA-AES-128-GCM or RSA-AES-128-CBC.
-#tls-priorities = "SECURE128:NORMAL:%SERVER_PRECEDENCE:%COMPAT"
-
-# Alternatively[2], force CBC ciphers so that DTLS can be enabled. Only
-# port 443 can be used.
-#udp-port = 443
-#tls-priorities = "NONE:+VERS-TLS-ALL:+SHA1:+RSA:+AES-128-CBC:+SIGN-ALL:+COMP-ALL"
-#dtls-legacy = false
+# If you are using older model phones such as 894x or 99xx series
+# then you may need to force the allowed ciphers
+#tls-priorities = "NONE:%SERVER_PRECEDENCE:%COMPAT:+VERS-TLS-ALL:+SIGN-ALL:+COMP-ALL:+RSA:+SHA1:+AES-256-CBC"
 ...</code>
         <br>
         <h2 id="certhash">certhash <a href="#certhash" title="Link">link</a></h2>
