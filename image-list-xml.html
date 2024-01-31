@@ -3,13 +3,14 @@
   <head>
     <title>Background Images</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="includes/theme.css">
-    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="includes/prettify.js"></script>
-    <script type="text/javascript">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1">
+    <link rel="stylesheet" href="includes/theme.css">
+    <link rel="stylesheet" href="includes/prettify.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="includes/prettify.js"></script>
+    <script>
       jQuery(window).on("load", function () {
           prettyPrint();
       });
@@ -182,7 +183,7 @@
               <td class="vertical-rule">Desktops/800x480x24</td>
             </tr>
             <tr>
-              <td>8800 BEKEM</td>
+              <td>BEKEM</td>
               <td class="vertical-rule">Color</td>
               <td class="vertical-rule">272</td>
               <td>480</td>
@@ -192,7 +193,7 @@
               <td class="vertical-rule">Desktops/272x480x24</td>
             </tr>
             <tr>
-              <td>8851/8861 BEKEM, 8865 BEKEM</td>
+              <td>CP-8800-Audio, CP-8800-Video</td>
               <td class="vertical-rule">Color</td>
               <td class="vertical-rule">320</td>
               <td>480</td>
@@ -214,8 +215,8 @@
           </tbody>
         </table>
         <br>
-        <h2 id="BEKEM">BEKEM Background Images <a href="#BEKEM" title="Link">link</a></h2>
-        When a wallpaper-supported BEKEM or Key Expansion Module is enabled and attached to the phone, it will automatically use a cropped version of the background image specified in <code class="literal">List.xml</code> for the device. If a separate background image for the KEM module is desired, an different background image exclusively intended for the KEM module may be uploaded to the provisioning server. The image's file name must remain the same as the main background image displayed on the KEM module and must be sized and placed in its appropriate directory specified in the table above.
+        <h2 id="Key-Expansion-Modules">Key Expansion Modules <a href="#Key-Expansion-Modules" title="Link">link</a></h2>
+        When a background image is selected on the phone the key expansion module will automatically try to download an image of the same file name from the directory shown above. If that image does not exist it will fall-back to using a cropped version of the phone's background.
       </article>
     </main>
     <footer></footer>

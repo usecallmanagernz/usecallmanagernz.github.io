@@ -8,8 +8,10 @@ body {
     color: rgb(80, 80, 80);
     display: flex;
     flex-direction: column;
-    font: normal normal 13pt/17pt Roboto, sans-serif;
+    font-family: "Roboto";
+    font-size: 13pt;
     height: 100%;
+    line-height: 19pt;
     margin: 0px;
 }
 
@@ -106,8 +108,9 @@ main > nav ul li h3 {
 main > nav ul li span.icon {
     color: rgb(160, 160, 160);
     display: inline-block;
-    font-family: "Material Icons";
+    font-family: "Material Symbols Outlined";
     font-size: 15pt;
+    font-variation-settings: "FILL" 1;
     padding: 0px 5px 0px 0px;
     vertical-align: middle;
 }
@@ -150,9 +153,9 @@ main > article div.horizontal-rule {
 main > article span.icon {
     color: rgb(160, 160, 160);
     display: inline-block;
-    font-family: "Material Icons";
+    font-family: "Material Symbols Outlined";
     font-size: 13pt;
-    vertical-align: text-top;
+    vertical-align: middle;
 }
 
 main > article h2 {
@@ -164,7 +167,7 @@ main > article h2 {
 main > article h2 > a {
     color: rgb(0, 126, 255);
     display: none;
-    font-family: "Material Icons";
+    font-family: "Material Symbols Outlined";
     font-size: 13pt;
     font-weight: normal;
     padding-left: 3px;

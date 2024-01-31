@@ -3,13 +3,14 @@
   <head>
     <title>SEPMAC.cnf.xml</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="includes/theme.css">
-    <link rel="stylesheet" type="text/css" href="includes/prettify.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="includes/prettify.js"></script>
-    <script type="text/javascript">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1">
+    <link rel="stylesheet" href="includes/theme.css">
+    <link rel="stylesheet" href="includes/prettify.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="includes/prettify.js"></script>
+    <script>
       jQuery(window).on("load", function () {
           prettyPrint();
       });
@@ -2342,7 +2343,7 @@
   &lt;addOnModules&gt;</code>
         <br>
         <h2 id="addOnModule">addOnModule <a href="#addOnModule" title="Link">link</a></h2>
-        Describes a add-on module attached to the phone.<br>
+        Describes a add-on (key expansion) module attached to the phone.<br>
         <br>
         <table>
           <tbody>
@@ -2356,7 +2357,7 @@
         <code class="prettify lang-xml">    &lt;addOnModule idx=&quot;1&quot;&gt;</code>
         <br>
         <h2 id="deviceType">deviceType <a href="#deviceType" title="Link">link</a></h2>
-        Model of the add-on module.<br>
+        Model of the add-on module. <b>Note</b>: For the 8800 series all modules connected must be of the same type.<br>
         <br>
         <table>
           <tbody>
