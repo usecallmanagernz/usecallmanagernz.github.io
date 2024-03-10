@@ -2139,6 +2139,24 @@
         <br>
         <code class="prettify lang-xml">    &lt;powerNegotiation&gt;0&lt;/powerNegotiation&gt;</code>
         <br>
+        <h2 id="eapAuthentication">eapAuthentication <a href="#eapAuthentication" title="Link">link</a></h2>
+        Enable port authentication on a switch supports 802.1x.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>User controlled</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>2</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">    &lt;eapAuthentication&gt;1&lt;/eapAuthentication&gt;</code>
+        <br>
         <h2 id="accessContacts">accessContacts <a href="#accessContacts" title="Link">link</a></h2>
         Allow access to the phone's contacts. <b>8821</b> model only.<br>
         <br>
@@ -2557,9 +2575,9 @@
               <td><b>type</b></td>
               <td>Which menu the service appears in</td>
               <td class="vertical-rule"><b>0</b></td>
-              <td>Applications menu</td>
+              <td>Services or Applications menu</td>
               <td class="vertical-rule"><b>1</b></td>
-              <td>Contacts menu</td>
+              <td>Directories or Contacts menu</td>
               <td class="vertical-rule"><b>2</b></td>
               <td>Messages menu</td>
             </tr>
