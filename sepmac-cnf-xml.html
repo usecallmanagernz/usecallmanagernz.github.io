@@ -1151,10 +1151,10 @@
         <code class="prettify lang-xml">  &lt;inactiveLoadInformation&gt;<i>LOADS FILE</i>&lt;/inactiveLoadInformation&gt;
   &lt;vendorConfig&gt;</code>
         <br>
-        <h2 id="defaultWallpaperFile">defaultWallpaperFiler <a href="#defaultWallpaperFile" title="Link">link</a></h2>
-        PNG image file containing the default background image for the phone. URL must be http://, <b>8800</b>, <b>8900</b> and <b>9900</b> series only. See <a href="image-list-xml.html">Background Images</a> for image size.<br>
+        <h2 id="defaultWallpaperFile">defaultWallpaperFile <a href="#defaultWallpaperFile" title="Link">link</a></h2>
+        Default background image for the phone, the file must be located in the directory the phone uses for user selecable background images and &lt;<code class="tag">backgroundImageAccess</code>&gt; must also be set to <code class="literal">false</code>.  <b>8800</b>, <b>8900</b> and <b>9900</b> series only. See <a href="image-list-xml.html">Background Images</a> for directory and image size.<br>
         <br>
-        <code class="prettify lang-xml">    &lt;defaultWallpaperFile&gt;<i>URL</i>&lt;defaultWallpaperFile&gt;</code>
+        <code class="prettify lang-xml">    &lt;defaultWallpaperFile&gt;<i>FILE</i>&lt;defaultWallpaperFile&gt;</code>
         <br>
         <h2 id="disableSpeaker">disableSpeaker <a href="#disableSpeaker" title="Link">link</a></h2>
         Whether a user can use the speaker.<br>
