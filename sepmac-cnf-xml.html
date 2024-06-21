@@ -878,7 +878,7 @@
         <h2 id="contact">contact <a href="#contact" title="Link">link</a></h2>
         SIP contact header username to use (optional).<br>
         <br>
-        <code class="prettify lang-xml">        &lt;contact&gt;&lt;/contact&gt;
+        <code class="prettify lang-xml">        &lt;contact&gt;<i>PEERNAME</i>&lt;/contact&gt;
         &lt;sharedLine&gt;false&lt;/sharedLine&gt;</code>
         <br>
         <h2 id="messageWaitingLampPolicy">messageWaitingLampPolicy <a href="#messageWaitingLampPolicy" title="Link">link</a></h2>
@@ -1386,6 +1386,22 @@
         <br>
         <code class="prettify lang-xml">    &lt;webProtocol&gt;0&lt;/webProtocol&gt;</code>
         <br>
+        <h2 id="tls12Only">tls12Only <a href="#tls12Only" title="Link">link</a></h2>
+        Only allow TLS 1.2 ciphers for web access via HTTPS.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>0</b></td>
+              <td>Disabled</td>
+              <td class="vertical-rule"><b>1</b></td>
+              <td>Enabled</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">    &lt;tls12Only&gt;0&lt;/tls12Only&gt;</code>
+        <br>
         <h2 id="webAdmin">webAdmin <a href="#webAdmin" title="Link">link</a></h2>
         Enable remote administration using the phone's web server. <b>8821</b> model only.<br>
         <br>
@@ -1617,10 +1633,12 @@
           <tbody>
             <tr>
               <td><b>0</b></td>
-              <td>Sunrise (<b>8800</b> series only)</td>
+              <td>Disabled</td>
               <td class="vertical-rule"><b>1</b></td>
-              <td>Chirp 1</td>
+              <td>Sunrise (<b>8800</b> series only)</td>
               <td class="vertical-rule"><b>2</b></td>
+              <td>Chirp 1</td>
+              <td class="vertical-rule"><b>3</b></td>
               <td>Chirp 2</td>
             </tr>
           </tbody>
@@ -1695,7 +1713,7 @@
         <h2 id="loadServer">loadServer <a href="#loadServer" title="Link">link</a></h2>
         Alternate TFTP or HTTP server to download firmware files.<br>
         <br>
-        <code class="prettify lang-xml">    &lt;loadServer&gt;&lt;/loadServer&gt;</code>
+        <code class="prettify lang-xml">    &lt;loadServer&gt;<i>HOST</i>&lt;/loadServer&gt;</code>
         <br>
         <h2 id="problemReportUploadURL">problemReportUploadURL <a href="#problemReportUploadURL" title="Link">link</a></h2>
         URL to use when the report problem option is selected in the phone information menu. <b>7800</b> and <b>8800</b> series only.<br>
@@ -1716,8 +1734,40 @@
           </tbody>
         </table>
         <br>
-        <code class="prettify lang-xml">    &lt;detectCMConnectionFailure&gt;0&lt;/detectCMConnectionFailure&gt;
-    &lt;rtcp&gt;1&lt;/rtcp&gt;
+        <code class="prettify lang-xml">    &lt;detectCMConnectionFailure&gt;0&lt;/detectCMConnectionFailure&gt;</code>
+        <br>
+        <h2 id="disableTLSCiphers">disableTLSCiphers <a href="#disableTLSCiphers" title="Link">link</a></h2>
+        Comma separated list of TLS ciphers to be disabled.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>TLS_RSA_WITH_3DES_EDE_CBC_SHA</td>
+              <td class="vertical-rule"><b>2</b></td>
+              <td>TLS_RSA_WITH_AES_128_CBC_SHA</td>
+              <td class="vertical-rule"><b>3</b></td>
+              <td>TLS_RSA_WITH_AES_256_CBC_SHA</td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</td>
+              <td class="vertical-rule"><b>5</b></td>
+              <td>TLS_ECDHE_ECDHE_WITH_AES_128_GCM_SHA256</td>
+              <td class="vertical-rule"><b>6</b></td>
+              <td>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>TLS_ECDHE_ECDHE_WITH_AES_256_GCM_SHA384</td>
+              <td colspan="4"></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">    &lt;disableTLSCiphers&gt;&lt;/disableTLSCiphers&gt;</code>
+        <br>
+        <code class="prettify lang-xml">    &lt;rtcp&gt;1&lt;/rtcp&gt;
     &lt;videoRtcp&gt;1&lt;/videoRtcp&gt;
     &lt;garp&gt;0&lt;/garp&gt;</code>
         <br>
@@ -2482,12 +2532,12 @@
         <h2 id="messagesURL">messagesURL <a href="#messagesURL" title="Link">link</a></h2>
         URL to use when the messages key is pressed, overrides &lt;<code class="tag">messagesNumber</code>&gt;.<br>
         <br>
-        <code class="prettify lang-xml">  &lt;messagesURL&gt;&lt;/messagesURL&gt;</code>
+        <code class="prettify lang-xml">  &lt;messagesURL&gt;<i>URL</i>&lt;/messagesURL&gt;</code>
         <br>
         <h2 id="secureMessagesURL">secureMessagesURL <a href="#secureMessagesURL" title="Link">link</a></h2>
         Secure &lt;<code class="tag">messagesURL</code>&gt;.<br>
         <br>
-        <code class="prettify lang-xml">  &lt;secureMessagesURL&gt;&lt;/secureMessagesURL&gt;</code>
+        <code class="prettify lang-xml">  &lt;secureMessagesURL&gt;<i>URL</i>&lt;/secureMessagesURL&gt;</code>
         <br>
         <h2 id="servicesURL">servicesURL <a href="#servicesURL" title="Link">link</a></h2>
         URL to use when the services key is pressed.<br>
