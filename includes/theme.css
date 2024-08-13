@@ -38,7 +38,9 @@ header {
 
 header > img {
     float: left;
+    height: 42px;
     padding: 0px 30px 0px 0px;
+    width: 42px;
 }
 
 header > h1 {

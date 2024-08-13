@@ -19,7 +19,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png" alt="">
+      <img src="images/logo.svg" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -265,20 +265,20 @@
   &lt;featureLabel&gt;Park&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="PickUp">PickUp <a href="#PickUp" title="Link">link</a></h2>
+        <h2 id="Pick-Up">Pick Up <a href="#Pick-Up" title="Link">link</a></h2>
         Pick-up an incoming call to one of the phones in you call group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-pickup</code>. See <a href="extensions-conf.html#pickup">Dialplan Extensions</a> for an example.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
   &lt;featureID&gt;127&lt;/featureID&gt;
-  &lt;featureLabel&gt;PickUp&lt;/featureLabel&gt;
+  &lt;featureLabel&gt;Pick Up&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Group-PickUp">Group PickUp <a href="#Group-PickUp" title="Link">link</a></h2>
+        <h2 id="Group-Pick-Up">Group Pick Up <a href="#Group-Pick-Up" title="Link">link</a></h2>
         Pick-up an incoming call in a specific call group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-gickup-XXX</code> where <code class="literal">XXX</code> is replaced with the group number dialed by the user. See <a href="extensions-conf.html#gpickup">Dialplan Extensions</a> for an example.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
   &lt;featureID&gt;128&lt;/featureID&gt;
-  &lt;featureLabel&gt;Group PickUp&lt;/featureLabel&gt;
+  &lt;featureLabel&gt;Group Pick Up&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
         <h2 id="Do-Not-Disturb">Do Not Disturb <a href="#Do-Not-Disturb" title="Link">link</a></h2>
@@ -313,12 +313,12 @@
   &lt;featureLabel&gt;Call Back&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
-        <h2 id="Other-PickUp">Other PickUp <a href="#Other-PickUp" title="Link">link</a></h2>
+        <h2 id="Other-Pick-Up">Other Pick Up <a href="#Other-Pick-Up" title="Link">link</a></h2>
         Pick-up an incoming call to on of the phones in your other pickup group. The phone will make a call to extension <code class="literal">x-cisco-serviceuri-opickup</code>.<br>
         <br>
         <code class="prettify lang-xml">&lt;line button=&quot;2&quot;&gt;
   &lt;featureID&gt;135&lt;/featureID&gt;
-  &lt;featureLabel&gt;Other PickUp&lt;/featureLabel&gt;
+  &lt;featureLabel&gt;Other Pick Up&lt;/featureLabel&gt;
 &lt;/line&gt;</code>
         <br>
         <h2 id="New-Call">New Call <a href="#New-Call" title="Link">link</a></h2>

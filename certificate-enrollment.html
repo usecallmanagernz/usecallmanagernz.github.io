@@ -19,7 +19,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.png" alt="">
+      <img src="images/logo.svg" alt="">
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -106,16 +106,16 @@
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
     --curve secp384r1</code>
         <br>
-	Optionally specify a password that the phone must provide to authenticate with CAPF. See <a href="sepmac-cnf-xml.html#capfAuthMode">SEPMAC.cnf.xml</a> for more information.<br>
-	<br>
-	<code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
+        Optionally specify a password that the phone must provide to authenticate with CAPF. See <a href="sepmac-cnf-xml.html#capfAuthMode">SEPMAC.cnf.xml</a> for more information.<br>
+        <br>
+        <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
     --password 123456</code>
         <br>
-	Optionally specify that phone will authenticate with the CAPF using both the LSC (if installed) and MIC. See below for additional command line options to <code class="literal">capfd</code> to authenticate the MIC.<br>
-	<br>
-	<code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
+        Optionally specify that phone will authenticate with the CAPF using both the LSC (if installed) and MIC. See below for additional command line options to <code class="literal">capfd</code> to authenticate the MIC.<br>
+        <br>
+        <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --install SEP58971ECC97C1 \
     --certificate</code>
-	<br>
+        <br>
         The LSC certificate can be deleted from the phone.<br>
         <br>
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfctl /var/lib/capf/capf.sqlite3 --delete SEP58971ECC97C1</code>
@@ -171,8 +171,8 @@
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
     --issuer /var/lib/capf/issuer.pem --days 90</code>
         <br>
-	If the phone has been configured to authenticate using a certificate then the <b>Cisco Manufacturing CA (cmca2)</b> certificate used to sign the phone's MIC must also be specified. The verify option may be specified multiple times to validate additional issuers, the certificate used to issue an LSC is automatically used for verification.<br>
-	<br>
+        If the phone has been configured to authenticate using a certificate then the <b>Cisco Manufacturing CA (cmca2)</b> certificate used to sign the phone's MIC must also be specified. The verify option may be specified multiple times to validate additional issuers, the certificate used to issue an LSC is automatically used for verification.<br>
+        <br>
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
     --verify /var/lib/capf/cmca2.pem</code>
         <br>
