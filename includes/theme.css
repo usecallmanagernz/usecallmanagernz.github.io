@@ -25,10 +25,6 @@ a:hover, a:active {
     color: rgb(82, 188, 255);
 }
 
-/*
- *
- */
-
 header {
     background-color: rgb(250, 250, 250);
     border-bottom: 1px solid rgb(203, 203, 203);
@@ -36,8 +32,7 @@ header {
     padding: 10px 50px 10px 50px;
 }
 
-header > img {
-    float: left;
+header > a > img {
     height: 42px;
     padding: 0px 30px 0px 0px;
     width: 42px;
@@ -58,7 +53,7 @@ header > h1 span {
 
 header > h2 {
     display: inline-block;
-    font-size: 13pt;
+    font-size: 11pt;
     line-height: 21pt;
     margin: 0px;
     padding: 5px 0px 0px 0px;
@@ -69,19 +64,11 @@ header > h2 span {
     color: rgb(52, 123, 164);
 }
 
-/*
- *
- */
-
 main {
     display: flex;
     flex-direction: row;
     flex: 1 1 auto;
 }
-
-/*
- *
- */
 
 main > nav {
     background-color: rgb(255, 255, 255);
@@ -129,10 +116,6 @@ main > nav ul li a, main > nav ul li a:visited {
 main > nav ul li a:hover, main > nav li u a:active {
     color: rgb(52, 123, 164);
 }
-
-/*
- *
- */
 
 main > article {
     flex: 1 1 auto;
@@ -209,11 +192,15 @@ main > article code.command-line > span.prompt {
     font-weight: bold;
 }
 
-/*
- *
- */
-
 footer {
-    display: none;
-    flex: none;
+    font-size: 9pt;
+    padding: 10px 50px 10px 50px;
+}
+
+footer span.icon {
+    color: rgb(160, 160, 160);
+    display: inline-block;
+    font-family: "Material Symbols Outlined";
+    font-size: 11pt;
+    vertical-align: middle;
 }

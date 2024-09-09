@@ -12,7 +12,7 @@
   </head>
   <body>
     <header>
-      <img src="images/logo.svg" alt="">
+      <a href="/"><img src="images/logo.svg" alt=""></a>
       <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
     </header>
     <main>
@@ -95,7 +95,7 @@
 <span class="prompt">~$</span> cd asterisk-X.X.X
 <span class="prompt">~/asterisk-X.X.X$</span> patch --strip=1 &lt; ../cisco-usecallmanager-X.X.X.patch</code>
         <br>
-        <b>4.</b> Configure the build environment and build the source.<br>
+        <b>4.</b> Configure the build environment and then compile the source code.<br>
         <br>
         <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> CFLAGS="-DENABLE_SRTP_AES_GCM -DENABLE_SRTP_AES_256" ./configure
 <span class="prompt">~/asterisk-X.X.X$</span> make</code>
@@ -109,6 +109,8 @@
         <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> sudo make samples</code>
       </article>
     </main>
-    <footer></footer>
+    <footer>
+      <span class="icon">copyright</span> Gareth Palmer and individual contributors. Documentation distributed under <a href="LICENSE">CC BY 4.0</a>.
+    </footer>
   </body>
 </html>
