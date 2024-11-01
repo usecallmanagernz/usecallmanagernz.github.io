@@ -297,7 +297,7 @@
         &lt;ntp&gt;</code>
         <br>
         <h2 id="ntp/name">name <a href="#ntp/name" title="Link">link</a></h2>
-        Host name or IP address of the NTP server when using <code class="literal">unicast</code> mode.<br>
+        Host name or IP address of the NTP server when using <code class="literal">unicast</code> mode. Maximum length of 50 characters.<br>
         <br>
         <code class="prettify lang-xml">          &lt;name&gt;<i>HOST</i>&lt;/name&gt;</code>
         <br>
@@ -352,7 +352,7 @@
             &lt;/ports&gt;</code>
         <br>
         <h2 id="callManagerGroup/processNodeName">processNodeName <a href="#callManagerGroup/processNodeName" title="Link">link</a></h2>
-        Host name or IP address of the server running Asterisk.<br>
+        Host name or IP address of the server running Asterisk. Maximum length of 50 characters.<br>
         <br>
         <code class="prettify lang-xml">            &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;
           &lt;/callManager&gt;
@@ -364,7 +364,7 @@
     &lt;members&gt;</code>
         <br>
         <h2 id="TVS/member">member <a href="#TVS/member" title="Link">link</a></h2>
-        Specifies the host name or IP address and port of the server running the Trust Verification Service. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it cannot connect to a member.<br>
+        Specifies the host name or IP address and port of the server running the Trust Verification Service. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it cannot connect to a member. Maximum length of 50 characters.<br>
         <br>
         <table>
           <tbody>
@@ -461,7 +461,7 @@
     &lt;addresses&gt;</code>
         <br>
         <h2 id="url1">url1 <a href="#url1" title="Link">link</a></h2>
-        URL of the VPN server using the format <b>https://<i>HOST</i>/svc</b>. Up to <code class="literal">3</code> URLs can be specified by including &lt;<code class="tag">url2</code>&gt; ... &lt;<code class="tag">url3</code>&gt;. <b>Note</b>: the path must be <code class="literal">/svc</code> when using the patched version of OpenConnect Server.<br>
+        URL of the VPN server using the format <b>https://<i>HOST</i>/svc</b>. Up to <code class="literal">3</code> URLs can be specified by including &lt;<code class="tag">url2</code>&gt; ... &lt;<code class="tag">url3</code>&gt;. Maximum length of 255 characters. <b>Note</b>: the path must be <code class="literal">/svc</code> when using the patched version of OpenConnect Server.<br>
         <br>
         <code class="prettify lang-xml">      &lt;url1&gt;<i>URL</i>&lt;/url1&gt;
     &lt;/addresses&gt;
@@ -779,7 +779,7 @@
         <code class="prettify lang-xml">        &lt;featureID&gt;9&lt;/featureID&gt;</code>
         <br>
         <h2 id="featureLabel">featureLabel <a href="#featureLabel" title="Link">link</a></h2>
-        Text label to display next to the line key.<br>
+        Text label to display next to the line key. Maximum length of 30 characters.<br>
         <br>
         <code class="prettify lang-xml">        &lt;featureLabel&gt;<i>PEERNAME</i>&lt;/featureLabel&gt;</code>
         <br>
@@ -790,11 +790,12 @@
         &lt;port&gt;5060&lt;/port&gt;</code>
         <br>
         <h2 id="line/name">name <a href="#line/name" title="Link">link</a></h2>
-        Name to use when registering. This is the name of the peer defined in <a href="sip-conf.html">sip.conf</a>.<br>
+        Name to use when registering. Maximum length of 30 characters. This is the name of the peer defined in <a href="sip-conf.html">sip.conf</a>.<br>
         <br>
         <code class="prettify lang-xml">        &lt;name&gt;<i>PEERNAME</i>&lt;/name&gt;</code>
         <br>
-        Name to use in SIP From header (optional).<br>
+        <h2 id="line/displayName">displayName <a href="#line/displayName" title="Link">link</a></h2>
+        Name to use in SIP From header (optional). Maximum length of 30 characters.<br>
         <br>
         <code class="prettify lang-xml">        &lt;displayName&gt;<i>NAME</i>&lt;/displayName&gt;
         &lt;autoAnswer&gt;</code>
@@ -866,12 +867,12 @@
         <code class="prettify lang-xml">        &lt;callWaiting&gt;1&lt;/callWaiting&gt;</code>
         <br>
         <h2 id="authName">authName <a href="#authName" title="Link">link</a></h2>
-        Username to use when registering.<br>
+        Username to use when registering. Maximum length of 30 characters.<br>
         <br>
         <code class="prettify lang-xml">        &lt;authName&gt;<i>PEERNAME</i>&lt;/authName&gt;</code>
         <br>
         <h2 id="authPassword">authPassword <a href="#authPassword" title="Link">link</a></h2>
-        Password to use when registering. This is the secret for the peer defined in <a href="sip-conf.html">sip.conf</a>.<br>
+        Password to use when registering. Maximum length of 30 characters. This is the secret for the peer defined in <a href="sip-conf.html">sip.conf</a>.<br>
         <br>
         <code class="prettify lang-xml">        &lt;authPassword&gt;<i>SECRET</i>&lt;/authPassword&gt;</code>
         <br>
@@ -1716,7 +1717,7 @@
         <code class="prettify lang-xml">    &lt;loadServer&gt;<i>HOST</i>&lt;/loadServer&gt;</code>
         <br>
         <h2 id="problemReportUploadURL">problemReportUploadURL <a href="#problemReportUploadURL" title="Link">link</a></h2>
-        URL to use when the report problem option is selected in the phone information menu. <b>7800</b> and <b>8800</b> series only.<br>
+        URL to use when the report problem option is selected in the phone information menu. Maximum length of 255 characters. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <code class="prettify lang-xml">    &lt;problemReportUploadURL&gt;<i>URL</i>&lt;/problemReportUploadURL&gt;</code>
         <br>
@@ -2277,7 +2278,7 @@
         <code class="prettify lang-xml">    &lt;accessApps&gt;1&lt;/accessApps&gt;</code>
         <br>
         <h2 id="applicationURL">applicationURL <a href="#applicationURL" title="Link">link</a></h2>
-        URL to use when the applications button is pressed <b>8821</b> model only.<br>
+        URL to use when the applications button is pressed <b>8821</b> model only. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">    &lt;applicationURL&gt;<i>URL</i>&lt;/applicationURL&gt;</code>
         <br>
@@ -2520,73 +2521,73 @@
         <code class="prettify lang-xml">  &lt;deviceSecurityMode&gt;1&lt;/deviceSecurityMode&gt;</code>
         <br>
         <h2 id="authenticationURL">authenticationURL <a href="#authenticationURL" title="Link">link</a></h2>
-        URL to use when checking whether XML posted to the phone's <a href="cgi-execute-xml.html">CGI Execute</a> URL will be accepted. Leave blank to accept all requests.<br>
+        URL to use when checking whether XML posted to the phone's <a href="cgi-execute-xml.html">CGI Execute</a> URL will be accepted. Leave blank to accept all requests. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;authenticationURL&gt;<i>URL</i>&lt;/authenticationURL&gt;</code>
         <br>
         <h2 id="secureAuthenticationURL">secureAuthenticationURL <a href="#secureAuthenticationURL" title="Link">link</a></h2>
-        Secure &lt;<code class="tag">authenticationURL</code>&gt;.<br>
+        Secure &lt;<code class="tag">authenticationURL</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;secureAuthenticationURL&gt;<i>URL</i>&lt;/secureAuthenticationURL&gt;</code>
         <br>
         <h2 id="messagesURL">messagesURL <a href="#messagesURL" title="Link">link</a></h2>
-        URL to use when the messages key is pressed, overrides &lt;<code class="tag">messagesNumber</code>&gt;.<br>
+        URL to use when the messages key is pressed, overrides &lt;<code class="tag">messagesNumber</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;messagesURL&gt;<i>URL</i>&lt;/messagesURL&gt;</code>
         <br>
         <h2 id="secureMessagesURL">secureMessagesURL <a href="#secureMessagesURL" title="Link">link</a></h2>
-        Secure &lt;<code class="tag">messagesURL</code>&gt;.<br>
+        Secure &lt;<code class="tag">messagesURL</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;secureMessagesURL&gt;<i>URL</i>&lt;/secureMessagesURL&gt;</code>
         <br>
         <h2 id="servicesURL">servicesURL <a href="#servicesURL" title="Link">link</a></h2>
-        URL to use when the services key is pressed.<br>
+        URL to use when the services key is pressed. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;servicesURL&gt;<i>URL</i>&lt;/servicesURL&gt;</code>
         <br>
         <h2 id="secureServicesURL">secureServicesURL <a href="#secureServicesURL" title="Link">link</a></h2>
-        Secure &lt;<code class="tag">servicesURL</code>&gt;.<br>
+        Secure &lt;<code class="tag">servicesURL</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;secureServicesURL&gt;<i>URL</i>&lt;/secureServicesURL&gt;</code>
         <br>
         <h2 id="directoryURL">directoryURL <a href="#directoryURL" title="Link">link</a></h2>
-        URL to use when the directories or contacts key is pressed.<br>
+        URL to use when the directories or contacts key is pressed. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;directoryURL&gt;<i>URL</i>&lt;/directoryURL&gt;</code>
         <br>
         <h2 id="secureDirectoryURL">secureDirectoryURL <a href="#secureDirectoryURL" title="Link">link</a></h2>
-        Secure &lt;<code class="tag">directoryURL</code>&gt;.<br>
+        Secure &lt;<code class="tag">directoryURL</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;secureDirectoryURL&gt;<i>URL</i>&lt;/secureDirectoryURL&gt;</code>
         <br>
         <h2 id="informationURL">informationURL <a href="#informationURL" title="Link">link</a></h2>
-        URL to use when the information key is pressed, <b>7900</b> series only.<br>
+        URL to use when the information key is pressed, <b>7900</b> series only. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;informationURL&gt;<i>URL</i>&lt;/informationURL&gt;</code>
         <br>
         <h2 id="secureInformationURL">secureInformationURL <a href="#secureInformationURL" title="Link">link</a></h2>
-        Secure &lt;<code class="tag">informationURL</code>&gt;.<br>
+        Secure &lt;<code class="tag">informationURL</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;secureInformationURL&gt;<i>URL</i>&lt;/secureInformationURL&gt;</code>
         <br>
         <h2 id="idleURL">idleURL <a href="#idleURL" title="Link">link</a></h2>
-        URL to use when the phone is idle.<br>
+        URL to use when the phone is idle. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;idleURL&gt;<i>URL</i>&lt;/idleURL&gt;</code>
         <br>
         <h2 id="secureIdleURL">secureIdleURL <a href="#secureIdleURL" title="Link">link</a></h2>
-        Secure &lt;<code class="tag">idleURL</code>&gt;.<br>
+        Secure &lt;<code class="tag">idleURL</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;secureIdleURL&gt;<i>URL</i>&lt;/secureIdleURL&gt;</code>
         <br>
         <h2 id="idleTimeout">idleTimeout <a href="#idleTimeout" title="Link">link</a></h2>
-        Timeout in seconds after the phone becomes idle before going to the &lt;<code class="tag">idleURL</code>&gt;.<br>
+        Timeout in seconds after the phone becomes idle before going to the &lt;<code class="tag">idleURL</code>&gt;. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;idleTimeout&gt;0&lt;/idleTimeout&gt;
   &lt;proxyServerURL&gt;&lt;/proxyServerURL&gt;</code>
         <br>
         <h2 id="phoneServices">phoneServices <a href="#phoneServices" title="Link">link</a></h2>
-        An optional method for specifiying the various service URLs above.<br>
+        An optional method for specifiying the various service URLs above. Maximum length of 255 characters.<br>
         <br>
         <table>
           <tbody>
@@ -2600,7 +2601,7 @@
         <code  class="prettify lang-xml">  &lt;phoneServices useHTTPS=&quot;false&quot;&gt;</code>
         <br>
         <h2 id="provisioning">provisioning <a href="#provisioning" title="Link">link</a></h2>
-        Tells the phone whether to ignore, override or merge the service URLs specified in &lt;<code class="tag">phoneServices</code>&gt;<br>
+        Tells the phone whether to ignore, override or merge the service URLs specified in &lt;<code class="tag">phoneServices</code>&gt;.<br>
         <br>
         <table>
           <tbody>
@@ -2618,7 +2619,7 @@
         <code class="prettify lang-xml">    &lt;provisioning&gt;2&lt;/provisioning&gt;</code>
         <br>
         <h2 id="phoneService">phoneService <a href="#phoneService" title="Link">link</a></h2>
-        Specifies a phone service URL.<br>
+        Specifies a phone service URL. Maximum length of 255 characters.<br>
         <br>
         <table>
           <tbody>
