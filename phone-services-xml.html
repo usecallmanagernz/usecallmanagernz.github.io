@@ -81,46 +81,50 @@
         <br>
         See <a href="https://developer.cisco.com/site/ip-phone-services/overview/"><span class="icon">open_in_browser</span> Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
         <br>
-        <h2 id="authenticationURL">authenticationURL <a href="#authenticationURL" title="Link">link</a></h2>
+        <h2 id="authenticationURL">&lt;authenticationURL&gt; <a href="#authenticationURL" title="Link">link</a></h2>
         If defined, the phone will make requests to this URL containing the username and password that was included in the <code class="literal">Authorization</code> header in the request to <b>http://<i>x.x.x.x</i>/CGI/Execute</b>. The script handling the request must respond exactly with <code class="literal">AUTHORIZED</code> (with no newline character at end) otherwise the request will be denied. See <a href="cgi-execute-xml.html">CGI Execute</a> for more information.<br>
         <br>
-        <h2 id="secureAuthenticationURL">secureAuthenticationURL <a href="#secureAuthenticationURL" title="Link">link</a></h2>
+        If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/authentication</b>.<br>
+        <br>
+        <h2 id="secureAuthenticationURL">&lt;secureAuthenticationURL&gt; <a href="#secureAuthenticationURL" title="Link">link</a></h2>
         Same as &lt;<code class="tag">authenticationURL</code>&gt; except using HTTPS.<br>
         <br>
-        <h2 id="directoryURL">directoryURL <a href="#directoryURL" title="Link">link</a></h2>
-        The URL accessed when the directories or contacts button is pressed. <b>Note:</b> The <b>7900</b> series requires a &lt;<code class="tag">CiscoIPPhoneMenu</code>&gt; containing a &lt;<code class="tag">MenuItem</code>&gt; link to the directory list as the first response.<br>
+        <h2 id="directoryURL">&lt;directoryURL&gt; <a href="#directoryURL" title="Link">link</a></h2>
+        The URL accessed when the directories or contacts button is pressed. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/directory</b>.<br>
         <br>
-        <h2 id="secureDirectoryURL">secureDirectoryURL <a href="#secureDirectoryURL" title="Link">link</a></h2>
+        <b>Note:</b> The <b>7900</b> series requires a &lt;<code class="tag">CiscoIPPhoneMenu</code>&gt; containing a &lt;<code class="tag">MenuItem</code>&gt; link to the directory list as the first response, the example phone services URL would be <b>http://<i>HOST</i>/directory/79xx</b>.<br>
+        <br>
+        <h2 id="secureDirectoryURL">&lt;secureDirectoryURL&gt; <a href="#secureDirectoryURL" title="Link">link</a></h2>
         Secure &lt;<code class="tag">directoryURL</code>&gt;.<br>
         <br>
-        <h2 id="servicesURL">servicesURL <a href="#servicesURL" title="Link">link</a></h2>
-        The URL accessed when the services or applications button is pressed.<br>
+        <h2 id="servicesURL">&lt;servicesURL&gt; <a href="#servicesURL" title="Link">link</a></h2>
+        The URL accessed when the services or applications button is pressed. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/services</b>.<br>
         <br>
-        <h2 id="secureServicesURL">secureServicesURL <a href="#secureServicesURL" title="Link">link</a></h2>
+        <h2 id="secureServicesURL">&lt;secureServicesURL&gt; <a href="#secureServicesURL" title="Link">link</a></h2>
         Secure &lt;<code class="tag">servicesURL</code>&gt;.<br>
         <br>
-        <h2 id="informationURL">informationURL <a href="#informationURL" title="Link">link</a></h2>
-        The URL accessed when the information button pressed. <b>7900</b> series only.<br>
+        <h2 id="informationURL">&lt;informationURL&gt; <a href="#informationURL" title="Link">link</a></h2>
+        The URL accessed when the information button pressed. <b>7900</b> series only. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/information</b>.<br>
         <br>
-        <h2 id="secureInformationURL">secureInformationURL <a href="#secureInformationURL" title="Link">link</a></h2>
+        <h2 id="secureInformationURL">&lt;secureInformationURL&gt; <a href="#secureInformationURL" title="Link">link</a></h2>
         Secure &lt;<code class="tag">informationURL</code>&gt;.<br>
         <br>
-        <h2 id="messagesURL">messagesURL <a href="#messagesURL" title="Link">link</a></h2>
+        <h2 id="messagesURL">&lt;messagesURL&gt; <a href="#messagesURL" title="Link">link</a></h2>
         The URL accessed when the messages button pressed, overrides &lt;<code class="tag">messagesNumber</code>&gt;.<br>
         <br>
-        <h2 id="secureMessagesURL">secureMessagesURL <a href="#secureMessagesURL" title="Link">link</a></h2>
+        <h2 id="secureMessagesURL">&lt;secureMessagesURL&gt; <a href="#secureMessagesURL" title="Link">link</a></h2>
         Secure &lt;<code class="tag">messagesURL</code>&gt;.<br>
         <br>
-        <h2 id="idleURL">idleURL <a href="#messagesURL" title="Link">link</a></h2>
+        <h2 id="idleURL">&lt;idleURL&gt; <a href="#messagesURL" title="Link">link</a></h2>
         The URL the phone uses when idle.<br>
         <br>
-        <h2 id="secureIdleURL">secureIdleURL <a href="#secureIdleURL" title="Link">link</a></h2>
+        <h2 id="secureIdleURL">&lt;secureIdleURL&gt; <a href="#secureIdleURL" title="Link">link</a></h2>
         Secure &lt;<code class="tag">idleURL</code>&gt;.<br>
         <br>
-        <h2 id="problemReportUploadURL">problemReportUploadURL <a href="#problemReportUploadURL" title="Link">link</a></h2>
-        The URL that the logs are uploaded to when the report problem option is selected. <b>7800</b> and <b>8800</b> series only.<br>
+        <h2 id="problemReportUploadURL">&lt;problemReportUploadURL&gt; <a href="#problemReportUploadURL" title="Link">link</a></h2>
+        The URL that the logs are uploaded to when the report problem option is selected. <b>7800</b> and <b>8800</b> series only. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/problem-report</b>.<br>
         <br>
-        <h2 id="phoneServices">phoneServices <a href="#phoneServices" title="Link">link</a></h2>
+        <h2 id="phoneServices">&lt;phoneServices&gt; <a href="#phoneServices" title="Link">link</a></h2>
         Allows multiple entries to appear when the services, directories or messages button is pressed without having to query the XML service. Additionally <code class="literal">Placed Calls</code>, <code class="literal">Received Calls</code> and <code class="literal">Missed Calls</code> entries may be disabled by removing their definitions. See <a href="sepmac-cnf-xml.html#phoneServices">phoneServices</a> for more information.
       </article>
     </main>
