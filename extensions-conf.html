@@ -274,6 +274,7 @@ exten =&gt; _meetme-36X,1,ExecIf($[${CONFBRIDGE_INFO(${EXTEN:7},parties)} != 0]?
 same =&gt; next,Set(CONFBRIDGE(bridge,template)=default_bridge)
 same =&gt; next,Set(CONFBRIDGE(user,template)=default_user)
 same =&gt; next,Set(CONFBRIDGE(user,admin)=yes)
+same =&gt; next,Set(CONNECTEDLINE(all)="MeetMe" &lt;${EXTEN}&gt;)
 same =&gt; next,ConfBridge(${EXTEN:7})
 same =&gt; next,Hangup(normal_clearing)
 
@@ -282,6 +283,7 @@ exten =&gt; _36X,1,ExecIf($[${CONFBRIDGE_INFO(${EXTEN},parties)} = 0]?Hangup(una
 same =&gt; next,Set(CONFBRIDGE(bridge,template)=default_bridge)
 same =&gt; next,Set(CONFBRIDGE(user,template)=default_user)
 same =&gt; next,Set(CONFBRIDGE(user,admin)=no)
+same =&gt; next,Set(CONNECTEDLINE(all)="MeetMe" &lt;${EXTEN}&gt;)
 same =&gt; next,ConfBridge(${EXTEN})
 same =&gt; next,Hangup(normal_clearing)</code>
         <br>
