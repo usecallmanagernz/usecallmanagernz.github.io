@@ -200,7 +200,7 @@
 &lt;/line&gt;</code>
         <br>
         <h2 id="BLF-Directed-Call-Park">BLF Directed Call Park <a href="#BLF-Directed-Call-Park" title="Link">link</a></h2>
-        Speed Dial that monitors the state of a parking extension, only displays idle and busy device states. &lt;<code class="tag">speedDialNumber</code>&gt; contains the number dialed and the optional &lt;<code class="tag">contact</code>&gt; contains the extension subscribed to. See above for additional subscription requirements.<br>
+        Speed Dial that monitors the state of a parking extension, only displays idle and busy device states. &lt;<code class="tag">speedDialNumber</code>&gt; and &lt;<code class="tag">contact</code>&gt; contains the parking extension subscribed to. See above for additional subscription requirements.<br>
         <br>
         When idle, the current call will be blind-transferred to <code class="literal">x-cisco-serviceuri-dpark-XXX</code> where <code class="literal">XXX</code> is replaced by the number in &lt;<code class="tag">speedDialNumber</code>&gt;. Otherwise if the parking extension is in-use a call will be made to the number in &lt;<code class="tag">speedDialNumber</code>&gt; optionally prefixed by &lt;<code class="tag">retrievalPrefix</code>&gt;. See <a href="extensions-conf.html#dpark">Dialplan Extensions</a> for an example.<br>
         <br>
@@ -208,7 +208,7 @@
   &lt;featureID&gt;22&lt;/featureID&gt;
   &lt;featureLabel&gt;<i>LABEL</i>&lt;/featureLabel&gt;
   &lt;speedDialNumber&gt;<i>NUMBER</i>&lt;/speedDialNumber&gt;
-  &lt;contact /&gt;
+  &lt;contact&gt;<i>NUMBER</i>&lt;/contact&gt;
   &lt;retrievalPrefix /&gt;
 &lt;/line&gt;</code>
         <br>
