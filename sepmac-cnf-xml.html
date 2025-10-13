@@ -296,7 +296,7 @@
       &lt;ntps&gt;
         &lt;ntp&gt;</code>
         <br>
-        <h2 id="ntp/name">name <a href="#ntp/name" title="Link">link</a></h2>
+        <h2 id="ntp-name">name <a href="#ntp-name" title="Link">link</a></h2>
         Host name or IP address of the NTP server when using <code class="literal">unicast</code> mode. Maximum length of 50 characters.<br>
         <br>
         <code class="prettify lang-xml">          &lt;name&gt;<i>HOST</i>&lt;/name&gt;</code>
@@ -324,7 +324,7 @@
     &lt;callManagerGroup&gt;
       &lt;members&gt;</code>
         <br>
-        <h2 id="callManagerGroup/member">member <a href="#callManagerGroup/member" title="Link">link</a></h2>
+        <h2 id="callManagerGroup-member">member <a href="#callManagerGroup-member" title="Link">link</a></h2>
         Specifies the host name or IP address and SIP port of the server running Asterisk. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it is disconnected from the current member.<br>
         <br>
         <table>
@@ -351,7 +351,7 @@
         <code class="prettify lang-xml">              &lt;securedSipPort&gt;5061&lt;/securedSipPort&gt;
             &lt;/ports&gt;</code>
         <br>
-        <h2 id="callManagerGroup/processNodeName">processNodeName <a href="#callManagerGroup/processNodeName" title="Link">link</a></h2>
+        <h2 id="callManagerGroup-processNodeName">processNodeName <a href="#callManagerGroup-processNodeName" title="Link">link</a></h2>
         Host name or IP address of the server running Asterisk. Maximum length of 50 characters.<br>
         <br>
         <code class="prettify lang-xml">            &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;
@@ -363,7 +363,7 @@
   &lt;TVS&gt;
     &lt;members&gt;</code>
         <br>
-        <h2 id="TVS/member">member <a href="#TVS/member" title="Link">link</a></h2>
+        <h2 id="TVS-member">member <a href="#TVS-member" title="Link">link</a></h2>
         Specifies the host name or IP address and port of the server running the Trust Verification Service. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it cannot connect to a member. Maximum length of 50 characters.<br>
         <br>
         <table>
@@ -377,18 +377,18 @@
         <br>
         <code class="prettify lang-xml">      &lt;member priority="0"&gt;</code>
         <br>
-        <h2 id="TVS/port">port <a href="#TVS/port" title="Link">link</a></h2>
+        <h2 id="TVS-port">port <a href="#TVS-port" title="Link">link</a></h2>
         Port to connect to on the server running the Trust Verification Service.<br>
         <br>
         <code class="prettify lang-xml">        &lt;port&gt;2445&lt;/port&gt;</code>
         <br>
-        <h2 id="TVS/address">address <a href="#TVS/address" title="Link">link</a></h2>
+        <h2 id="TVS-address">address <a href="#TVS-address" title="Link">link</a></h2>
         Host name or IP address of the server running the Trust Verification Service.<br>
         <br>
         <code class="prettify lang-xml">        &lt;address&gt;<i>HOST</i>&lt;/address&gt;
       &lt;/member&gt;
     &lt;/members&gt;
-  &lt;/TVS&gt;
+  &lt;-TVS&gt;
   &lt;vpnGroup&gt;
     &lt;mtu&gt;1290&lt;/mtu&gt;
     &lt;failConnectTime&gt;30&lt;/failConnectTime&gt;</code>
@@ -789,12 +789,12 @@
         <code class="prettify lang-xml">        &lt;proxy&gt;USECALLMANAGER&lt;/proxy&gt;
         &lt;port&gt;5060&lt;/port&gt;</code>
         <br>
-        <h2 id="line/name">name <a href="#line/name" title="Link">link</a></h2>
+        <h2 id="line-name">name <a href="#line-name" title="Link">link</a></h2>
         Name to use when registering. Maximum length of 30 characters. This is the name of the peer defined in <a href="sip-conf.html">sip.conf</a>.<br>
         <br>
         <code class="prettify lang-xml">        &lt;name&gt;<i>PEERNAME</i>&lt;/name&gt;</code>
         <br>
-        <h2 id="line/displayName">displayName <a href="#line/displayName" title="Link">link</a></h2>
+        <h2 id="line-displayName">displayName <a href="#line-displayName" title="Link">link</a></h2>
         Name to use in SIP From header (optional). Maximum length of 30 characters.<br>
         <br>
         <code class="prettify lang-xml">        &lt;displayName&gt;<i>NAME</i>&lt;/displayName&gt;
@@ -2471,14 +2471,14 @@
   &lt;versionStamp&gt;d902ed5a-c1e5-4233-b1d6-a960d53d1c3a&lt;/versionStamp&gt;
   &lt;userLocale&gt;</code>
         <br>
-        <h2 id="userLocale/name">name <a href="#userLocale/name" title="Link">link</a></h2>
-        The dowloadable user locale allows the messages displayed by the phone to be in in the local language. If you do not have the locale file use the default of <code class="literal">English_United_States</code>. See <a href="network-locale.html">Network Locale</a> for examples.<br>
+        <h2 id="userLocale-name">name <a href="#userLocale-name" title="Link">link</a></h2>
+        The downloadable user locale allows the messages displayed by the phone to be in in the local language. If you do not have the locale file use the default of <code class="literal">English_United_States</code>. See <a href="network-locale.html">Network Locale</a> for examples.<br>
         <br>
         <code class="prettify lang-xml">    &lt;name&gt;<i>USER LOCALE NAME</i>&lt;/name&gt;
     &lt;uid&gt;1&lt;/uid&gt;
     &lt;langCode&gt;&lt;/langCode&gt;</code>
         <br>
-        <h2 id="userLocale/vesion">version <a href="#userLocale/vesion" title="Link">link</a></h2>
+        <h2 id="userLocale-version">version <a href="#userLocale-version" title="Link">link</a></h2>
         User locale version, the phone will only download a new locale when the version changes.<br>
         <br>
         <code class="prettify">    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;</code>
@@ -2491,12 +2491,12 @@
   &lt;networkLocale&gt;<i>NETWORK LOCALE NAME</i>&lt;/networkLocale&gt;
   &lt;networkLocaleInfo&gt;</code>
         <br>
-        <h2 id="networkLocale/name">name <a href="#networkLocale/name" title="Link">link</a></h2>
-        The dowloadable network locale allows the tones (dial-tone, ringing, busy etc.) to be those specified by the local phone network. If you do not have the locale file use the default of <code class="literal">United_States</code> See <a href="user-locale.html">User Locale</a> for examples.<br>
+        <h2 id="networkLocale-name">name <a href="#networkLocale-name" title="Link">link</a></h2>
+        The downloadable network locale allows the tones (dial-tone, ringing, busy etc.) to be those specified by the local phone network. If you do not have the locale file use the default of <code class="literal">United_States</code>. See <a href="user-locale.html">User Locale</a> for examples.<br>
         <br>
         <code class="prettify lang-xml">    &lt;name&gt;<i>NETWORK LOCALE NAME</i>&lt;/name&gt;</code>
         <br>
-        <h2 id="networkLocale/vesion">version <a href="#networkLocale/vesion" title="Link">link</a></h2>
+        <h2 id="networkLocale-version">version <a href="#networkLocale-version" title="Link">link</a></h2>
         Network locale version, the phone will only download a new locale when the version changes.<br>
         <br>
         <code class="prettify">    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;
@@ -2794,17 +2794,17 @@
         <code class="prettify lang-xml">  &lt;capfAuthMode&gt;1&lt;/capfAuthMode&gt;
   &lt;capfList&gt;</code>
         <br>
-        <h2 id="capfList/capf">capf <a href="#capfList/capf" title="Link">link</a></h2>
+        <h2 id="capfList-capf">capf <a href="#capfList-capf" title="Link">link</a></h2>
         Specifies the host name or IP address and port of the server running the Certificate Authentication Proxy Function. Up to <code class="literal">5</code> members can be defined.<br>
         <br>
         <code class="prettify lang-xml">    &lt;capf&gt;</code>
         <br>
-        <h2 id="capf/phonePort">port <a href="#capf/phonePort" title="Link">link</a></h2>
+        <h2 id="capf-phonePort">port <a href="#capf-phonePort" title="Link">link</a></h2>
         Port to connect to on the server running the Certificate Authentication Proxy Function.<br>
         <br>
         <code class="prettify lang-xml">      &lt;phonePort&gt;3804&lt;/phonePort&gt;</code>
         <br>
-        <h2 id="capf/processNodeName">processNodeName <a href="#capf/processNodeName" title="Link">link</a></h2>
+        <h2 id="capf-processNodeName">processNodeName <a href="#capf-processNodeName" title="Link">link</a></h2>
         Host name or IP address of the server running the Certificate Authentication Proxy Function.<br>
         <br>
         <code class="prettify lang-xml">      &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;
