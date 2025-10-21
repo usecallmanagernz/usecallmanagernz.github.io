@@ -76,7 +76,7 @@ main > nav {
 }
 
 main > nav ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0px;
     padding: 15px 50px 0px 50px;
 }
@@ -190,6 +190,21 @@ main > article code.command-line {
 
 main > article code.command-line > span.prompt {
     font-weight: bold;
+}
+
+main > article ul {
+    list-style: disc outside;
+    margin: 0px;
+    padding: 0px;
+}
+
+main > article ul li {
+    padding: 5px 0px 5px 0px;
+    margin-left: 20px;
+}
+
+main > article ul li::marker {
+    color: rgb(52, 123, 164);
 }
 
 footer {

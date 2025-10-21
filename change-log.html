@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Change Log</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="shortcut icon" href="images/logo.svg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1">
+    <link rel="stylesheet" href="includes/theme.css">
+    <link rel="stylesheet" href="includes/prettify.css">
+  </head>
+  <body>
+    <header>
+      <a href="/"><img src="images/logo.svg" alt=""></a>
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="documentation-overview.html"><span class="icon">home</span> Documentation Overview</a></li>
+          <li><a href="patching-asterisk.html"><span class="icon">build</span> Patching Asterisk</a></li>
+          <li><span class="icon selected">news</span> <b>Change Log</b></li>
+        </ul>
+        <ul>
+          <li><h3>Network Configuration</h3></li>
+          <li><a href="dhcpd-conf.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
+          <li><a href="apache-conf.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
+          <li><a href="tftpd-conf.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
+          <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
+          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
+          <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
+          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
+          <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
+          <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
+          <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
+          <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
+          <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
+          <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
+          <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><a href="sip-conf.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
+          <li><a href="sip-notify-conf.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><a href="extensions-conf.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
+          <li><a href="res-parking-conf.html"><span class="icon">local_parking</span> Call Parking</a></li>
+          <li><a href="sippeer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
+          <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
+          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><a href="phone-services-xml.html"><span class="icon">settings</span> Phone Services</a></li>
+          <li><a href="cgi-execute-xml.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><a href="as-feature-events.html"><span class="icon">extension</span> AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Change Log</h1>
+        The patch for Asterisk 22 is currently <b>ready for testing</b> and may not be suitable for production use. Existing configurations should work mostly unchanged as options and functions that have been renamed can still be used via their original name, a deprecation warning will be shown indicating the new name.<br>
+        <br>
+        <h2>Removed Features</h2>
+        <ul>
+          <li>Removed support for DTLS and WebSocket transports.</li>
+          <li>Removed support for call transfer via an Also header in a BYE request.</li>
+          <li>Removed support for sending DTMF via SIP INFO requests.</li>
+          <li>Removed support for cpim-pidf-xml and Digium presence events for subscriptions.</li>
+          <li>Removed support for call completion.</li>
+        </ul>
+        <br>
+        <h2>Changed Features</h2>
+        <ul>
+          <li>Custom notify types are now defined in sip.conf using a section with a type keyword of "notify".</li>
+          <li>Authentication realm credentials are now defined in the general section of sip.conf instead of the authentication section.
+          <li>Peer address entries in astdb now use the prefix SIP/Peer instead of SIP/Registry.</li>
+          <li>Updated the sample sip.conf to show the new option names.</li>
+        </ul>
+        <br>
+        <h2>General Options</h2>
+        <ul>
+          <li>Removed insecure, allowguest, autocreatepeer, legacy_option_parsing, compactheaders, autodomain, recordhistory, dumphistory, matchexternaddrlocally, regextenonqualify, dynamic_exclude_static, auth_message_requests, outofcall_message_context, ignoresdpversion, storesipcause, refer_addheaders, snom_aoc_enabled and recordonfeature to recordofffeature.</li>
+          <li>Removed pedantic as this is now always enabled.</li>
+          <li>Removed mwiexpiry as subscriptions now use subscribemaxexpires.</li>
+          <li>Changed tlsverifycert to not be ignored and client certificates are now verified.</li>
+          <li>Removed relaxdtmf as this is now set on a specific peer.</li>
+          <li>Renamed nat keywords comedia to rtp and autocomedia to auto_rtp.</li>
+          <li>Renamed maxexpiry to registermaxexpires, minexpiry to registerminexpires, submaxexpiry to subscribemaxexpires and subminexpiry to subscribeminexpires.</li>
+          <li>Renamed match_auth_username to matchauthusername, accept_outofcall_message to allowmessage, auth_options_request to authoptions and register_retry_403 to registryretryforbidden.
+          <li>Renamed localnet to localnetwork, externhost to externalhost, externrefresh to externalrefresh, externtcpport to externaltcpport and externtlsport to externaltlsport.</li>
+          <li>Renamed binaddr to udpbindaddr and media_address to mediaaddr.</li>
+          <li>Renamed outboundproxy to proxy, qualifyfreq to qualifyexpires, sipdebug to debug, t1_min to timert1min and sdpowner to sdpusername.</li>
+          <li>Renamed tos_sip to tosip, tos_audio to tosaudio, tos_video to tosvideo, tos_text to tostext, cos_sip to cossip, cos_audio to cosaudio and cos_text to costext.</li>
+          <li>Renamed notifycid to notifycallerid and removed notifyringing as notifyhold as these are now always enabled.</li>
+          <li>Remove notifycid keyword ignore-context, added pickupcontext to replace that setting.</li>
+          <li>Renamed rtcachepeers to realtimecachepeers, rtsavesysname to realtimesavesysname, rtsavepath to realtimesavepath, ignoreexpire to realtimeignoreexpires and rtautoclear to realtimeautoclear.</li>
+          <li>Renamed subscribe_network_change_event to networkchangeevent.</li>
+        </ul>
+        <br>
+        <h2>Peer Options</h2>
+        <ul>
+          <li>Removed avpf, force_avpf, keepalive, promiscredir, g726nonstandard, rfc2833compensate, rtp_engine, encryption_taglen, defaultip, defaultaddr, regexten, callbackextension, mwi_from, discard_remote_hold_retrieval and disallowed_methods.</li>
+          <li>Removed rpid_update, rpid_immediate, progressinband and callcounter as these are now always enabled.</li>
+          <li>Changed type to support only the keyword "peer".</li>
+          <li>Combined sendrpid, trustrpid and trust_id_outbound to identity. Renamed pai keyword to p_asserted.</li>
+          <li>Renamed qualify to maxqualify and qualifyfreq to qualifyexpires.</li>
+          <li>Renamed videosupport to video, textsupport to text and t38pt_udptl to fax.</li>
+          <li>Renamed cid_name to callername, cid_number to callernumber, cid_tag to callertag and callingpres to callerpresentation.</li>
+          <li>Renamed auth to authentication, call-limit to maxcalls and setvar to variable.</li>
+          <li>Renamed cisco_usecallmanager to cisco, dndbusy to busywhendnd, huntgroup_default to huntgroupdefault, cisco_keep_conference to keepconference, cisco_multiadmin_conference to multiadminconference, cisco_pickupnotify_alert to pickupnotify, cisco_pickupnotify_timer to pickupnotifytimer and cisco_qrt_url to qrturl.</li>
+          <li>Renamed supportpath to path, senddiversion to diversion and use_q850_reason to reason.</li>
+          <li>Renamed preferred_codec_only to preferredcodeconly, ignore_requested_pref to ignoreoutoundcodec and rtcp_mux to rtcpmux.</li>
+          <li>Renamed session-timers to timer, session-expires to timermaxexpires and session-minse to timerminexpires.</li>
+          <li>Renamed auth to authentication, outboundproxy to proxy, vmexten to mwiexten, unsolicited_mailbox to unsolicitedmailbox and outofcall_message_context to messagecontext.</li>
+          <li>Renamed fax keyword maxdatagram to max_datagram and usertpsource to nat.</li>
+          <li>Renamed directmedia keyword nonat to no_nat.</li>
+          <li>Added relaxdtmf.</li>
+          <li>Added parknotifytimer which sets how long the parked call notification message is displayed.</li>
+        </ul>
+        <br>
+        <h2>Channel Variables</h2>
+        <ul>
+          <li>Renamed SIPTRANSFER_REPLACES to SIP_TRANSFER_REPLACES, SIPTRANSFER_REFERER to SIP_TRANSFER_REFERRED_BY and SIPDOMAIN to SIP_TRANSFER_DOMAIN.</li>
+          <li>Renamed SIPRDNISDOMAIN to SIP_REDIRECT_DOMAIN and SIPREDIRECTREASON to SIP_REDIRECT_REASON.</li>
+          <li>Renamed SIPREFERRINGCONTEXT to SIP_REFERRING_CONTEXT and SIPREFERREDBYHDR to SIP_REFERRED_BY.</li>
+          <li>Renamed SIPDOMAIN to SIP_DOMAIN and SIPFROMDOMAIN to SIP_FROM_DOMAIN.</li>
+        </ul>
+        <br>
+        <h2>DialPlan Applications and Functions</h2>
+        <ul>
+          <li>Removed application SIPDtmfMode.</li>
+          <li>Renamed function SIPPEER to SIP_PEER.</li>
+          <li>Renamed SIPPEER options ip to ipaddr, limit to maxcalls, currcalls to currcallsinuse, expire to expires, chanvar to variable, callerid_num to callerid_number, regcallid to register_callid, cisco_devicename to devicename and cisco_lineindex to lineindex.</li>
+          <li>Renamed CHECKSIPDOMAIN to SIP_CHECK_DOMAIN.</li>
+          <li>Added "t" option to SIPCiscoPage to set display timer.</li>
+        </ul>
+        <br>
+        <h2>Command Line</h2>
+        <ul>
+          <li>Renamed "sip show registry" to "sip show registrations".</li>
+          <li>Added "sip show mwi subscriptions" which shows oubound MWI subscriptions.</li>
+          <li>Added peer settings that previously were not shown to the output of "sip show peer".</li>
+        </ul>
+        <br>
+        <h2>Manager Interface</h2>
+        <ul>
+          <li>Renamed SIPRegistry to SIPRegistrations.</li>
+          <li>Added SIPMWISubscriptions to list outbound MWI subscriptions.</li>
+          <li>Added missing peer settings to SIPShowPeer.</li>
+        </ul>
+      </article>
+    </main>
+    <footer>
+      <span class="icon">copyright</span> Gareth Palmer and individual contributors. Documentation distributed under <a href="LICENSE">CC BY 4.0</a>.
+    </footer>
+  </body>
+</html>
