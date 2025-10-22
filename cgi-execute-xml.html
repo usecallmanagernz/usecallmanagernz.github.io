@@ -78,7 +78,7 @@
         <h1>CGI Execute</h1>
         The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>. An archive containing sample command line utilties can be downloaded from the URL below.<br>
         <br>
-        <a href="https://github.com/usecallmanagernz/commands/archive/v2.6.tar.gz" download><span class="icon">file_download</span> commands-2.6.tar.gz</a> (15K) <span class="icon">event</span> 28/07/2025 <span class="icon">security</span> SHA256:f72fb1075dcfd465ffd843d1a9f25dd964e03b749bb51a9e37f95b4f3a52ed88.<br>
+        <a href="https://github.com/usecallmanagernz/commands/archive/v2.7.tar.gz" download><span class="icon">file_download</span> commands-2.7.tar.gz</a> (16K) <span class="icon">event</span> 22/10/2025 <span class="icon">security</span> SHA256:4a9d70bc63a93f5cc5c5b6da31f10340bdfdaaab15f425d2cbb87b6f4fadc694.<br>
         <br>
         If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services-xml.html">Phone Services</a> for more information.<br>
         <br>
@@ -87,7 +87,7 @@
         <code class="prettify lang-xml">&lt;CiscoIPPhoneExecute&gt;</code>
         <br>
         <h2 id="ExecuteItem">ExecuteItem <a href="#ExecuteItem" title="Link">link</a></h2>
-        Specifies a URL to fetch or a URI to execute. Up to <code class="literal">3</code> &lt;<code class="tag">ExecuteItem</code>&gt; tags can be specified.<br>
+        Specifies a URL to fetch or a URI to execute. Up to <code class="literal">3</code> &lt;<code class="tag">ExecuteItem</code>&gt; elements can be specified.<br>
         <br>
         <table>
           <tbody>
@@ -123,25 +123,110 @@
 &lt;/CiscoIPPhoneExecute&gt;</code>
         <br>
         <h2 id="setBackground">setBackground <a href="#setBackground" title="Link">link</a></h2>
-        Sets the background on the phone, both URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. An example <code class="literal">setbackground</code> script can be found in the archive above.<br>
-        <br>
-        See <a href="image-list-xml.html">Background Images</a> for more information.<br>
+        Sets the background on the phone. An example <code class="literal">setbackground</code> script can be found in the archive above. See <a href="image-list-xml.html">Background Images</a> for more information.<br>
         <br>
         <code class="prettify lang-xml">&lt;setBackground&gt;
-  &lt;background&gt;
-    &lt;icon&gt;<i>ICON URL</i>&lt;/icon&gt;
-    &lt;image&gt;<i>IMAGE URL</i>&lt;/image&gt;
+  &lt;background&gt;</code>
+        <br>
+        <h2 id="icon">icon <a href="#icon" title="Link">link</a></h2>
+        URL for the preview image, this will be displayed when viewing the list of background images.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;icon&gt;<i>ICON URL</i>&lt;/icon&gt;</code>
+        <br>
+        <h2 id="image">image <a href="#image" title="Link">link</a></h2>
+        URL for the full-size image.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;image&gt;<i>IMAGE URL</i>&lt;/image&gt;
   &lt;/background&gt;
 &lt;/setBackground&gt;</code>
         <br>
         <h2 id="setRingTone">setRingTone <a href="#setRingTone" title="Link">link</a></h2>
-        Sets the ring-tone on the phone, the URLs must be http://. Send to the phone using the same method as &lt;<code class="tag">CiscoIPPhoneExecute</code>&gt; with the <code class="literal">XML</code> parameter as follows. An example <code class="literal">setringtone</code> script can be found in the archive above.<br>
+        Sets the ring-tone on the phone. An example <code class="literal">setringtone</code> script can be found in the archive above. See <a href="ring-list-xml.html">Ring Tones</a> for more information.<br>
         <br>
-        See <a href="ring-list-xml.html">Ring Tones</a> for more information.<br>
+        <code class="prettify lang-xml">&lt;setRingTone&gt;</code>
         <br>
-        <code class="prettify lang-xml">&lt;setRingTone&gt;
-  &lt;ringTone&gt;<i>RINGTONE URL</i>&lt;/ringTone&gt;
+        <h2 id="ringTone">ringTone <a href="#ringTone" title="Link">link</a></h2>
+        URL for the ring tone.<br>
+        <br>
+        <code class="prettify lang-xml">  &lt;ringTone&gt;<i>RINGTONE URL</i>&lt;/ringTone&gt;
 &lt;/setRingTone&gt;</code>
+        <br>
+        <h2 id="startMedia">startMedia <a href="#startMedia" title="Link">link</a></h2>
+        Start streaming media to or from the phone. The command will return a &lt;<code class="tag">mediaStream</code>&gt; element with an <code class="literal">id</code> attribute that may be used to stop a specific stream. An example <code class="literal">mediastream</code> script can be found in the archive above. See <a href="rtp-streaming.html">RTP Streaming</a> for more information.<br>
+
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>receiveVolume</b></td>
+              <td>Optional volume percentage to play received media <b>1</b> to <b>100</b>.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">&lt;startMedia receiveVolume="<i>VOLUME</i>"&gt;
+  &lt;type&gt;audio&lt;/type&gt;</code>
+        <br>
+        <h2 id="codec">codec <a href="#codec" title="Link">link</a></h2>
+        Codec to use for media.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>G.711</b></td>
+              <td class="vertical-rule"><b>G.722</b></td>
+              <td class="vertical-rule"><b>G.729</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;codec&gt;<i>CODEC</i>&lt;/codec&gt;</code>
+        <br>
+        <h2 id="mode">mode <a href="#mode" title="Link">link</a></h2>
+        Whether the phone will send, receive or send and receive media.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>send</b></td>
+              <td class="vertical-rule"><b>receive</b></td>
+              <td class="vertical-rule"><b>sendReceive</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;mode&gt;<i>MODE</i>&lt;/mode&gt;</code>
+        <br>
+        <h2 id="address">address <a href="#address" title="Link">link</a></h2>
+        IP address the phone will receive media from. A multicast IP address may be specified.<br>
+        <br>
+        <code class="prettify lang-xml">  &lt;address&gt;<i>ADDRESS</i>&lt;/address&gt;</code>
+        <br>
+        <h2 id="port">port <a href="#port" title="Link">link</a></h2>
+        Optional port to receive media on from <b>20480</b> to <b>32768</b> and must be an even number. Default is <b>20480</b>.<br>
+        <br>
+        <code class="prettify lang-xml">  &lt;port&gt;<i>PORT</i>&lt;/port&gt;
+&lt;/startMedia&gt;</code>
+        <br>
+        <h2 id="stopMedia">stopMedia <a href="#stopMedia" title="Link">link</a></h2>
+        Stop a media stream started using &lt;<code class="tag">startMedia</code>&gt;.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;stopMedia&gt;</code>
+        <br>
+        <h2 id="mediaStream">mediaStream <a href="#mediaStream" title="Link">link</a></h2>
+        Specifies which media stream to stop.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>id</b></td>
+              <td>Optional <code class="literal">id</code> may be specified to stop a specifc stream, otherwise all media streams will be stopped.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;mediaStream id="<i>ID</i>" /&gt;
+&lt;/stopMedia&gt;</code>
       </article>
     </main>
     <footer>
