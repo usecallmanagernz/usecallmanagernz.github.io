@@ -31,43 +31,43 @@
         </ul>
         <ul>
           <li><h3>Network Configuration</h3></li>
-          <li><a href="dhcpd-conf.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
-          <li><a href="apache-conf.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
-          <li><a href="tftpd-conf.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+          <li><a href="dhcp-options.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
+          <li><a href="http-provisioning.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
+          <li><a href="tftp-provisioning.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
         </ul>
         <ul>
           <li><h3>Phone Configuration</h3></li>
           <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
-          <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
-          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
-          <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
-          <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
-          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
+          <li><a href="dial-template.html"><span class="icon">dialpad</span> Dial Template</a></li>
+          <li><a href="application-dial-rules.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><a href="soft-keys.html"><span class="icon">power_input</span> Soft Keys</a></li>
+          <li><a href="line-keys.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
+          <li><a href="feature-policy.html"><span class="icon">fact_check</span> Feature Policy</a></li>
           <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
           <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
           <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
-          <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
-          <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
-          <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="background-images.html"><span class="icon">wallpaper</span> Background Images</a></li>
+          <li><a href="ring-tones.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
+          <li><a href="device-security.html"><span class="icon">security</span> Device Security</a></li>
           <li><span class="icon selected">verified</span> <b>Trust Verification</b></li>
           <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
-          <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
+          <li><a href="vpn-connection.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
           <li><h3>Asterisk Configuration</h3></li>
-          <li><a href="sip-conf.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
-          <li><a href="sip-notify-conf.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
-          <li><a href="extensions-conf.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
-          <li><a href="res-parking-conf.html"><span class="icon">local_parking</span> Call Parking</a></li>
-          <li><a href="sippeer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><a href="sip-peers.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
+          <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
+          <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
+          <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
           <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
           <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
         </ul>
         <ul>
           <li><h3>XML Services</h3></li>
-          <li><a href="phone-services-xml.html"><span class="icon">settings</span> Phone Services</a></li>
-          <li><a href="cgi-execute-xml.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
+          <li><a href="phone-services.html"><span class="icon">settings</span> Phone Services</a></li>
+          <li><a href="cgi-execute.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
         </ul>
         <ul>
           <li><h3>Additional Features</h3></li>
@@ -78,7 +78,7 @@
         <h1>Trust Verification</h1>
         The Trust Verification Service (TVS) allows phones to query the validity of a certificate that is not included in <code class="literal">ITLFile.tlv</code> on demand. Certificates used for <code class="literal">CCM</code>, <code class="literal">TFTP</code>, <code class="literal">CAPF</code> and <code class="literal">APP-SERVER</code> roles can be dynamically provisioned without the phone having to re-download <code class="literal">ITLFile.tlv</code>.<br>
         <br>
-        To enable use of TVS set &lt;<code class="tag">address</code>&gt; and &lt;<code class="tag">port</code>&gt; in <a href="sepmac-cnf-xml.html#TVS/member">SEPMAC.cnf.xml</a> and include a certificate with the <code class="literal">TVS</code> role in <code class="literal">ITLFile.tlv</code>. An archive containing the server and client utilities can be downloaded from the URL below.<br>
+        To enable use of TVS set &lt;<code class="tag">address</code>&gt; and &lt;<code class="tag">port</code>&gt; in <a href="sepmac-cnf-xml.html#TVS.member">SEPMAC.cnf.xml</a> and include a certificate with the <code class="literal">TVS</code> role in <code class="literal">ITLFile.tlv</code>. An archive containing the server and client utilities can be downloaded from the URL below.<br>
         <br>
         <a href="https://github.com/usecallmanagernz/daemons/archive/v4.1.tar.gz" download><span class="icon">file_download</span> daemons-4.1.tar.gz</a> (28K) <span class="icon">event</span> 29/08/2024 <span class="icon">security</span> SHA256:546df03cf7832d3d58434f7f97e5de8acb509acc52bb57b3bbd74909d24f994e.<br>
         <br>
@@ -104,7 +104,7 @@
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> ./tvsctl /var/lib/tvs/tvs.sqlite3 --list</code>
         <br>
         <h2 id="tvsd">tvsd <a href="#tvsd" title="Link">link</a></h2>
-        The Trust Verification Service requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
+        The Trust Verification Service requires an RSA key and X509 certificate, if you already have a certificate that can be used instead. Otherwise a new certificate can be generated using <code class="literal">mkcert</code>. See <a href="device-security.html">Device Security</a> for more information.<br>
         <br>
         <code class="command-line"><span class="prompt">~/certutils-X.X$</span> sudo ./mkcert --common "TVS" --organization "TVS" --unit "TVS" \
     /var/lib/tvs/tvs.pem</code>

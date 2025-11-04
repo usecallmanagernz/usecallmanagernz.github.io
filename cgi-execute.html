@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CGI Execute</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="shortcut icon" href="images/logo.svg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1">
+    <link rel="stylesheet" href="includes/theme.css">
+    <link rel="stylesheet" href="includes/prettify.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="includes/prettify.js"></script>
+    <script>
+      jQuery(window).on("load", function () {
+          prettyPrint();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <a href="/"><img src="images/logo.svg" alt=""></a>
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="documentation-overview.html"><span class="icon">home</span> Documentation Overview</a></li>
+          <li><a href="patching-asterisk.html"><span class="icon">build</span> Patching Asterisk</a></li>
+          <li><a href="change-log.html"><span class="icon">news</span> Change Log</a></li>
+        </ul>
+        <ul>
+          <li><h3>Network Configuration</h3></li>
+          <li><a href="dhcp-options.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
+          <li><a href="http-provisioning.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
+          <li><a href="tftp-provisioning.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
+          <li><a href="dial-template.html"><span class="icon">dialpad</span> Dial Template</a></li>
+          <li><a href="application-dial-rules.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><a href="soft-keys.html"><span class="icon">power_input</span> Soft Keys</a></li>
+          <li><a href="line-keys.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
+          <li><a href="feature-policy.html"><span class="icon">fact_check</span> Feature Policy</a></li>
+          <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
+          <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
+          <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
+          <li><a href="background-images.html"><span class="icon">wallpaper</span> Background Images</a></li>
+          <li><a href="ring-tones.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
+          <li><a href="device-security.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
+          <li><a href="vpn-connection.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><a href="sip-peers.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
+          <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
+          <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
+          <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
+          <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
+          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><a href="phone-services.html"><span class="icon">settings</span> Phone Services</a></li>
+          <li><span class="icon selected">phone_forwarded</span> <b>CGI Execute</b></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><a href="as-feature-events.html"><span class="icon">extension</span> AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>CGI Execute</h1>
+        The phone can be commanded to execute an internal URI handler or fetch an external URL by sending a <code class="literal">POST</code> request to the phone's web-server using the URL <b>http://<i>x.x.x.x</i>/CGI/Execute</b> with a parameter named <code class="literal">XML</code>. An archive containing sample command line utilties can be downloaded from the URL below.<br>
+        <br>
+        <a href="https://github.com/usecallmanagernz/commands/archive/v2.8.tar.gz" download><span class="icon">file_download</span> commands-2.8.tar.gz</a> (17K) <span class="icon">event</span> 01/11/2025 <span class="icon">security</span> SHA256:8afd0369aaacc9338180b2efbd607d7b103e9cb331ca8314b540748c30721f77.<br>
+        <br>
+        If an &lt;<code class="tag">authenticationURL</code>&gt; has been defined, requests need to include a <code class="literal">Authorization</code> header encoded using the <code class="literal">basic</code> method. The username and password will be passed on to the authentication URL for checking. See <a href="phone-services.html">Phone Services</a> for more information.<br>
+        <br>
+        See the <a href="https://developer.cisco.com/site/ip-phone-services/overview/"><span class="icon">open_in_browser</span>  Cisco Unified IP Phone Services Application Development Notes</a> a list of URIs the each phone model supports.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;CiscoIPPhoneExecute&gt;</code>
+        <br>
+        <h2 id="ExecuteItem">ExecuteItem <a href="#ExecuteItem" title="Link">link</a></h2>
+        Specifies a URL to fetch or a URI to execute. Up to <code class="literal">3</code> &lt;<code class="tag">ExecuteItem</code>&gt; elements can be specified.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>URL</b></td>
+              <td>URL to fetch or execute. Must be ether one of the internal URIs (<code class="literal">Dial</code>, <code class="literal">Key</code>, <code class="literal">SoftKey</code>, <code class="literal">Init</code>, <code class="literal">Play</code> etc.), an http:// URL or an https:// URL.</td>
+            </tr>
+            <tr>
+              <td><b>Priority</b></td>
+              <td>Priority of the request (optional)</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><b>0</b></td>
+                      <td>Execute immediately (default)</td>
+                      <td class="vertical-rule"><b>1</b></td>
+                      <td>Execute when idle</td>
+                      <td class="vertical-rule"><b>2</b></td>
+                      <td>Execute only if idle</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;ExecuteItem URL="<i>URL</i>" Priority="<i>PRIORITY</i>" /&gt;
+&lt;/CiscoIPPhoneExecute&gt;</code>
+        <br>
+        <h2 id="setBackground">setBackground <a href="#setBackground" title="Link">link</a></h2>
+        Sets the background on the phone. An example <code class="literal">setbackground</code> script can be found in the archive above. See <a href="background-images.html">Background Images</a> for more information.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;setBackground&gt;
+  &lt;background&gt;</code>
+        <br>
+        <h2 id="setBackground.icon">icon <a href="#setBackground.icon" title="Link">link</a></h2>
+        URL for the preview image, this will be displayed when viewing the list of background images.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;icon&gt;<i>ICON URL</i>&lt;/icon&gt;</code>
+        <br>
+        <h2 id="setBackground.image">image <a href="#setBackground.image" title="Link">link</a></h2>
+        URL for the full-size image.<br>
+        <br>
+        <code class="prettify lang-xml">    &lt;image&gt;<i>IMAGE URL</i>&lt;/image&gt;
+  &lt;/background&gt;
+&lt;/setBackground&gt;</code>
+        <br>
+        <h2 id="setRingTone">setRingTone <a href="#setRingTone" title="Link">link</a></h2>
+        Sets the ring-tone on the phone. An example <code class="literal">setringtone</code> script can be found in the archive above. See <a href="ring-tones.html">Ring Tones</a> for more information.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;setRingTone&gt;</code>
+        <br>
+        <h2 id="setRingTone.ringTone">ringTone <a href="#setRingTone.ringTone" title="Link">link</a></h2>
+        URL for the ring tone.<br>
+        <br>
+        <code class="prettify lang-xml">  &lt;ringTone&gt;<i>RINGTONE URL</i>&lt;/ringTone&gt;
+&lt;/setRingTone&gt;</code>
+        <br>
+        <h2 id="startMedia">startMedia <a href="#startMedia" title="Link">link</a></h2>
+        Start streaming media to or from the phone. The command will return a &lt;<code class="tag">mediaStream</code>&gt; element with an <code class="literal">id</code> attribute that may be used to stop a specific stream. An example <code class="literal">mediastream</code> script can be found in the archive above. See <a href="rtp-streaming.html">RTP Streaming</a> for more information.<br>
+
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>receiveVolume</b></td>
+              <td>Optional volume percentage to play received media <b>1</b> to <b>100</b>.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">&lt;startMedia receiveVolume="<i>VOLUME</i>"&gt;
+  &lt;type&gt;audio&lt;/type&gt;</code>
+        <br>
+        <h2 id="startMedia.codec">codec <a href="#startMedia.codec" title="Link">link</a></h2>
+        Codec to use for media.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>G.711</b></td>
+              <td class="vertical-rule"><b>G.722</b></td>
+              <td class="vertical-rule"><b>G.729</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;codec&gt;<i>CODEC</i>&lt;/codec&gt;</code>
+        <br>
+        <h2 id="startMedia.mode">mode <a href="#startMedia.mode" title="Link">link</a></h2>
+        Whether the phone will send, receive or send and receive media.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>send</b></td>
+              <td class="vertical-rule"><b>receive</b></td>
+              <td class="vertical-rule"><b>sendReceive</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;mode&gt;<i>MODE</i>&lt;/mode&gt;</code>
+        <br>
+        <h2 id="startMedia.address">address <a href="#startMedia.address" title="Link">link</a></h2>
+        IP address the phone will receive media from. A multicast IP address may be specified.<br>
+        <br>
+        <code class="prettify lang-xml">  &lt;address&gt;<i>ADDRESS</i>&lt;/address&gt;</code>
+        <br>
+        <h2 id="startMedia.port">port <a href="#startMedia.port" title="Link">link</a></h2>
+        Optional port to receive media on from <b>20480</b> to <b>32768</b> and must be an even number. Default is <b>20480</b>.<br>
+        <br>
+        <code class="prettify lang-xml">  &lt;port&gt;<i>PORT</i>&lt;/port&gt;
+&lt;/startMedia&gt;</code>
+        <br>
+        <h2 id="stopMedia">stopMedia <a href="#stopMedia" title="Link">link</a></h2>
+        Stop a media stream started using &lt;<code class="tag">startMedia</code>&gt;.<br>
+        <br>
+        <code class="prettify lang-xml">&lt;stopMedia&gt;</code>
+        <br>
+        <h2 id="mediaStream">mediaStream <a href="#mediaStream" title="Link">link</a></h2>
+        Specifies which media stream to stop.<br>
+        <br>
+        <table>
+          <tbody>
+            <tr>
+              <td><b>id</b></td>
+              <td>Optional <code class="literal">id</code> may be specified to stop a specifc stream, otherwise all media streams will be stopped.</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;mediaStream id="<i>ID</i>" /&gt;
+&lt;/stopMedia&gt;</code>
+      </article>
+    </main>
+    <footer>
+      <span class="icon">copyright</span> Gareth Palmer and individual contributors. Documentation distributed under <a href="LICENSE">CC BY 4.0</a>.
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Phone Services</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="shortcut icon" href="images/logo.svg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1">
+    <link rel="stylesheet" href="includes/theme.css">
+    <link rel="stylesheet" href="includes/prettify.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="includes/prettify.js"></script>
+    <script>
+      jQuery(window).on("load", function () {
+          prettyPrint();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <a href="/"><img src="images/logo.svg" alt=""></a>
+      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
+    </header>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="documentation-overview.html"><span class="icon">home</span> Documentation Overview</a></li>
+          <li><a href="patching-asterisk.html"><span class="icon">build</span> Patching Asterisk</a></li>
+          <li><a href="change-log.html"><span class="icon">news</span> Change Log</a></li>
+        </ul>
+        <ul>
+          <li><h3>Network Configuration</h3></li>
+          <li><a href="dhcp-options.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
+          <li><a href="http-provisioning.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
+          <li><a href="tftp-provisioning.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+        </ul>
+        <ul>
+          <li><h3>Phone Configuration</h3></li>
+          <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
+          <li><a href="dial-template.html"><span class="icon">dialpad</span> Dial Template</a></li>
+          <li><a href="application-dial-rules.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><a href="soft-keys.html"><span class="icon">power_input</span> Soft Keys</a></li>
+          <li><a href="line-keys.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
+          <li><a href="feature-policy.html"><span class="icon">fact_check</span> Feature Policy</a></li>
+          <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
+          <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
+          <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
+          <li><a href="background-images.html"><span class="icon">wallpaper</span> Background Images</a></li>
+          <li><a href="ring-tones.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
+          <li><a href="device-security.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
+          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
+          <li><a href="vpn-connection.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
+        </ul>
+        <ul>
+          <li><h3>Asterisk Configuration</h3></li>
+          <li><a href="sip-peers.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
+          <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
+          <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
+          <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
+          <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
+          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
+        </ul>
+        <ul>
+          <li><h3>XML Services</h3></li>
+          <li><span class="icon selected">settings</span> <b>Phone Services</b></li>
+          <li><a href="cgi-execute.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
+        </ul>
+        <ul>
+          <li><h3>Additional Features</h3></li>
+          <li><a href="as-feature-events.html"><span class="icon">extension</span> AS Feature Events</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>Phone Services</h1>
+        The phone can make HTTP requests to a remote web-server to display text, menus and images as well as check whether a <a href="cgi-execute.html">CGI Execute</a> requests will be allowed. URLs assigned to fixed-keys (eg: services, directories) and line keys are defined in <a href="sepmac-cnf-xml.html#line">SEPMAC.cnf.xml</a>. An archive containing a sample WSGI application can be downloaded from the URL below.<br>
+        <br>
+        <a href="https://github.com/usecallmanagernz/services/archive/v2.9.tar.gz" download><span class="icon">file_download</span> services-2.9.tar.gz</a> (18K) <span class="icon">event</span> 01/11/2025 <span class="icon">security</span> SHA256:4c9ca4ffa36a4c482ff1974c1700bd56ae564f2050b2566204b95c688523c284.<br>
+        <br>
+        See <a href="https://developer.cisco.com/site/ip-phone-services/overview/"><span class="icon">open_in_browser</span> Cisco Unified IP Phone Services Application Development Notes</a> for a list of XML objects the each phone model supports.<br>
+        <br>
+        <h2 id="authenticationURL">authenticationURL <a href="#authenticationURL" title="Link">link</a></h2>
+        If defined, the phone will make requests to this URL containing the username and password that was included in the <code class="literal">Authorization</code> header in the request to <b>http://<i>x.x.x.x</i>/CGI/Execute</b>. The script handling the request must respond exactly with <code class="literal">AUTHORIZED</code> (with no newline character at end) otherwise the request will be denied. See <a href="cgi-execute.html">CGI Execute</a> for more information.<br>
+        <br>
+        If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/authentication</b>.<br>
+        <br>
+        <h2 id="secureAuthenticationURL">secureAuthenticationURL <a href="#secureAuthenticationURL" title="Link">link</a></h2>
+        Same as &lt;<code class="tag">authenticationURL</code>&gt; except using HTTPS.<br>
+        <br>
+        <h2 id="directoryURL">directoryURL <a href="#directoryURL" title="Link">link</a></h2>
+        The URL accessed when the directories or contacts button is pressed. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/directory</b>.<br>
+        <br>
+        <b>Note:</b> The <b>7900</b> series requires a &lt;<code class="tag">CiscoIPPhoneMenu</code>&gt; containing a &lt;<code class="tag">MenuItem</code>&gt; link to the directory list as the first response, the example phone services URL would be <b>http://<i>HOST</i>/directory/79xx</b>.<br>
+        <br>
+        <h2 id="secureDirectoryURL">secureDirectoryURL <a href="#secureDirectoryURL" title="Link">link</a></h2>
+        Secure &lt;<code class="tag">directoryURL</code>&gt;.<br>
+        <br>
+        <h2 id="servicesURL">servicesURL <a href="#servicesURL" title="Link">link</a></h2>
+        The URL accessed when the services or applications button is pressed. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/services</b>.<br>
+        <br>
+        <h2 id="secureServicesURL">secureServicesURL <a href="#secureServicesURL" title="Link">link</a></h2>
+        Secure &lt;<code class="tag">servicesURL</code>&gt;.<br>
+        <br>
+        <h2 id="informationURL">informationURL <a href="#informationURL" title="Link">link</a></h2>
+        The URL accessed when the information button pressed. <b>7900</b> series only. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/information</b>.<br>
+        <br>
+        <h2 id="secureInformationURL">secureInformationURL <a href="#secureInformationURL" title="Link">link</a></h2>
+        Secure &lt;<code class="tag">informationURL</code>&gt;.<br>
+        <br>
+        <h2 id="messagesURL">messagesURL <a href="#messagesURL" title="Link">link</a></h2>
+        The URL accessed when the messages button pressed, overrides &lt;<code class="tag">messagesNumber</code>&gt;.<br>
+        <br>
+        <h2 id="secureMessagesURL">secureMessagesURL <a href="#secureMessagesURL" title="Link">link</a></h2>
+        Secure &lt;<code class="tag">messagesURL</code>&gt;.<br>
+        <br>
+        <h2 id="idleURL">idleURL <a href="#messagesURL" title="Link">link</a></h2>
+        The URL the phone uses when idle.<br>
+        <br>
+        <h2 id="secureIdleURL">secureIdleURL <a href="#secureIdleURL" title="Link">link</a></h2>
+        Secure &lt;<code class="tag">idleURL</code>&gt;.<br>
+        <br>
+        <h2 id="problemReportUploadURL">problemReportUploadURL <a href="#problemReportUploadURL" title="Link">link</a></h2>
+        The URL that the logs are uploaded to when the report problem option is selected. <b>7800</b> and <b>8800</b> series only. If you are using the example phone services above the URL would be <b>http://<i>HOST</i>/problem-report</b>.<br>
+        <br>
+        <h2 id="phoneServices">phoneServices <a href="#phoneServices" title="Link">link</a></h2>
+        Allows multiple entries to appear when the services, directories or messages button is pressed without having to query the XML service. Additionally <code class="literal">Placed Calls</code>, <code class="literal">Received Calls</code> and <code class="literal">Missed Calls</code> entries may be disabled by removing their definitions. See <a href="sepmac-cnf-xml.html#phoneServices">phoneServices</a> for more information.
+      </article>
+    </main>
+    <footer>
+      <span class="icon">copyright</span> Gareth Palmer and individual contributors. Documentation distributed under <a href="LICENSE">CC BY 4.0</a>.
+    </footer>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FreePBX Integration</title>
+    <title>TFTP Provisioning</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="shortcut icon" href="images/logo.svg">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="includes/prettify.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="includes/prettify.js"></script>
-    <script src="includes/lang-other.js"></script>
+    <script src="includes/lang-tftpd.js"></script>
     <script>
       jQuery(window).on("load", function () {
           prettyPrint();
@@ -34,7 +34,7 @@
           <li><h3>Network Configuration</h3></li>
           <li><a href="dhcp-options.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
           <li><a href="http-provisioning.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
-          <li><a href="tftp-provisioning.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+          <li><span class="icon selected">file_download</span> <b>TFTP Provisioning</b></li>
         </ul>
         <ul>
           <li><h3>Phone Configuration</h3></li>
@@ -63,7 +63,7 @@
           <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
           <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
-          <li><span class="icon selected">view_kanban</span> <b>FreePBX Integration</b></li>
+          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
         </ul>
         <ul>
           <li><h3>XML Services</h3></li>
@@ -76,14 +76,11 @@
         </ul>
       </nav>
       <article>
-        <h1>FreePBX Integration</h1>
-        The examples shown on this site are for an Asterisk install that uses the default configuration files. If you are using FreePBX (<a href="https://www.freepbx.org"><span class="icon">open_in_browser</span> www.freepbx.org</a>) to provision Cisco phones then you will need to perform additional steps to apply the device specific configuration options.<br>
+        <h1>TFTP Provisioning</h1>
+        Phones will fall-back to using TFTP to download configuration files if <a href="http-provisioning.html">HTTP Provisioning</a> fails or when using older version firmware. A sample tftpboot directory containing templates for <code class="literal">SEPMAC.cnf.xml</code>, <code class="literal">Softkeys.xml</code>, <code class="literal">FeaturePolicy.xml</code>, <code class="literal">DialTemplate.xml</code>, <code class="literal">AppDialRules.xml</code>, background images and ring-tones can be downloaded from the URL below.<br>
         <br>
-        Listed below are external guides created by other people that may be useful. <b>Note</b>: I do not use FreePBX and thus cannot attest to the accuracy of the information provided there.<br>
-        <br>
-        <a href="https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323/Patching+Asterisk+11+for+Cisco+phones"><span class="icon">open_in_browser</span> https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323</a> &mdash; The FreePBX wiki has a slightly outdated guide on how to patch Asterisk 11 and also has some examples of the additional configuration needed.<br>
-        <br>
-        <a href="https://christai.com/index.php?option=com_content&amp;view=category&amp;id=17&amp;Itemid=1545"><span class="icon">open_in_browser</span> https://christai.com/index.php</a> &mdash; This user has written guides on how to install the patch for Asterisk 20 and FreePBX 17 as well as a basic configuration guide.
+        <a href="https://github.com/usecallmanagernz/tftpboot/archive/v1.7.tar.gz" download><span class="icon">file_download</span> tftpboot-1.7.tar.gz</a> (124K) <span class="icon">event</span> 21/06/2024 <span class="icon">security</span> SHA256:afe96ab7aabfb8b9e93b78aa0177aef45eefc6486c85140c3aae81542e3b485e.<br>
+
       </article>
     </main>
     <footer>

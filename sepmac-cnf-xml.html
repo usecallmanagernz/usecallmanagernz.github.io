@@ -31,43 +31,43 @@
         </ul>
         <ul>
           <li><h3>Network Configuration</h3></li>
-          <li><a href="dhcpd-conf.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
-          <li><a href="apache-conf.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
-          <li><a href="tftpd-conf.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+          <li><a href="dhcp-options.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
+          <li><a href="http-provisioning.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
+          <li><a href="tftp-provisioning.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
         </ul>
         <ul>
           <li><h3>Phone Configuration</h3></li>
           <li><span class="icon selected">settings_phone</span> <b>SEPMAC.cnf.xml</b></li>
-          <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
-          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
-          <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
-          <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
-          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
+          <li><a href="dial-template.html"><span class="icon">dialpad</span> Dial Template</a></li>
+          <li><a href="application-dial-rules.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><a href="soft-keys.html"><span class="icon">power_input</span> Soft Keys</a></li>
+          <li><a href="line-keys.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
+          <li><a href="feature-policy.html"><span class="icon">fact_check</span> Feature Policy</a></li>
           <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
           <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
           <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
-          <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
-          <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
-          <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="background-images.html"><span class="icon">wallpaper</span> Background Images</a></li>
+          <li><a href="ring-tones.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
+          <li><a href="device-security.html"><span class="icon">security</span> Device Security</a></li>
           <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
           <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
-          <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
+          <li><a href="vpn-connection.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
           <li><h3>Asterisk Configuration</h3></li>
-          <li><a href="sip-conf.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
-          <li><a href="sip-notify-conf.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
-          <li><a href="extensions-conf.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
-          <li><a href="res-parking-conf.html"><span class="icon">local_parking</span> Call Parking</a></li>
-          <li><a href="sippeer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><a href="sip-peers.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
+          <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
+          <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
+          <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
           <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
           <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
         </ul>
         <ul>
           <li><h3>XML Services</h3></li>
-          <li><a href="phone-services-xml.html"><span class="icon">settings</span> Phone Services</a></li>
-          <li><a href="cgi-execute-xml.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
+          <li><a href="phone-services.html"><span class="icon">settings</span> Phone Services</a></li>
+          <li><a href="cgi-execute.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
         </ul>
         <ul>
           <li><h3>Additional Features</h3></li>
@@ -76,7 +76,7 @@
       </nav>
       <article>
         <h1>SEPMAC.cnf.xml</h1>
-        The main configuration file for the phone. The actual name of the file is based on the MAC address of the phone, eg: <code class="literal">SEP58971ECC97C1.cnf.xml</code>. An sample version of this file is included in the sample tftpboot directory from <a href="apache-conf.html">HTTP Provisioning</a>.<br>
+        The main configuration file for the phone. The actual name of the file is based on the MAC address of the phone, eg: <code class="literal">SEP58971ECC97C1.cnf.xml</code>. An sample version of this file is included in the sample tftpboot directory from <a href="http-provisioning.html">HTTP Provisioning</a>.<br>
         <br>
         <code class="prettify lang-xml">&lt;device&gt;
   &lt;fullConfig&gt;true&lt;/fullConfig&gt;
@@ -168,7 +168,7 @@
   &lt;devicePool&gt;
     &lt;dateTimeSetting&gt;</code>
         <br>
-        <h2 id="dateTemplate">dateTemplate <a href="#dateTemplate" title="Link">link</a></h2>
+        <h2 id="dateTimeSetting.dateTemplate">dateTemplate <a href="#dateTimeSetting.dateTemplate" title="Link">link</a></h2>
         How the date and time is displayed. Alternate date field delimiters are <code class="literal">-</code> (dash) and <code class="literal">.</code> (period). D and M fields can be swapped to display date in American format.<br>
         <br>
         <table>
@@ -190,7 +190,7 @@
         <br>
         <code class="prettify lang-xml">      &lt;dateTemplate&gt;D/M/Y&lt;/dateTemplate&gt;</code>
         <br>
-        <h2 id="timeZone">timeZone <a href="#timeZone" title="Link">link</a></h2>
+        <h2 id="dateTimeSetting.timeZone">timeZone <a href="#dateTimeSetting.timeZone" title="Link">link</a></h2>
         Name of the local time zone. Display time is adjusted by the number of minutes from UTC.<br>
         <br>
         <table>
@@ -297,12 +297,12 @@
       &lt;ntps&gt;
         &lt;ntp&gt;</code>
         <br>
-        <h2 id="ntp-name">name <a href="#ntp-name" title="Link">link</a></h2>
+        <h2 id="ntp.name">name <a href="#ntp.name" title="Link">link</a></h2>
         Host name or IP address of the NTP server when using <code class="literal">unicast</code> mode. Maximum length of 50 characters.<br>
         <br>
         <code class="prettify lang-xml">          &lt;name&gt;<i>HOST</i>&lt;/name&gt;</code>
         <br>
-        <h2 id="ntpMode">ntpMode <a href="#ntpMode" title="Link">link</a></h2>
+        <h2 id="ntp.ntpMode">ntpMode <a href="#ntp.ntpMode" title="Link">link</a></h2>
         How the phone synchronises the clock.<br>
         <br>
         <table>
@@ -325,7 +325,7 @@
     &lt;callManagerGroup&gt;
       &lt;members&gt;</code>
         <br>
-        <h2 id="callManagerGroup-member">member <a href="#callManagerGroup-member" title="Link">link</a></h2>
+        <h2 id="callManagerGroup.member">member <a href="#callManagerGroup.member" title="Link">link</a></h2>
         Specifies the host name or IP address and SIP port of the server running Asterisk. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it is disconnected from the current member.<br>
         <br>
         <table>
@@ -341,18 +341,18 @@
           &lt;callManager&gt;
             &lt;ports&gt;</code>
         <br>
-        <h2 id="sipPort">sipPort <a href="#sipPort" title="Link">link</a></h2>
+        <h2 id="callManagerGroup.member.sipPort">sipPort <a href="#callManagerGroup.member.sipPort" title="Link">link</a></h2>
         SIP port to connect to on the server running Asterisk.<br>
         <br>
         <code class="prettify lang-xml">              &lt;sipPort&gt;5060&lt;/sipPort&gt;</code>
         <br>
-        <h2 id="securedSipPort">securedSipPort <a href="#securedSipPort" title="Link">link</a></h2>
+        <h2 id="callManagerGroup.member.securedSipPort">securedSipPort <a href="#callManagerGroup.member.securedSipPort" title="Link">link</a></h2>
         SIP-TLS port to connect to on the server running Asterisk.<br>
         <br>
         <code class="prettify lang-xml">              &lt;securedSipPort&gt;5061&lt;/securedSipPort&gt;
             &lt;/ports&gt;</code>
         <br>
-        <h2 id="callManagerGroup-processNodeName">processNodeName <a href="#callManagerGroup-processNodeName" title="Link">link</a></h2>
+        <h2 id="callManagerGroup.member.processNodeName">processNodeName <a href="#callManagerGroup.member.processNodeName" title="Link">link</a></h2>
         Host name or IP address of the server running Asterisk. Maximum length of 50 characters.<br>
         <br>
         <code class="prettify lang-xml">            &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;
@@ -364,7 +364,7 @@
   &lt;TVS&gt;
     &lt;members&gt;</code>
         <br>
-        <h2 id="TVS-member">member <a href="#TVS-member" title="Link">link</a></h2>
+        <h2 id="TVS.member">member <a href="#TVS.member" title="Link">link</a></h2>
         Specifies the host name or IP address and port of the server running the Trust Verification Service. Up to <code class="literal">5</code> members can be defined with the phone will automatically failing-over to a member with a higher priority when it cannot connect to a member. Maximum length of 50 characters.<br>
         <br>
         <table>
@@ -378,23 +378,23 @@
         <br>
         <code class="prettify lang-xml">      &lt;member priority="0"&gt;</code>
         <br>
-        <h2 id="TVS-port">port <a href="#TVS-port" title="Link">link</a></h2>
+        <h2 id="TVS.port">port <a href="#TVS.port" title="Link">link</a></h2>
         Port to connect to on the server running the Trust Verification Service.<br>
         <br>
         <code class="prettify lang-xml">        &lt;port&gt;2445&lt;/port&gt;</code>
         <br>
-        <h2 id="TVS-address">address <a href="#TVS-address" title="Link">link</a></h2>
+        <h2 id="TVS.address">address <a href="#TVS.address" title="Link">link</a></h2>
         Host name or IP address of the server running the Trust Verification Service.<br>
         <br>
         <code class="prettify lang-xml">        &lt;address&gt;<i>HOST</i>&lt;/address&gt;
       &lt;/member&gt;
     &lt;/members&gt;
-  &lt;-TVS&gt;
+  &lt;TVS&gt;
   &lt;vpnGroup&gt;
     &lt;mtu&gt;1290&lt;/mtu&gt;
     &lt;failConnectTime&gt;30&lt;/failConnectTime&gt;</code>
         <br>
-        <h2 id="authMethod">authMethod <a href="#authMethod" title="Link">link</a></h2>
+        <h2 id="vpnGroup.authMethod">authMethod <a href="#vpnGroup.authMethod" title="Link">link</a></h2>
         Method the phone uses to authenticate to the VPN server.<br>
         <br>
         <table>
@@ -412,7 +412,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;authMethod&gt;0&lt;/authMethod&gt;</code>
         <br>
-        <h2 id="pswdPersistent">pswdPersistent <a href="#pswdPersistent" title="Link">link</a></h2>
+        <h2 id="vpnGroup.pswdPersistent">pswdPersistent <a href="#vpnGroup.pswdPersistent" title="Link">link</a></h2>
         Locally store the password entered by the user. If disabled the user has to re-enter the password if the phone is reset.<br>
         <br>
         <table>
@@ -428,7 +428,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;pswdPersistent&gt;1&lt;/pswdPersistent&gt;</code>
         <br>
-        <h2 id="autoNetDetect">autoNetDetect <a href="#autoNetDetect" title="Link">link</a></h2>
+        <h2 id="vpnGroup.autoNetDetect">autoNetDetect <a href="#vpnGroup.autoNetDetect" title="Link">link</a></h2>
         When the phone starts it will attempt to ping the TFTP server. If it does not receive a response it will automatically connect to the VPN server.<br>
         <br>
         <table>
@@ -444,7 +444,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;autoNetDetect&gt;1&lt;/autoNetDetect&gt;</code>
         <br>
-        <h2 id="enableHostIDCheck">enableHostIDCheck <a href="#enableHostIDCheck" title="Link">link</a></h2>
+        <h2 id="vpnGroup.enableHostIDCheck">enableHostIDCheck <a href="#vpnGroup.enableHostIDCheck" title="Link">link</a></h2>
         Compare the host name part of the URL set below to the name in the certificate that the VPN server uses and abort the connection if the do not match.<br>
         <br>
         <table>
@@ -461,7 +461,7 @@
         <code class="prettify lang-xml">    &lt;enableHostIDCheck&gt;0&lt;/enableHostIDCheck&gt;
     &lt;addresses&gt;</code>
         <br>
-        <h2 id="url1">url1 <a href="#url1" title="Link">link</a></h2>
+        <h2 id="vpnGroup.url1">url1 <a href="#vpnGroup.url1" title="Link">link</a></h2>
         URL of the VPN server using the format <b>https://<i>HOST</i>/svc</b>. Up to <code class="literal">3</code> URLs can be specified by including &lt;<code class="tag">url2</code>&gt; ... &lt;<code class="tag">url3</code>&gt;. Maximum length of 255 characters. <b>Note</b>: the path must be <code class="literal">/svc</code> when using OpenConnect Server.<br>
         <br>
         <code class="prettify lang-xml">      &lt;url1&gt;<i>URL</i>&lt;/url1&gt;
@@ -469,8 +469,8 @@
     &lt;credentials&gt;
       &lt;hashAlg&gt;0&lt;/hashAlg&gt;</code>
         <br>
-        <h2 id="certHash1">certHash1 <a href="#certHash1" title="Link">link</a></h2>
-        Encoded hash of the VPN server certificate generated by <code class="literal">certhash</code>. See <a href="vpn-group.html#certhash">VPN Connection</a> for an archive containing scripts for managing certificates. Up to <code class="literal">10</code> hashes can be specified by including &lt;<code class="tag">certHash2</code>&gt; ... &lt;<code class="tag">certHash10</code>&gt;<br>
+        <h2 id="vpnGroup.certHash1">certHash1 <a href="#vpnGroup.certHash1" title="Link">link</a></h2>
+        Encoded hash of the VPN server certificate generated by <code class="literal">certhash</code>. See <a href="vpn-connection.html#certhash">VPN Connection</a> for an archive containing scripts for managing certificates. Up to <code class="literal">10</code> hashes can be specified by including &lt;<code class="tag">certHash2</code>&gt; ... &lt;<code class="tag">certHash10</code>&gt;<br>
         <br>
         <code class="prettify lang-xml">      &lt;certHash1&gt;<i>HASH</i>&lt;/certHash1&gt;
     &lt;/credentials&gt;
@@ -478,7 +478,7 @@
   &lt;sipProfile&gt;
     &lt;sipProxies&gt;</code>
         <br>
-        <h2 id="registerWithProxy">registerWithProxy <a href="#registerWithProxy" title="Link">link</a></h2>
+        <h2 id="sipProxies.registerWithProxy">registerWithProxy <a href="#sipProxies.registerWithProxy" title="Link">link</a></h2>
         Register with Asterisk, must be set to <code class="literal">true</code>.<br>
         <br>
         <code class="prettify lang-xml">      &lt;registerWithProxy&gt;true&lt;/registerWithProxy&gt;
@@ -491,7 +491,7 @@
       &lt;meetMeServiceURI&gt;x-cisco-serviceuri-meetme&lt;/meetMeServiceURI&gt;
       &lt;abbreviatedDialURI&gt;x-cisco-serviceuri-abbrdial&lt;/abbreviatedDialURI&gt;</code>
         <br>
-        <h2 id="callHoldRingback">callHoldRingback <a href="#callHoldRingback" title="Link">link</a></h2>
+        <h2 id="sipCalLFeatures.callHoldRingback">callHoldRingback <a href="#sipCallFeatures.callHoldRingback" title="Link">link</a></h2>
         Have the phone ring if a user hangs up an while the phone has another call on hold.<br>
         <br>
         <table>
@@ -507,7 +507,7 @@
         <br>
         <code class="prettify lang-xml">      &lt;callHoldRingback&gt;1&lt;/callHoldRingback&gt;</code>
         <br>
-        <h2 id="semiAttendedTransfer">semiAttendedTransfer <a href="#semiAttendedTransfer" title="Link">link</a></h2>
+        <h2 id="sipCalLFeatures.semiAttendedTransfer">semiAttendedTransfer <a href="#sipCalLFeatures.semiAttendedTransfer" title="Link">link</a></h2>
         Allow transfers to be completed before the remote party has answered.<br>
         <br>
         <table>
@@ -523,7 +523,7 @@
         <br>
         <code class="prettify lang-xml">      &lt;semiAttendedTransfer&gt;true&lt;/semiAttendedTransfer&gt;</code>
         <br>
-        <h2 id="anonymousCallBlock">anonymousCallBlock <a href="#anonymousCallBlock" title="Link">link</a></h2>
+        <h2 id="sipCalLFeatures.anonymousCallBlock">anonymousCallBlock <a href="#sipCalLFeatures.anonymousCallBlock" title="Link">link</a></h2>
         Whether the phone rejects incoming anonymous calls. Depending on the phone model, this setting is parsed differently.<br>
         <br>
         <table>
@@ -556,7 +556,7 @@
         <br>
         <code class="prettify lang-xml">      &lt;anonymousCallBlock&gt;0&lt;/anonymousCallBlock&gt;</code>
         <br>
-        <h2 id="callerIdBlocking">callerIdBlocking <a href="#callerIdBlocking" title="Link">link</a></h2>
+        <h2 id="sipCalLFeatures.callerIdBlocking">callerIdBlocking <a href="#sipCalLFeatures.callerIdBlocking" title="Link">link</a></h2>
         Whether the phone hides the outgoing caller ID. Actual phone details will be included the Remote-Party-ID header. Depending on the phone model, this setting is parsed differently.<br>
         <br>
         <table>
@@ -589,7 +589,7 @@
         <br>
         <code class="prettify lang-xml">      &lt;callerIdBlocking&gt;0&lt;/callerIdBlocking&gt;</code>
         <br>
-        <h2 id="remoteCcEnable">remoteCcEnable <a href="#remoteCcEnable" title="Link">link</a></h2>
+        <h2 id="sipCalLFeatures.remoteCcEnable">remoteCcEnable <a href="#sipCalLFeatures.remoteCcEnable" title="Link">link</a></h2>
         Enable remote call control. Must be set to <code class="literal">true</code>.<br>
         <br>
         <code class="prettify lang-xml">      &lt;remoteCcEnable&gt;true&lt;/remoteCcEnable&gt;
@@ -599,7 +599,7 @@
       &lt;localCfwdEnable&gt;true&lt;/localCfwdEnable&gt;
       &lt;retainForwardInformation&gt;false&lt;/retainForwardInformation&gt;</code>
         <br>
-        <h2 id="uriDialingDisplayPreference">uriDialingDisplayPreference <a href="#uriDialingDisplayPreference" title="Link">link</a></h2>
+        <h2 id="sipCalLFeatures.uriDialingDisplayPreference">uriDialingDisplayPreference <a href="#sipCalLFeatures.uriDialingDisplayPreference" title="Link">link</a></h2>
         Whether to display the full SIP user@domain URI or just the user part only.<br>
         <br>
         <table>
@@ -628,7 +628,7 @@
       &lt;timerT2&gt;4000&lt;/timerT2&gt;
       &lt;maxRedirects&gt;70&lt;/maxRedirects&gt;</code>
         <br>
-        <h2 id="remotePartyID">remotePartyID <a href="#remotePartyID" title="Link">link</a></h2>
+        <h2 id="sipStack.remotePartyID">remotePartyID <a href="#sipStack.remotePartyID" title="Link">link</a></h2>
         Send and receive the SIP Remote-Party-ID header, allows the called or calling party information to be updated by the ${<code class="literal">CONNECTEDLINE</code>()} function. Must be set to <code class="literal">true</code>.<br>
         <br>
         <code class="prettify lang-xml">      &lt;remotePartyID&gt;true&lt;/remotePartyID&gt;
@@ -757,7 +757,7 @@
     &lt;sipLines&gt;</code>
         <br>
         <h2 id="line">line <a href="#line" title="Link">link</a></h2>
-        Defines the line keys on the phone, you can specify as many lines as your phone has line keys. Line keys are used for phone lines, BLF speed dials, service URLs etc. There must be at least one line key of &lt;<code class="tag">featureID</code>&gt; type <code class="literal">9</code> defined. See <a href="line-keys-xml.html">Line Keys</a> for examples for a list of available features.<br>
+        Defines the line keys on the phone, you can specify as many lines as your phone has line keys. Line keys are used for phone lines, BLF speed dials, service URLs etc. There must be at least one line key of &lt;<code class="tag">featureID</code>&gt; type <code class="literal">9</code> defined. See <a href="line-keys.html">Line Keys</a> for examples for a list of available features.<br>
         <br>
         <table>
           <tbody>
@@ -774,34 +774,34 @@
         <br>
         <code class="prettify lang-xml">      &lt;line button=&quot;1&quot; lineIndex=&quot;1&quot;&gt;</code>
         <br>
-        <h2 id="featureID">featureID <a href="#featureID" title="Link">link</a></h2>
+        <h2 id="line.featureID">featureID <a href="#line.featureID" title="Link">link</a></h2>
         Number determining which feature is assigned to this line key.<br>
         <br>
         <code class="prettify lang-xml">        &lt;featureID&gt;9&lt;/featureID&gt;</code>
         <br>
-        <h2 id="featureLabel">featureLabel <a href="#featureLabel" title="Link">link</a></h2>
+        <h2 id="line.featureLabel">featureLabel <a href="#line.featureLabel" title="Link">link</a></h2>
         Text label to display next to the line key. Maximum length of 30 characters.<br>
         <br>
         <code class="prettify lang-xml">        &lt;featureLabel&gt;<i>PEERNAME</i>&lt;/featureLabel&gt;</code>
         <br>
-        <h2 id="proxy">proxy <a href="#proxy" title="Link">link</a></h2>
+        <h2 id="line.proxy">proxy <a href="#line.proxy" title="Link">link</a></h2>
         Proxy must be the keyword <code class="literal">USECALLMANAGER</code>.<br>
         <br>
         <code class="prettify lang-xml">        &lt;proxy&gt;USECALLMANAGER&lt;/proxy&gt;
         &lt;port&gt;5060&lt;/port&gt;</code>
         <br>
-        <h2 id="line-name">name <a href="#line-name" title="Link">link</a></h2>
-        Name to use when registering. Maximum length of 30 characters. This is the name of the peer defined in <a href="sip-conf.html">sip.conf</a>.<br>
+        <h2 id="line.name">name <a href="#line.name" title="Link">link</a></h2>
+        Name to use when registering. Maximum length of 30 characters. This is the name of the peer defined in <a href="sip-peers.html">sip.conf</a>.<br>
         <br>
         <code class="prettify lang-xml">        &lt;name&gt;<i>PEERNAME</i>&lt;/name&gt;</code>
         <br>
-        <h2 id="line-displayName">displayName <a href="#line-displayName" title="Link">link</a></h2>
+        <h2 id="line.displayName">displayName <a href="#line.displayName" title="Link">link</a></h2>
         Name to use in SIP From header (optional). Maximum length of 30 characters.<br>
         <br>
         <code class="prettify lang-xml">        &lt;displayName&gt;<i>NAME</i>&lt;/displayName&gt;
         &lt;autoAnswer&gt;</code>
         <br>
-        <h2 id="autoAnswerEnabled">autoAnswerEnabled <a href="#autoAnswerEnabled" title="Link">link</a></h2>
+        <h2 id="line.autoAnswerEnabled">autoAnswerEnabled <a href="#line.autoAnswerEnabled" title="Link">link</a></h2>
         Automatically answer incoming calls on this line.<br>
         <br>
         <table>
@@ -817,7 +817,7 @@
         <br>
         <code class="prettify lang-xml">          &lt;autoAnswerEnabled&gt;0&lt;/autoAnswerEnabled&gt;</code>
         <br>
-        <h2 id="autoAnswerMode">autoAnswerMode <a href="#autoAnswerMode" title="Link">link</a></h2>
+        <h2 id="line.autoAnswerMode">autoAnswerMode <a href="#line.autoAnswerMode" title="Link">link</a></h2>
         Where to send the audio for automatically answered calls.<br>
         <br>
         <table>
@@ -834,7 +834,7 @@
         <code class="prettify lang-xml">          &lt;autoAnswerMode&gt;Auto Answer with Headset&lt;/autoAnswerMode&gt;
         &lt;/autoAnswer&gt;</code>
         <br>
-        <h2 id="callWaiting">callWaiting <a href="#callWaiting" title="Link">link</a></h2>
+        <h2 id="line.callWaiting">callWaiting <a href="#line.callWaiting" title="Link">link</a></h2>
         Enable call waiting.<br>
         <br>
         <table>
@@ -867,23 +867,23 @@
         <br>
         <code class="prettify lang-xml">        &lt;callWaiting&gt;1&lt;/callWaiting&gt;</code>
         <br>
-        <h2 id="authName">authName <a href="#authName" title="Link">link</a></h2>
+        <h2 id="line.authName">authName <a href="#line.authName" title="Link">link</a></h2>
         Username to use when registering. Maximum length of 30 characters.<br>
         <br>
         <code class="prettify lang-xml">        &lt;authName&gt;<i>PEERNAME</i>&lt;/authName&gt;</code>
         <br>
-        <h2 id="authPassword">authPassword <a href="#authPassword" title="Link">link</a></h2>
-        Password to use when registering. Maximum length of 30 characters. This is the secret for the peer defined in <a href="sip-conf.html">sip.conf</a>.<br>
+        <h2 id="line.authPassword">authPassword <a href="#line.authPassword" title="Link">link</a></h2>
+        Password to use when registering. Maximum length of 30 characters. This is the secret for the peer defined in <a href="sip-peers.html">sip.conf</a>.<br>
         <br>
         <code class="prettify lang-xml">        &lt;authPassword&gt;<i>SECRET</i>&lt;/authPassword&gt;</code>
         <br>
-        <h2 id="contact">contact <a href="#contact" title="Link">link</a></h2>
+        <h2 id="line.contact">contact <a href="#line.contact" title="Link">link</a></h2>
         SIP contact header username to use (optional).<br>
         <br>
         <code class="prettify lang-xml">        &lt;contact&gt;<i>PEERNAME</i>&lt;/contact&gt;
         &lt;sharedLine&gt;false&lt;/sharedLine&gt;</code>
         <br>
-        <h2 id="messageWaitingLampPolicy">messageWaitingLampPolicy <a href="#messageWaitingLampPolicy" title="Link">link</a></h2>
+        <h2 id="line.messageWaitingLampPolicy">messageWaitingLampPolicy <a href="#line.messageWaitingLampPolicy" title="Link">link</a></h2>
         How the phone alerts the user to unheard voicemail messages.<br>
         <br>
         <table>
@@ -921,7 +921,7 @@
         <br>
         <code class="prettify lang-xml">        &lt;messageWaitingLampPolicy&gt;3&lt;/messageWaitingLampPolicy&gt;</code>
         <br>
-        <h2 id="messageWaitingAMWI">messageWaitingAMWI <a href="#messageWaitingAMWI" title="Link">link</a></h2>
+        <h2 id="line.messageWaitingAMWI">messageWaitingAMWI <a href="#line.messageWaitingAMWI" title="Link">link</a></h2>
         Play an brief audible tone when the phone is taken off-hook and a there is an unheard voicemail message.<br>
         <br>
         <table>
@@ -937,12 +937,12 @@
         <br>
         <code class="prettify lang-xml">        &lt;messageWaitingAMWI&gt;0&lt;/messageWaitingAMWI&gt;</code>
         <br>
-        <h2 id="messagesNumber">messagesNumber <a href="#messagesNumber" title="Link">link</a></h2>
+        <h2 id="line.messagesNumber">messagesNumber <a href="#line.messagesNumber" title="Link">link</a></h2>
         Number to dial when the messages key is pressed.<br>
         <br>
         <code class="prettify lang-xml">        &lt;messagesNumber&gt;<i>VOICEMAIL EXTENSION</i>&lt;/messagesNumber&gt;</code>
         <br>
-        <h2 id="ringSettingIdle">ringSettingIdle <a href="#ringSettingIdle" title="Link">link</a></h2>
+        <h2 id="line.ringSettingIdle">ringSettingIdle <a href="#line.ringSettingIdle" title="Link">link</a></h2>
         How the phone rings when not on a call.<br>
         <br>
         <table>
@@ -964,7 +964,7 @@
         <br>
         <code class="prettify lang-xml">        &lt;ringSettingIdle&gt;4&lt;/ringSettingIdle&gt;</code>
         <br>
-        <h2 id="ringSettingActive">ringSettingActive <a href="#ringSettingActive" title="Link">link</a></h2>
+        <h2 id="line.ringSettingActive">ringSettingActive <a href="#line.ringSettingActive" title="Link">link</a></h2>
         How the phone rings when it already has a call.<br>
         <br>
         <table>
@@ -994,7 +994,7 @@
           &lt;dialedNumber&gt;true&lt;/dialedNumber&gt;
         &lt;/forwardCallInfoDisplay&gt;</code>
         <br>
-        <h2 id="maxNumCalls">maxNumCalls <a href="#maxNumCalls" title="Link">link</a></h2>
+        <h2 id="line.maxNumCalls">maxNumCalls <a href="#line.maxNumCalls" title="Link">link</a></h2>
         Maximum number of calls the line can have at a time. The table below shows the highest value that can be used for each phone model.<br>
         <br>
         <table>
@@ -1028,12 +1028,12 @@
         <br>
         <code class="prettify lang-xml">        &lt;maxNumCalls&gt;5&lt;/maxNumCalls&gt;</code>
         <br>
-        <h2 id="busyTrigger">busyTrigger <a href="#busyTrigger" title="Link">link</a></h2>
+        <h2 id="line.busyTrigger">busyTrigger <a href="#line.busyTrigger" title="Link">link</a></h2>
         Number of calls the line can have at a time before returning a busy signal.<br>
         <br>
         <code class="prettify lang-xml">        &lt;busyTrigger&gt;4&lt;/busyTrigger&gt;</code>
         <br>
-        <h2 id="recordingOption">recordingOption <a href="#recordingOption" title="Link">link</a></h2>
+        <h2 id="line.recordingOption">recordingOption <a href="#line.recordingOption" title="Link">link</a></h2>
         Allow user-initiated recording of calls on this line.<br>
         <br>
         <table>
@@ -1058,18 +1058,18 @@
     &lt;ringSettingBusyStationPolicy&gt;0&lt;/ringSettingBusyStationPolicy&gt;</code>
         <br>
         <h2 id="dialTemplate">dialTemplate <a href="#dialTemplate" title="Link">link</a></h2>
-        Name of the file containing the digit timeout patterns. See <a href="dial-template-xml.html">Dial Templates</a> for further information. <b>Note</b>: default timeout is 15 seconds if you do not specify a dial template.<br>
+        Name of the file containing the digit timeout patterns. See <a href="dial-template.html">Dial Template</a> for further information. <b>Note</b>: default timeout is 15 seconds if you do not specify a dial template.<br>
         <br>
         <code class="prettify lang-xml">    &lt;dialTemplate&gt;<i>DIAL TEMPLATE FILE</i>&lt;/dialTemplate&gt;</code>
         <br>
         <h2 id="softKeyFile">softKeyFile <a href="#softKeyFile" title="Link">link</a></h2>
-        Name of the file containing the soft key definitions and layouts. See <a href="soft-keys-xml.html">Soft Keys</a> for further information.<br>
+        Name of the file containing the soft key definitions and layouts. See <a href="soft-keys.html">Soft Keys</a> for further information.<br>
         <br>
         <code class="prettify lang-xml">    &lt;softKeyFile&gt;<i>SOFTKEY FILE</i>&lt;/softKeyFile&gt;
   &lt;/sipProfile&gt;</code>
         <br>
         <h2 id="featurePolicyFile">featurePolicyFile <a href="#featurePolicyFile" title="Link">link</a></h2>
-        Name of the file containing the enabled features policy for the <b>8961</b>, <b>9951</b> and <b>9971</b> models. See <a href="feature-policy-xml.html">Feature Policy</a> for further information.<br>
+        Name of the file containing the enabled features policy for the <b>8961</b>, <b>9951</b> and <b>9971</b> models. See <a href="feature-policy.html">Feature Policy</a> for further information.<br>
         <br>
         <code class="prettify lang-xml">  &lt;featurePolicyFile&gt;<i>FEATURE POLICY FILE</i>&lt;/featurePolicyFile&gt;</code>
         <br>
@@ -1091,7 +1091,7 @@
   &lt;commonProfile&gt;
     &lt;phonePassword&gt;&lt;/phonePassword&gt;</code>
         <br>
-        <h2 id="backgroundImageAccess">backgroundImageAccess <a href="#backgroundImageAccess" title="Link">link</a></h2>
+        <h2 id="commonProfile.backgroundImageAccess">backgroundImageAccess <a href="#commonProfile.backgroundImageAccess" title="Link">link</a></h2>
         Allow the end user to change the background wallpaper image on the phone.<br>
         <br>
         <table>
@@ -1107,7 +1107,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;backgroundImageAccess&gt;true&lt;/backgroundImageAccess&gt;</code>
         <br>
-        <h2 id="callLogBlfEnabled">callLogBlfEnabled <a href="#callLogBlfEnabled" title="Link">link</a></h2>
+        <h2 id="commonProfile.callLogBlfEnabled">callLogBlfEnabled <a href="#commonProfile.callLogBlfEnabled" title="Link">link</a></h2>
         Show whether an extension is in either busy or idle in the phone's call history. A hint for that extension must exist in the Asterisk dial-plan.<br>
         <br>
         <table>
@@ -1153,12 +1153,12 @@
         <code class="prettify lang-xml">  &lt;inactiveLoadInformation&gt;<i>LOADS FILE</i>&lt;/inactiveLoadInformation&gt;
   &lt;vendorConfig&gt;</code>
         <br>
-        <h2 id="defaultWallpaperFile">defaultWallpaperFile <a href="#defaultWallpaperFile" title="Link">link</a></h2>
-        Default background image for the phone, the file must be located in the directory the phone uses for user selecable background images and &lt;<code class="tag">backgroundImageAccess</code>&gt; must also be set to <code class="literal">false</code>.  <b>8800</b>, <b>8900</b> and <b>9900</b> series only. See <a href="image-list-xml.html">Background Images</a> for directory and image size.<br>
+        <h2 id="vendorConfig.defaultWallpaperFile">defaultWallpaperFile <a href="#vendorConfig.defaultWallpaperFile" title="Link">link</a></h2>
+        Default background image for the phone, the file must be located in the directory the phone uses for user selecable background images and &lt;<code class="tag">backgroundImageAccess</code>&gt; must also be set to <code class="literal">false</code>.  <b>8800</b>, <b>8900</b> and <b>9900</b> series only. See <a href="background-images.html">Background Images</a> for directory and image size.<br>
         <br>
         <code class="prettify lang-xml">    &lt;defaultWallpaperFile&gt;<i>FILE</i>&lt;defaultWallpaperFile&gt;</code>
         <br>
-        <h2 id="disableSpeaker">disableSpeaker <a href="#disableSpeaker" title="Link">link</a></h2>
+        <h2 id="vendorConfig.disableSpeaker">disableSpeaker <a href="#vendorConfig.disableSpeaker" title="Link">link</a></h2>
         Whether a user can use the speaker.<br>
         <br>
         <table>
@@ -1174,7 +1174,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;disableSpeaker&gt;false&lt;/disableSpeaker&gt;</code>
         <br>
-        <h2 id="disableSpeakerAndHeadset">disableSpeakerAndHeadset <a href="#disableSpeakerAndHeadset" title="Link">link</a></h2>
+        <h2 id="vendorConfig.disableSpeakerAndHeadset">disableSpeakerAndHeadset <a href="#vendorConfig.disableSpeakerAndHeadset" title="Link">link</a></h2>
         Whether a user can use the either the speaker or headset.<br>
         <br>
         <table>
@@ -1190,7 +1190,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;disableSpeakerAndHeadset&gt;false&lt;/disableSpeakerAndHeadset&gt;</code>
         <br>
-        <h2 id="enableMuteFeature">enableMuteFeature <a href="#enableMuteFeature" title="Link">link</a></h2>
+        <h2 id="vendorConfig.enableMuteFeature">enableMuteFeature <a href="#vendorConfig.enableMuteFeature" title="Link">link</a></h2>
         Provide the user with a <code class="literal">Mute</code> soft key that can be used to mute or unmute calls for phones that do not have a dedicated mute key.<br>
         <br>
         <table>
@@ -1206,7 +1206,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;enableMuteFeature&gt;false&lt;/enableMuteFeature&gt;</code>
         <br>
-        <h2 id="enableGroupListen">enableGroupListen <a href="#enableGroupListen" title="Link">link</a></h2>
+        <h2 id="vendorConfig.enableGroupListen">enableGroupListen <a href="#vendorConfig.enableGroupListen" title="Link">link</a></h2>
         Allow the use of the headset and handset simultaneously when the headset is in use.<br>
         <br>
         <table>
@@ -1222,7 +1222,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;enableGroupListen&gt;true&lt;/enableGroupListen&gt;</code>
         <br>
-        <h2 id="g722CodecSupport">g722CodecSupport <a href="#g722CodecSupport" title="Link">link</a></h2>
+        <h2 id="vendorConfig.g722CodecSupport">g722CodecSupport <a href="#vendorConfig.g722CodecSupport" title="Link">link</a></h2>
         Whether the G.722 codec is enabled.<br>
         <br>
         <table>
@@ -1240,7 +1240,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;g722CodecSupport&gt;2&lt;/g722CodecSupport&gt;</code>
         <br>
-        <h2 id="holdResumeKey">holdResumeKey <a href="#holdResumeKey" title="Link">link</a></h2>
+        <h2 id="vendorConfig.holdResumeKey">holdResumeKey <a href="#vendorConfig.holdResumeKey" title="Link">link</a></h2>
         Whether the hold key can be used to hold and resume a call or only hold the call. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <table>
@@ -1256,7 +1256,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;holdResumeKey&gt;0&lt;/holdResumeKey&gt;</code>
         <br>
-        <h2 id="recentsSoftKey">recentsSoftKey <a href="#recentsSoftKey" title="Link">link</a></h2>
+        <h2 id="vendorConfig.recentsSoftKey">recentsSoftKey <a href="#vendorConfig.recentsSoftKey" title="Link">link</a></h2>
         Whether to display the <code class="literal">recents</code> soft key. <b>7800</b> series only.<br>
         <br>
         <table>
@@ -1276,7 +1276,7 @@
     &lt;headsetWidebandUIControl&gt;1&lt;/headsetWidebandUIControl&gt;
     &lt;handsetWidebandUIControl&gt;1&lt;/handsetWidebandUIControl&gt;</code>
         <br>
-        <h2 id="settingsAccess">settingsAccess <a href="#settingsAccess" title="Link">link</a></h2>
+        <h2 id="vendorConfig.settingsAccess">settingsAccess <a href="#vendorConfig.settingsAccess" title="Link">link</a></h2>
         Whether a user can access the phone settings.<br>
         <br>
         <table>
@@ -1292,7 +1292,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;settingsAccess&gt;1&lt;/settingsAccess&gt;</code>
         <br>
-        <h2 id="videoCapability">videoCapability <a href="#videoCapability" title="Link">link</a></h2>
+        <h2 id="vendorConfig.videoCapability">videoCapability <a href="#vendorConfig.videoCapability" title="Link">link</a></h2>
         Enable video capability.<br>
         <br>
         <table>
@@ -1308,7 +1308,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;videoCapability&gt;0&lt;/videoCapability&gt;</code>
         <br>
-        <h2 id="separateMute">separateMute <a href="#separateMute" title="Link">link</a></h2>
+        <h2 id="vendorConfig.separateMute">separateMute <a href="#vendorConfig.separateMute" title="Link">link</a></h2>
         When transmitting video, pressing mute will only mutes the audio instead of muting both audio and video. <b>9900</b> series only.<br>
         <br>
         <table>
@@ -1324,7 +1324,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;separateMute&gt;0&lt;/separateMute&gt;</code>
         <br>
-        <h2 id="hideVideoByDefault">hideVideoByDefault <a href="#hideVideoByDefault" title="Link">link</a></h2>
+        <h2 id="vendorConfig.hideVideoByDefault">hideVideoByDefault <a href="#vendorConfig.hideVideoByDefault" title="Link">link</a></h2>
         Hide the video window by default. Video from the phone's camera will still be transmitted. <b>8900</b> and <b>9900</b> series only.<br>
         <br>
         <table>
@@ -1340,7 +1340,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;hideVideoByDefault&gt;0&lt;/hideVideoByDefault&gt;</code>
         <br>
-        <h2 id="ciscoCamera">ciscoCamera <a href="#ciscoCamera" title="Link">link</a></h2>
+        <h2 id="vendorConfig.ciscoCamera">ciscoCamera <a href="#vendorConfig.ciscoCamera" title="Link">link</a></h2>
         Enable camera.<br>
         <br>
         <table>
@@ -1356,7 +1356,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;ciscoCamera&gt;0&lt;/ciscoCamera&gt;</code>
         <br>
-        <h2 id="webAccess">webAccess <a href="#webAccess" title="Link">link</a></h2>
+        <h2 id="vendorConfig.webAccess">webAccess <a href="#vendorConfig.webAccess" title="Link">link</a></h2>
         Enable the phone's web server.<br>
         <br>
         <table>
@@ -1372,7 +1372,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;webAccess&gt;0&lt;/webAccess&gt;</code>
         <br>
-        <h2 id="webProtocol">webProtocol <a href="#webProtocol" title="Link">link</a></h2>
+        <h2 id="vendorConfig.webProtocol">webProtocol <a href="#vendorConfig.webProtocol" title="Link">link</a></h2>
         Protocols the phone's web server supports.<br>
         <br>
         <table>
@@ -1388,7 +1388,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;webProtocol&gt;0&lt;/webProtocol&gt;</code>
         <br>
-        <h2 id="tls12Only">tls12Only <a href="#tls12Only" title="Link">link</a></h2>
+        <h2 id="vendorConfig.tls12Only">tls12Only <a href="#vendorConfig.tls12Only" title="Link">link</a></h2>
         Only allow TLS 1.2 ciphers for web access via HTTPS.<br>
         <br>
         <table>
@@ -1404,7 +1404,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;tls12Only&gt;0&lt;/tls12Only&gt;</code>
         <br>
-        <h2 id="webAdmin">webAdmin <a href="#webAdmin" title="Link">link</a></h2>
+        <h2 id="vendorConfig.webAdmin">webAdmin <a href="#vendorConfig.webAdmin" title="Link">link</a></h2>
         Enable remote administration using the phone's web server. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -1420,12 +1420,12 @@
         <br>
         <code class="prettify lang-xml">    &lt;webAdmin&gt;1&lt;/webAdmin&gt;</code>
         <br>
-        <h2 id="adminPassword">adminPassword <a href="#adminPassword" title="Link">link</a></h2>
+        <h2 id="vendorConfig.adminPassword">adminPassword <a href="#vendorConfig.adminPassword" title="Link">link</a></h2>
         Password to access the phone's remote administration web interface. <b>8821</b> model only.<br>
         <br>
         <code class="prettify lang-xml">    &lt;adminPassword&gt;&lt;/adminPassword&gt;</code>
         <br>
-        <h2 id="sshAccess">sshAccess <a href="#sshAccess" title="Link">link</a></h2>
+        <h2 id="vendorConfig.sshAccess">sshAccess <a href="#vendorConfig.sshAccess" title="Link">link</a></h2>
         Enable the phone's SSH server.<br>
         <br>
         <table>
@@ -1441,7 +1441,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;sshAccess&gt;0&lt;/sshAccess&gt;</code>
         <br>
-        <h2 id="displayRefreshRate">displayRefreshRate <a href="#displayRefreshRate" title="Link">link</a></h2>
+        <h2 id="vendorConfig.displayRefreshRate">displayRefreshRate <a href="#vendorConfig.displayRefreshRate" title="Link">link</a></h2>
         The refresh rate of the display to prevent flicker caused by some lighting environments.<br>
         <br>
         <table>
@@ -1457,7 +1457,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;displayRefreshRate&gt;0&lt;/displayRefreshRate&gt;</code>
         <br>
-        <h2 id="daysDisplayNotActive">daysDisplayNotActive <a href="#daysDisplayNotActive" title="Link">link</a></h2>
+        <h2 id="vendorConfig.daysDisplayNotActive">daysDisplayNotActive <a href="#vendorConfig.daysDisplayNotActive" title="Link">link</a></h2>
         Comma separated list of days that the phone's display is not active and will be automatically turned off after the time specified by &lt;<code class="tag">displayIdleTimeout</code>&gt; has elapsed.<br>
         <br>
         <table>
@@ -1483,22 +1483,22 @@
         <br>
         <code class="prettify lang-xml">    &lt;daysDisplayNotActive&gt;1,7&lt;/daysDisplayNotActive&gt;</code>
         <br>
-        <h2 id="displayOnTime">displayOnTime <a href="#displayOnTime" title="Link">link</a></h2>
+        <h2 id="vendorConfig.displayOnTime">displayOnTime <a href="#vendorConfig.displayOnTime" title="Link">link</a></h2>
         Time in HH:MM format to automatically turn on the phone display.<br>
         <br>
         <code class="prettify lang-xml">    &lt;displayOnTime&gt;08:00&lt;/displayOnTime&gt;</code>
         <br>
-        <h2 id="displayOnDuration">displayOnDuration <a href="#displayOnDuration" title="Link">link</a></h2>
+        <h2 id="vendorConfig.displayOnDuration">displayOnDuration <a href="#vendorConfig.displayOnDuration" title="Link">link</a></h2>
         Time duration in HH:MM format to automatically turn off the phone display after it was turned on.<br>
         <br>
         <code class="prettify lang-xml">    &lt;displayOnDuration&gt;10:00&lt;/displayOnDuration&gt;</code>
         <br>
-        <h2 id="displayIdleTimeout">displayIdleTimeout <a href="#displayIdleTimeout" title="Link">link</a></h2>
+        <h2 id="vendorConfig.displayIdleTimeout">displayIdleTimeout <a href="#vendorConfig.displayIdleTimeout" title="Link">link</a></h2>
         Timeout in HH:MM format to automatically turn off phone display if outside the time specified by &lt;<code class="tag">daysDisplayNotActive</code>&gt;, &lt;<code class="tag">displayOnTime</code>&gt; and &lt;<code class="tag">displayOnTimeout</code>&gt;.<br>
         <br>
         <code class="prettify lang-xml">    &lt;displayIdleTimeout&gt;00:10&lt;/displayIdleTimeout&gt;</code>
         <br>
-        <h2 id="displayOnWhenIncomingCall">displayOnWhenIncomingCall <a href="#displayOnWhenIncomingCall" title="Link">link</a></h2>
+        <h2 id="vendorConfig.displayOnWhenIncomingCall">displayOnWhenIncomingCall <a href="#vendorConfig.displayOnWhenIncomingCall" title="Link">link</a></h2>
         Automatically turn on display when there is an incoming call and outside the time specified by &lt;<code class="tag">daysDisplayNotActive</code>&gt;, &lt;<code class="tag">displayOnTime</code>&gt; and &lt;<code class="tag">displayOnDuration</code>&gt;.<br>
         <br>
         <table>
@@ -1514,32 +1514,32 @@
         <br>
         <code class="prettify lang-xml">    &lt;displayOnWhenIncomingCall&gt;1&lt;/displayOnWhenIncomingCall&gt;</code>
         <br>
-        <h2 id="daysBacklightNotActive">daysBacklightNotActive <a href="#daysBacklightNotActive" title="Link">link</a></h2>
+        <h2 id="vendorConfig.daysBacklightNotActive">daysBacklightNotActive <a href="#vendorConfig.daysBacklightNotActive" title="Link">link</a></h2>
         Comma separated list of days that the phone's backlight is not active and will be automatically turned off after the time specified by &lt;<code class="tag">backlightIdleTimeout</code>&gt; has elapsed. See &lt;<code class="tag">daysDisplayNotActive</code>&gt; for examples.<br>
         <br>
         <code class="prettify lang-xml">    &lt;daysBacklightNotActive&gt;1,7&lt;/daysBacklightNotActive&gt;</code>
         <br>
-        <h2 id="backlightOnTime">backlightOnTime <a href="#backlightOnTime" title="Link">link</a></h2>
+        <h2 id="vendorConfig.backlightOnTime">backlightOnTime <a href="#vendorConfig.backlightOnTime" title="Link">link</a></h2>
         Time in HH:MM format to automatically turn on the phone backlight.<br>
         <br>
         <code class="prettify lang-xml">    &lt;backlightOnTime&gt;08:00&lt;/backlightOnTime&gt;</code>
         <br>
-        <h2 id="backlightOnDuration">backlightOnDuration <a href="#backlightOnDuration" title="Link">link</a></h2>
+        <h2 id="vendorConfig.backlightOnDuration">backlightOnDuration <a href="#vendorConfig.backlightOnDuration" title="Link">link</a></h2>
         Time duration in HH:MM format to automatically turn off the phone backlight after it was turned on.<br>
         <br>
         <code class="prettify lang-xml">    &lt;backlightOnDuration&gt;10:00&lt;/backlightOnDuration&gt;</code>
         <br>
-        <h2 id="backlightOnIdleTimeout">backlightOnIdleTimeout <a href="#backlightOnIdleTimeout" title="Link">link</a></h2>
+        <h2 id="vendorConfig.backlightOnIdleTimeout">backlightOnIdleTimeout <a href="#vendorConfig.backlightOnIdleTimeout" title="Link">link</a></h2>
         Timeout in HH:MM format to automatically turn off phone backlight if outside the time specified by &lt;<code class="tag">daysBacklightNotActive</code>&gt;, &lt;<code class="tag">backlightOnTime</code>&gt; and &lt;<code class="tag">backlightOnTimeout</code>&gt;.<br>
         <br>
         <code class="prettify lang-xml">    &lt;backlightIdleTimeout&gt;00:10&lt;/backlightIdleTimeout&gt;</code>
         <br>
-        <h2 id="backlightOnWhenIncomingCall">backlightOnWhenIncomingCall <a href="#backlightOnWhenIncomingCall" title="Link">link</a></h2>
+        <h2 id="vendorConfig.backlightOnWhenIncomingCall">backlightOnWhenIncomingCall <a href="#vendorConfig.backlightOnWhenIncomingCall" title="Link">link</a></h2>
         Automatically turn on backlight when there is an incoming call and outside the time specified by &lt;<code class="tag">daysBacklightNotActive</code>&gt;, &lt;<code class="tag">backlightOnTime</code>&gt; and &lt;<code class="tag">backlightOnDuration</code>&gt;. See &lt;<code class="tag">backlightOnWhenIncomingCall</code>&gt; for examples.<br>
         <br>
         <code class="prettify lang-xml">    &lt;backlightOnWhenIncomingCall&gt;1&lt;/backlightOnWhenIncomingCall&gt;</code>
         <br>
-        <h2 id="recordingTone">recordingTone <a href="#recordingTone" title="Link">link</a></h2>
+        <h2 id="vendorConfig.recordingTone">recordingTone <a href="#vendorConfig.recordingTone" title="Link">link</a></h2>
         Periodically play a beep tone during the call. <b>Note</b>: the tone is played regardless of whether the call is being recorded or not.<br>
         <br>
         <table>
@@ -1555,7 +1555,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;recordingTone&gt;0&lt;/recordingTone&gt;</code>
         <br>
-        <h2 id="recordingToneLocalVolume">recordingToneLocalVolume <a href="#recordingToneLocalVolume" title="Link">link</a></h2>
+        <h2 id="vendorConfig.recordingToneLocalVolume">recordingToneLocalVolume <a href="#vendorConfig.recordingToneLocalVolume" title="Link">link</a></h2>
         <table>
           <tbody>
             <tr>
@@ -1567,7 +1567,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;recordingToneLocalVolume&gt;100&lt;/recordingToneLocalVolume&gt;</code>
         <br>
-        <h2 id="recordingToneRemoteVolume">recordingToneRemoteVolume <a href="#recordingToneRemoteVolume" title="Link">link</a></h2>
+        <h2 id="vendorConfig.recordingToneRemoteVolume">recordingToneRemoteVolume <a href="#vendorConfig.recordingToneRemoteVolume" title="Link">link</a></h2>
         <table>
           <tbody>
             <tr>
@@ -1580,12 +1580,12 @@
         <code class="prettify lang-xml">    &lt;recordingToneRemoteVolume&gt;50&lt;/recordingToneRemoteVolume&gt;
     &lt;recordingToneDuration&gt;&lt;/recordingToneDuration&gt;</code>
         <br>
-        <h2 id="moreKeyReversionTimer">moreKeyReversionTimer <a href="#moreKeyReversionTimer" title="Link">link</a></h2>
+        <h2 id="vendorConfig.moreKeyReversionTimer">moreKeyReversionTimer <a href="#vendorConfig.moreKeyReversionTimer" title="Link">link</a></h2>
         Number of seconds between <code class="literal">0</code> and <code class="literal">30</code> to wait after the <code class="literal">more</code> soft key is pressed before reverting to the initial set of soft keys. A timer of <code class="literal">0</code> prevents reversion.<br>
         <br>
         <code class="prettify lang-xml">    &lt;moreKeyReversionTimer&gt;5&lt;/moreKeyReversionTimer&gt;</code>
         <br>
-        <h2 id="autoSelectLineEnable">autoSelectLineEnable <a href="#autoSelectLineEnable" title="Link">link</a></h2>
+        <h2 id="vendorConfig.autoSelectLineEnable">autoSelectLineEnable <a href="#vendorConfig.autoSelectLineEnable" title="Link">link</a></h2>
         Change focus to incoming calls on all lines, otherwise only change focus to calls on the currently selected line.<br>
         <br>
         <table>
@@ -1601,7 +1601,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;autoSelectLineEnable&gt;1&lt;/autoSelectLineEnable&gt;</code>
         <br>
-        <h2 id="autoCallSelect">autoCallSelect <a href="#autoCallSelect" title="Link">link</a></h2>
+        <h2 id="vendorConfig.autoCallSelect">autoCallSelect <a href="#vendorConfig.autoCallSelect" title="Link">link</a></h2>
         When the phone has a incoming call, automatically change focus to that call.<br>
         <br>
         <table>
@@ -1617,18 +1617,18 @@
         <br>
         <code class="prettify lang-xml">    &lt;autoCallSelect&gt;1&lt;/autoCallSelect&gt;</code>
         <br>
-        <h2 id="incomingCallToastTimer">incomingCallToastTimer <a href="#incomingCallToastTimer" title="Link">link</a></h2>
+        <h2 id="vendorConfig.incomingCallToastTimer">incomingCallToastTimer <a href="#vendorConfig.incomingCallToastTimer" title="Link">link</a></h2>
         Time in seconds to display the incoming call toast (popup) notification. A value of <code class="literal">0</code> disables the notification.<br>
         <br>
         <code class="prettify lang-xml">    &lt;incomingCallToastTimer&gt;5&lt;/incomingCallToastTimer&gt;
     &lt;joinAndDirectTransferPolicy&gt;0&lt;/joinAndDirectTransferPolicy&gt;</code>
         <br>
-        <h2 id="minimumRingVolume">minimumRingVolume <a href="#minimumRingVolume" title="Link">link</a></h2>
+        <h2 id="vendorConfig.minimumRingVolume">minimumRingVolume <a href="#vendorConfig.minimumRingVolume" title="Link">link</a></h2>
         Minimum volume of the phone's ringer. A number between <code class="literal">0</code> (off) to <code class="literal">15</code> (full).<br>
         <br>
         <code class="prettify lang-xml">    &lt;minimumRingVolume&gt;&lt;/minimumRingVolume&gt;</code>
         <br>
-        <h2 id="adminConfigurableRinger">adminConfigurableRinger <a href="#adminConfigurableRinger" title="Link">link</a></h2>
+        <h2 id="vendorConfig.adminConfigurableRinger">adminConfigurableRinger <a href="#vendorConfig.adminConfigurableRinger" title="Link">link</a></h2>
         Set the ring-tone to one of the the built-in tones, cannot be changed by the user.<br>
         <br>
         <table>
@@ -1648,7 +1648,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;adminConfigurableRinger&gt;&lt;/adminConfigurableRinger&gt;</code>
         <br>
-        <h2 id="simplifiedNewCall">simplifiedNewCall <a href="#simplifiedNewCall" title="Link">link</a></h2>
+        <h2 id="vendorConfig.simplifiedNewCall">simplifiedNewCall <a href="#vendorConfig.simplifiedNewCall" title="Link">link</a></h2>
         Use a simplified new call window when dialing which only displays the number being dialed rather than displaying a list of call history entries that the phone number matches. <b>7800</b>, <b>8800</b>, <b>8900</b> and <b>9900</b> series only.<br>
         <br>
         <table>
@@ -1664,7 +1664,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;simplifiedNewCall&gt;0&lt;/simplifiedNewCall&gt;</code>
         <br>
-        <h2 id="actionableAlert">actionableAlert <a href="#actionableAlert" title="Link">link</a></h2>
+        <h2 id="vendorConfig.actionableAlert">actionableAlert <a href="#vendorConfig.actionableAlert" title="Link">link</a></h2>
         Display a window at the bottom of the screen with the call details instead of next to the session key. <b>7800</b>, <b>8800</b>, <b>8900</b> and <b>9900</b> series only.<br>
         <br>
         <table>
@@ -1680,7 +1680,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;actionableAlert&gt;0&lt;/actionableAlert&gt;</code>
         <br>
-        <h2 id="softkeyControl">softKeyControl <a href="#softkeyControl" title="Link">link</a></h2>
+        <h2 id="vendorConfig.softkeyControl">softKeyControl <a href="#vendorConfig.softkeyControl" title="Link">link</a></h2>
         Use soft key feature definitions in &lt;<code class="tag">softKeyFile</code>&gt; instead of &lt;<code class="tag">featureControlPolicy</code>&gt;. <b>7800</b>, <b>8800</b> and <b>9900</b> series only.<br>
         <br>
         <table>
@@ -1696,7 +1696,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;softkeyControl&gt;0&lt;/softkeyControl&gt;</code>
         <br>
-        <h2 id="peerFirmwareSharing">peerFirmwareSharing <a href="#peerFirmwareSharing" title="Link">link</a></h2>
+        <h2 id="vendorConfig.peerFirmwareSharing">peerFirmwareSharing <a href="#vendorConfig.peerFirmwareSharing" title="Link">link</a></h2>
         Enable firmware sharing, the phone will attempts to download the new firmware files from another phone on the same subnet rather than the TFTP or HTTP server.<br>
         <br>
         <table>
@@ -1712,17 +1712,17 @@
         <br>
         <code class="prettify lang-xml">    &lt;peerFirmwareSharing&gt;1&lt;/peerFirmwareSharing&gt;</code>
         <br>
-        <h2 id="loadServer">loadServer <a href="#loadServer" title="Link">link</a></h2>
+        <h2 id="vendorConfig.loadServer">loadServer <a href="#vendorConfig.loadServer" title="Link">link</a></h2>
         Alternate TFTP or HTTP server to download firmware files.<br>
         <br>
         <code class="prettify lang-xml">    &lt;loadServer&gt;<i>HOST</i>&lt;/loadServer&gt;</code>
         <br>
-        <h2 id="problemReportUploadURL">problemReportUploadURL <a href="#problemReportUploadURL" title="Link">link</a></h2>
+        <h2 id="vendorConfig.problemReportUploadURL">problemReportUploadURL <a href="#vendorConfig.problemReportUploadURL" title="Link">link</a></h2>
         URL to use when the report problem option is selected in the phone information menu. Maximum length of 255 characters. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <code class="prettify lang-xml">    &lt;problemReportUploadURL&gt;<i>URL</i>&lt;/problemReportUploadURL&gt;</code>
         <br>
-        <h2 id="detectCMConnectionFailure">detectCMConnectionFailure <a href="#detectCMConnectionFailure" title="Link">link</a></h2>
+        <h2 id="vendorConfig.detectCMConnectionFailure">detectCMConnectionFailure <a href="#vendorConfig.detectCMConnectionFailure" title="Link">link</a></h2>
         How long the phone waits before failing-over to the backup proxy after losing connectivity to the primary. In delayed mode the phone waits approximately 4 times longer.<br>
         <br>
         <table>
@@ -1738,7 +1738,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;detectCMConnectionFailure&gt;0&lt;/detectCMConnectionFailure&gt;</code>
         <br>
-        <h2 id="disableTLSCiphers">disableTLSCiphers <a href="#disableTLSCiphers" title="Link">link</a></h2>
+        <h2 id="vendorConfig.disableTLSCiphers">disableTLSCiphers <a href="#vendorConfig.disableTLSCiphers" title="Link">link</a></h2>
         Comma separated list of TLS ciphers to be disabled.<br>
         <br>
         <table>
@@ -1773,7 +1773,7 @@
     &lt;videoRtcp&gt;1&lt;/videoRtcp&gt;
     &lt;garp&gt;0&lt;/garp&gt;</code>
         <br>
-        <h2 id="bluetooth">bluetooth <a href="#bluetooth" title="Link">link</a></h2>
+        <h2 id="vendorConfig.bluetooth">bluetooth <a href="#vendorConfig.bluetooth" title="Link">link</a></h2>
         Enable bluetooth, <b>8845</b>, <b>8851</b>, <b>8861</b>, <b>8865</b>, <b>8945</b>, <b>9951</b> and <b>9971</b> models only.<br>
         <br>
         <table>
@@ -1789,7 +1789,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;bluetooth&gt;1&lt;/bluetooth&gt;</code>
         <br>
-        <h2 id="bluetoothProfile">bluetoothProfile <a href="#bluetoothProfile" title="Link">link</a></h2>
+        <h2 id="vendorConfig.bluetoothProfile">bluetoothProfile <a href="#vendorConfig.bluetoothProfile" title="Link">link</a></h2>
         Comma separated list of supported bluetooth profiles.<br>
         <br>
         <table>
@@ -1805,7 +1805,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;bluetoothProfile&gt;0,1&lt;/bluetoothProfile&gt;</code>
         <br>
-        <h2 id="btpbap">btpbap <a href="#btpbap" title="Link">link</a></h2>
+        <h2 id="vendorConfig.btpbap">btpbap <a href="#vendorConfig.btpbap" title="Link">link</a></h2>
         Include the bluetooth device's address book in the contacts menu.<br>
         <br>
         <table>
@@ -1821,7 +1821,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;btpbap&gt;0&lt;/btpbap&gt;</code>
         <br>
-        <h2 id="bthfu">bthfu <a href="#bthfu" title="Link">link</a></h2>
+        <h2 id="vendorConfig.bthfu">bthfu <a href="#vendorConfig.bthfu" title="Link">link</a></h2>
         Register the bluetooth device as a second line on the phone and allow calls to be dialed out through the device.<br>
         <br>
         <table>
@@ -1837,7 +1837,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;bthfu&gt;0&lt;/bthfu&gt;</code>
         <br>
-        <h2 id="wifi">wifi <a href="#wifi" title="Link">link</a></h2>
+        <h2 id="vendorConfig.wifi">wifi <a href="#vendorConfig.wifi" title="Link">link</a></h2>
         Enable wifi, <b>8861</b>, <b>8865</b> and <b>9971</b> models only.<br>
         <br>
         <table>
@@ -1854,7 +1854,7 @@
         <code class="prettify lang-xml">    &lt;wifi&gt;1&lt;/wifi&gt;
     &lt;sdio&gt;1&lt;/sdio&gt;</code>
         <br>
-        <h2 id="usb1">usb1 <a href="#usb1" title="Link">link</a></h2>
+        <h2 id="vendorConfig.usb1">usb1 <a href="#vendorConfig.usb1" title="Link">link</a></h2>
         Enable USB port 1.<br>
         <br>
         <table>
@@ -1870,7 +1870,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;usb1&gt;1&lt;/usb1&gt;</code>
         <br>
-        <h2 id="usb2">usb2 <a href="#usb2" title="Link">link</a></h2>
+        <h2 id="vendorConfig.usb2">usb2 <a href="#vendorConfig.usb2" title="Link">link</a></h2>
         Enable USB port 2.<br>
         <br>
         <table>
@@ -1886,7 +1886,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;usb2&gt;1&lt;/usb2&gt;</code>
         <br>
-        <h2 id="usbClasses">usbClasses <a href="#usbClasses" title="Link">link</a></h2>
+        <h2 id="vendorConfig.usbClasses">usbClasses <a href="#vendorConfig.usbClasses" title="Link">link</a></h2>
         Comma separated list of supported USB device classes.<br>
         <br>
         <table>
@@ -1904,7 +1904,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;usbClasses&gt;0,1,2&lt;/usbClasses&gt;</code>
         <br>
-        <h2 id="ehookEnable">ehookEnable <a href="#ehookEnable" title="Link">link</a></h2>
+        <h2 id="vendorConfig.ehookEnable">ehookEnable <a href="#vendorConfig.ehookEnable" title="Link">link</a></h2>
         Enable Electronic Hook-Switch support on the AUX port.<br>
         <br>
         <table>
@@ -1920,7 +1920,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;ehookEnable&gt;0&lt;/ehookEnable&gt;</code>
         <br>
-        <h2 id="kemOneColumn">kemOneColumn <a href="#kemOneColumn" title="Link">link</a></h2>
+        <h2 id="vendorConfig.kemOneColumn">kemOneColumn <a href="#vendorConfig.kemOneColumn" title="Link">link</a></h2>
         Display only one line key per row for the <b>KEM</b> and <b>BEKEM</b> expansion modules. The provides more room for the label and allows the feature to be accessed by pressing either the left or right line-key.<br>
         <br>
         <table>
@@ -1936,7 +1936,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;kemOneColumn&gt;0&lt;/kemOneColumn&gt;</code>
         <br>
-        <h2 id="lineMode">lineMode <a href="#lineMode" title="Link">link</a></h2>
+        <h2 id="vendorConfig.lineMode">lineMode <a href="#vendorConfig.lineMode" title="Link">link</a></h2>
         Make the session keys on the right of the phone's display be configurable as line keys. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <table>
@@ -1952,7 +1952,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;lineMode&gt;0&lt;/lineMode&gt;</code>
         <br>
-        <h2 id="callParkMonitor">callParkMonitor <a href="#callParkMonitor" title="Link">link</a></h2>
+        <h2 id="vendorConfig.callParkMonitor">callParkMonitor <a href="#vendorConfig.callParkMonitor" title="Link">link</a></h2>
         Monitor the parked call's status using a line key. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <table>
@@ -1968,7 +1968,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;callParkMonitor&gt;1&lt;/callParkMonitor&gt;</code>
         <br>
-        <h2 id="showCallHistoryForSelectedLine">showCallHistoryForSelectedLine <a href="#showCallHistoryForSelectedLine" title="Link">link</a></h2>
+        <h2 id="vendorConfig.showCallHistoryForSelectedLine">showCallHistoryForSelectedLine <a href="#vendorConfig.showCallHistoryForSelectedLine" title="Link">link</a></h2>
         When viewing the phone's call history only show calls for the currently selected line.<br>
         <br>
         <table>
@@ -1984,7 +1984,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;showCallHistoryForSelectedLine&gt;0&lt;/showCallHistoryForSelectedLine&gt;</code>
         <br>
-        <h2 id="dialToneFromReleaseKey">dialToneFromReleaseKey <a href="#dialToneFromReleaseKey" title="Link">link</a></h2>
+        <h2 id="vendorConfig.dialToneFromReleaseKey">dialToneFromReleaseKey <a href="#vendorConfig.dialToneFromReleaseKey" title="Link">link</a></h2>
         Provide the new call screen when a user ends a call.<br>
         <br>
         <table>
@@ -2000,7 +2000,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;dialToneFromReleaseKey&gt;0&lt;/dialToneFromReleaseKey&gt;</code>
         <br>
-        <h2 id="markCallAsSpam">markCallAsSpam <a href="#markCallAsSpam" title="Link">link</a></h2>
+        <h2 id="vendorConfig.markCallAsSpam">markCallAsSpam <a href="#vendorConfig.markCallAsSpam" title="Link">link</a></h2>
         Show mark as call as spam soft-key. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <table>
@@ -2016,7 +2016,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;markCallAsSpam&gt;1&lt;/markCallAsSpam&gt;</code>
         <br>
-        <h2 id="lowerYourVoiceAlert">lowerYourVoiceAlert <a href="#lowerYourVoiceAlert" title="Link">link</a></h2>
+        <h2 id="vendorConfig.lowerYourVoiceAlert">lowerYourVoiceAlert <a href="#vendorConfig.lowerYourVoiceAlert" title="Link">link</a></h2>
         Enable an alert when input sound level is too high. <b>7800</b> and <b>8800</b> series only.<br>
         <br>
         <table>
@@ -2032,7 +2032,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;lowerYourVoiceAlert&gt;0&lt;/lowerYourVoiceAlert&gt;</code>
         <br>
-        <h2 id="dfBit">dfBit <a href="#dfBit" title="Link">link</a></h2>
+        <h2 id="vendorConfig.dfBit">dfBit <a href="#vendorConfig.dfBit" title="Link">link</a></h2>
         Set the DF (Don't Fragement) bit in the IP packet header.<br>
         <br>
         <table>
@@ -2048,7 +2048,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;dfBit&gt;0&lt;/dfBit&gt;</code>
         <br>
-        <h2 id="pcPort">pcPort <a href="#pcPort" title="Link">link</a></h2>
+        <h2 id="vendorConfig.pcPort">pcPort <a href="#vendorConfig.pcPort" title="Link">link</a></h2>
         Disable the PC (computer) port.<br>
         <br>
         <table>
@@ -2064,7 +2064,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;pcPort&gt;0&lt;/pcPort&gt;</code>
         <br>
-        <h2 id="spanToPCPort">spanToPCPort <a href="#spanToPCPort" title="Link">link</a></h2>
+        <h2 id="vendorConfig.spanToPCPort">spanToPCPort <a href="#vendorConfig.spanToPCPort" title="Link">link</a></h2>
         Forward packets sent and received on the SW (network) port to the PC (computer) port.<br>
         <br>
         <table>
@@ -2080,7 +2080,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;spanToPCPort&gt;1&lt;/spanToPCPort&gt;</code>
         <br>
-        <h2 id="voiceVlanAccess">voiceVlanAccess <a href="#voiceVlanAccess" title="Link">link</a></h2>
+        <h2 id="vendorConfig.voiceVlanAccess">voiceVlanAccess <a href="#vendorConfig.voiceVlanAccess" title="Link">link</a></h2>
         Allow devices connected to the PC (computer) port to access the voice VLAN.<br>
         <br>
         <table>
@@ -2096,7 +2096,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;voiceVlanAccess&gt;0&lt;/voiceVlanAccess&gt;</code>
         <br>
-        <h2 id="enableCdpSwPort">enableCdpSwPort <a href="#enableCdpSwPort" title="Link">link</a></h2>
+        <h2 id="vendorConfig.enableCdpSwPort">enableCdpSwPort <a href="#vendorConfig.enableCdpSwPort" title="Link">link</a></h2>
         Enable Cisco Discovery Protocol on the SW (network) port.<br>
         <br>
         <table>
@@ -2112,7 +2112,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;enableCdpSwPort&gt;1&lt;/enableCdpSwPort&gt;</code>
         <br>
-        <h2 id="enableCdpPcPort">enableCdpPcPort <a href="#enableCdpPcPort" title="Link">link</a></h2>
+        <h2 id="vendorConfig.enableCdpPcPort">enableCdpPcPort <a href="#vendorConfig.enableCdpPcPort" title="Link">link</a></h2>
         Enable Cisco Discovery Protocol on the PC (computer) port.<br>
         <br>
         <table>
@@ -2128,7 +2128,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;enableCdpPcPort&gt;0&lt;/enableCdpPcPort&gt;</code>
         <br>
-        <h2 id="enableLldpSwPort">enableLldpSwPort <a href="#enableLldpSwPort" title="Link">link</a></h2>
+        <h2 id="vendorConfig.enableLldpSwPort">enableLldpSwPort <a href="#vendorConfig.enableLldpSwPort" title="Link">link</a></h2>
         Enable Link Layer Discovery Protocol on the SW (network) port.<br>
         <br>
         <table>
@@ -2144,7 +2144,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;enableLldpSwPort&gt;1&lt;/enableLldpSwPort&gt;</code>
         <br>
-        <h2 id="enableLldpPcPort">enableLldpPcPort <a href="#enableLldpPcPort" title="Link">link</a></h2>
+        <h2 id="vendorConfig.enableLldpPcPort">enableLldpPcPort <a href="#vendorConfig.enableLldpPcPort" title="Link">link</a></h2>
         Enable Link Layer Discovery Protocol on the PC (computer) port.<br>
         <br>
         <table>
@@ -2160,7 +2160,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;enableLldpPcPort&gt;0&lt;/enableLldpPcPort&gt;</code>
         <br>
-        <h2 id="cdpEnable">cdpEnable <a href="#cdpEnable" title="Link">link</a></h2>
+        <h2 id="vendorConfig.cdpEnable">cdpEnable <a href="#vendorConfig.cdpEnable" title="Link">link</a></h2>
         Enable Cisco Discovery Protocol. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2176,7 +2176,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;cdpEnable&gt;1&lt;/cdpEnable&gt;</code>
         <br>
-        <h2 id="powerNegotiation">powerNegotiation <a href="#powerNegotiation" title="Link">link</a></h2>
+        <h2 id="vendorConfig.powerNegotiation">powerNegotiation <a href="#vendorConfig.powerNegotiation" title="Link">link</a></h2>
         Enable power negotiation when connected to a PoE switch that supports 802.3at (PoE+). The phone may not power-up accessories if it cannot receive enough power.<br>
         <br>
         <table>
@@ -2192,7 +2192,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;powerNegotiation&gt;0&lt;/powerNegotiation&gt;</code>
         <br>
-        <h2 id="eapAuthentication">eapAuthentication <a href="#eapAuthentication" title="Link">link</a></h2>
+        <h2 id="vendorConfig.eapAuthentication">eapAuthentication <a href="#vendorConfig.eapAuthentication" title="Link">link</a></h2>
         Enable port authentication on a switch supports 802.1x.<br>
         <br>
         <table>
@@ -2210,7 +2210,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;eapAuthentication&gt;1&lt;/eapAuthentication&gt;</code>
         <br>
-        <h2 id="accessContacts">accessContacts <a href="#accessContacts" title="Link">link</a></h2>
+        <h2 id="vendorConfig.accessContacts">accessContacts <a href="#vendorConfig.accessContacts" title="Link">link</a></h2>
         Allow access to the phone's contacts. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2228,7 +2228,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;accessContacts&gt;1&lt;/accessContacts&gt;</code>
         <br>
-        <h2 id="accessFavorites">accessFavorites <a href="#accessFavorites" title="Link">link</a></h2>
+        <h2 id="vendorConfig.accessFavorites">accessFavorites <a href="#vendorConfig.accessFavorites" title="Link">link</a></h2>
         Allow access to the phone's favorites. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2246,7 +2246,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;accessFavorites&gt;1&lt;/accessFavorites&gt;</code>
         <br>
-        <h2 id="accessVoicemail">accessVoicemail <a href="#accessVoicemail" title="Link">link</a></h2>
+        <h2 id="vendorConfig.accessVoicemail">accessVoicemail <a href="#vendorConfig.accessVoicemail" title="Link">link</a></h2>
         Allow access to the phone's voicemail. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2262,7 +2262,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;accessVoicemail&gt;1&lt;/accessVoicemail&gt;</code>
         <br>
-        <h2 id="accessApps">accessApps <a href="#accessApps" title="Link">link</a></h2>
+        <h2 id="vendorConfig.accessApps">accessApps <a href="#vendorConfig.accessApps" title="Link">link</a></h2>
         Allow access to the phone's applications. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2278,12 +2278,12 @@
         <br>
         <code class="prettify lang-xml">    &lt;accessApps&gt;1&lt;/accessApps&gt;</code>
         <br>
-        <h2 id="applicationURL">applicationURL <a href="#applicationURL" title="Link">link</a></h2>
+        <h2 id="vendorConfig.applicationURL">applicationURL <a href="#vendorConfig.applicationURL" title="Link">link</a></h2>
         URL to use when the applications button is pressed <b>8821</b> model only. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">    &lt;applicationURL&gt;<i>URL</i>&lt;/applicationURL&gt;</code>
         <br>
-        <h2 id="appButtonTimer">appButtonTimer <a href="#appButtonTimer" title="Link">link</a></h2>
+        <h2 id="vendorConfig.appButtonTimer">appButtonTimer <a href="#vendorConfig.appButtonTimer" title="Link">link</a></h2>
         Time in seconds the applications button must be held down before the phone will access the applications URL. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2297,7 +2297,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;appButtonTimer&gt;0&lt;/appButtonTimer&gt;</code>
         <br>
-        <h2 id="appButtonPriority">appButtonPriority <a href="#appButtonPriority" title="Link">link</a></h2>
+        <h2 id="vendorConfig.appButtonPriority">appButtonPriority <a href="#vendorConfig.appButtonPriority" title="Link">link</a></h2>
         How the phone behaves when applications button is pressed. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2319,7 +2319,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;appButtonPriority&gt;1&lt;/appButtonPriority&gt;</code>
         <br>
-        <h2 id="homeScreen">homeScreen <a href="#homeScreen" title="Link">link</a></h2>
+        <h2 id="vendorConfig.homeScreen">homeScreen <a href="#vendorConfig.homeScreen" title="Link">link</a></h2>
         The default view on the phone's screen. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2335,7 +2335,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;homeScreen&gt;1&lt;/homeScreen&gt;</code>
         <br>
-        <h2 id="sendKeyAction">sendKeyAction <a href="#sendKeyAction" title="Link">link</a></h2>
+        <h2 id="vendorConfig.sendKeyAction">sendKeyAction <a href="#vendorConfig.sendKeyAction" title="Link">link</a></h2>
         The dialing mode the phone uses when the send key is first pressed. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2351,12 +2351,12 @@
         <br>
         <code class="prettify lang-xml">    &lt;sendKeyAction&gt;1&lt;/sendKeyAction&gt;</code>
         <br>
-        <h2 id="specialNumbers">specialNumbers <a href="#specialNumbers" title="Link">link</a></h2>
+        <h2 id="vendorConfig.specialNumbers">specialNumbers <a href="#vendorConfig.specialNumbers" title="Link">link</a></h2>
         Comma separated list of numbers the phone will allow to be dialed even if the keypad is locked. <b>8821</b> model only.<br>
         <br>
         <code class="prettify lang-xml">    &lt;specialNumbers&gt;&lt;/specialNumbers&gt;</code>
         <br>
-        <h2 id="outOfRangeAlert">outOfRangeAlert <a href="#outOfRangeAlert" title="Link">link</a></h2>
+        <h2 id="vendorConfig.outOfRangeAlert">outOfRangeAlert <a href="#vendorConfig.outOfRangeAlert" title="Link">link</a></h2>
         Alert when the phone is out of range of the wireless access point. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2378,7 +2378,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;outOfRangeAlert&gt;1&lt;/outOfRangeAlert&gt;</code>
         <br>
-        <h2 id="scanningMode">scanningMode <a href="#scanningMode" title="Link">link</a></h2>
+        <h2 id="vendorConfig.scanningMode">scanningMode <a href="#vendorConfig.scanningMode" title="Link">link</a></h2>
         Control how the phone scans for access points. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2396,7 +2396,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;scanningMode&gt;2&lt;/scanningMode&gt;</code>
         <br>
-        <h2 id="powerOffWhenCharging">powerOffWhenCharging <a href="#powerOffWhenCharging" title="Link">link</a></h2>
+        <h2 id="vendorConfig.powerOffWhenCharging">powerOffWhenCharging <a href="#vendorConfig.powerOffWhenCharging" title="Link">link</a></h2>
         Automatically power off the phone during charging. <b>8821</b> model only.<br>
         <br>
         <table>
@@ -2428,7 +2428,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;addOnModule idx=&quot;1&quot;&gt;</code>
         <br>
-        <h2 id="deviceType">deviceType <a href="#deviceType" title="Link">link</a></h2>
+        <h2 id="addOnModule.deviceType">deviceType <a href="#addOnModule.deviceType" title="Link">link</a></h2>
         Model of the add-on module. <b>Note</b>: For the 8800 series all modules connected must be of the same type.<br>
         <br>
         <table>
@@ -2458,12 +2458,12 @@
         <br>
         <code class="prettify lang-xml">      &lt;deviceType&gt;<i>TYPE</i>&lt;/deviceType&gt;</code>
         <br>
-        <h2 id="deviceLine">deviceLine <a href="#deviceLine" title="Link">link</a></h2>
+        <h2 id="addOnModule.deviceLine">deviceLine <a href="#addOnModule.deviceLine" title="Link">link</a></h2>
         Number of line keys available, see above for the number of lines.<br>
         <br>
         <code class="prettify lang-xml">      &lt;deviceLine&gt;<i>LINES</i>&lt;/deviceLine&gt;</code>
         <br>
-        <h2 id="loadInformation">loadInformation <a href="#loadInformation" title="Link">link</a></h2>
+        <h2 id="addOnModule.loadInformation">loadInformation <a href="#addOnModule.loadInformation" title="Link">link</a></h2>
         Name of the firmware load file without the <code class="literal">.loads</code> file extension, only required for the <b>7914</b>, <b>7915</b> and <b>7916</b> models.<br>
         <br>
         <code class="prettify lang-xml">      &lt;loadInformation&gt;<i>LOADS FILE</i>&lt;/loadInformation&gt;
@@ -2472,19 +2472,19 @@
   &lt;versionStamp&gt;d902ed5a-c1e5-4233-b1d6-a960d53d1c3a&lt;/versionStamp&gt;
   &lt;userLocale&gt;</code>
         <br>
-        <h2 id="userLocale-name">name <a href="#userLocale-name" title="Link">link</a></h2>
-        The downloadable user locale allows the messages displayed by the phone to be in in the local language. If you do not have the locale file use the default of <code class="literal">English_United_States</code>. See <a href="network-locale.html">Network Locale</a> for examples.<br>
+        <h2 id="userLocale.name">name <a href="#userLocale.name" title="Link">link</a></h2>
+        The downloadable user locale allows the messages displayed by the phone to be in in the local language. If you do not have the locale file use the default of <code class="literal">English_United_States</code>. See <a href="user-locale.html">User Locale</a> for examples.<br>
         <br>
         <code class="prettify lang-xml">    &lt;name&gt;<i>USER LOCALE NAME</i>&lt;/name&gt;
     &lt;uid&gt;1&lt;/uid&gt;
     &lt;langCode&gt;&lt;/langCode&gt;</code>
         <br>
-        <h2 id="userLocale-version">version <a href="#userLocale-version" title="Link">link</a></h2>
+        <h2 id="userLocale.version">version <a href="#userLocale.version" title="Link">link</a></h2>
         User locale version, the phone will only download a new locale when the version changes.<br>
         <br>
         <code class="prettify">    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;</code>
         <br>
-        <h2 id="winCharSet">winCharSet <a href="#winCharSet" title="Link">link</a></h2>
+        <h2 id="userLocale.winCharSet">winCharSet <a href="#userLocale.winCharSet" title="Link">link</a></h2>
         Character set used by the locale, either <code class="literal">iso-8859-1</code> or <code class="literal">utf-8</code>.<br>
         <br>
         <code class="prettify lang-xml">    &lt;winCharSet&gt;utf-8&lt;/winCharSet&gt;
@@ -2492,19 +2492,19 @@
   &lt;networkLocale&gt;<i>NETWORK LOCALE NAME</i>&lt;/networkLocale&gt;
   &lt;networkLocaleInfo&gt;</code>
         <br>
-        <h2 id="networkLocale-name">name <a href="#networkLocale-name" title="Link">link</a></h2>
-        The downloadable network locale allows the tones (dial-tone, ringing, busy etc.) to be those specified by the local phone network. If you do not have the locale file use the default of <code class="literal">United_States</code>. See <a href="user-locale.html">User Locale</a> for examples.<br>
+        <h2 id="networkLocale.name">name <a href="#networkLocale.name" title="Link">link</a></h2>
+        The downloadable network locale allows the tones (dial-tone, ringing, busy etc.) to be those specified by the local phone network. If you do not have the locale file use the default of <code class="literal">United_States</code>. See <a href="network-locale.html">Network Locale</a> for examples.<br>
         <br>
         <code class="prettify lang-xml">    &lt;name&gt;<i>NETWORK LOCALE NAME</i>&lt;/name&gt;</code>
         <br>
-        <h2 id="networkLocale-version">version <a href="#networkLocale-version" title="Link">link</a></h2>
+        <h2 id="networkLocale.version">version <a href="#networkLocale.version" title="Link">link</a></h2>
         Network locale version, the phone will only download a new locale when the version changes.<br>
         <br>
         <code class="prettify">    &lt;version&gt;<i>VERSION</i>&lt;/version&gt;
   &lt;/networkLocaleInfo&gt;</code>
         <br>
         <h2 id="deviceSecurityMode">deviceSecurityMode <a href="#deviceSecurityMode" title="Link">link</a></h2>
-        Specifies which cipher to use when connecting using TLS as the &lt;<code class="tag">transportLayerProtocol</code>&gt;. See <a href="itl-file-tlv.html">Device Security</a> for more information.<br>
+        Specifies which cipher to use when connecting using TLS as the &lt;<code class="tag">transportLayerProtocol</code>&gt;. See <a href="device-security.html">Device Security</a> for more information.<br>
         <br>
         <table>
           <tbody>
@@ -2522,7 +2522,7 @@
         <code class="prettify lang-xml">  &lt;deviceSecurityMode&gt;1&lt;/deviceSecurityMode&gt;</code>
         <br>
         <h2 id="authenticationURL">authenticationURL <a href="#authenticationURL" title="Link">link</a></h2>
-        URL to use when checking whether XML posted to the phone's <a href="cgi-execute-xml.html">CGI Execute</a> URL will be accepted. Leave blank to accept all requests. Maximum length of 255 characters.<br>
+        URL to use when checking whether XML posted to the phone's <a href="cgi-execute.html">CGI Execute</a> URL will be accepted. Leave blank to accept all requests. Maximum length of 255 characters.<br>
         <br>
         <code class="prettify lang-xml">  &lt;authenticationURL&gt;<i>URL</i>&lt;/authenticationURL&gt;</code>
         <br>
@@ -2601,7 +2601,7 @@
         <br>
         <code  class="prettify lang-xml">  &lt;phoneServices useHTTPS=&quot;false&quot;&gt;</code>
         <br>
-        <h2 id="provisioning">provisioning <a href="#provisioning" title="Link">link</a></h2>
+        <h2 id="phoneServices.provisioning">provisioning <a href="#phoneServices.provisioning" title="Link">link</a></h2>
         Tells the phone whether to ignore, override or merge the service URLs specified in &lt;<code class="tag">phoneServices</code>&gt;.<br>
         <br>
         <table>
@@ -2619,7 +2619,7 @@
         <br>
         <code class="prettify lang-xml">    &lt;provisioning&gt;2&lt;/provisioning&gt;</code>
         <br>
-        <h2 id="phoneService">phoneService <a href="#phoneService" title="Link">link</a></h2>
+        <h2 id="phoneServices.phoneService">phoneService <a href="#phoneServices.phoneService" title="Link">link</a></h2>
         Specifies a phone service URL. Maximum length of 255 characters.<br>
         <br>
         <table>
@@ -2664,7 +2664,7 @@
   &lt;/phoneServices&gt;</code>
         <br>
         <h2 id="transportLayerProtocol">transportLayerProtocol <a href="#transportLayerProtocol" title="Link">link</a></h2>
-        What protocol the phone will use to connect to Asterisk. Only use <code class="literal">1</code> (TCP) or <code class="literal">3</code> (TLS), as the phone causes SIP retransmit errors when using UDP. <b>Note</b>: &lt;<code class="tag">deviceSecurityMode</code>&gt; must be set to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) to enable TLS as well as configuring <a href="itl-file-tlv.html">Device Security</a>.<br>
+        What protocol the phone will use to connect to Asterisk. Only use <code class="literal">1</code> (TCP) or <code class="literal">3</code> (TLS), as the phone causes SIP retransmit errors when using UDP. <b>Note</b>: &lt;<code class="tag">deviceSecurityMode</code>&gt; must be set to either <code class="literal">2</code> (Authenticated) or <code class="literal">3</code> (Encrypted) to enable TLS as well as configuring <a href="device-security.html">Device Security</a>.<br>
         <br>
         <table>
           <tbody>
@@ -2732,7 +2732,7 @@
         <code class="prettify lang-xml">  &lt;blfAudibleAlertSettingOfBusyStation&gt;0&lt;/blfAudibleAlertSettingOfBusyStation&gt;</code>
         <br>
         <h2 id="dndCallAlert">dndCallAlert <a href="#dndCallAlert" title="Link">link</a></h2>
-        How the phone displays an incoming call when DND is enabled and <code class="literal">dndbusy</code> is set to <code class="literal">no</code> in <a href="sip-conf.html">sip.conf</a>.<br>
+        How the phone displays an incoming call when DND is enabled and <code class="literal">dndbusy</code> is set to <code class="literal">no</code> in <a href="sip-peers.html">sip.conf</a>.<br>
         <br>
         <table>
           <tbody>
@@ -2795,17 +2795,17 @@
         <code class="prettify lang-xml">  &lt;capfAuthMode&gt;1&lt;/capfAuthMode&gt;
   &lt;capfList&gt;</code>
         <br>
-        <h2 id="capfList-capf">capf <a href="#capfList-capf" title="Link">link</a></h2>
+        <h2 id="capfList.capf">capf <a href="#capfList.capf" title="Link">link</a></h2>
         Specifies the host name or IP address and port of the server running the Certificate Authentication Proxy Function. Up to <code class="literal">5</code> members can be defined.<br>
         <br>
         <code class="prettify lang-xml">    &lt;capf&gt;</code>
         <br>
-        <h2 id="capf-phonePort">port <a href="#capf-phonePort" title="Link">link</a></h2>
+        <h2 id="capfList.capf.phonePort">phonePort <a href="#capfList.capf.phonePort" title="Link">link</a></h2>
         Port to connect to on the server running the Certificate Authentication Proxy Function.<br>
         <br>
         <code class="prettify lang-xml">      &lt;phonePort&gt;3804&lt;/phonePort&gt;</code>
         <br>
-        <h2 id="capf-processNodeName">processNodeName <a href="#capf-processNodeName" title="Link">link</a></h2>
+        <h2 id="capfList.capf.processNodeName">processNodeName <a href="#capfList.capf.processNodeName" title="Link">link</a></h2>
         Host name or IP address of the server running the Certificate Authentication Proxy Function.<br>
         <br>
         <code class="prettify lang-xml">      &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;

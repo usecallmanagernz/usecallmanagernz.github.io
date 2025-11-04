@@ -1,118 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Application Dial Rules</title>
+    <title>Redirect</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta http-equiv="Refresh" content="0; url=application-dial-rules.html">
+    <link rel="canonical" href="application-dial-rules.html">
     <link rel="shortcut icon" href="images/logo.svg">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1">
-    <link rel="stylesheet" href="includes/theme.css">
-    <link rel="stylesheet" href="includes/prettify.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="includes/prettify.js"></script>
-    <script>
-      jQuery(window).on("load", function () {
-          prettyPrint();
-      });
-    </script>
   </head>
-  <body>
-    <header>
-      <a href="/"><img src="images/logo.svg" alt=""></a>
-      <h2>&lt;<span>proxy</span>&gt;</h2><h1><span>USECALLMANAGER</span>.nz</h1><h2>&lt;/<span>proxy</span>&gt;</h2>
-    </header>
-    <main>
-      <nav>
-        <ul>
-          <li><a href="documentation-overview.html"><span class="icon">home</span> Documentation Overview</a></li>
-          <li><a href="patching-asterisk.html"><span class="icon">build</span> Patching Asterisk</a></li>
-          <li><a href="change-log.html"><span class="icon">news</span> Change Log</a></li>
-        </ul>
-        <ul>
-          <li><h3>Network Configuration</h3></li>
-          <li><a href="dhcpd-conf.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
-          <li><a href="apache-conf.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
-          <li><a href="tftpd-conf.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
-        </ul>
-        <ul>
-          <li><h3>Phone Configuration</h3></li>
-          <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
-          <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
-          <li><span class="icon selected">bluetooth</span> <b>Application Dial Rules</b></li>
-          <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
-          <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
-          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
-          <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
-          <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
-          <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
-          <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
-          <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
-          <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
-          <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
-          <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
-          <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
-        </ul>
-        <ul>
-          <li><h3>Asterisk Configuration</h3></li>
-          <li><a href="sip-conf.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
-          <li><a href="sip-notify-conf.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
-          <li><a href="extensions-conf.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
-          <li><a href="res-parking-conf.html"><span class="icon">local_parking</span> Call Parking</a></li>
-          <li><a href="sippeer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
-          <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
-          <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
-          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
-        </ul>
-        <ul>
-          <li><h3>XML Services</h3></li>
-          <li><a href="phone-services-xml.html"><span class="icon">settings</span> Phone Services</a></li>
-          <li><a href="cgi-execute-xml.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
-        </ul>
-        <ul>
-          <li><h3>Additional Features</h3></li>
-          <li><a href="as-feature-events.html"><span class="icon">extension</span> AS Feature Events</a></li>
-        </ul>
-      </nav>
-      <article>
-        <h1>Application Dial Rules</h1>
-        The list of transformation rules applied to numbers dialed through either the phone's received call history or via the bluetooth address book is specified in a file called <code class="literal">AppDialRules.xml</code>. Rules will not be applied if the number is edited before dialing, <b>7800</b> and <b>8800</b> series only.<br>
-        <br>
-        <code class="prettify lang-xml">&lt;DialRules&gt;</code>
-        <br>
-        <h2 id="DialRule">DialRule <a href="#DialRule" title="Link">link</a></h2>
-        Specifies a number prefix rule.<br>
-        <br>
-        <table>
-          <tbody>
-            <tr>
-              <td><b>BeginsWith</b></td>
-              <td>Digits at beginning part of the number to match</td>
-            </tr>
-            <tr>
-              <td><b>NumDigits</b></td>
-              <td>Total length of the number being dialed</td>
-            </tr>
-            <tr>
-              <td><b>DigitsToRemove</b></td>
-              <td>Number of digits to remove from the beginning of the number</td>
-            </tr>
-            <tr>
-              <td><b>PrefixWith</b></td>
-              <td>Digits to prefix the number with</td>
-            </tr>
-          </tbody>
-        </table>
-        <br>
-        <code class="prettify lang-xml">  &lt;DialRule BeginsWith=&quot;+&quot; NumDigits=&quot;11&quot; DigitsToRemove=&quot;1&quot; PrefixWith=&quot;00&quot; /&gt;
-  &lt;DialRule BeginsWith=&quot;+&quot; NumDigits=&quot;12&quot; DigitsToRemove=&quot;1&quot; PrefixWith=&quot;00&quot; /&gt;
-  &lt;DialRule BeginsWith=&quot;+&quot; NumDigits=&quot;13&quot; DigitsToRemove=&quot;1&quot; PrefixWith=&quot;00&quot; /&gt;
-  ...
-&lt;/DialRules&gt;</code>
-      </article>
-    </main>
-    <footer>
-      <span class="icon">copyright</span> Gareth Palmer and individual contributors. Documentation distributed under <a href="LICENSE">CC BY 4.0</a>.
-    </footer>
-  </body>
+  <body></body>
 </html>

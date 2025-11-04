@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FreePBX Integration</title>
+    <title>SIP Notify Commands</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="shortcut icon" href="images/logo.svg">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1">
     <link rel="stylesheet" href="includes/theme.css">
-    <link rel="stylesheet" href="includes/prettify.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="includes/prettify.js"></script>
-    <script src="includes/lang-other.js"></script>
-    <script>
-      jQuery(window).on("load", function () {
-          prettyPrint();
-      });
-    </script>
   </head>
   <body>
     <header>
@@ -57,13 +49,13 @@
         <ul>
           <li><h3>Asterisk Configuration</h3></li>
           <li><a href="sip-peers.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
-          <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><span class="icon selected">settings_power</span> <b>SIP Notify Commands</b></li>
           <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
           <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
           <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
           <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
-          <li><span class="icon selected">view_kanban</span> <b>FreePBX Integration</b></li>
+          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
         </ul>
         <ul>
           <li><h3>XML Services</h3></li>
@@ -76,14 +68,17 @@
         </ul>
       </nav>
       <article>
-        <h1>FreePBX Integration</h1>
-        The examples shown on this site are for an Asterisk install that uses the default configuration files. If you are using FreePBX (<a href="https://www.freepbx.org"><span class="icon">open_in_browser</span> www.freepbx.org</a>) to provision Cisco phones then you will need to perform additional steps to apply the device specific configuration options.<br>
+        <h1>SIP Notify Commands</h1>
+        New sip notify commands are provided in <code class="literal">sip_notify.conf</code> which allow for the restarting or resetting of phones, see <a href="command-line.html">Command Line</a> for more information. Entries now also support ${<code class="variable">VARIABLE</code>} expansion.<br>
         <br>
-        Listed below are external guides created by other people that may be useful. <b>Note</b>: I do not use FreePBX and thus cannot attest to the accuracy of the information provided there.<br>
+        <h2 id="cisco-restart">cisco-restart <a href="#cisco-restart" title="Link">link</a></h2>
+        The phone will do a quick restart which will re-download SEPMAC.cnf.xml, dial template, soft keys, feature policy and ring-tone.<br>
         <br>
-        <a href="https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323/Patching+Asterisk+11+for+Cisco+phones"><span class="icon">open_in_browser</span> https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323</a> &mdash; The FreePBX wiki has a slightly outdated guide on how to patch Asterisk 11 and also has some examples of the additional configuration needed.<br>
+        <h2 id="cisco-reset">cisco-reset <a href="#cisco-reset" title="Link">link</a></h2>
+        The phone will do a full reset, equivalent to powering the phone off and on again.<br>
         <br>
-        <a href="https://christai.com/index.php?option=com_content&amp;view=category&amp;id=17&amp;Itemid=1545"><span class="icon">open_in_browser</span> https://christai.com/index.php</a> &mdash; This user has written guides on how to install the patch for Asterisk 20 and FreePBX 17 as well as a basic configuration guide.
+        <h2 id="cisco-prt-report">cisco-prt-report <a href="#cisco-prt-report" title="Link">link</a></h2>
+        The phone will upload a problem report to the URL set in &lt;<code class="tag">problemReportUploadURL</code>&gt;.<br>
       </article>
     </main>
     <footer>

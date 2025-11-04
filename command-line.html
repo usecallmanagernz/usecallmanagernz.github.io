@@ -31,43 +31,43 @@
         </ul>
         <ul>
           <li><h3>Network Configuration</h3></li>
-          <li><a href="dhcpd-conf.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
-          <li><a href="apache-conf.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
-          <li><a href="tftpd-conf.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
+          <li><a href="dhcp-options.html"><span class="icon">settings_ethernet</span> DHCP Options</a></li>
+          <li><a href="http-provisioning.html"><span class="icon">file_download</span> HTTP Provisioning</a></li>
+          <li><a href="tftp-provisioning.html"><span class="icon">file_download</span> TFTP Provisioning</a></li>
         </ul>
         <ul>
           <li><h3>Phone Configuration</h3></li>
           <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
-          <li><a href="dial-template-xml.html"><span class="icon">dialpad</span> Dial Templates</a></li>
-          <li><a href="app-dial-rules-xml.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
-          <li><a href="soft-keys-xml.html"><span class="icon">power_input</span> Soft Keys</a></li>
-          <li><a href="line-keys-xml.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
-          <li><a href="feature-policy-xml.html"><span class="icon">fact_check</span> Feature Policy</a></li>
+          <li><a href="dial-template.html"><span class="icon">dialpad</span> Dial Template</a></li>
+          <li><a href="application-dial-rules.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><a href="soft-keys.html"><span class="icon">power_input</span> Soft Keys</a></li>
+          <li><a href="line-keys.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
+          <li><a href="feature-policy.html"><span class="icon">fact_check</span> Feature Policy</a></li>
           <li><a href="network-locale.html"><span class="icon">language</span> Network Locale</a></li>
           <li><a href="user-locale.html"><span class="icon">face</span> User Locale</a></li>
           <li><a href="load-information.html"><span class="icon">file_upload</span> Firmware Load Information</a></li>
-          <li><a href="image-list-xml.html"><span class="icon">wallpaper</span> Background Images</a></li>
-          <li><a href="ring-list-xml.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
-          <li><a href="itl-file-tlv.html"><span class="icon">security</span> Device Security</a></li>
+          <li><a href="background-images.html"><span class="icon">wallpaper</span> Background Images</a></li>
+          <li><a href="ring-tones.html"><span class="icon">ring_volume</span> Ring Tones</a></li>
+          <li><a href="device-security.html"><span class="icon">security</span> Device Security</a></li>
           <li><a href="trust-verification.html"><span class="icon">verified</span> Trust Verification</a></li>
           <li><a href="certificate-enrollment.html"><span class="icon">card_membership</span> Certificate Enrollment</a></li>
-          <li><a href="vpn-group.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
+          <li><a href="vpn-connection.html"><span class="icon">vpn_key</span> VPN Connection</a></li>
         </ul>
         <ul>
           <li><h3>Asterisk Configuration</h3></li>
-          <li><a href="sip-conf.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
-          <li><a href="sip-notify-conf.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
-          <li><a href="extensions-conf.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
-          <li><a href="res-parking-conf.html"><span class="icon">local_parking</span> Call Parking</a></li>
-          <li><a href="sippeer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><a href="sip-peers.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
+          <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
+          <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
+          <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
+          <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
           <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><span class="icon selected">keyboard_arrow_right</span> <b>Command Line</b></li>
           <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
         </ul>
         <ul>
           <li><h3>XML Services</h3></li>
-          <li><a href="phone-services-xml.html"><span class="icon">settings</span> Phone Services</a></li>
-          <li><a href="cgi-execute-xml.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
+          <li><a href="phone-services.html"><span class="icon">settings</span> Phone Services</a></li>
+          <li><a href="cgi-execute.html"><span class="icon">phone_forwarded</span> CGI Execute</a></li>
         </ul>
         <ul>
           <li><h3>Additional Features</h3></li>
@@ -76,7 +76,7 @@
       </nav>
       <article>
         <h1>Command Line</h1>
-        The call forward, do not disturb and hunt-group login state of a phone can be viewed and changed using the Asterisk command line. These values can also be changed using <a href="sippeer-options.html">SIPPEER options</a>.<br>
+        The call forward, do not disturb and hunt-group login state of a phone can be viewed and changed using the Asterisk command line. These values can also be changed using <a href="sip-peer-options.html">SIPPEER options</a>.<br>
         <br>
         <h2 id="sip-callforward-on">sip callforward on <a href="#sip-callforward-on" title="Link">link</a></h2>
         Sets the call forwarding target.<br>
@@ -116,19 +116,19 @@ Hunt Group logout for '301'</code>
         <br>
         <div class="horizontal-rule"></div>
         <h2 id="sip-notify-cisco-restart">sip notify cisco-restart <a href="#sip-notify-cisco-restart" title="Link">link</a></h2>
-        Does a quick restart of the phone. See <a href="sip-notify-conf.html">SIP Notify Commands</a> for more information.<br>
+        Does a quick restart of the phone. See <a href="sip-notify-commands.html">SIP Notify Commands</a> for more information.<br>
         <br>
         <code class="command-line"><span class="prompt">asterisk*CLI&gt;</span> sip notify cisco-restart 301
 Sending NOTIFY of type 'cisco-restart' to '301'</code>
         <br>
         <h2 id="sip-notify-cisco-reset">sip notify cisco-reset <a href="#sip-notify-cisco-reset" title="Link">link</a></h2>
-        Does full reset of the phone. See <a href="sip-notify-conf.html">SIP Notify Commands</a> for more information.<br>
+        Does full reset of the phone. See <a href="sip-notify-commands.html">SIP Notify Commands</a> for more information.<br>
         <br>
         <code class="command-line"><span class="prompt">asterisk*CLI&gt;</span> sip notify cisco-reset 301
 Sending NOTIFY of type 'cisco-reset to '301'</code>
         <br>
         <h2 id="sip-notify-cisco-prt-report">sip notify cisco-prt-report <a href="#sip-notify-cisco-prt-report" title="Link">link</a></h2>
-        Tell the phone to upload a problem report. See <a href="phone-services-xml.html#problemReportUploadURL">Phone Services</a> for more information.<br>
+        Tell the phone to upload a problem report. See <a href="phone-services.html#problemReportUploadURL">Phone Services</a> for more information.<br>
         <br>
         <code class="command-line"><span class="prompt">asterisk*CLI&gt;</span> sip notify cisco-prt-report 301
 Sending NOTIFY of type 'cisco-prt-report to '301'</code>

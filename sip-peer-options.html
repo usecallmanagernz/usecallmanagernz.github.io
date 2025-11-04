@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FreePBX Integration</title>
+    <title>SIPPEER Options</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="shortcut icon" href="images/logo.svg">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="includes/prettify.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="includes/prettify.js"></script>
-    <script src="includes/lang-other.js"></script>
+    <script src="includes/lang-astexten.js"></script>
     <script>
       jQuery(window).on("load", function () {
           prettyPrint();
@@ -60,10 +60,10 @@
           <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
           <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
           <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
-          <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
+          <li><span class="icon selected">code</span> <b>SIPPEER Options</b></li>
           <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
-          <li><span class="icon selected">view_kanban</span> <b>FreePBX Integration</b></li>
+          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
         </ul>
         <ul>
           <li><h3>XML Services</h3></li>
@@ -76,14 +76,68 @@
         </ul>
       </nav>
       <article>
-        <h1>FreePBX Integration</h1>
-        The examples shown on this site are for an Asterisk install that uses the default configuration files. If you are using FreePBX (<a href="https://www.freepbx.org"><span class="icon">open_in_browser</span> www.freepbx.org</a>) to provision Cisco phones then you will need to perform additional steps to apply the device specific configuration options.<br>
+        <h1>SIPPEER Options</h1>
+        New options have been added to the <code class="literal">SIPPEER</code> function that reflect the current status of call-forwarding, do not disturb and hunt-group login. Writing to the function will automatically update the phone's display. These settings can also be changed using the <a href="command-line.html">command line</a> interface. Read-only information about the registered device is also provided.<br>
         <br>
-        Listed below are external guides created by other people that may be useful. <b>Note</b>: I do not use FreePBX and thus cannot attest to the accuracy of the information provided there.<br>
+        <h2 id="callforward">callforward <a href="#callforward" title="Link">link</a></h2>
+        Contains the call-forwarding target.<br>
         <br>
-        <a href="https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323/Patching+Asterisk+11+for+Cisco+phones"><span class="icon">open_in_browser</span> https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323</a> &mdash; The FreePBX wiki has a slightly outdated guide on how to patch Asterisk 11 and also has some examples of the additional configuration needed.<br>
+        <code class="prettify lang-astexten">; Show the current target
+exten =&gt; _X.,1,NoOp(Call Forward: ${SIPPEER(${CHANNEL(peername)},callforward)})
+
+; Set call forwarding target
+exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},callforward)=${TARGET});
+
+; Clear call forwarding target
+exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},callforward)=);</code>
         <br>
-        <a href="https://christai.com/index.php?option=com_content&amp;view=category&amp;id=17&amp;Itemid=1545"><span class="icon">open_in_browser</span> https://christai.com/index.php</a> &mdash; This user has written guides on how to install the patch for Asterisk 20 and FreePBX 17 as well as a basic configuration guide.
+        <h2 id="donotdisturb">donotdisturb <a href="#donotdisturb" title="Link">link</a></h2>
+        Whether the phone has set do not disturb or not.<br>
+        <br>
+        <code class="prettify lang-astexten">; Show the current status
+exten =&gt; _X.,1,NoOp(Do Not Disturb: ${SIPPEER(${CHANNEL(peername)},donotdisturb)})
+
+; Enables do not disturb
+exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},donotdisturb)=yes);
+
+; Disables do not disutrb
+exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},donotdisturb)=no);</code>
+        <br>
+        <h2 id="huntgroup">huntgroup <a href="#huntgroup" title="Link">link</a></h2>
+        Whether the phone has logged into the hunt-group.<br>
+        <br>
+        <code class="prettify lang-astexten">; Show the current status
+exten =&gt; _X.,1,NoOp(Hunt Group Login: ${SIPPEER(${CHANNEL(peername)},huntgroup)})
+
+; Login to hunt group
+exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=yes);
+
+; Logout from hunt group
+exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=no);</code>
+        <br>
+        <h2 id="vmexten">vmexten <a href="#vmexten" title="Link">link</a></h2>
+        The <code class="literal">vmexten</code> configured for the phone. <b>Note</b>: this item is read-only.<br>
+        <br>
+        <code class="prettify lang-astexten">; Show the vmexten
+exten =&gt; _X.,1,NoOp(VM extension: ${SIPPEER(${CHANNEL(peername)},vmetxen)})</code>
+        <br>
+        <h2 id="regcallid">regcallid <a href="#regcallid" title="Link">link</a></h2>
+        The SIP Call-ID of the REGISTER dialog, used when restaring or resetting the phone via <a href="sip-notify-commands.html">SIP Notify Commands</a>. <b>Note</b>: this item is read-only.<br>
+        <br>
+        <code class="prettify lang-astexten">; Show the REGISTER Call-ID
+exten =&gt; _X.,1,NoOp(Register Call-ID: ${SIPPEER(${CHANNEL(peername)},regcallid)})</code>
+        <br>
+        <h2 id="ciscodevicename">ciscodevicename <a href="#ciscodevicename" title="Link">link</a></h2>
+        The device name provided in the Contact header when the phone registered. <b>Note</b>: this item is read-only.<br>
+        <br>
+        <code class="prettify lang-astexten">; Show the Device Name
+exten =&gt; _X.,1,NoOp(Device Name: ${SIPPEER(${CHANNEL(peername)},ciscodevicename)})</code>
+        <br>
+        <h2 id="ciscolineindex">ciscolineindex <a href="#ciscolineindex" title="Link">link</a></h2>
+        The line index assigned to the phone. Used to determine if the peer has been registered as a secondary line. <b>Note</b>: this item is read-only.<br>
+        <br>
+        <code class="prettify lang-astexten">; Show the Line Index
+exten =&gt; _X.,1,NoOp(Line Index: ${SIPPEER(${CHANNEL(peername)},ciscolineindex)})</code>
       </article>
     </main>
     <footer>

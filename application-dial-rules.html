@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FreePBX Integration</title>
+    <title>Application Dial Rules</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="shortcut icon" href="images/logo.svg">
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="includes/prettify.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="includes/prettify.js"></script>
-    <script src="includes/lang-other.js"></script>
     <script>
       jQuery(window).on("load", function () {
           prettyPrint();
@@ -40,7 +39,7 @@
           <li><h3>Phone Configuration</h3></li>
           <li><a href="sepmac-cnf-xml.html"><span class="icon">settings_phone</span> SEPMAC.cnf.xml</a></li>
           <li><a href="dial-template.html"><span class="icon">dialpad</span> Dial Template</a></li>
-          <li><a href="application-dial-rules.html"><span class="icon">bluetooth</span> Application Dial Rules</a></li>
+          <li><span class="icon selected">bluetooth</span> <b>Application Dial Rules</b></li>
           <li><a href="soft-keys.html"><span class="icon">power_input</span> Soft Keys</a></li>
           <li><a href="line-keys.html"><span class="icon">format_list_bulleted</span> Line Keys</a></li>
           <li><a href="feature-policy.html"><span class="icon">fact_check</span> Feature Policy</a></li>
@@ -63,7 +62,7 @@
           <li><a href="sip-peer-options.html"><span class="icon">code</span> SIPPEER Options</a></li>
           <li><a href="rtp-streaming.html"><span class="icon">volume_up</span> RTP Streaming</a></li>
           <li><a href="command-line.html"><span class="icon">keyboard_arrow_right</span> Command Line</a></li>
-          <li><span class="icon selected">view_kanban</span> <b>FreePBX Integration</b></li>
+          <li><a href="freepbx-integration.html"><span class="icon">view_kanban</span> FreePBX Integration</a></li>
         </ul>
         <ul>
           <li><h3>XML Services</h3></li>
@@ -76,14 +75,40 @@
         </ul>
       </nav>
       <article>
-        <h1>FreePBX Integration</h1>
-        The examples shown on this site are for an Asterisk install that uses the default configuration files. If you are using FreePBX (<a href="https://www.freepbx.org"><span class="icon">open_in_browser</span> www.freepbx.org</a>) to provision Cisco phones then you will need to perform additional steps to apply the device specific configuration options.<br>
+        <h1>Application Dial Rules</h1>
+        The list of transformation rules applied to numbers dialed through either the phone's received call history or via the bluetooth address book is specified in a file called <code class="literal">AppDialRules.xml</code>. Rules will not be applied if the number is edited before dialing, <b>7800</b> and <b>8800</b> series only.<br>
         <br>
-        Listed below are external guides created by other people that may be useful. <b>Note</b>: I do not use FreePBX and thus cannot attest to the accuracy of the information provided there.<br>
+        <code class="prettify lang-xml">&lt;DialRules&gt;</code>
         <br>
-        <a href="https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323/Patching+Asterisk+11+for+Cisco+phones"><span class="icon">open_in_browser</span> https://sangomakb.atlassian.net/wiki/spaces/FP/pages/11862323</a> &mdash; The FreePBX wiki has a slightly outdated guide on how to patch Asterisk 11 and also has some examples of the additional configuration needed.<br>
+        <h2 id="DialRule">DialRule <a href="#DialRule" title="Link">link</a></h2>
+        Specifies a number prefix rule.<br>
         <br>
-        <a href="https://christai.com/index.php?option=com_content&amp;view=category&amp;id=17&amp;Itemid=1545"><span class="icon">open_in_browser</span> https://christai.com/index.php</a> &mdash; This user has written guides on how to install the patch for Asterisk 20 and FreePBX 17 as well as a basic configuration guide.
+        <table>
+          <tbody>
+            <tr>
+              <td><b>BeginsWith</b></td>
+              <td>Digits at beginning part of the number to match</td>
+            </tr>
+            <tr>
+              <td><b>NumDigits</b></td>
+              <td>Total length of the number being dialed</td>
+            </tr>
+            <tr>
+              <td><b>DigitsToRemove</b></td>
+              <td>Number of digits to remove from the beginning of the number</td>
+            </tr>
+            <tr>
+              <td><b>PrefixWith</b></td>
+              <td>Digits to prefix the number with</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <code class="prettify lang-xml">  &lt;DialRule BeginsWith=&quot;+&quot; NumDigits=&quot;11&quot; DigitsToRemove=&quot;1&quot; PrefixWith=&quot;00&quot; /&gt;
+  &lt;DialRule BeginsWith=&quot;+&quot; NumDigits=&quot;12&quot; DigitsToRemove=&quot;1&quot; PrefixWith=&quot;00&quot; /&gt;
+  &lt;DialRule BeginsWith=&quot;+&quot; NumDigits=&quot;13&quot; DigitsToRemove=&quot;1&quot; PrefixWith=&quot;00&quot; /&gt;
+  ...
+&lt;/DialRules&gt;</code>
       </article>
     </main>
     <footer>
