@@ -154,7 +154,7 @@
         <code class="command-line"><span class="prompt">~/certutils-X.X$</span> sudo ./tlvfile --build /var/lib/tftpboot/CTLSEP58971ECC97C1.tlv --sast /etc/ssl/private/sast.pem \
   --app-server /etc/apache2/ssl-certs/apache-1.pem --app-server /etc/apache2/ssl-certs/apache-2.pem --filename CTLFile.tlv</code>
         <br>
-        <b>4.</b> Optionally, use HTTPS provisioning for SEPMAC.cnf.xml and signing for the other configuration files. <b>Note</b>: the certificate used to verify the HTTPS connection must use an EC (Elliptic Curve) key.<br>
+        <b>4.</b> Optionally, use HTTPS provisioning for SEPMAC.cnf.xml and signing for the other configuration files. <b>Note</b>: the certificate used to verify the HTTPS connection must use an EC (Elliptic Curve) key and have a version of <code class="literal">1.1</code>.<br>
         <br>
         <code class="command-line"><span class="prompt">~/certutils-X.X$</span> sudo ./tlvfile --build /var/lib/tftpboot/ITLFile.tlv --version 1.1 --sast /etc/ssl/private/sast.pem \
   --ccm /etc/asterisk/keys/asterisk.pem --tftp /etc/apache2/ssl-certs/apache-ec.pem</code>
@@ -199,7 +199,7 @@
   --filename Desktops/320x196x4/Logo_Preview.png.sgn</code>
         <br>
         <h2 id="enccnf">enccnf <a href="#enccnf" title="Link">link</a></h2>
-        <code class="literal">enccnf</code> is used to build or parse <code class="literal">.enc.sgn</code> files which are encrypted SEPMAC.cnf.xml phone configuration file and signed by a certificate with the <code class="literal">TFTP</code> role. The public key from the phone's MIC or LSC is used to encrypt the file, see <a href="certificate-enrollment.html">Certificate Enrollment</a> for more information. <b>Note</b>: <code class="literal">enccnf</code> will delete the <code class="literal">.cnf.xml</code> file after creating the <code class="literal">.sgn</code> and <code class="literal">.enc.sgn</code> file.<br>
+        <code class="literal">enccnf</code> is used to build or parse <code class="literal">.enc.sgn</code> files which is an encrypted SEPMAC.cnf.xml phone configuration file that has a signature from a certificate with the <code class="literal">TFTP</code> role. The public key from the phone's MIC or LSC is used to encrypt the file, see <a href="certificate-enrollment.html">Certificate Enrollment</a> for more information. <b>Note</b>: <code class="literal">enccnf</code> will delete the <code class="literal">.cnf.xml</code> file after creating the <code class="literal">.sgn</code> and <code class="literal">.enc.sgn</code> file.<br>
         <br>
         <code class="command-line"><span class="prompt">~/certutils-X.X$</span> sudo ./enccnf --build /var/lib/tfptboot/SEP58971ECC97C1.cnf.xml --tftp /etc/asterisk/keys/asterisk.pem \
   --certificate /var/lib/capf/SEP58971ECC97C1.pem</code>

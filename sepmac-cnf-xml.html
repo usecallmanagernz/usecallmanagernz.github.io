@@ -169,7 +169,7 @@
     &lt;dateTimeSetting&gt;</code>
         <br>
         <h2 id="dateTimeSetting.dateTemplate">dateTemplate <a href="#dateTimeSetting.dateTemplate" title="Link">link</a></h2>
-        How the date and time is displayed. Alternate date field delimiters are <code class="literal">-</code> (dash) and <code class="literal">.</code> (period). D and M fields can be swapped to display date in American format.<br>
+        How the date and time is displayed. Alternate date field delimiters are <code class="literal">-</code> (dash) and <code class="literal">.</code> (period). <code class="literal">D</code> and <code class="literal">M</code> fields can be swapped to display date in American format.<br>
         <br>
         <table>
           <tbody>
@@ -341,18 +341,18 @@
           &lt;callManager&gt;
             &lt;ports&gt;</code>
         <br>
-        <h2 id="callManagerGroup.member.sipPort">sipPort <a href="#callManagerGroup.member.sipPort" title="Link">link</a></h2>
+        <h2 id="callManager.sipPort">sipPort <a href="#callManager.sipPort" title="Link">link</a></h2>
         SIP port to connect to on the server running Asterisk.<br>
         <br>
         <code class="prettify lang-xml">              &lt;sipPort&gt;5060&lt;/sipPort&gt;</code>
         <br>
-        <h2 id="callManagerGroup.member.securedSipPort">securedSipPort <a href="#callManagerGroup.member.securedSipPort" title="Link">link</a></h2>
+        <h2 id="callManager.securedSipPort">securedSipPort <a href="#callManager.securedSipPort" title="Link">link</a></h2>
         SIP-TLS port to connect to on the server running Asterisk.<br>
         <br>
         <code class="prettify lang-xml">              &lt;securedSipPort&gt;5061&lt;/securedSipPort&gt;
             &lt;/ports&gt;</code>
         <br>
-        <h2 id="callManagerGroup.member.processNodeName">processNodeName <a href="#callManagerGroup.member.processNodeName" title="Link">link</a></h2>
+        <h2 id="callManager.processNodeName">processNodeName <a href="#callManager.processNodeName" title="Link">link</a></h2>
         Host name or IP address of the server running Asterisk. Maximum length of 50 characters.<br>
         <br>
         <code class="prettify lang-xml">            &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;
@@ -2732,7 +2732,7 @@
         <code class="prettify lang-xml">  &lt;blfAudibleAlertSettingOfBusyStation&gt;0&lt;/blfAudibleAlertSettingOfBusyStation&gt;</code>
         <br>
         <h2 id="dndCallAlert">dndCallAlert <a href="#dndCallAlert" title="Link">link</a></h2>
-        How the phone displays an incoming call when DND is enabled and <code class="literal">dndbusy</code> is set to <code class="literal">no</code> in <a href="sip-peers.html">sip.conf</a>.<br>
+        How the phone displays an incoming call when DND is enabled and <code class="literal">dndbusy</code> is set to <code class="literal">no</code> in <a href="sip-peers.html#dndbusy">sip.conf</a>.<br>
         <br>
         <table>
           <tbody>
@@ -2795,17 +2795,17 @@
         <code class="prettify lang-xml">  &lt;capfAuthMode&gt;1&lt;/capfAuthMode&gt;
   &lt;capfList&gt;</code>
         <br>
-        <h2 id="capfList.capf">capf <a href="#capfList.capf" title="Link">link</a></h2>
+        <h2 id="capf">capf <a href="#capf" title="Link">link</a></h2>
         Specifies the host name or IP address and port of the server running the Certificate Authentication Proxy Function. Up to <code class="literal">5</code> members can be defined.<br>
         <br>
         <code class="prettify lang-xml">    &lt;capf&gt;</code>
         <br>
-        <h2 id="capfList.capf.phonePort">phonePort <a href="#capfList.capf.phonePort" title="Link">link</a></h2>
+        <h2 id="capf.phonePort">phonePort <a href="#capf.phonePort" title="Link">link</a></h2>
         Port to connect to on the server running the Certificate Authentication Proxy Function.<br>
         <br>
         <code class="prettify lang-xml">      &lt;phonePort&gt;3804&lt;/phonePort&gt;</code>
         <br>
-        <h2 id="capfList.capf.processNodeName">processNodeName <a href="#capfList.capf.processNodeName" title="Link">link</a></h2>
+        <h2 id="capf.processNodeName">processNodeName <a href="#capf.processNodeName" title="Link">link</a></h2>
         Host name or IP address of the server running the Certificate Authentication Proxy Function.<br>
         <br>
         <code class="prettify lang-xml">      &lt;processNodeName&gt;<i>HOST</i>&lt;/processNodeName&gt;

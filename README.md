@@ -79,7 +79,7 @@ Use the following template when creating a redirect page.
 </html>
 ```
 
-These are the current redirect pages:
+These are the current redirect pages.
 
 | From                           | To                             |
 | :---                           | :---                           |
