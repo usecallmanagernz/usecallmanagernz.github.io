@@ -10,67 +10,52 @@ This repository contains the content needed for the website at
 Documentation for specific features or changes is located in the following
 pages.
 
-* [application-dial-rules.html](application-dial-rules.html): Transformation
-  patterns for received numbers.
-* [as-feature-events.html](as-feature-events.html): How to enable feature events
-  for non-Cisco phones.
-* [background-images.html](background-images.html): How to specify a custom
-  background image on the phone.
-* [call-parking.html](call-parking.html): Example call parking configuration.
-* [certificate-enrollment.html](certificate-enrollment.html): How to install
-  and configure the Certificate Authentication Proxy Function (CAPF).
-* [cgi-execute.html](cgi-execute.html): How to remotely execute features on
-  the phone.
-* [change-log.html](change-log.html): Changes made for the patch to Asterisk
-  version 22+.
-* [command-line.html](command-line.html): Additional information provided in
-  the Asterisk CLI.
-* [device-security.html](device-security.html): How to set the initial list of
-  certificates trusted by the phone.
-* [dhcp-options.html](dhcp-options.html): Example `isc-dhcpd` configuration for
-  assigning IP addresses to the phone.
-* [dialplan-extensions.html](dialplan-extensions.html): Example additional
-  dial-plan extensions needed to use phone features.
-* [dial-template.html](dial-template.html): Number patterns that may be dialed
-  from the phone. 
-* [documentation-overview.html](documentation-overview.html): Overwview of all
-  the documentation on the site.
-* [feature-policy.html](feature-policy.html): Alternative to soft keys for 9900
-  series phones.
-* [freepbx-integration.html](freepbx-integration.html): External documentation
-  on how to use `FreePBX` with the patch.
-* [http-provisioning.html]: Example `Apache` configuration for files that the
-  phone downloads. 
-* [line-keys.html](line-keys.html): How to specify what line keys appear on the
+* **application-dial-rules.html**: Transformation patterns for received numbers.
+* **as-feature-events.html)**: How to enable feature events for non-Cisco
+  phones.
+* **background-images.html**: How to specify a custom background image on the
   phone.
-* [load-information.html](load-information.html): How to download new firmware
-  for the phone.
-* [network-locale.html](network-locale.html): How to download the network locale
-  (inband network tones).
-* [patching-asterisk.html](patching-asterisk.html): How to apply the patch and
-  build the Asterisk from source.
-* [phone-services.html](phone-services.html): How to specify external service
-  URLs. 
-* [ring-tones.html](ring-tones.html): How to specify custom ring-tones for the
-  phone.
-* [rtp-streaming.html](rtp-streaming.html): Play audio on the phone outside of
-  a call.   
-* [sepmac-cnf-xml.html](sepmac-cnf-xml.html): Main phone configuration file
-  features.
-* [sip-notify-commands.html](sip-notify-commands.html): Cisco-specific
-  `sip notify` commands.
-* [sip-peer-options.html](sip-peer-options.html): Options added to the
-  `SIPPEER` dialplan function.
-* [soft-keys.html](soft-keys.html): How to specify what soft keys appear on the
-  phone.
-* [tftp-provisioning.html](tftp-provisioning.html): Example `tftpd-hpa`
-  configuration for files that the phone downloads.
-* [trust-verification.html](trust-verification): How to install and configure
-  the Trust Verification Service (TVS). 
-* [user-locale.html](user-locale.html): How to download the user locale (user
-  interface language).
-* [vpn-connection.html](vpn-connection.html): How to install and configure the
-  VPN server `OpenConnect`.
+* **call-parking.html**: Example call parking configuration.
+* **certificate-enrollment.html**: How to install and configure the Certificate
+  Authentication Proxy Function (CAPF).
+* **cgi-execute.html**: How to remotely execute features on the phone.
+* **change-log.html**: Changes made for the patch to Asterisk version 22+.
+* **command-line.html**: Additional information provided in the Asterisk CLI.
+* **device-security.html**: How to set the initial list of certificates trusted
+  by the phone.
+* **dhcp-options.html**: Example `isc-dhcpd` configuration for assigning IP
+  addresses to the phone.
+* **dialplan-extensions.html**: Example additional dial-plan extensions needed
+  to use phone features.
+* **dial-template.html**: Number patterns that may be dialed from the phone.
+* **documentation-overview.html**: Overview of all the documentation on the
+  site.
+* **feature-policy.html**: Alternative to soft keys for 9900 series phones.
+* **freepbx-integration.html**: External documentation on how to use `FreePBX`
+  with the patch.
+* **http-provisioning.html**: Example `Apache` configuration for files that the
+  phone downloads via HTTP.
+* **line-keys.html**: How to specify what line keys appear on the phone.
+* **load-information.html**: How to download new firmware for the phone.
+* **network-locale.html**: How to download the network locale (inband network
+  tones).
+* **patching-asterisk.html**: How to apply the patch and build the Asterisk from
+  source.
+* **phone-services.html**: How to specify external service URLs.
+* **ring-tones.html**: How to specify custom ring-tones for the phone.
+* **rtp-streaming.html**: How to play audio on the phone outside of a call.
+* **sepmac-cnf-xml.html**: Main configuration file for the phone.
+* **sip-notify-commands.html**: Cisco-specific `sip notify` commands.
+* **sip-peer-options.html**: Options added to the `SIPPEER` dialplan function.
+* **soft-keys.html**: How to specify what soft keys appear on the phone.
+* **tftp-provisioning.html**: Example `tftpd-hpa` configuration for files that
+  the phone downloads via TFTP.
+* **trust-verification**: How to install and configure the Trust Verification
+  Service (TVS).
+* **user-locale.html**: How to download the user locale (user interface
+  language).
+* **vpn-connection.html**: How to install and configure the VPN server
+  `OpenConnect`.
 
 ## Redirect Pages
 
