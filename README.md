@@ -84,7 +84,7 @@ These are the current redirect pages.
 | From                           | To                             |
 | :---                           | :---                           |
 | apache-conf.html               | http-provisioning.html         |
-| app-dial-rules.html            | application-dial-rules.html    |
+| app-dial-rules-xml.html        | application-dial-rules.html    |
 | cgi-execute-xml.html           | cgi-execute.html               |
 | dhcpd-conf.html                | dhcp-options.html              |
 | dial-templates-xml.html        | dial-template.html             |
