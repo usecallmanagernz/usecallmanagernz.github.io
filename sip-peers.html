@@ -281,10 +281,12 @@ huntgroup_default=no
         <br>
         <code class="prettify lang-astsip">[general]
 ...
-; Only the following ciphers are supported, phone may fail to connect if others are specified
-tlscipher=ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA
-; NULL cipher is only needed if you are using Authenticated mode, otherwise is should not be enabled
+; Use the default set of ciphers
+tlscipher=DEFAULT
+; NULL cipher is only needed if you are using Authenticated mode, otherwise is should not be used
 ;tlscipher+=:NULL
+; If you want to allow older models like 79x1 to connect using TLS then add @SECLEVEL=0
+;tlscipher+=:@SECLEVEL=0
 ...
 
 [non-secure-mode](!)
@@ -297,6 +299,7 @@ transport=tls
 transport=tls
 ; The res_srtp module must be loaded.
 encryption=yes
+; Note, 79x1 needs a encryption_taglen of 32
 encryption_taglen=80</code>
         <br>
         <b>Note</b>: To enable RTP encryption <code class="literal">libsrtp</code> must be installed. Additionally to use the newer <code class="literal">AES-128-GCM</code> and <code class="literal">AES-256-GCM</code> ciphers both Asterisk and <code class="literal">libsrtp</code> must have been compiled with support for them enabled. See <a href="device-security.html#libsrtp">Device Security</a> for more information.<br>
@@ -310,6 +313,8 @@ busylevel=3
 call-limit=4
 ; Force huntgroup login so that the prompt does not show the logged out message
 huntgroup_default=yes
+; 79x1 series only support 32-bit tags
+encryption_taglen=32
 
 [cisco-8841](!,cisco-usecallmanager)
 busylevel=4
