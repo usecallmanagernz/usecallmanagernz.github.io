@@ -1,4 +1,4 @@
-name: html lint
+name: html-lint
   
 on:
   push:
