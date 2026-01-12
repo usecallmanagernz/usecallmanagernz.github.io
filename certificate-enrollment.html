@@ -177,6 +177,10 @@
         <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfd /var/lib/capf/capf.sqlite3 --capf /var/lib/capf/capf.pem \
     --verify /var/lib/capf/cmca2.pem</code>
         <br>
+        <b>7900</b> series only supports TLS version 1.0, to allow connections from those phones include the <code class="literal">tlsv1</code> option.<br>
+        <br>
+        <code class="command-line"><span class="prompt">~/daemons-X.X$</span> sudo --user capf ./capfd ... --tlsv1</code>
+        <br>
         <h2 id="capfc">capfc <a href="#capfc" title="Link">link</a></h2>
         <code class="literal">capfc</code> is a command line client that connects to <code class="literal">capfd</code> to perform the current operation. This can be used to debug certificate enrollment failures.
       </article>

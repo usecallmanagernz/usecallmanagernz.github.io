@@ -169,6 +169,16 @@
     WSGIScriptAlias / /var/www/services/application.wsgi
   &lt;/IfModule&gt;
 &lt;/Virtualhost&gt;</code>
+        <br>
+        <h2 id="Allowing-TLSv1-Connections">Allowing TLSv1 Connections</h2>
+        <b>7900</b> series only supports TLS version 1.0, to allow HTTPS connections from those phones include <code class="literal">@SECLEVEL=0</code> in the global SSL cipher suite option.<br>
+        <br>
+        <code class="prettify lang-apache">&lt;IfModule ssl_module&gt;
+    ...
+    # Only needed to allow connections from older model Cisco phones
+    SSLCipheriSuite DEFAULT:@SECLEVEL=0
+    ...
+&lt;/IfModule&gt;</code>
       </article>
     </main>
     <footer>
