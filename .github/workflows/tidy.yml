@@ -5,17 +5,20 @@ on:
     branches:
       - master
     paths:
-      - '*.html'
-      - '.tidyrc'
-      - '.github/workflows/tidy.yml'
+      - "*.html"
+      - ".tidyrc"
+      - ".github/workflows/tidy.yml"
 
   pull_request:
     branches:
       - master
     paths:
-      - '*.html'
-      - '.tidyrc'
-      - '.github/workflows/tidy.yml'
+      - "*.html"
+      - ".tidyrc"
+      - ".github/workflows/tidy.yml"
+
+  schedule:
+    - cron: "0 8 1 * *"
 
   workflow_dispatch:
 
