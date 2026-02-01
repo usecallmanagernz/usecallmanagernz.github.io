@@ -33,6 +33,7 @@ jobs:
 
       - name: Install packages
         run: |
+          sudo apt update
           sudo apt install tidy 
 
       - name: Run tidy
