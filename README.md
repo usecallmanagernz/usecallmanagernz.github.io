@@ -11,7 +11,7 @@ Documentation for specific features or changes is located in the following
 pages.
 
 * **application-dial-rules.html**: Transformation patterns for received numbers.
-* **as-feature-events.html)**: How to enable feature events for non-Cisco
+* **as-feature-events.html**: How to enable feature events for non-Cisco
   phones.
 * **background-images.html**: How to specify a custom background image on the
   phone.

@@ -17,6 +17,7 @@ body {
     height: 100%;
     line-height: 19pt;
     margin: 0px;
+    scrollbar-gutter: stable;
 }
 
 a, a:visited {

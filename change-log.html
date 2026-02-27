@@ -97,7 +97,7 @@
           <li>Removed relaxdtmf as this is now set on a specific peer.</li>
           <li>Renamed nat keywords comedia to rtp and autocomedia to auto_rtp.</li>
           <li>Renamed maxexpiry to registermaxexpires, minexpiry to registerminexpires, submaxexpiry to subscribemaxexpires and subminexpiry to subscribeminexpires.</li>
-          <li>Renamed match_auth_username to matchauthusername, accept_outofcall_message to allowmessage, auth_options_request to authoptions and register_retry_403 to registryretryforbidden.
+          <li>Renamed match_auth_username to matchauthusername, accept_outofcall_message to allowmessage, auth_options_request to authoptions and register_retry_403 to registerretryforbidden.
           <li>Renamed localnet to localnetwork, externhost to externalhost, externrefresh to externalrefresh, externtcpport to externaltcpport and externtlsport to externaltlsport.</li>
           <li>Renamed binaddr to udpbindaddr and media_address to mediaaddr.</li>
           <li>Renamed outboundproxy to proxy, qualifyfreq to qualifyexpires, sipdebug to debug, t1_min to timert1min and sdpowner to sdpusername.</li>
@@ -141,7 +141,8 @@
         <ul>
           <li>Removed application SIPDtmfMode.</li>
           <li>Renamed function SIPPEER to SIP_PEER.</li>
-          <li>Renamed SIPPEER options ip to ipaddr, limit to maxcalls, currcalls to currcallsinuse, expire to expires, chanvar to variable, callerid_num to callerid_number, regcallid to register_callid, cisco_devicename to devicename and cisco_lineindex to lineindex.</li>
+          <li>Renamed SIP_PEER options ip to ipaddr, limit to maxcalls, currcalls to inuse, expire to expires, chanvar to variable, callerid_num to callerid_number, regcallid to register_callid, cisco_devicename to devicename and cisco_lineindex to lineindex.</li>
+          <li>Added SIP_PEER options ringing and onhold which return the number of calls in that state for that peer.</li>
           <li>Renamed CHECKSIPDOMAIN to SIP_CHECK_DOMAIN.</li>
           <li>Added "t" option to SIPCiscoPage to set display timer.</li>
         </ul>
@@ -158,6 +159,7 @@
           <li>Renamed SIPRegistry to SIPRegistrations.</li>
           <li>Added SIPMWISubscriptions to list outbound MWI subscriptions.</li>
           <li>Added missing peer settings to SIPShowPeer.</li>
+          <li>Added DeviceName parameter to SIPShowPeer to find a specific peer with that DeviceName.</li>
         </ul>
       </article>
     </main>

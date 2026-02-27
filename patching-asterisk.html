@@ -81,7 +81,7 @@
             </tr>
             <tr>
               <td><b>Asterisk 22</b> (ready for testing)</td>
-              <td><a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-22.8.1.patch" download><span class="icon">file_download</span> cisco-usecallmanager-22.8.1.patch</a> (1.4M) <span class="icon">event</span> 06/02/2026 <span class="icon">security</span> SHA256:2e23662c3cbf3cf6ecba934e67103820a7a2e7dbe2a4c4c8c91a94c95a6f7b5d.</td>
+              <td><a href="https://raw.githubusercontent.com/usecallmanagernz/patches/master/asterisk/cisco-usecallmanager-22.8.2.patch" download><span class="icon">file_download</span> cisco-usecallmanager-22.8.2.patch</a> (1.4M) <span class="icon">event</span> 27/02/2026 <span class="icon">security</span> SHA256:374a70aa3f38295d87215351a3f883b769f254a2083c71ea3064e710f2240b51.</td>
             </tr>
           </tbody>
         </table>
@@ -98,16 +98,26 @@
 <span class="prompt">~$</span> cd asterisk-X.X.X
 <span class="prompt">~/asterisk-X.X.X$</span> patch --strip=1 &lt; ../cisco-usecallmanager-X.X.X.patch</code>
         <br>
-        <b>4.</b> Configure the build environment and then compile the source code.<br>
+        <b>4.</b> Configure the build environment.<br>
         <br>
-        <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> CFLAGS="-DENABLE_SRTP_AES_GCM -DENABLE_SRTP_AES_256" ./configure
+        <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> ./configure
 <span class="prompt">~/asterisk-X.X.X$</span> make</code>
         <br>
-        <b>5.</b> Install the patched version.<br>
+        <b>5.</b> Optionally enable high-strength SRTP ciphers.<br>
+        <br>
+        <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> make menuselect.makeopts
+<span class="prompt">~/asterisk-X.X.X$</span> ./menuselect/menuselect --enable ENABLE_SRTP_AES_256 menuselect.makeopts
+<span class="prompt">~/asterisk-X.X.X$</span> ./menuselect/menuselect --enable ENABLE_SRTP_AES_GCM menuselect.makeopts</code>
+        <br>
+        <b>6.</b> Compile the source code.<br>
+        <br>
+        <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> make</code>
+        <br>
+        <b>7.</b> Install the patched version.<br>
         <br>
         <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> sudo make install</code>
         <br>
-        <b>6.</b> Optionally install the sample configuration files. <b>Note</b>: sample sip.conf, sip_notify.conf and res_parking.conf contain patch-specific features so you will need to do this at least once.<br>
+        <b>8.</b> Optionally install the sample configuration files. <b>Note</b>: sample sip.conf, sip_notify.conf and res_parking.conf contain patch-specific features so you will need to do this at least once.<br>
         <br>
         <code class="command-line"><span class="prompt">~/asterisk-X.X.X$</span> sudo make samples</code>
       </article>

@@ -94,7 +94,7 @@
   ...
 &lt;/CiscoIPPhoneRingList&gt;</code>
         <br>
-        <h2 id="Using-SoX">Using SoX <a href="#Using-SoX" title="Link">link</a></h2>
+        <h2 id="Standard-Ring-Tones">Standard Ring Tones <a href="#Standard-Ring-Tones" title="Link">link</a></h2>
         Ring-tones are raw PCM (no header), u-law encoded with 8-bits per sample, mono at 8000Hz between 240 and 16080 samples (2 seconds) in length. The example below shows how a <code class="literal">.wav</code> file can be converted to <code class="literal">.raw</code> using <code class="literal">sox</code>.<br>
         <br>
         <code class="command-line"><span class="prompt">~$</span> sox ring-tone.wav -t raw -e u-law -b 8 -c 1 -r 8000 ring-tone.raw</code>
