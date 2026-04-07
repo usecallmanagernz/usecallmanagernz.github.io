@@ -97,6 +97,7 @@ These are the current redirect pages.
 | res-parking-conf.html          | call-parking.html              |
 | ring-list-xml.html             | ring-tones.html                |
 | sip-conf.html                  | sip-peers.html                 |
+| sip-notify-commands.html       | command-line.html              |
 | sip-notify-conf.html           | sip-notify-commands.html       |
 | sippeer-options.html           | sip-peer-options.html          |
 | soft-keys-xml.html             | soft-keys.html                 |

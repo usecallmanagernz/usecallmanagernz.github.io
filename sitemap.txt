@@ -22,7 +22,6 @@ phone-services.html
 ring-tones.html
 rtp-streaming.html
 sepmac-cnf-xml.html
-sip-notify-commands.html
 sip-peer-options.html
 sip-peers.html
 soft-keys.html

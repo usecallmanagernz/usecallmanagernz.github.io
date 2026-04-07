@@ -57,7 +57,6 @@
         <ul>
           <li><h3>Asterisk Configuration</h3></li>
           <li><a href="sip-peers.html"><span class="icon">dialer_sip</span> SIP Peers</a></li>
-          <li><a href="sip-notify-commands.html"><span class="icon">settings_power</span> SIP Notify Commands</a></li>
           <li><a href="dialplan-extensions.html"><span class="icon">format_list_numbered</span> Dialplan Extensions</a></li>
           <li><a href="call-parking.html"><span class="icon">local_parking</span> Call Parking</a></li>
           <li><span class="icon selected">code</span> <b>SIPPEER Options</b></li>
@@ -122,7 +121,7 @@ exten =&gt; _X.,1,Set(SIPPEER(${CHANNEL(peername)},huntgroup)=no);</code>
 exten =&gt; _X.,1,NoOp(VM extension: ${SIPPEER(${CHANNEL(peername)},vmetxen)})</code>
         <br>
         <h2 id="regcallid">regcallid <a href="#regcallid" title="Link">link</a></h2>
-        The SIP Call-ID of the REGISTER dialog, used when restaring or resetting the phone via <a href="sip-notify-commands.html">SIP Notify Commands</a>. <b>Note</b>: this item is read-only.<br>
+        The SIP Call-ID of the REGISTER dialog, used when <a href="command-line.html#sip-notify-cisco-restart">restaring</a> or <a href="command-line.html#sip-notify-cisco-reset">resetting</a> the phone. <b>Note</b>: this item is read-only.<br>
         <br>
         <code class="prettify lang-astexten">; Show the REGISTER Call-ID
 exten =&gt; _X.,1,NoOp(Register Call-ID: ${SIPPEER(${CHANNEL(peername)},regcallid)})</code>
