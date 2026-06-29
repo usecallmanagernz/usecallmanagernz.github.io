@@ -202,18 +202,18 @@
           </tbody>
         </table>
         <br> 
-        <code class="prettify lang-xml">  &lt;TEMPLATE match="3.." timeout="1" /&gt;
-  &lt;TEMPLATE match=&quot;...&quot; timeout=&quot;2&quot; /&gt;
-  &lt;TEMPLATE match=&quot;.......&quot; timeout=&quot;2&quot; /&gt;
-  &lt;TEMPLATE match=&quot;0........&quot; timeout=&quot;2&quot; /&gt;
-  &lt;TEMPLATE match=&quot;*&quot; timeout=&quot;3&quot; /&gt;
+        <code class="prettify lang-xml">  &lt;TEMPLATE match="3.." timeout="1"/&gt;
+  &lt;TEMPLATE match=&quot;...&quot; timeout=&quot;2&quot;/&gt;
+  &lt;TEMPLATE match=&quot;.......&quot; timeout=&quot;2&quot;/&gt;
+  &lt;TEMPLATE match=&quot;0........&quot; timeout=&quot;2&quot;/&gt;
+  &lt;TEMPLATE match=&quot;*&quot; timeout=&quot;3&quot;/&gt;
 &lt;/dialTemplate&gt;</code>
         <br>
         <h2 id="Hotline">Hotline <a href="#Hotline" title="Link">link</a></h2>
         To create a line that automatically dials a number when the phone goes off-hook use an empty pattern with a timeout of <code class="literal">0</code> and <code class="literal">rewrite</code> containing the number to dial.<br>
         <br>
         <code class="prettify lang-xml">&lt;dialTemplate&gt;
-  &lt;TEMPLATE match=&quot;&quot; timeout=&quot;0&quot; rewrite=&quot;300&quot; /&gt;
+  &lt;TEMPLATE match=&quot;&quot; timeout=&quot;0&quot; rewrite=&quot;300&quot;/&gt;
 &lt;/dialTemplate&gt;</code>
         <br>
         <h2 id="Intercom">Intercom <a href="#Intercom" title="Link">link</a></h2>
@@ -221,7 +221,7 @@
         <br>
         <code class="prettify lang-xml">&lt;dialTemplate&gt;
   ...
-  &lt;TEMPLATE match=&quot;&quot; timeout=&quot;0&quot; rewrite=&quot;390&quot; line=&quot;2&quot; /&gt;
+  &lt;TEMPLATE match=&quot;&quot; timeout=&quot;0&quot; rewrite=&quot;390&quot; line=&quot;2&quot;/&gt;
 &lt;/dialTemplate&gt;</code>
       </article>
     </main>
