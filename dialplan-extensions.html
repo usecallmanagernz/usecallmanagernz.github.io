@@ -102,17 +102,17 @@ same =&gt; next,Goto(extensions,${CALLFORWARD},1)
 ; If ${MAILBOX} is empty send congestion, otherwise go to voicemail extension below
 exten =&gt; congestion,1,ExecIf($[${LEN(${MAILBOX})} = 0]?Congestion(10))
 same =&gt; next,Set(GREETING=u)
-same =&gt; next,Goto(voicemail,1)
+same =&gt; next,Goto(messages,1)
 
 ; If ${MAILBOX} is empty send busy, otherwise go to voicemail extension below
 exten =&gt; busy,1,ExecIf($[${LEN(${MAILBOX})} = 0]?Busy(10))
 same =&gt; next,Set(GREETING=b)
-same =&gt; next,Goto(voicemail,1)
+same =&gt; next,Goto(messages,1)
 
 exten =&gt; noanswer,1,Goto(congestion,1)
 exten =&gt; chanunavail,1,Goto(congestion,1)
 
-exten =&gt; voicemail,1,Answer()
+exten =&gt; messages,1,Answer()
 same =&gt; next,Wait(0.5)
 same =&gt; next,VoiceMail(${MAILBOX},${GREETING})
 same =&gt; next,Hangup(normal_clearing)</code>
@@ -175,14 +175,42 @@ same =&gt; next,ExecIf($[${LEN(${DIALGROUP(intercom)})} = 0]?Busy(10))
 same =&gt; next,Page(${DIALGROUP(intercom)},is,3)
 same =&gt; next,Hangup(normal_clearing)</code>
         <br>
-        <h2 id="voicemail">voicemail <a href="#voicemail" title="Link">link</a></h2>
-        Extension for the messages (voicemail) button, set by &lt;<code class="tag">messagesNumber</code>&gt; as part of the <a href="line-keys.html#Line">line key</a> definition.<br>
+        <h2 id="messages">messages <a href="#messages" title="Link">link</a></h2>
+        Extension for the messages button, set by &lt;<code class="tag">messagesNumber</code>&gt; as part of the <a href="line-keys.html#Line">line key</a> definition.<br>
         <br>
-        <code class="prettify lang-astexten">exten =&gt; 399,1,Set(CONNECTEDLINE(all)=&quot;Voice Mail&quot; &lt;${EXTEN}&gt;)
+        <code class="prettify lang-astexten">exten =&gt; messages,1,Set(CONNECTEDLINE(all)=&quot;Messages&quot; &lt;&gt;)
 same =&gt; next,Answer()
 same =&gt; next,Wait(0.5)
 same =&gt; next,Set(MAILBOX=${SIPPEER(${CHANNEL(peername)},mailbox)})
 same =&gt; next,VoiceMailMain(${MAILBOX},s)
+same =&gt; next,Hangup(normal_clearing)
+
+; Play a message, used by the messages XML service
+exten =&gt; _messages-.,1,Set(MAILBOX=${SIP_PEER(${CHANNEL(peername)},mailbox)})
+same =&gt; next,Set(MESSAGE=${CUT(EXTEN,-,2-3)})
+same =&gt; next,Set(CALLER=${CUT(EXTEN,-,4)})
+same =&gt; next,Set(CISCO_CALLBACK_NUMBER=messages)
+same =&gt; next,Set(CONNECTEDLINE(all)="Message from ${CALLER}" &lt;&gt;)
+same =&gt; next,VoicemailPlayMsg(${MAILBOX},${MESSAGE})
+same =&gt; next,Hangup(normal_clearing)</code>
+        <br>
+        <h2 id="greeting">greeting <a href="#greeting" title="Link">link</a></h2>
+        Extensions for playing or changing the voicemail greetin. Used by the messages XML service. <b>Note</b>: <code class="literal">n</code> needs to be surrounded by <code class="literal">[]</code> otherwise it will be interpreted as to match any non-zero digit (Asterisk 22.11.0 or later).<br>
+        <br>
+        <code class="prettify lang-astexten">exten =&gt; _greeti[n]g-.,1,Set(MAILBOX=${SIP_PEER(${CHANNEL(peername)},mailbox)})
+same =&gt; next,Set(GREETING=${EXTEN:9:1})
+same =&gt; next,Set(NAME=${TOUPPER(${EXTEN:9:1})}${EXTEN:10})
+same =&gt; next,Set(CISCO_CALLBACK_NUMBER=messages)
+same =&gt; next,Set(CONNECTEDLINE(all)="${NAME} Greeting" &lt;&gt;)
+same =&gt; next,VoicemailGreeting(${MAILBOX},${GREETING})
+same =&gt; next,Hangup(normal_clearing)
+
+exten =&gt; _recgreeti[n]g-.,1,Set(MAILBOX=${SIP_PEER(${CHANNEL(peername)},mailbox)})
+same =&gt; next,Set(GEEETING=${EXTEN:12:1})
+same =&gt; next,Set(NAME=${TOUPPER(${EXTEN:12:1})}${EXTEN:13})
+same =&gt; next,Set(CISCO_CALLBACK_NUMBER=messages)
+same =&gt; next,Set(CONNECTEDLINE(all)="${NAME} Greeting" &lt;&gt;)
+same =&gt; next,VoicemailGreeting(${MAILBOX},${GREETING}r)
 same =&gt; next,Hangup(normal_clearing)</code>
         <br>
         <h2 id="x-cisco-serviceuri">x-cisco-serviceuri <a href="#x-cisco-serviceuri" title="Link">link</a></h2>
@@ -302,7 +330,7 @@ same =&gt; next,Hangup(normal_clearing)</code>
         <code class="prettify lang-astexten">; If dialing outside numbers requires that they be prefixed with a '1'
 exten =&gt; _X.,1,Set(_CISCO_CALLBACK_NUMBER=1${CALLERID(number)})
 same =&gt; next,Dial(SIP/${EXTEN},,30)
-...</code>    
+...</code>
         <br>
         <h2 id="cisco_huntpilot">cisco_huntpilot <a href="#cisco_huntpilot" title="Link">link</a></h2>
         Specifies the caller-ID for the hunt-group which will be shown on the phone and stored in the call history. For later models this needs to be set to avoid logging calls answered on other phones as missed calls. <b>Note</b>: The phone must be logged-in to the hunt-group for the information to be shown.<br>

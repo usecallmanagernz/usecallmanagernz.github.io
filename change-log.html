@@ -79,12 +79,13 @@
           <li>Removed support for call completion.</li>
         </ul>
         <br>
-        <h2>Changed Features</h2>
+        <h2>Added or Changed Features</h2>
         <ul>
           <li>Custom notify types are now defined in sip.conf using a section with a type keyword of "notify".</li>
           <li>Authentication realm credentials are now defined in the general section of sip.conf instead of the authentication section.
           <li>Peer address entries in astdb now use the prefix SIP/Peer instead of SIP/Registry.</li>
           <li>Updated the sample sip.conf to show the new option names.</li>
+          <li>Implemented Cisco-specific answered-elsewhere method for newer model phones.</li>
         </ul>
         <br>
         <h2>General Options</h2>
@@ -144,6 +145,8 @@
           <li>Added SIP_PEER options ringing and onhold which return the number of calls in that state for that peer.</li>
           <li>Renamed CHECKSIPDOMAIN to SIP_CHECK_DOMAIN.</li>
           <li>Added "t" option to SIPCiscoPage to set display timer.</li>
+          <li>Added "f" option to Pickup which forwards the call instead of answering.</li>
+          <li>Added hangup cause "pickup_failure" that will causes the phone to display a "No call to pickup" message.</li>
         </ul>
         <br>
         <h2>Command Line</h2>
