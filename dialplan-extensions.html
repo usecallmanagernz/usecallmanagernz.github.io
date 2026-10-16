@@ -298,7 +298,7 @@ same =&gt; next,Hangup(unallocated)</code>
         Meetme Conferencing, used to detect creation of a conference bridge as opposed to just joining one.<br>
         <br>
         <code class="prettify lang-astexten">; Only allow creation of conference bridge if no one else has first
-exten =&gt; _meetme-36X,1,ExecIf($[${CONFBRIDGE_INFO(${EXTEN:7},parties)} != 0]?Hangup(normal_circuit_congestion))
+exten =&gt; _meetme-36X,1,ExecIf($[${CONFBRIDGE_INFO(parties,${EXTEN:7})} != 0]?Hangup(normal_circuit_congestion))
 same =&gt; next,Set(CONFBRIDGE(bridge,template)=default_bridge)
 same =&gt; next,Set(CONFBRIDGE(user,template)=default_user)
 same =&gt; next,Set(CONFBRIDGE(user,admin)=yes)
@@ -307,7 +307,7 @@ same =&gt; next,ConfBridge(${EXTEN:7})
 same =&gt; next,Hangup(normal_clearing)
 
 ; Reject calls to conference bridges that haven't been created
-exten =&gt; _36X,1,ExecIf($[${CONFBRIDGE_INFO(${EXTEN},parties)} = 0]?Hangup(unallocated))
+exten =&gt; _36X,1,ExecIf($[${CONFBRIDGE_INFO(parties,${EXTEN})} = 0]?Hangup(unallocated))
 same =&gt; next,Set(CONFBRIDGE(bridge,template)=default_bridge)
 same =&gt; next,Set(CONFBRIDGE(user,template)=default_user)
 same =&gt; next,Set(CONFBRIDGE(user,admin)=no)
